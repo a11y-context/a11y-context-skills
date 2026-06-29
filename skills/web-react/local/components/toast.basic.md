@@ -10,10 +10,14 @@ summary: Temporary, non-blocking status message announced via live region. May i
 
 # Toast
 
+Pattern ID: `toast.basic`
+
+Temporary, non-blocking status message announced via live region. May include optional dismiss control. Disappears automatically.
+
 ## Use When
 
 - Use when presenting a temporary, non-blocking status message.
-- Use when the message confirms an action (e.g., “Saved”, “Added to watchlist”).
+- Use when the message confirms an action (e.g., "Saved", "Added to watchlist").
 - Use when the message is text-only and contains no required actions, except for (at most) a dismiss button.
 
 ## Do Not Use When
@@ -40,7 +44,7 @@ summary: Temporary, non-blocking status message announced via live region. May i
 
 ## Don'ts
 
-- Don’t mount/unmount the live region container based on toast visibility.
+- Do not mount/unmount the live region container based on toast visibility.
 - Do not move focus into the toast when it appears.
 - Do not use `role="alertdialog"`.
 - The toast must not contain buttons or elements that require user action (use `snackbar` or `dialog` instead).

@@ -5,10 +5,14 @@ stack: web/react
 status: beta
 tags: [link, anchor, navigation, external-link]
 aliases: [anchor, hyperlink, external link]
-summary: Native link for navigation using <a href>. Supports optional context in the accessible name, including “opens in new tab/window/dialog”.
+summary: Native link for navigation using <a href>. Supports optional context in the accessible name, including "opens in new tab/window/dialog".
 ---
 
 # Link
+
+Pattern ID: `link.basic`
+
+Native link for navigation using `<a href>`. Supports optional context in the accessible name, including "opens in new tab/window/dialog".
 
 ## Use When
 - Use when activating the element navigates to a different URL, route, or in-page anchor.
@@ -20,10 +24,10 @@ summary: Native link for navigation using <a href>. Supports optional context in
 
 ## Must Haves
 - Use a native `<a>` element with an `href` whenever possible.
-- Ensure the link’s purpose/destination is understandable from the link text alone, or from the link text plus programmatically determined context (e.g., `aria-label`, `aria-labelledby`, offscreen text).
-- Ensure the link has an accessible name that describes its purpose/destination.
-- For links with visible text, the inner text may serve as the accessible name. Additional context may be added using `aria-label`, `aria-labelledby`, or offscreen text when needed.
-- If the accessible name extends beyond the visible text, ensure the visible text appears at the beginning of the accessible name.
+- Ensure the link's purpose/destination is understandable from the link text alone, or from the link text plus programmatically determined context (e.g., `aria-label`, `aria-labelledby`, offscreen text).
+- The link has an accessible name that describes its purpose or destination.
+- When the link has visible text, the visible text serves as the accessible name.
+- When additional context is needed beyond the visible text, add it via `aria-label`, `aria-labelledby`, or offscreen text. The visible text appears at the start of the accessible name.
 - For icon-only links, provide an accessible name using `aria-label` or `aria-labelledby`.
 - Icons within links must be decorative (`aria-hidden="true"`).
 - Keyboard activation must follow native link behavior: Enter activates; Space does not.
@@ -31,20 +35,20 @@ summary: Native link for navigation using <a href>. Supports optional context in
   - Preferred: provide `href` (native focus + native behaviors).
   - If using `role="link"` on a non-`<a>` element, you must also provide keyboard support and focus management (e.g., `tabIndex="0"` and Enter key activation).
 - If a link opens a new tab/window, include both:
-  - programmatic context in the accessible name (e.g., “opens in new tab”), and
+  - programmatic context in the accessible name (e.g., "opens in new tab"), and
   - a visual affordance: append an external-link icon at the end of the visible label.
  - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the link.
 
 ## Customizable
-- Links with visible text don't usually need additional context for screen reader users (though they might). If they do, then an `aria-label` or offscreen element should be used.
+- No accessibility-relevant variations beyond the Must Haves above.
 
-## Don’ts
-- Don’t style a link to look like plain text when it appears inline within a paragraph; inline links must be visually obvious (e.g., underlined).
-- Don’t rely on color alone to indicate a link.
-- Don’t use `<a>` without `href` for interactive behavior; it loses native link semantics and behaviors.
+## Don'ts
+- Do not style a link to look like plain text when it appears inline within a paragraph; inline links must be visually obvious (e.g., underlined).
+- Do not rely on color alone to indicate a link.
+- Do not use `<a>` without `href` for interactive behavior; it loses native link semantics and behaviors.
 - Do not use `role="link"` on non-link elements unless you cannot use a native `<a href>`. Native links provide browser behaviors ARIA cannot add automatically.
-  - Don’t use `role="link"` unless you also implement the missing link behaviors (focus, Enter activation, navigation, and expected link affordances).
-- Don’t permit Space to activate links.
+  - Do not use `role="link"` unless you also implement the missing link behaviors (focus, Enter activation, navigation, and expected link affordances).
+- Do not permit Space to activate links.
 
 ## Golden Pattern
 ```jsx
@@ -94,6 +98,6 @@ export function LinkDemo() {
 - Inline link in body text is visually identifiable as a link (e.g., underlined).
 - Screen reader announces an understandable name for each link:
   - Simple link: reads the visible text.
-  - Contextual link: includes the additional context (e.g., “Superflo Water Bottle Read more”).
-  - New tab/window link: includes “opens in a new tab/window” in the accessible name, and the external-link icon is not announced.
+  - Contextual link: includes the additional context (e.g., "Superflo Water Bottle Read more").
+  - New tab/window link: includes "opens in a new tab/window" in the accessible name, and the external-link icon is not announced.
   - Icon-only link: announces the `aria-label`.

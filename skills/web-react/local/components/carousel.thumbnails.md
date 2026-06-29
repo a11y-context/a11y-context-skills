@@ -10,6 +10,10 @@ summary: Horizontally-advancing carousel (aka hero or marquee carousel) with thu
 
 # Carousel with Thumbnail Navigation
 
+Pattern ID: `carousel.thumbnails`
+
+Horizontally-advancing carousel (aka hero or marquee carousel) with thumbnail navigation, prev/next buttons, and pause behavior.
+
 ## Use When
 - Use when thumbnail images are displayed for direct slide selection.
 - Use when users can identify slide content from visible preview images before activating a slide.
@@ -22,7 +26,8 @@ summary: Horizontally-advancing carousel (aka hero or marquee carousel) with thu
 ## Must Haves
 - Render a carousel container with `aria-roledescription="carousel"` and an accessible name (`aria-label`).
 - Ensure the carousel container has a semantic HTML5 element or role, such as `<section>` or `role="region"`.
-- Each slide must have `role="group"`, `aria-roledescription="slide"` and an `aria-label` like “1 of N”.
+- Each slide must have `role="group"`, `aria-roledescription="slide"` and an `aria-label` like "1 of N".
+- Slides that are not currently visible must not be rendered, or must be hidden in the DOM (e.g., via the `hidden` attribute), so their content cannot be reached by keyboard or screen readers.
 - Provide Previous/Next buttons as real `<button>` elements, with `aria-label` like "Previous Slide" and "Next Slide".
 - Provide thumbnail navigation as real `<button>` elements in normal tab order (no roving tabindex), with `aria-label` like "Go to slide 2: {title of slide 2}", and with `aria-current="true"` on the button corresponding to the active slide.
 - Provide a Pause/Play button as the first focusable element inside the carousel container.
@@ -33,17 +38,16 @@ summary: Horizontally-advancing carousel (aka hero or marquee carousel) with thu
 ## Customizable
 - The contents of each slide are customizable. However, if they contain a title, then these should usually be `<h2>`.
 
-## Don’ts
-- Don’t auto-advance the slides without a visible Pause/Play control.
-- Don’t ignore `prefers-reduced-motion: reduce`.
-- Don’t keep moving while the user is interacting (focus inside carousel must pause autoplay).
+## Don'ts
+- Do not auto-advance the slides without a visible Pause/Play control.
+- Do not ignore `prefers-reduced-motion: reduce`.
+- Do not keep moving while the user is interacting (focus inside carousel must pause autoplay).
 
 ## Golden Pattern
-```js
+```jsx
 "use client";
 
 import * as React from "react";
-import { Pause, Play } from "lucide-react";
 
 export function CarouselThumbnailsDemo({
   ariaLabel = "Featured content",
@@ -121,27 +125,11 @@ export function CarouselThumbnailsDemo({
 
   // Autoplay (respects reduced motion, focus-paused state, and user pause).
   React.useEffect(() => {
-    // Clear any existing timer.
-    if (timerRef.current) {
-      window.clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
+    if (!autoplay || isPaused || reducedMotionRef.current) return;
 
-    if (!autoplay) return;
-    if (isPaused) return;
-    if (reducedMotionRef.current) return;
-
+    // Functional update avoids stale-closure reads of the current index.
     timerRef.current = window.setInterval(() => {
-      // Do not rotate if user paused manually.
-      // (If you want “Play” to resume, that’s handled by togglePause.)
-      goTo((prev) => {
-        return prev;
-      });
-    }, intervalMs);
-
-    window.clearInterval(timerRef.current);
-    timerRef.current = window.setInterval(() => {
-      setIndex((i) => ((i + 1) % count));
+      setIndex((i) => (i + 1) % count);
     }, intervalMs);
 
     return () => {
@@ -191,11 +179,9 @@ export function CarouselThumbnailsDemo({
           aria-pressed={isPaused}
           style={pauseButtonStyle}
         >
-          {isPaused ? (
-            <Play size={18} aria-hidden="true" focusable="false" />
-          ) : (
-            <Pause size={18} aria-hidden="true" focusable="false" />
-          )}
+          <span aria-hidden="true">
+            {isPaused ? "[play-icon]" : "[pause-icon]"}
+          </span>
         </button>
 
         {/* Slide */}
@@ -390,7 +376,8 @@ const DEFAULT_ITEMS = [
 ## Acceptance Checks
 - Semantics:
   - The carousel container has `aria-roledescription="carousel"` and an accessible name.
-  - Each slide has `aria-roledescription="slide"` and exposes position (e.g., “2 of 3”).
+  - Each slide has `aria-roledescription="slide"` and exposes position (e.g., "2 of 3").
+  - Content of non-visible slides is not reachable by keyboard or screen reader.
 - Autoplay:
   - With `prefers-reduced-motion: reduce`, autoplay is paused by default.
   - Tabbing into the carousel pauses autoplay.

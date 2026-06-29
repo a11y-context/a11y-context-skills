@@ -10,6 +10,10 @@ summary: Interactive channel guide grid with one Tab stop and arrow-key navigati
 
 # Channel Guide Grid
 
+Pattern ID: `grid.channel-guide`
+
+Interactive channel guide grid with one Tab stop and arrow-key navigation across channels and time slots.
+
 ## Use When
 - Use when content is arranged in a 2D matrix of channels (rows) and time slots (columns).
 - Use when program items span time horizontally and are positioned according to schedule duration.
@@ -31,35 +35,36 @@ summary: Interactive channel guide grid with one Tab stop and arrow-key navigati
 - The grid must expose its dimensions:
   - Set `aria-rowcount` to the total number of rows in the grid.
   - Set `aria-colcount` to the total number of columns in the grid (including the channel column).
+  - Set `aria-rowindex` on each row and `aria-colindex` on each cell (1-based, counting the header row and the channel column), so position announcements remain correct when rows or columns are rendered lazily.
 - Keyboard model:
   - The grid must be a single Tab stop.
   - Only one cell is tabbable at a time (roving `tabIndex`: active cell `0`, all others `-1`).
   - Arrow keys move focus within the grid (Left/Right/Up/Down).
   - Tab/Shift+Tab exits the grid to the next/previous focusable element outside.
 - Pointer + keyboard continuity:
-  - Clicking a cell updates the roving “current cell” so Arrow-key navigation continues from that cell.
-- Persist and restore “last focused cell”:
+  - Clicking a cell updates the roving "current cell" so Arrow-key navigation continues from that cell.
+- Persist and restore "last focused cell":
   - When focus leaves and re-enters the grid, focus lands on the last focused cell.
 - Activation model:
-  - Channel column (row header) opens “channel details”.
-  - “Now” column activates tune (no-op if already selected).
-  - Future columns open “program details” (demo can use a modal).
+  - Channel column (row header) opens "channel details".
+  - "Now" column activates tune (no-op if already selected).
+  - Future columns open "program details" (demo can use a modal).
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) on each focusable element, such as grid cells and grid headers.
 
 ## Customizable
-- Support a “currently playing” channel:
+- Support a "currently playing" channel:
   - Exactly one channel row is marked as selected (separate from focus).
-  - Selecting/tuning changes the selected row, but focus stays with the user’s navigation.
+  - Selecting/tuning changes the selected row, but focus stays with the user's navigation.
 
-## Don’ts
-- Don’t make every cell a Tab stop.
-- Don’t require Tab to move between cells.
-- Don’t mix multiple interactive controls inside a cell in this basic pattern.
-- Don’t conflate “selected channel” with “focused cell”.
+## Don'ts
+- Do not make every cell a Tab stop.
+- Do not require Tab to move between cells.
+- Do not mix multiple interactive controls inside a cell in this basic pattern.
+- Do not conflate "selected channel" with "focused cell".
 - Do not use `<button role="gridcell">` or `<button role="columnheader">`.
 
 ## Golden Pattern
-```js
+```jsx
 "use client";
 
 import * as React from "react";
@@ -115,7 +120,7 @@ export function ChannelGuideGrid({
     commitPos({ row: nextRow, col: nextCol });
   }
 
-  // When Tab enters the grid, restore focus to the last-focused cell’s button.
+  // When Tab enters the grid, restore focus to the last-focused cell's button.
   function onGridFocusCapture(e) {
     const from = e.relatedTarget;
     if (from && e.currentTarget.contains(from)) return;
@@ -194,13 +199,20 @@ export function ChannelGuideGrid({
         maxWidth: 1100,
       }}
     >
-      {/* Header row (static, not focusable) */}
-      <div role="row" style={rowStyle(true)}>
-        <div role="columnheader" style={headerCellStyle}>
+      {/* Header row (static, not focusable). Row/col indices are 1-based and
+          include this header row, so positions stay correct if rows or
+          columns are lazy-loaded. */}
+      <div role="row" aria-rowindex={1} style={rowStyle(true)}>
+        <div role="columnheader" aria-colindex={1} style={headerCellStyle}>
           Channel
         </div>
-        {columns.map((c) => (
-          <div key={c.key} role="columnheader" style={headerCellStyle}>
+        {columns.map((c, colIdx) => (
+          <div
+            key={c.key}
+            role="columnheader"
+            aria-colindex={colIdx + 2}
+            style={headerCellStyle}
+          >
             {c.label}
           </div>
         ))}
@@ -214,11 +226,16 @@ export function ChannelGuideGrid({
           <div
             key={ch.id}
             role="row"
+            aria-rowindex={rowIndex + 2}
             aria-selected={isSelected ? "true" : undefined}
             style={rowStyle(false, isSelected)}
           >
             {/* Rowheader cell */}
-            <div role="rowheader" style={cellContainerStyle(isSelected)}>
+            <div
+              role="rowheader"
+              aria-colindex={1}
+              style={cellContainerStyle(isSelected)}
+            >
               <button
                 type="button"
                 tabIndex={pos.row === rowIndex && pos.col === 0 ? 0 : -1}
@@ -251,6 +268,7 @@ export function ChannelGuideGrid({
                 <div
                   key={`${ch.id}-${p.id}`}
                   role="gridcell"
+                  aria-colindex={colIndex + 1}
                   style={cellContainerStyle(isSelected, isNow)}
                 >
                   <button
@@ -283,7 +301,7 @@ export function ChannelGuideGrid({
       {/* DOCUMENTATION NOTES (intentionally not implemented in MCP code):
           - A live player preview region should announce currently playing content changes (aria-live="polite").
           - Channel tuning should be a no-op when the selectedRow channel is already playing.
-          - “Details” actions (channel column + future programs) should open a modal/dialog (use your dialog.modal pattern).
+          - "Details" actions (channel column + future programs) should open a modal/dialog (use your dialog.modal pattern).
           - On modal close: restore focus to the invoking grid button (store opener ref).
           - Consider additional keys: PageUp/PageDown (jump time columns), Ctrl+Home/End (grid edges), etc.
           - For SR verbosity: aria-label may be double-announced in some AT/browser combos; prefer aria-labelledby/aria-describedby.
@@ -419,8 +437,9 @@ const DEMO_CHANNELS = [
   - Time headers use `role="columnheader"` and are not focusable.
   - Channel cells are row headers and are interactive.
   - Program cells use `role="gridcell"` and are interactive.
+  - Rows expose `aria-rowindex` and cells expose `aria-colindex`, consistent with `aria-rowcount`/`aria-colcount`.
 - State:
   - Exactly one channel row is marked as selected (currently playing), distinct from focus.
   - Selecting/tuning updates the selected row without forcibly moving focus.
 - Pointer + keyboard continuity:
-  - Clicking a cell updates the roving “current cell” so arrow-key navigation continues from that cell.
+  - Clicking a cell updates the roving "current cell" so arrow-key navigation continues from that cell.

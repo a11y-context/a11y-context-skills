@@ -10,8 +10,12 @@ summary: A non-modal header navigation pattern that supports top-level links and
 
 # Navigation Menu
 
+Pattern ID: `navigation-menu.basic`
+
+A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with `aria-expanded`/`aria-controls` and Tab-based navigation (no roving focus, no `role="menu"`).
+
 ## Use When
-- Use when a website’s top-level navigation contains at least one sub-menu of links.
+- Use when a website's top-level navigation contains at least one sub-menu of links.
 - Use for primary or secondary navigation regions (e.g., header nav, section nav) when the same link + sub-menu structure is needed.
 - Use when the navigation structure maps to a sitemap-like set of destinations.
 
@@ -35,6 +39,7 @@ summary: A non-modal header navigation pattern that supports top-level links and
 - If the current page corresponds to a top-level item:
   - If the top-level item is a link, apply aria-current="page" to that link.
   - If the top-level item is a button-only parent (no destination), do not put aria-current on the button. Instead, apply aria-current="page" to the submenu link that represents the current page.
+  - If the navigation has no explicit Home link and the site logo links to the homepage, the logo link carries `aria-current="page"` when the user is on the homepage.
   - Ensure there is some visual change that indicates this is the current page link.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around all links and buttons.
 
@@ -71,19 +76,19 @@ summary: A non-modal header navigation pattern that supports top-level links and
 
 ## Customizable
 - Whether a submenu closes when a submenu item is activated (often yes).
-- Whether submenu content includes non-interactive text (e.g., “Signed in as…”) or separators.
+- Whether submenu content includes non-interactive text (e.g., "Signed in as…") or separators.
 - Positioning of submenus (left/right, below/above) provided DOM order and focus order remain logical.
 - Whether the toggle is a caret icon button, text button, or combined button label (as long as the accessibility semantics above are met).
 
-## Don’ts
-- Don’t open sub-menus on hover only.
+## Don'ts
+- Do not open sub-menus on hover only.
   - If hover-to-open is supported for mouse users, sub-menus must also be operable via click and keyboard, and keyboard users must not be forced to tab through submenu items unless they intentionally open them.
-- Don’t make a top-level item both a navigation link and the submenu toggle using the same element.
+- Do not make a top-level item both a navigation link and the submenu toggle using the same element.
   - If the parent has its own destination page and also has a submenu, use **parent link + separate toggle button**.
-- Don’t use `role="menu"` / `role="menuitem"` unless you implement the full ARIA menu widget behavior (managed focus, arrow keys, typeahead).
-- Don’t leave submenu content visible while `aria-expanded="false"` (and vice versa).
-- Don’t strand focus by removing the currently focused submenu item without closing and allowing focus to move naturally.
-- Don’t render sub-menus expanded/visible by default. They open only after the user activates the corresponding toggle.
+- Do not use `role="menu"` / `role="menuitem"` unless you implement the full ARIA menu widget behavior (managed focus, arrow keys, typeahead).
+- Do not leave submenu content visible while `aria-expanded="false"` (and vice versa).
+- Do not strand focus by removing the currently focused submenu item without closing and allowing focus to move naturally.
+- Do not render sub-menus expanded/visible by default. They open only after the user activates the corresponding toggle.
 
 ## Golden Pattern
 ```jsx

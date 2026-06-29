@@ -10,9 +10,13 @@ summary: A non-modal, button-invoked account menu that reveals a small list of l
 
 # Account Menu
 
+Pattern ID: `menu.account`
+
+A non-modal, button-invoked account menu that reveals a small list of links and optional actions. Uses `aria-expanded` plus DOM show/hide so keyboard users Tab into items and Esc closes.
+
 ## Use When
 - Use when providing a compact set of account-related destinations or actions (Profile, Settings, Billing, Sign out).
-- Use when the trigger is a dedicated control (avatar button, “Account” button) with no other primary action.
+- Use when the trigger is a dedicated control (avatar button, "Account" button) with no other primary action.
 - Use when the menu content is short and stable (typically 3–10 items).
 - Use when (usually) the menu is in the top-right area of a webpage.
 
@@ -24,7 +28,7 @@ summary: A non-modal, button-invoked account menu that reveals a small list of l
 ## Must Haves
 - The invoking control is a native `<button>` (preferred), or `role="button"` only when a native button cannot be used.
   - If using `role="button"`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating.
-- The invoking button reflects open state of the menu with `aria-expanded="true|false"`.
+- The invoking button reflects open state of the menu with `aria-expanded="true|false"`. This state toggle is the core signal of the pattern; the implementation fails without it.
 - The invoking button is associated to the menu container with `aria-controls="IDREF"`.
 - The menu content is shown/hidden in the DOM (for example via the `hidden` attribute) so that when closed, menu content cannot be reached by keyboard or screen readers.
 - When the menu opens, focus remains on the invoking button.
@@ -42,15 +46,16 @@ summary: A non-modal, button-invoked account menu that reveals a small list of l
 - Whether the menu includes non-interactive text (for example signed-in email) or separators.
 - Menu positioning (left/right alignment, above/below) as long as it does not break reading and focus order.
 - Accessible labeling strategy:
-  - Trigger button label (for example “Account” or “Open account menu”).
+  - Trigger button label (for example "Account" or "Open account menu").
   - Optional label for the list (for example `aria-label="Account"` on the list, or wrap with a labeled container).
 
-## Don’ts
-- Don’t open the menu on hover or click only. It must respond to keyboard Enter and Space as well.
-- Don’t use `role="menu"` / `role="menuitem"` unless you implement the full keyboard and focus behavior expected of composite menu widgets.
-- Don’t position the menu in the DOM far away from the trigger in a way that breaks focus order or causes screen readers to encounter the menu in an unexpected location.
-- Don’t leave the menu visible or accessible to screen readers while `aria-expanded="false"` (and vice versa).
-- Don’t close the menu in a way that strands focus (for example removing the focused element without moving focus).
+## Don'ts
+- Do not render the invoking button without `aria-expanded`; `aria-haspopup` alone does not convey open/closed state.
+- Do not make hover or pointer click the only way to open the menu; opening must also work with keyboard Enter and Space (native button activation).
+- Do not use `role="menu"` / `role="menuitem"` unless you implement the full keyboard and focus behavior expected of composite menu widgets.
+- Do not position the menu in the DOM far away from the trigger in a way that breaks focus order or causes screen readers to encounter the menu in an unexpected location.
+- Do not leave the menu visible or accessible to screen readers while `aria-expanded="false"` (and vice versa).
+- Do not close the menu in a way that strands focus (for example removing the focused element without moving focus).
 
 ## Golden Pattern
 ```jsx
@@ -170,7 +175,7 @@ Keyboard
 - If focus moves outside the button + menu (Tab away or click elsewhere), the menu closes.
 
 Screen Reader
-- The invoking button announces expanded/collapsed state via aria-expanded.
+- The invoking button announces expanded/collapsed state via `aria-expanded`; the attribute is present and flips between `"true"` and `"false"` on every open and close.
 - When closed, menu items are not reachable.
 - When open, the list and its items are reachable in reading and focus order.
 - Links announce as links and navigate correctly.

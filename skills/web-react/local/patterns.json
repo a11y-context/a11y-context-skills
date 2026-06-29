@@ -1,8 +1,8 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "rev_2026-02-17T18:00:00Z",
-  "generated_at": "2026-02-17T18:00:00Z",
+  "catalog_revision": "0.3.0",
+  "generated_at": "2026-06-28T00:00:00Z",
   "cache_ttl_seconds": 3600,
 
   "patterns": [
@@ -12,7 +12,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.1.1",
 
       "summary": "A set of show/hide sections with heading-wrapped buttons controlling associated panels via aria-expanded (and optionally aria-controls / region).",
       "aliases": ["accordion", "disclosure group", "expand collapse", "collapsible panels"],
@@ -26,7 +26,7 @@
       "default_variant": null,
 
       "source": {
-        "path": "components/accordion.md",
+        "path": "components/accordion.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -37,7 +37,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.1",
 
       "summary": "A non-modal, button-invoked account menu that reveals a small list of links and optional actions. Uses aria-expanded plus DOM show/hide so keyboard users Tab into items and Esc closes.",
       "aliases": ["account dropdown", "account menu", "profile menu", "user menu", "avatar menu", "settings menu"],
@@ -62,7 +62,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "Native button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.",
       "aliases": ["btn", "primary button", "icon button", "call to action", "cta"],
@@ -87,7 +87,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "Horizontally-advancing carousel (aka hero or marquee carousel) with 'dot' navigation, prev/next buttons, and pause behavior.",
       "aliases": ["hero carousel", "marquee", "featured gallery", "hero gallery", "slider"],
@@ -112,7 +112,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "Horizontally-advancing carousel (aka hero or marquee carousel) with thumbnail navigation, prev/next buttons, and pause behavior.",
       "aliases": ["hero carousel thumbnails", "marquee thumbnails", "featured gallery thumbnails", "hero gallery thumbnails", "preview carousel"],
@@ -137,7 +137,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "Interactive channel guide grid with one Tab stop and arrow-key navigation across channels and time slots.",
       "aliases": ["epg", "electronic program guide", "tv guide", "live guide", "schedule grid"],
@@ -162,13 +162,13 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "Horizontal product shelf with a heading, list semantics, and Prev/Next paging that moves focus to newly revealed items.",
-      "aliases": ["content row", "content rail", "rail", "strip", "shelf", "multi item carousel", "product row"],
+      "aliases": ["content row", "content rail", "rail", "strip", "shelf", "multi item carousel", "product row", "product card grid", "product cards", "card row", "media row"],
       "tags": ["collection-row", "shelf", "rail", "horizontal-list", "ecommerce", "navigation"],
       "selection_excerpt": {
-        "use_when": ["Use when displaying multiple related items in a horizontally scrollable row under a shared category heading (e.g., e.g., 'Customers Also Viewed', 'Action Movies').", "Use when multiple items are visible simultaneously and can be scrolled left or right.", "Use when each item is a compact card with a primary visual element and brief supporting text."],
+        "use_when": ["Use when displaying multiple related items in a horizontally scrollable row under a shared category heading (e.g., 'Customers Also Viewed', 'Action Movies').", "Use when multiple items are visible simultaneously and can be scrolled left or right.", "Use when each item is a compact card with a primary visual element and brief supporting text."],
         "do_not_use_when": ["Do not use when only one item is visible at a time within a rotatable sequence (use carousel).", "Do not use when items are arranged in a multi-row or multi-column layout (use grid).", "Do not use when items are presented as a simple vertical list without horizontal scrolling (use list)."]
       },
 
@@ -176,7 +176,7 @@
       "default_variant": null,
 
       "source": {
-        "path": "components/collection-row.md",
+        "path": "components/collection-row.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -187,7 +187,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "User-initiated blocking dialog that traps focus, inerts background content, and restores focus on close.",
       "aliases": ["dialog", "modal", "pop-up"],
@@ -212,7 +212,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "Native link for navigation using <a href>. Supports optional context in the accessible name, including 'opens in new tab/window/dialog'.",
       "aliases": ["anchor", "hyperlink", "external link"],
@@ -226,7 +226,7 @@
       "default_variant": null,
 
       "source": {
-        "path": "components/link.md",
+        "path": "components/link.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -237,7 +237,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with aria-expanded/controls and Tab-based navigation (no roving focus / no role=menu).",
       "aliases": ["nav dropdown", "header dropdown", "mega menu", "disclosure navigation", "flyout menu"],
@@ -287,7 +287,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.3.0",
 
       "summary": "Two-state on/off control representing a persistent setting. Uses role=\"switch\" with aria-checked, or native checkbox semantics when applicable.",
       "aliases": ["toggle switch", "preference toggle"],
@@ -301,7 +301,7 @@
       "default_variant": null,
 
       "source": {
-        "path": "components/switch.md",
+        "path": "components/switch.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -326,7 +326,7 @@
       "default_variant": null,
 
       "source": {
-        "path": "components/toast.md",
+        "path": "components/toast.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -337,7 +337,7 @@
       "pattern_type": "component",
 
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
 
       "summary": "Two- or three-state button that toggles between pressed and not pressed using aria-pressed.",
       "aliases": ["toggle button", "pressed button"],

@@ -10,6 +10,10 @@ summary: A custom-styled form select that matches native <select> behavior using
 
 # Select
 
+Pattern ID: `select.basic`
+
+A custom-styled form select that matches native `<select>` behavior using a button trigger + listbox popup, and a visually hidden native `<select>` for form submission and browser autofill.
+
 Native `<select>` elements are accessible out of the box. This pattern applies only when building a **custom-styled** select input.
 
 ## Use When
@@ -27,10 +31,10 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
 - Include a **visually hidden native `<select>`** (required).
   - The hidden `<select>` includes the same options and current value as the custom UI.
   - The hidden `<select>` includes form attributes as needed (e.g., `name`, `required`, `disabled`).
-  - The hidden `<select>` is not focusable (so users don’t tab to both controls).
+  - The hidden `<select>` is not focusable (so users don't tab to both controls).
 - The visible interactive control is a native `<button>` (preferred) or `role="button"` only when a native button cannot be used.
   - If using `role="button"`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating.
-- The button must expose “opens a listbox” semantics and state:
+- The button must expose "opens a listbox" semantics and state:
   - `aria-haspopup="listbox"`
   - `aria-expanded="true|false"` reflecting open/closed
   - `aria-controls="IDREF"` pointing to the listbox element
@@ -42,7 +46,7 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
   - The popup contains one element with `role="listbox"` and a stable ID (the same one referenced by `aria-controls`).
   - Each option uses `role="option"` and has a stable ID.
   - Each option exposes selection with `aria-selected="true|false"`.
-- When the listbox is open, the “currently active” option is programmatically indicated (recommended).
+- When the listbox is open, the "currently active" option is programmatically indicated (recommended).
   - Preferred approach: keep focus on the button and set `aria-activedescendant="{optionId}"` on the button to point to the active option.
 - The listbox must be shown/hidden in the DOM so that when closed it cannot be reached by keyboard or screen readers (e.g., via `hidden`).
 - Keyboard UX must match native `<select>` expectations:
@@ -67,13 +71,13 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
 - Visual styling (caret icon, borders, spacing, animation), as long as it does not replace accessible naming.
 - Optional grouping or separators, as long as listbox/option semantics remain correct and options remain navigable.
 
-## Don’ts
-- Don’t omit the visually hidden native `<select>` when this control participates in form submission or should support autofill.
-- Don’t implement the trigger as a non-interactive element (e.g., `<div>`) without button semantics.
-- Don’t use `role="menu"` / `role="menuitem"` for select options.
-- Don’t make each option tabbable (avoid forcing users to Tab through options).
-- Don’t leave the listbox visible while `aria-expanded="false"` (and vice versa).
-- Don’t allow the custom UI and hidden `<select>` to get out of sync (options/value must match).
+## Don'ts
+- Do not omit the visually hidden native `<select>` when this control participates in form submission or should support autofill.
+- Do not implement the trigger as a non-interactive element (e.g., `<div>`) without button semantics.
+- Do not use `role="menu"` / `role="menuitem"` for select options.
+- Do not make each option tabbable (avoid forcing users to Tab through options).
+- Do not leave the listbox visible while `aria-expanded="false"` (and vice versa).
+- Do not allow the custom UI and hidden `<select>` to get out of sync (options/value must match).
 
 ## Golden Pattern
 ```jsx
@@ -88,6 +92,7 @@ const OPTIONS = [
   { value: "green", label: "Green" },
 ];
 
+// Visually-hidden styles matching the global sr-only utility (global.sr-only).
 const srOnlySelectStyle = {
   position: "absolute",
   width: 1,
@@ -304,7 +309,7 @@ Keyboard
 - Tab does not move through every option (no focus trap / no tabbing each option).
 
 Screen Reader
-- The trigger is announced with “has popup” and expanded/collapsed state (from aria-haspopup="listbox" + aria-expanded).
+- The trigger is announced with "has popup" and expanded/collapsed state (from aria-haspopup="listbox" + aria-expanded).
 - The listbox is announced as a listbox, and options are announced as options.
 - The selected option is conveyed via aria-selected="true".
 - The active option is conveyed while navigating (e.g., via aria-activedescendant).

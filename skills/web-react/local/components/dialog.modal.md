@@ -10,6 +10,10 @@ summary: User-initiated blocking dialog that traps focus, inerts background cont
 
 # Dialog (Modal)
 
+Pattern ID: `dialog.modal`
+
+User-initiated blocking dialog that traps focus, inerts background content, and restores focus on close.
+
 ## Use When
 - Use when content appears in an overlay that blocks interaction with the underlying page.
 - Use when keyboard focus must move into the dialog and remain contained until dismissal.
@@ -27,14 +31,11 @@ summary: User-initiated blocking dialog that traps focus, inerts background cont
   - Clicking the backdrop (outside the dialog surface) closes the dialog.
   - Clicking inside the dialog must not close the dialog.
 - Dialog semantics:
-  - Dialog surface has `role="dialog"` (or native `<dialog>` with equivalent semantics).
+  - Dialog surface uses the native `<dialog>` element (preferred), or `<div role="dialog">` when `<dialog>` cannot be used (see Customizable).
   - Dialog surface sets `aria-modal="true"`.
   - Dialog surface is focusable for entry (`tabIndex={-1}` or equivalent) and receives initial focus on open.
-- Accessible naming (required):
-  - Dialog has an accessible name via `aria-labelledby` (preferred) or `aria-label`.
-  - If `aria-labelledby` is used, it must reference a visible title element (e.g., `<h2 id="...">`).
-- Accessible description (recommended when present):
-  - If a description is rendered, it should be referenced by `aria-describedby` (do not rely on incidental reading order).
+- Dialog has an accessible name via `aria-labelledby` (preferred) or `aria-label`. If `aria-labelledby` is used, it references a visible title element (e.g., `<h2 id="...">`).
+- If a description is rendered, it is referenced by `aria-describedby`. Do not rely on incidental reading order.
 - Focus management:
   - Capture the invoking element on open.
   - Move focus into the dialog on open.
@@ -49,18 +50,18 @@ summary: User-initiated blocking dialog that traps focus, inerts background cont
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) on the button that triggers the dialog and any focusable elements inside the dialog.
 
 ## Customizable
-- The `<dialog>` element does not have perfect browser support yet. For this reason, we still recommend using `role="dialog"` and `aria-modal="true"`. The engineer may use `<dialog>`, but if they do, they must still include `aria-modal="true"`.
+- The native `<dialog>` element is preferred when feasible. If the implementation cannot use `<dialog>` — for example, because of inadequate browser support for an older target matrix, portal-based architecture that conflicts with `<dialog>`'s top-layer behavior, or interactions with custom stacking contexts — substitute `<div role="dialog">`. Either implementation requires `aria-modal="true"` and the full focus, dismiss, and background-isolation contract above.
 
-## Don’ts
+## Don'ts
 - Do not rely on the native `<dialog>` element for consistent cross-browser modal behavior in portal-based applications.
-- Don’t rely on `aria-modal="true"` to block background interaction; it does not prevent focus/pointer access on its own.
-- Don’t render the modal inside containers that create clipping or stacking contexts (e.g., `overflow: hidden/auto`, `transform`), and don’t rely on `z-index` alone to “make it work.”
-- Don’t inert `document.body` or `document.documentElement`; inert only the application content root.
-- Don’t omit focus restoration; closing a modal must return the user to where they were.
+- Do not rely on `aria-modal="true"` to block background interaction; it does not prevent focus/pointer access on its own.
+- Do not render the modal inside containers that create clipping or stacking contexts (e.g., `overflow: hidden/auto`, `transform`), and don't rely on `z-index` alone to "make it work."
+- Do not inert `document.body` or `document.documentElement`; inert only the application content root.
+- Do not omit focus restoration; closing a modal must return the user to where they were.
 
 ## Golden Pattern
 
-```js
+```jsx
 "use client";
 
 import * as React from "react";
@@ -131,6 +132,42 @@ export function ModalDialog({
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open, onClose]);
+
+  // Fallback focus containment: wrap Tab within the dialog.
+  // Primary containment is `inert` on the app root (above); this guards
+  // setups where no inert target exists.
+  React.useEffect(() => {
+    if (!open) return;
+
+    function onKeyDown(e) {
+      if (e.key !== "Tab") return;
+
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+
+      const focusables = dialog.querySelectorAll(
+        'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusables.length) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (
+        e.shiftKey &&
+        (document.activeElement === first || document.activeElement === dialog)
+      ) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   if (!open) return null;
 

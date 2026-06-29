@@ -117,6 +117,7 @@ scope: [page, layout]
   - An `<h3>` introduces a subsection of the preceding `<h2>`, and so on.
   - When closing a subsection and returning to a higher-level section, it is acceptable to return to a higher heading level.
 - If text visually functions as a heading, it must be marked up as a heading element rather than only styled to look like one.
+- If footer links are grouped under visible group titles (e.g., "Company", "Support", "Legal"), each group title is a level 2 heading (`<h2>`).
 - Headings are descriptive of the content they introduce.
 
 ### Customizable
@@ -133,6 +134,7 @@ scope: [page, layout]
 - The heading structure forms a logical outline of the content.
 - When heading depth increases, levels are not skipped.
 - Headings are descriptive of the content they introduce.
+- Footer link-group titles, when present, are marked up as `<h2>` headings.
 - Text that appears visually to be a heading is programmatically marked up as a heading.
 - No empty heading elements are present.
 
@@ -174,12 +176,8 @@ scope: [page, component, style]
 
 ### Don'ts
 - Do not use very low-contrast borders, outlines, or icons when they are necessary to identify a control or its current state.
-- Visible UI controls and authored state indicators needed for perception meet at least 3:1 contrast against adjacent colors.
-- Meaningful icons and other non-text graphics needed for understanding meet at least 3:1 contrast against adjacent colors.
 
 ### Acceptance Checks
-- Normal text meets at least 4.5:1 contrast against its background.
-- Large-scale text meets at least 3:1 contrast against its background.
 - Visible UI controls and authored state indicators needed for perception meet at least 3:1 contrast against adjacent colors.
 - Meaningful icons and other non-text graphics needed for understanding meet at least 3:1 contrast against adjacent colors.
 
@@ -199,10 +197,10 @@ scope: [component, style]
 ### Customizable 
 - The focus indicator may take different forms, such as an outline, border, background change, underline, or other visible treatment, provided that it clearly indicates which element currently has keyboard focus.
 - Prefer styling keyboard focus with `:focus-visible` so the indicator is shown when users navigate by keyboard.
-- A recommended focus style is a solid outline that is offset from the element.
-  - Recommended starting pattern: `outline: 2px solid ...`
-  - Recommended starting offset: `outline-offset: 2px`
-  - `outline-offset: 1px` may also be used where spacing is tighter.
+- **Strongly recommended:** a two-layer focus style — a 2px solid ring with a white extension of the element background around it — so the indicator remains visible against any surrounding surface (light, dark, image, or gradient). See the first snippet below.
+- A simple solid outline offset from the element remains acceptable when the surrounding surfaces are known and the ring's 3:1 contrast against them is verified.
+  - Starting pattern: `outline: 2px solid ...`
+  - Starting offset: `outline-offset: 2px` (`1px` may be used where spacing is tighter).
 
 ### Don'ts
 - Do not use a focus indicator whose color blends into adjacent colors below the required 3:1 contrast ratio.
@@ -210,6 +208,18 @@ scope: [component, style]
 - Do not rely on hover-only styles as the only visible indicator of focus.
 
 ### Snippets
+
+Strongly recommended two-layer focus ring. The box-shadow extends the element background by 4px in white; the 2px ring sits inside that extension, so the indicator stays visible against any page background:
+
+```css
+:focus-visible {
+  outline: 2px solid var(--focus-ring-color, #1a73e8);
+  outline-offset: 0;
+  box-shadow: 0 0 0 4px #fff;
+}
+```
+
+Acceptable simpler alternative when the surrounding surfaces are known and contrast is verified:
 
 ```css
 :focus-visible {

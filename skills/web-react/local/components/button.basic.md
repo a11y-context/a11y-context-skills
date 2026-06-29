@@ -10,8 +10,12 @@ summary: Native button that triggers an action. Supports text-only, icon+text, a
 
 # Basic Button
 
+Pattern ID: `button.basic`
+
+Native button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.
+
 ## Use When
-- Use when the user triggers an immediate action (e.g., “Save”, “Continue”, “Dismiss”).
+- Use when the user triggers an immediate action (e.g., "Save", "Continue", "Dismiss").
 
 ## Do Not Use When
 - Do not use when the control navigates to a new URL (use `link`).
@@ -22,22 +26,22 @@ summary: Native button that triggers an action. Supports text-only, icon+text, a
 - Use a native `<button>` for built-in semantics and keyboard behavior.
   - A custom implementation with `role="button"` is appropriate only when a native button cannot be used.
   - If role="button" is used instead of a native <button>, add tabindex="0" and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating the control.
-- Ensure the button has an accessible name that clearly describes its purpose or action.
-- For buttons with visible text, the button's inner text may serve as the accessible name. Additional context may be added for screen reader users with `aria-label` or `aria-labelledby`, or offscreen text, when needed.
-- If the accessible name extends beyond the visible text, ensure the visible text appears at the beginning of the accessible name.
+- The button has an accessible name that describes its purpose or action.
+- When the button has visible text, the visible text serves as the accessible name.
+- When additional context is needed beyond the visible text, add it via `aria-label`, `aria-labelledby`, or offscreen text. The visible text appears at the start of the accessible name.
 - For icon-only buttons, provide an accessible name using `aria-label` or `aria-labelledby`.
 - Icons within buttons must be decorative (`aria-hidden="true"`).
 - If the action is unavailable, disable the button using the native `disabled` attribute. (It becomes unfocusable and non-interactive.)
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the button.
 
 ## Customizable
-- Buttons with visible text don't usually need additional context for screen reader users (though they might). If they do, then an `aria-label` or offscreen element should be used.
+- No accessibility-relevant variations beyond the Must Haves above.
 
-## Don’ts
-- Don’t build a button out of a `<div>` or `<span>` with `role="button"` unless you absolutely must; native `<button>` is the baseline.
-- Don’t create icon-only buttons without an accessible name (no unlabeled icons). 
-- Don’t use `aria-label` that conflicts with (or is wildly different from) the visible label text. Accessible names should at least begin with the visible label.
-- Don’t hide focus outlines without providing a strong custom focus style.
+## Don'ts
+- Do not build a button out of a `<div>` or `<span>` with `role="button"` unless you absolutely must; native `<button>` is the baseline.
+- Do not create icon-only buttons without an accessible name (no unlabeled icons). 
+- Do not use `aria-label` that conflicts with (or is wildly different from) the visible label text. Accessible names should at least begin with the visible label.
+- Do not hide focus outlines without providing a strong custom focus style.
 
 ## Golden Pattern
 ```jsx

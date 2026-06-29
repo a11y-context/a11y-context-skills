@@ -4,14 +4,18 @@ title: Collection Row
 stack: web/react
 status: beta
 tags: [collection-row, shelf, rail, horizontal-list, ecommerce, navigation]
-aliases: [content row, content rail, rail, strip, shelf, multi item carousel, product row]
+aliases: [content row, content rail, rail, strip, shelf, multi item carousel, product row, product card grid, product cards, card row, media row]
 summary: Horizontal product shelf with a heading, list semantics, and Prev/Next paging that moves focus to newly revealed items.
 ---
 
 # Collection Row
 
+Pattern ID: `collection-row.basic`
+
+Horizontal product shelf with a heading, list semantics, and Prev/Next paging that moves focus to newly revealed items.
+
 ## Use When
-- Use when displaying multiple related items in a horizontally scrollable row under a shared category heading (e.g., e.g., “Customers Also Viewed”, “Action Movies”).
+- Use when displaying multiple related items in a horizontally scrollable row under a shared category heading (e.g., "Customers Also Viewed", "Action Movies").
 - Use when multiple items are visible simultaneously and can be scrolled left or right.
 - Use when each item is a compact card with a primary visual element and brief supporting text.
 
@@ -29,10 +33,10 @@ summary: Horizontal product shelf with a heading, list semantics, and Prev/Next 
   - Optional visible metadata (e.g., price, episode number, rating).
 - Each item link must have an accessible name composed of:
   - title + metadata (optional) via `aria-labelledby`
-- Each item link should expose position context (e.g., “3 of 18”) as supplemental information:
-  - Provide an offscreen “X of Y” element.
+- Each item link should expose position context (e.g., "3 of 18") as supplemental information:
+  - Provide an offscreen "X of Y" element.
   - Reference it via `aria-describedby`.
-  - The position must reflect the item’s index within the full set, not just the currently visible subset.
+  - The position must reflect the item's index within the full set, not just the currently visible subset.
 - Provide paging controls:
   - Next button on the right edge of the row container (vertically centered)
   - Previous button on the left edge when not on the first page
@@ -46,13 +50,13 @@ summary: Horizontal product shelf with a heading, list semantics, and Prev/Next 
 - In the golden pattern, we wrap the component in a container with `role="group"` and `aria-labelledby` pointing to the heading ID. This is optional. Engineers may choose instead to use a `<section>` or `role="region"`, or to eschew the container entirely.
 - Items must at minimum have some "title" text that gives each item a name, but they are not required to also have metadata, like a price, or rating, etc.
 
-## Don’ts
-- When a user's focus is on the last visible item, and they press Tab, focus should move to a 'Next' button, not to the next item in the collection row.
-- Don’t split the item into multiple separate interactive elements (one item = one link).
+## Don'ts
+- Do not let Tab from the last visible item move into out-of-view items; it must reach the Next button instead.
+- Do not split the item into multiple separate interactive elements (one item = one link).
 - Do not rely solely on poster art or imagery to communicate the name of each item.
 
 ## Golden Pattern
-```js
+```jsx
 "use client";
 
 import * as React from "react";
@@ -130,6 +134,7 @@ export function CollectionRow({ heading = "Customers Also Viewed", items = ITEMS
   );
 }
 
+// Visually-hidden styles matching the global sr-only utility (global.sr-only).
 const srOnly = {
   position: "absolute",
   width: 1,
@@ -162,7 +167,7 @@ const ITEMS = [
 - Accessible naming:
   - Each link exposes a programmatic name that includes the visible title.
   - If metadata is present, it contributes to the accessible name.
-  - Each link exposes position context (e.g., “3 of 18”) once via `aria-describedby`.
+  - Each link exposes position context (e.g., "3 of 18") once via `aria-describedby`.
 - Keyboard:
   - Tab order reaches Previous and Next buttons without forcing navigation through hidden items.
   - Activating Next moves focus to the first newly visible item.

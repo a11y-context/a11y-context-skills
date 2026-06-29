@@ -10,6 +10,10 @@ summary: A set of show/hide sections with heading-wrapped buttons controlling as
 
 # Accordion
 
+Pattern ID: `accordion.basic`
+
+A set of show/hide sections with heading-wrapped buttons controlling associated panels via `aria-expanded` (and optionally `aria-controls` / region).
+
 ## Use When
 - Use when content can be organized into collapsible sections to reduce scanning and scrolling.
 
@@ -37,12 +41,12 @@ summary: A set of show/hide sections with heading-wrapped buttons controlling as
   - If only one panel may be expanded, expanding a new panel collapses the previously open panel.
 - The heading level will usually be `h2`, but this is customizable and depends on the heading hierarchy of the surrounding page.
 
-## Don’ts
-- Don’t use non-focusable headers (e.g., `<div>` without proper button semantics) as the interactive control.
-- Don’t make the panel visible while leaving `aria-expanded="false"` (and vice versa).
-- Don’t remove panel content from the DOM in a way that breaks expected focus behavior (e.g., collapsing a panel while focus remains inside it without moving focus).
-- Don’t use `role="heading"` without an `aria-level`.
-- Don't nest accordions within accordion panels.
+## Don'ts
+- Do not use non-focusable headers (e.g., `<div>` without proper button semantics) as the interactive control.
+- Do not make the panel visible while leaving `aria-expanded="false"` (and vice versa).
+- Do not remove panel content from the DOM in a way that breaks expected focus behavior (e.g., collapsing a panel while focus remains inside it without moving focus).
+- Do not use `role="heading"` without an `aria-level`.
+- Do not nest accordions within accordion panels.
 
 ## Golden Pattern
 ```jsx
@@ -64,6 +68,9 @@ export function AccordionDemo() {
 
   return (
     <div>
+      {/* h3 assumes an h2 section heading exists above the accordion.
+          Match the heading level to the surrounding page hierarchy
+          (see Customizable). */}
       <h3>
         <button
           id="acc-btn-overview"
