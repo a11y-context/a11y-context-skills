@@ -14,7 +14,9 @@ apply_policy:
 
 ---
 
-# Global Rules (Baseline)
+# Foundations
+
+Foundations are the accessibility rules that aren't tied to a single component — utilities used across patterns (like `sr-only`), page-level structure (landmarks, headings, page titles), and visual fundamentals (text contrast, focus indicators). The rules below are the cross-cutting requirements every UI implementation should meet.
 
 ## Rule: Offscreen Text Utility (sr-only)
 
