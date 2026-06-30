@@ -81,10 +81,11 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
 - Do not allow the custom UI and hidden `<select>` to get out of sync (options/value must match).
 
 ## Golden Pattern
+
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
-
-import * as React from "react";
 
 const OPTIONS = [
   { value: "red", label: "Red" },
@@ -107,19 +108,19 @@ const srOnlySelectStyle = {
 };
 
 export function CustomSelectBasic() {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("red");
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("red");
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const rootRef = React.useRef(null);
-  const btnRef = React.useRef(null);
+  const rootRef = useRef(null);
+  const btnRef = useRef(null);
 
   const labelId = "color-select-label";
   const valueId = "color-select-value";
   const listboxId = "color-select-listbox";
   const nativeId = "color-select-native";
 
-  const selectedIndex = React.useMemo(
+  const selectedIndex = useMemo(
     () => Math.max(0, OPTIONS.findIndex((o) => o.value === value)),
     [value],
   );
@@ -145,7 +146,7 @@ export function CustomSelectBasic() {
   }
 
   // Close on outside click.
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
 
     function onPointerDown(e) {

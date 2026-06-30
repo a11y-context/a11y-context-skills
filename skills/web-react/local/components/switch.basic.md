@@ -64,13 +64,13 @@ Two-state on/off control representing a persistent setting. Uses `role="switch"`
 
 ## Golden Pattern
 
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
 
-import * as React from "react";
-
 export function SwitchDemo() {
-  const [notifications, setNotifications] = React.useState(false);
+  const [notifications, setNotifications] = useState(false);
 
   function toggle() {
     setNotifications((v) => !v);

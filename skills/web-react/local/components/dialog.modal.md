@@ -62,11 +62,10 @@ User-initiated blocking dialog that traps focus, inerts background content, and 
 
 ## Golden Pattern
 
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
-
-import * as React from "react";
-import { createPortal } from "react-dom";
 
 export function ModalDialog({
   open,
@@ -76,19 +75,19 @@ export function ModalDialog({
   children,
   inertRoot,
 }) {
-  const titleId = React.useId();
+  const titleId = useId();
 
-  const dialogRef = React.useRef(null);
-  const openerRef = React.useRef(null);
+  const dialogRef = useRef(null);
+  const openerRef = useRef(null);
 
   // Capture the opener at the moment we open (so focus can be restored on close).
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     if (!open) return;
     openerRef.current = document.activeElement;
   }, [open]);
 
   // Background inert while open (optional; depends on target root existing).
-  React.useEffect(() => {
+  useEffect(() => {
     const target =
       inertRoot || document.getElementById("app-root");
 
@@ -106,7 +105,7 @@ export function ModalDialog({
   }, [open, inertRoot]);
 
   // Focus entry + restore.
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) {
       if (openerRef.current && typeof openerRef.current.focus === "function") {
         openerRef.current.focus();
@@ -120,7 +119,7 @@ export function ModalDialog({
   }, [open]);
 
   // Close on Escape.
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
 
     function onKeyDown(e) {
@@ -137,7 +136,7 @@ export function ModalDialog({
   // Fallback focus containment: wrap Tab within the dialog.
   // Primary containment is `inert` on the app root (above); this guards
   // setups where no inert target exists.
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
 
     function onKeyDown(e) {

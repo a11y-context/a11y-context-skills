@@ -45,10 +45,11 @@ Horizontally-advancing carousel (aka hero or marquee carousel) with thumbnail na
 - Do not keep moving while the user is interacting (focus inside carousel must pause autoplay).
 
 ## Golden Pattern
+
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
-
-import * as React from "react";
 
 export function CarouselThumbnailsDemo({
   ariaLabel = "Featured content",
@@ -56,18 +57,18 @@ export function CarouselThumbnailsDemo({
   autoplay = true,
   intervalMs = 5000,
 }) {
-  const [index, setIndex] = React.useState(0);
-  const [isPaused, setIsPaused] = React.useState(false);
+  const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const hasUserToggledPauseRef = React.useRef(false);
-  const reducedMotionRef = React.useRef(false);
-  const timerRef = React.useRef(null);
-  const skipFocusPauseRef = React.useRef(false);
+  const hasUserToggledPauseRef = useRef(false);
+  const reducedMotionRef = useRef(false);
+  const timerRef = useRef(null);
+  const skipFocusPauseRef = useRef(false);
 
   const count = items.length;
 
   // Reduced motion: paused by default.
-  React.useEffect(() => {
+  useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const apply = () => {
       reducedMotionRef.current = !!mq.matches;
@@ -125,7 +126,7 @@ export function CarouselThumbnailsDemo({
   }
 
   // Autoplay (respects reduced motion, focus-paused state, and user pause).
-  React.useEffect(() => {
+  useEffect(() => {
     if (!autoplay || isPaused || reducedMotionRef.current) return;
 
     // Functional update avoids stale-closure reads of the current index.

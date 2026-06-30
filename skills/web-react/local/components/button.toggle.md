@@ -52,14 +52,15 @@ Two- or three-state button that toggles between pressed and not pressed using `a
 - Do not put state only in the icon (screen reader users must get state via the accessible name change or `aria-pressed`, depending on strategy).
 
 ## Golden Pattern
-```jsx
-import * as React from "react";
 
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
+```jsx
 export function ToggleButtonDemo() {
-  const [muted, setMuted] = React.useState(false);
-  const [iconOnlyMuted, setIconOnlyMuted] = React.useState(false);
-  const [pinned, setPinned] = React.useState(false);
-  const [bold, setBold] = React.useState(false);
+  const [muted, setMuted] = useState(false);
+  const [iconOnlyMuted, setIconOnlyMuted] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const [bold, setBold] = useState(false);
 
   return (
     <div>

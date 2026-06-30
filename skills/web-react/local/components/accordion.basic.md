@@ -50,14 +50,15 @@ A set of show/hide sections with heading-wrapped buttons controlling associated 
 - Do not nest accordions within accordion panels.
 
 ## Golden Pattern
+
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
 
-import * as React from "react";
-
 export function AccordionDemo() {
   // Single-expand: exactly one panel open at a time.
-  const [openId, setOpenId] = React.useState("overview");
+  const [openId, setOpenId] = useState("overview");
 
   function toggle(id) {
     setOpenId(id);

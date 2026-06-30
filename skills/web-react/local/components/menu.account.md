@@ -59,21 +59,22 @@ A non-modal, button-invoked account menu that reveals a small list of links and 
 - Do not close the menu in a way that strands focus (for example removing the focused element without moving focus).
 
 ## Golden Pattern
+
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
 
-import * as React from "react";
-
 export function AccountMenu() {
-  const [open, setOpen] = React.useState(false);
-  const btnRef = React.useRef(null);
-  const listRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const btnRef = useRef(null);
+  const listRef = useRef(null);
 
-  const close = React.useCallback(() => setOpen(false), []);
-  const toggle = React.useCallback(() => setOpen(v => !v), []);
+  const close = useCallback(() => setOpen(false), []);
+  const toggle = useCallback(() => setOpen(v => !v), []);
 
   // Close on outside click (non-modal).
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
     const onPointerDown = (e) => {
       const btn = btnRef.current;
@@ -86,7 +87,7 @@ export function AccountMenu() {
   }, [open, close]);
 
   // Close when focus leaves button + list.
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
     const onFocusIn = (e) => {
       const btn = btnRef.current;
@@ -99,7 +100,7 @@ export function AccountMenu() {
   }, [open, close]);
 
   // Esc closes and returns focus to the trigger.
-  React.useEffect(() => {
+  useEffect(() => {
     if (!open) return;
     const onKeyDown = (e) => {
       if (e.key !== "Escape") return;

@@ -52,9 +52,10 @@ Native link for navigation using `<a href>`. Supports optional context in the ac
 - Do not permit Space to activate links.
 
 ## Golden Pattern
-```jsx
-import * as React from "react";
 
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
+```jsx
 export function LinkDemo() {
   return (
     <div>

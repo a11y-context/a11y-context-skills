@@ -45,9 +45,10 @@ Native button that triggers an action. Supports text-only, icon+text, and icon-o
 - Do not hide focus outlines without providing a strong custom focus style.
 
 ## Golden Pattern
-```jsx
-import * as React from "react";
 
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
+```jsx
 export function ButtonBasicDemo() {
   return (
     <div>

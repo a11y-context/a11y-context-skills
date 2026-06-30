@@ -65,10 +65,11 @@ Interactive channel guide grid with one Tab stop and arrow-key navigation across
 - Do not use `<button role="gridcell">` or `<button role="columnheader">`.
 
 ## Golden Pattern
+
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
-
-import * as React from "react";
 
 export function ChannelGuideGrid({
   ariaLabel = "Channel guide",
@@ -76,17 +77,17 @@ export function ChannelGuideGrid({
   channels = DEMO_CHANNELS,
 }) {
   // Selected row = currently playing channel (visual/semantic state only)
-  const [selectedRow, setSelectedRow] = React.useState(1);
+  const [selectedRow, setSelectedRow] = useState(1);
 
   // Roving focus position (row, col)
   // col 0 = channel buttons column, col 1 = Now, col 2.. = future
-  const [pos, setPos] = React.useState({ row: selectedRow, col: 1 });
+  const [pos, setPos] = useState({ row: selectedRow, col: 1 });
 
   // Last-focused cell for Tab out / Tab back in restoration.
-  const lastPosRef = React.useRef({ row: selectedRow, col: 1 });
+  const lastPosRef = useRef({ row: selectedRow, col: 1 });
 
   // Button refs keyed by "row-col" so arrow keys can programmatically move focus.
-  const btnRefs = React.useRef({}); // { "1-2": HTMLButtonElement }
+  const btnRefs = useRef({}); // { "1-2": HTMLButtonElement }
 
   const totalCols = columns.length + 1; // +1 for channel column
   const rowCount = channels.length + 1; // +1 header row

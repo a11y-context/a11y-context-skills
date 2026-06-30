@@ -92,16 +92,17 @@ A non-modal header navigation pattern that supports top-level links and optional
 - Do not render sub-menus expanded/visible by default. They open only after the user activates the corresponding toggle.
 
 ## Golden Pattern
+
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
 
-import * as React from "react";
-
 export function NavigationMenuBasic() {
-  const [openId, setOpenId] = React.useState(null);
+  const [openId, setOpenId] = useState(null);
 
-  const togglesRef = React.useRef(new Map());
-  const listsRef = React.useRef(new Map());
+  const togglesRef = useRef(new Map());
+  const listsRef = useRef(new Map());
 
   function closeAll() {
     setOpenId(null);
@@ -111,7 +112,7 @@ export function NavigationMenuBasic() {
     setOpenId((prev) => (prev === id ? null : id));
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!openId) return;
 
     function onPointerDown(event) {
@@ -127,7 +128,7 @@ export function NavigationMenuBasic() {
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [openId]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!openId) return;
 
     function onFocusIn(event) {
@@ -143,7 +144,7 @@ export function NavigationMenuBasic() {
     return () => document.removeEventListener("focusin", onFocusIn, true);
   }, [openId]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!openId) return;
 
     function onKeyDown(event) {

@@ -52,18 +52,18 @@ Temporary, non-blocking status message announced via live region. May include op
 
 ## Golden Pattern
 
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
 
-import * as React from "react";
-
-const ToastContext = React.createContext(() => {});
+const ToastContext = createContext(() => {});
 
 export function ToastProvider({ children }) {
-  const [message, setMessage] = React.useState("");
-  const timeoutRef = React.useRef(null);
+  const [message, setMessage] = useState("");
+  const timeoutRef = useRef(null);
 
-  const showToast = React.useCallback((text) => {
+  const showToast = useCallback((text) => {
     if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
     setMessage(text);
     timeoutRef.current = window.setTimeout(() => setMessage(""), 5000);
@@ -82,7 +82,7 @@ export function ToastProvider({ children }) {
 }
 
 export function useToast() {
-  return React.useContext(ToastContext);
+  return useContext(ToastContext);
 }
 
 /** Demo */

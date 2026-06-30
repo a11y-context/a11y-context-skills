@@ -57,16 +57,17 @@ Horizontal product shelf with a heading, list semantics, and Prev/Next paging th
 - Do not rely solely on poster art or imagery to communicate the name of each item.
 
 ## Golden Pattern
+
+Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
+
 ```jsx
 "use client";
 
-import * as React from "react";
-
 export function CollectionRow({ heading = "Customers Also Viewed", items = ITEMS, pageSize = 4 }) {
-  const headingId = React.useId();
-  const [startIndex, setStartIndex] = React.useState(0);
+  const headingId = useId();
+  const [startIndex, setStartIndex] = useState(0);
 
-  const linkRefs = React.useRef([]);
+  const linkRefs = useRef([]);
 
   const total = items.length;
   const endIndex = Math.min(startIndex + pageSize, total);
