@@ -3,6 +3,7 @@ id: select.basic
 title: Select
 stack: web/react
 status: beta
+latest_version: 0.1.0
 tags: [select, form, form-select, listbox, dropdown]
 aliases: [form select, styled select, listbox select, dropdown select]
 summary: A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.

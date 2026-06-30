@@ -3,6 +3,7 @@ id: toast.basic
 title: Toast
 stack: web/react
 status: beta
+latest_version: 0.1.0
 tags: [toast, notification, status, live-region]
 aliases: [notification, toast, transient message, status message]
 summary: Temporary, non-blocking status message announced via live region. May include optional dismiss control. Disappears automatically.

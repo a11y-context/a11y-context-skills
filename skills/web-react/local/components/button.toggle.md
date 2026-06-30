@@ -3,6 +3,7 @@ id: button.toggle
 title: Toggle Button
 stack: web/react
 status: beta
+latest_version: 0.2.0
 tags: [button, toggle, pressed, aria-pressed, mute-button]
 aliases: [toggle button, pressed button]
 summary: Two- or three-state button that toggles between pressed and not pressed using aria-pressed.

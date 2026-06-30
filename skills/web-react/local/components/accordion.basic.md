@@ -3,6 +3,7 @@ id: accordion.basic
 title: Accordion
 stack: web/react
 status: beta
+latest_version: 0.1.1
 tags: [accordion, disclosure, show-hide]
 aliases: [accordion, disclosure group, expand collapse, collapsible panels]
 summary: A set of show/hide sections with heading-wrapped buttons controlling associated panels via aria-expanded (and optionally aria-controls / region).

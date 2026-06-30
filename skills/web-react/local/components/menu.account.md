@@ -3,6 +3,7 @@ id: menu.account
 title: Account Menu
 stack: web/react
 status: beta
+latest_version: 0.2.1
 tags: [menu, account, profile, disclosure, popover]
 aliases: [account dropdown, account menu, profile menu, user menu, avatar menu, settings menu]
 summary: A non-modal, button-invoked account menu that reveals a small list of links and optional actions. Uses aria-expanded plus DOM show/hide so keyboard users Tab into items and Esc closes.

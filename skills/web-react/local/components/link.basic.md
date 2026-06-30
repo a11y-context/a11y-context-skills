@@ -3,6 +3,7 @@ id: link.basic
 title: Link
 stack: web/react
 status: beta
+latest_version: 0.2.0
 tags: [link, anchor, navigation, external-link]
 aliases: [anchor, hyperlink, external link]
 summary: Native link for navigation using <a href>. Supports optional context in the accessible name, including "opens in new tab/window/dialog".

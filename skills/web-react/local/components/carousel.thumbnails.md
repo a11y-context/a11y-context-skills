@@ -3,6 +3,7 @@ id: carousel.thumbnails
 title: Carousel with Thumbnail Navigation
 stack: web/react
 status: beta
+latest_version: 0.2.0
 tags: [marquee, carousel, slider, gallery, thumbnails, autoplay, reduced-motion, image-preview]
 aliases: [hero carousel thumbnails, marquee thumbnails, featured gallery thumbnails, hero gallery thumbnails, preview carousel]
 summary: Horizontally-advancing carousel (aka hero or marquee carousel) with thumbnail navigation, prev/next buttons, and pause behavior.

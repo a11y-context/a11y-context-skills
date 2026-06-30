@@ -3,6 +3,7 @@ id: carousel.dots
 title: Carousel with Dot Navigation
 stack: web/react
 status: beta
+latest_version: 0.2.0
 tags: [marquee, carousel, slider, gallery, dots, autoplay, reduced-motion]
 aliases: [hero carousel, marquee, featured gallery, hero gallery, image gallery, slider]
 summary: Horizontally-advancing carousel (aka hero or marquee carousel) with 'dot' navigation, prev/next buttons, and pause behavior.

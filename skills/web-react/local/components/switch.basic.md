@@ -3,6 +3,7 @@ id: switch.basic
 title: Switch
 stack: web/react
 status: beta
+latest_version: 0.3.0
 tags: [switch, form, settings, on-off, form-control, toggle]
 aliases: [toggle switch, preference toggle]
 summary: Two-state on/off control representing a persistent setting. Uses role="switch" with aria-checked, or native checkbox semantics when applicable.

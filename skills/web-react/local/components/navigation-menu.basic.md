@@ -3,6 +3,7 @@ id: navigation-menu.basic
 title: Navigation Menu
 stack: web/react
 status: beta
+latest_version: 0.2.0
 tags: [navigation, menu, disclosure, header, sitemap, flyout]
 aliases: [nav dropdown, header dropdown, mega menu (simple), disclosure navigation, flyout menu]
 summary: A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with aria-expanded/controls and Tab-based navigation (no roving focus / no role=menu).

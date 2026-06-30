@@ -3,6 +3,7 @@ id: collection-row.basic
 title: Collection Row
 stack: web/react
 status: beta
+latest_version: 0.2.0
 tags: [collection-row, shelf, rail, horizontal-list, ecommerce, navigation]
 aliases: [content row, content rail, rail, strip, shelf, multi item carousel, product row, product card grid, product cards, card row, media row]
 summary: Horizontal product shelf with a heading, list semantics, and Prev/Next paging that moves focus to newly revealed items.

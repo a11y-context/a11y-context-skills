@@ -3,6 +3,7 @@ id: dialog.modal
 title: "Dialog (Modal)"
 stack: web/react
 status: beta
+latest_version: 0.2.0
 tags: [dialog, modal, pop-up, overlay, focus-trap, blocking]
 aliases: [dialog, modal, pop-up]
 summary: User-initiated blocking dialog that traps focus, inerts background content, and restores focus on close.
