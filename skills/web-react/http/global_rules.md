@@ -198,25 +198,27 @@ scope: [component, style]
 
 ### Customizable 
 - The focus indicator may take different forms, such as an outline, border, background change, underline, or other visible treatment, provided that it clearly indicates which element currently has keyboard focus.
-- Prefer styling keyboard focus with `:focus-visible` so the indicator is shown when users navigate by keyboard.
-- **Strongly recommended:** a two-layer focus style — a 2px solid ring with a white extension of the element background around it — so the indicator remains visible against any surrounding surface (light, dark, image, or gradient). See the first snippet below.
+- Prefer styling keyboard focus with `:focus-visible` so the indicator is shown when users navigate by keyboard, not on mouse click.
+- **Strongly recommended:** a two-layer focus style — a 2px solid ring floated 2px outside the element with a white box-shadow behind it — so the indicator remains visible against any surrounding surface (light, dark, image, or gradient). See the first snippet below.
 - A simple solid outline offset from the element remains acceptable when the surrounding surfaces are known and the ring's 3:1 contrast against them is verified.
   - Starting pattern: `outline: 2px solid ...`
   - Starting offset: `outline-offset: 2px` (`1px` may be used where spacing is tighter).
+- **Windows High Contrast Mode (forced-colors) support is required for any focus style.** Pair the primary style with a `@media (forced-colors: active)` override that uses the `Highlight` CSS system color and drops the box-shadow. See the shared override snippet below.
 
 ### Don'ts
 - Do not use a focus indicator whose color blends into adjacent colors below the required 3:1 contrast ratio.
 - Do not make the focus indicator so subtle that users cannot quickly identify which element currently has focus.
 - Do not rely on hover-only styles as the only visible indicator of focus.
+- Do not ship focus styles without a `forced-colors` override — Windows High Contrast Mode users will lose the custom colors and be left with browser defaults that may not match the design's contrast intent.
 
 ### Snippets
 
-Strongly recommended two-layer focus ring. The box-shadow extends the element background by 4px in white; the 2px ring sits inside that extension, so the indicator stays visible against any page background:
+Strongly recommended two-layer focus ring. The `box-shadow` extends 4px in white around the element; the outline floats 2px outside the element edge, so the white halo sits between the element and the colored ring for surface-independent visibility:
 
 ```css
 :focus-visible {
   outline: 2px solid var(--focus-ring-color, #1a73e8);
-  outline-offset: 0;
+  outline-offset: 2px;
   box-shadow: 0 0 0 4px #fff;
 }
 ```
@@ -230,9 +232,22 @@ Acceptable simpler alternative when the surrounding surfaces are known and contr
 }
 ```
 
+Required forced-colors override — pair with either primary style above. `Highlight` maps to the OS-defined focus/selection color under Windows High Contrast Mode; `box-shadow: none` prevents doubled visuals under the system-managed palette:
+
+```css
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+}
+```
+
 ### Acceptance Checks
 - Every keyboard-focusable component shows a visible focus indicator when reached by keyboard navigation.
 - The visible focus indicator remains present while the component has keyboard focus.
 - The focus indicator has at least 3:1 contrast against adjacent colors.
 - If a custom focus style is used, it is clearly visible and does not make focus harder to perceive than the default browser or platform behavior.
 - Hover alone is not the only visible cue for the currently focused element.
+- With Windows High Contrast Mode active (or emulated via a browser dev-tool forced-colors setting), the focus indicator remains clearly visible using the system `Highlight` color.
