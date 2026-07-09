@@ -3,7 +3,7 @@ id: button.basic
 title: Basic Button
 stack: web/react
 status: beta
-latest_version: 0.2.0
+latest_version: 0.2.1
 tags: [button, control, action, icon-button]
 aliases: [btn, primary button, icon button, call to action, cta]
 summary: Native button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.
@@ -21,7 +21,7 @@ Native button that triggers an action. Supports text-only, icon+text, and icon-o
 ## Do Not Use When
 - Do not use when the control navigates to a new URL (use `link`).
 - Do not use when the control represents an on/off pressed state (use `button.toggle`).
-- Do not use when the control opens a menu (use `menu.button`).
+- Do not use when the control opens a menu (use `menu.basic`).
 
 ## Must Haves
 - Use a native `<button>` for built-in semantics and keyboard behavior.

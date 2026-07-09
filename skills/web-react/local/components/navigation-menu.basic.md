@@ -3,7 +3,7 @@ id: navigation-menu.basic
 title: Navigation Menu
 stack: web/react
 status: beta
-latest_version: 0.2.0
+latest_version: 0.3.0
 tags: [navigation, menu, disclosure, header, sitemap, flyout]
 aliases: [nav dropdown, header dropdown, mega menu (simple), disclosure navigation, flyout menu]
 summary: A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with aria-expanded/controls and Tab-based navigation (no roving focus / no role=menu).
@@ -21,8 +21,8 @@ A non-modal header navigation pattern that supports top-level links and optional
 - Use when the navigation structure maps to a sitemap-like set of destinations.
 
 ## Do Not Use When
-- Do not use when you need application-style menubar behavior, such as arrow-key navigation, roving tabindex, typeahead (use `navigation-menu.menubar`).
-- Do not use to select a value within a form (use `select.basic` or `combobox` when searchable).
+- Do not use when you are building a desktop-application command bar with arrow-key navigation and roving tabindex (use `menu.menubar`).
+- Do not use to select a value within a form (use `select.native` or `combobox.autocomplete` when searchable).
 - Do not use as the mobile or responsive version of a navigation menu.
 
 ## Must Haves
@@ -49,7 +49,7 @@ A non-modal header navigation pattern that supports top-level links and optional
   - If using `role="button"`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating.
 - The toggle reflects open state with `aria-expanded="true|false"`.
 - The toggle references its submenu with `aria-controls="IDREF"` (recommended).
-- The toggle includes `aria-haspopup="true"` (or `aria-haspopup="menu"`).
+- The toggle does not carry `aria-haspopup`; a submenu of links is not a menu, listbox, tree, grid, or dialog, so `aria-expanded` alone is the correct state signal.
 - If the toggle is an **icon button associated with a parent link** (case B), it has an accessible name that includes the parent link text.
   - Example: `aria-label="Categories menu"` (text is customizable but must include the parent link label).
 - Top-level items that open a sub-menu include a visible indicator (e.g., down caret) that communicates "has submenu."
@@ -87,6 +87,7 @@ A non-modal header navigation pattern that supports top-level links and optional
 - Do not make a top-level item both a navigation link and the submenu toggle using the same element.
   - If the parent has its own destination page and also has a submenu, use **parent link + separate toggle button**.
 - Do not use `role="menu"` / `role="menuitem"` unless you implement the full ARIA menu widget behavior (managed focus, arrow keys, typeahead).
+- Do not add `aria-haspopup` to the toggle; the submenu is a list of links, not a menu, so it announces a widget that is not present.
 - Do not leave submenu content visible while `aria-expanded="false"` (and vice versa).
 - Do not strand focus by removing the currently focused submenu item without closing and allowing focus to move naturally.
 - Do not render sub-menus expanded/visible by default. They open only after the user activates the corresponding toggle.
@@ -193,7 +194,6 @@ export function NavigationMenuBasic() {
           <button
             type="button"
             aria-label="Categories menu"
-            aria-haspopup="true"
             aria-expanded={openId === "categories" ? "true" : "false"}
             aria-controls="nav-submenu-categories"
             onClick={() => toggle("categories")}
@@ -237,7 +237,6 @@ export function NavigationMenuBasic() {
         <li style={{ position: "relative" }}>
           <button
             type="button"
-            aria-haspopup="true"
             aria-expanded={openId === "faculty" ? "true" : "false"}
             aria-controls="nav-submenu-faculty"
             onClick={() => toggle("faculty")}
@@ -284,7 +283,6 @@ export function NavigationMenuBasic() {
           <button
             type="button"
             aria-label="About menu"
-            aria-haspopup="true"
             aria-expanded={openId === "about" ? "true" : "false"}
             aria-controls="nav-submenu-about"
             onClick={() => toggle("about")}

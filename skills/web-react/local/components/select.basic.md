@@ -3,7 +3,7 @@ id: select.basic
 title: Select
 stack: web/react
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [select, form, form-select, listbox, dropdown]
 aliases: [form select, styled select, listbox select, dropdown select]
 summary: A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.
@@ -23,9 +23,10 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
 - Use for primary or secondary forms anywhere on a site or application.
 
 ## Do Not Use When
-- Do not use when the user needs to type to filter a large list (use a `combobox` / autocomplete).
-- Do not use when multiple selections are required (use a dedicated multi-select pattern).
-- Do not use for navigation menus or account menus (use `navigation-menu.basic` or `menu.account`).
+- Do not use when a native `<select>` styled with CSS meets the need (use `select.native`).
+- Do not use when the user needs to type to filter a large list (use `combobox.autocomplete`).
+- Do not use when multiple selections are required (use `listbox.basic`).
+- Do not use for navigation menus or account menus (use `navigation-menu.basic` or `navigation-menu.dropdown`).
 
 ## Must Haves
 - Provide a visible label for the field. Prefer a native `<label>` and ensure the custom UI is programmatically associated with the label (see `aria-labelledby` below).

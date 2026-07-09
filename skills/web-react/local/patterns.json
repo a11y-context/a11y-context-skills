@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.4.5",
+  "catalog_revision": "0.4.6",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -43,7 +43,7 @@
       "title": "Basic Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.2.1",
       "summary": "Native button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.",
       "aliases": [
         "btn",
@@ -65,7 +65,7 @@
         "do_not_use_when": [
           "Do not use when the control navigates to a new URL (use link).",
           "Do not use when the control represents an on/off pressed state (use button.toggle).",
-          "Do not use when the control opens a menu (use menu.button)."
+          "Do not use when the control opens a menu (use menu.basic)."
         ]
       },
       "variants": [],
@@ -81,7 +81,7 @@
       "title": "Toggle Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.2.1",
       "summary": "Two- or three-state button that toggles between pressed and not pressed using aria-pressed.",
       "aliases": [
         "toggle button",
@@ -102,7 +102,7 @@
           "Do not use when the control navigates to a new URL (use link).",
           "Do not use when the control represents a persistent on/off system or application setting, such as \"Enable notifications\", \"Dark mode\" (use switch.basic).",
           "Do not use when the control records a value to submit with a form rather than toggling something in the current context (use checkbox.basic).",
-          "Do not use when the control opens a menu (use menu.button)."
+          "Do not use when the control opens a menu (use menu.basic)."
         ]
       },
       "variants": [],
@@ -368,54 +368,11 @@
       }
     },
     {
-      "id": "menu.account",
-      "title": "Account Menu",
-      "pattern_type": "component",
-      "status": "beta",
-      "latest_version": "0.2.1",
-      "summary": "A non-modal, button-invoked account menu that reveals a small list of links and optional actions. Uses aria-expanded plus DOM show/hide so keyboard users Tab into items and Esc closes.",
-      "aliases": [
-        "account dropdown",
-        "account menu",
-        "profile menu",
-        "user menu",
-        "avatar menu",
-        "settings menu"
-      ],
-      "tags": [
-        "menu",
-        "account",
-        "profile",
-        "disclosure",
-        "popover"
-      ],
-      "selection_excerpt": {
-        "use_when": [
-          "Use when providing a compact set of account-related destinations or actions (Profile, Settings, Billing, Sign out).",
-          "Use when the trigger is a dedicated control (avatar button, \"Account\" button) with no other primary action.",
-          "Use when the menu content is short and stable (typically 3–10 items).",
-          "Use when (usually) the menu is in the top-right area of a webpage."
-        ],
-        "do_not_use_when": [
-          "Do not use for primary site navigation with multiple sibling dropdowns (use navigation-menu.basic).",
-          "Do not use for choosing a form value (use select.basic, or combobox if searchable).",
-          "Do not use for dense command palettes or application-style decision trees that require arrow-key navigation and focus management (use menu.menubar)."
-        ]
-      },
-      "variants": [],
-      "default_variant": null,
-      "source": {
-        "path": "components/menu.account.md",
-        "format": "markdown",
-        "frontmatter": true
-      }
-    },
-    {
       "id": "navigation-menu.basic",
       "title": "Navigation Menu",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.3.0",
       "summary": "A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with aria-expanded/controls and Tab-based navigation (no roving focus / no role=menu).",
       "aliases": [
         "nav dropdown",
@@ -439,8 +396,8 @@
           "Use when the navigation structure maps to a sitemap-like set of destinations."
         ],
         "do_not_use_when": [
-          "Do not use when you need application-style menubar behavior, such as arrow-key navigation, roving tabindex, typeahead (use navigation-menu.menubar).",
-          "Do not use to select a value within a form (use select.basic or combobox when searchable).",
+          "Do not use when you are building a desktop-application command bar with arrow-key navigation and roving tabindex (use menu.menubar).",
+          "Do not use to select a value within a form (use select.native or combobox.autocomplete when searchable).",
           "Do not use as the mobile or responsive version of a navigation menu."
         ]
       },
@@ -457,7 +414,7 @@
       "title": "Select",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.",
       "aliases": [
         "form select",
@@ -479,9 +436,10 @@
           "Use for primary or secondary forms anywhere on a site or application."
         ],
         "do_not_use_when": [
-          "Do not use when the user needs to type to filter a large list (use a combobox / autocomplete).",
-          "Do not use when multiple selections are required (use a dedicated multi-select pattern).",
-          "Do not use for navigation menus or account menus (use navigation-menu.basic or menu.account)."
+          "Do not use when a native <select> styled with CSS meets the need (use select.native).",
+          "Do not use when the user needs to type to filter a large list (use combobox.autocomplete).",
+          "Do not use when multiple selections are required (use listbox.basic).",
+          "Do not use for navigation menus or account menus (use navigation-menu.basic or navigation-menu.dropdown)."
         ]
       },
       "variants": [],
