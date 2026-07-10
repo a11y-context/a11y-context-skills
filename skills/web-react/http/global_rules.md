@@ -185,6 +185,45 @@ scope: [page, component, style]
 
 ---
 
+## Rule: Use of Color
+
+```yaml
+id: global.use-of-color
+scope: [component, style]
+```
+
+### Must Haves
+- Do not use color as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element (WCAG 1.4.1).
+- When a component renders a meaningful state visually (e.g., selected, active, current, invalid, pressed), that state is distinguishable by something in addition to color, such as an icon, checkmark, shape, underline, or text.
+  - This is the visual counterpart to exposing the state programmatically. A component may satisfy `aria-selected` yet still fail 1.4.1 if selection is shown by a background tint alone.
+
+### Don'ts
+- Do not signal selection, validity, current-ness, or availability by color alone.
+
+### Acceptance Checks
+- Every meaningful state the component renders is perceivable without relying on color (verify in grayscale).
+
+---
+
+## Rule: Focus Not Obscured
+
+```yaml
+id: global.focus-not-obscured
+scope: [component, layout, style]
+```
+
+### Must Haves
+- When a component receives keyboard focus, the focused element is not entirely hidden by author-created content such as sticky headers, sticky footers, or the component's own overlapping chrome (WCAG 2.4.11 Focus Not Obscured, Minimum).
+- Components with their own sticky or floating sub-regions (e.g., a frozen header row or column) keep the focused element scrolled or offset into a visible area.
+
+### Don'ts
+- Do not let a sticky or floating region overlap and fully conceal the element that currently has keyboard focus.
+
+### Acceptance Checks
+- Tabbing or arrowing to any focusable element leaves at least part of that element and its focus indicator visible, not fully covered by sticky or overlapping content.
+
+---
+
 ## Rule: Focus States
 
 ```yaml

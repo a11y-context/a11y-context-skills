@@ -31,31 +31,26 @@ A button that opens a menu of commands using `role="menu"` and `role="menuitem"`
 
 ## Must Haves
 
-### Trigger
+### Roles & structure
 - Use a native `<button>` (preferred), or `role="button"` only when a native button cannot be used.
   - If `role="button"` is used instead of a native `<button>`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating the control.
-- The trigger has an accessible name that describes its purpose or action.
-  - For an icon-only trigger, provide an accessible name using `aria-label` or `aria-labelledby` (e.g., "More actions").
-  - Icons within the trigger must be decorative (`aria-hidden="true"`).
-- The trigger has `aria-haspopup="menu"`.
-- The trigger has `aria-expanded="true|false"` reflecting the open or closed state of the menu.
-- The trigger has `aria-controls="IDREF"` pointing to the menu container.
-
-### Menu container
 - The menu container has `role="menu"`.
-- The menu container has an accessible name via `aria-labelledby` referencing the trigger, or via `aria-label`.
-- The menu is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its items cannot be reached by keyboard or screen readers.
-
-### Items
 - Each command uses `role="menuitem"`.
   - A stateful item that toggles in place uses `role="menuitemcheckbox"` or `role="menuitemradio"` with `aria-checked="true|false"`.
 - Dividers between groups of items use `role="separator"`.
 - The menu contains only menu parts (`menuitem`, `menuitemcheckbox`, `menuitemradio`, `separator`, and grouping wrappers with `role="none"`), with no links, headings, or form inputs.
 
-### Focus management
-- Focus is managed with roving tabindex: the active item has `tabindex="0"` and all other items have `tabindex="-1"`.
-- The active item receives DOM focus via `element.focus()`.
-- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the trigger and the menu items.
+### Accessible name
+- The trigger has an accessible name that describes its purpose or action.
+  - For an icon-only trigger, provide an accessible name using `aria-label` or `aria-labelledby` (e.g., "More actions").
+  - Icons within the trigger must be decorative (`aria-hidden="true"`).
+- The menu container has an accessible name via `aria-labelledby` referencing the trigger, or via `aria-label`.
+
+### State & properties
+- The trigger has `aria-haspopup="menu"`.
+- The trigger has `aria-expanded="true|false"` reflecting the open or closed state of the menu.
+- The trigger has `aria-controls="IDREF"` pointing to the menu container.
+- The menu is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its items cannot be reached by keyboard or screen readers.
 
 ### Keyboard
 - On the trigger, Enter, Space, and Arrow Down open the menu and move focus to the first item.
@@ -64,10 +59,17 @@ A button that opens a menu of commands using `role="menu"` and `role="menuitem"`
 - Within the menu, Home moves focus to the first item and End moves focus to the last item.
 - Within the menu, Enter or Space activates the focused item, then closes the menu and returns focus to the trigger.
 - Within the menu, a printable character moves focus to the next item whose label starts with that character (type-ahead).
+
+### Focus
+- Focus is managed with roving tabindex: the active item has `tabindex="0"` and all other items have `tabindex="-1"`.
+- The active item receives DOM focus via `element.focus()`.
+- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the trigger and the menu items.
+- Focus returns to the trigger when the menu closes via activation or Esc, deferred with `requestAnimationFrame` so the trigger is focusable when the call runs.
+
+### Dismissal
 - Esc closes the menu and returns focus to the trigger.
 - Tab moves focus out of the menu and closes it.
 - An outside click or focus loss closes the menu.
-- Focus returns to the trigger when the menu closes via activation or Esc, deferred with `requestAnimationFrame` so the trigger is focusable when the call runs.
 
 ## Customizable
 - Roving tabindex is the default focus model. `aria-activedescendant` on the menu container is an acceptable alternative when DOM focus must remain on a single owner element. It has weaker screen-reader support, and the active-item visual style must be painted manually because no element holds DOM focus.

@@ -28,20 +28,18 @@ An editable text input that filters a listbox of options as the user types; uses
 
 ## Must Haves
 
-### Structure
+### Roles & structure
 - Use a native `<input>` element with `role="combobox"` as the editable control.
-- Provide a visible native `<label>` associated with the input via `for`/`id`.
 - Set `aria-autocomplete="list"` on the input to indicate that typing filters a list of options.
-- Set `aria-expanded="true|false"` on the input reflecting whether the listbox is displayed.
-- Set `aria-controls="IDREF"` on the input pointing to the listbox element.
 - Render the popup as an element with `role="listbox"` and a stable ID (the same one referenced by `aria-controls`).
 - Give each option `role="option"`, a stable ID, and `aria-selected="true|false"`.
 
-### Focus
-- Keep DOM focus on the input at all times so native text editing keeps working.
-- Indicate the active option by setting `aria-activedescendant="{optionId}"` on the input, pointing to the currently highlighted option.
-  - When no option is active, remove `aria-activedescendant` (do not point it at a stale or nonexistent ID).
-- Scroll the active option into view via scripting when it changes so it is visible.
+### Accessible name
+- Provide a visible native `<label>` associated with the input via `for`/`id`.
+
+### State & properties
+- Set `aria-expanded="true|false"` on the input reflecting whether the listbox is displayed.
+- Set `aria-controls="IDREF"` on the input pointing to the listbox element.
 - The listbox is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its options cannot be reached by keyboard or screen readers.
 
 ### Keyboard
@@ -50,11 +48,19 @@ An editable text input that filters a listbox of options as the user types; uses
 - Alt+Arrow Down opens the listbox without moving the active option.
 - When the listbox is open, Arrow Up and Arrow Down move the active option and wrap at the ends.
 - Enter sets the input value to the active option and closes the listbox.
-- Esc closes the listbox if it is open, or clears the input if the listbox is already closed.
 - Home, End, Left, and Right move the caret within the input text rather than the active option.
 - A printable character returns focus to the input, inserts the character, and filters the listbox to matching options.
 - Do not capture the keys the browser uses for text editing (character keys, caret movement, selection, and deletion).
+
+### Focus
+- Keep DOM focus on the input at all times so native text editing keeps working.
+- Indicate the active option by setting `aria-activedescendant="{optionId}"` on the input, pointing to the currently highlighted option.
+  - When no option is active, remove `aria-activedescendant` (do not point it at a stale or nonexistent ID).
+- Scroll the active option into view via scripting when it changes so it is visible.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the input, and a distinct visual highlight on the active option.
+
+### Dismissal
+- Esc closes the listbox if it is open, or clears the input if the listbox is already closed.
 
 ## Customizable
 - `aria-autocomplete` may be `"none"`, `"list"` (the default for this pattern), or `"both"`.

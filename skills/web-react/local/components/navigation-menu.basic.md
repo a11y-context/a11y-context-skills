@@ -27,7 +27,7 @@ A non-modal header navigation pattern that supports top-level links and optional
 
 ## Must Haves
 
-### Structure
+### Roles & structure
 - Navigation is contained within a `<nav>` landmark, or an element with `role="navigation"`, and an accessible name (`aria-label`) when multiple nav landmarks exist.
 - Top-level navigation items are presented in a list structure (e.g., `<ul><li>…</li></ul>`).
 - Each top-level item is one of the following:
@@ -37,42 +37,44 @@ A non-modal header navigation pattern that supports top-level links and optional
     - A separate adjacent **menu toggle button** opens/closes the sub-menu.
   - (C) **Parent button** (when the parent does not have its own destination page):
     - A `<button>` acts as the parent control and opens/closes the sub-menu.
+- The toggle control is a native `<button>` (preferred) or `role="button"` only when a native button cannot be used.
+  - If using `role="button"`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating.
+- The sub-menu container is positioned immediately after its toggle control in the DOM.
+- Sub-menu items are links and/or buttons contained in a list structure (`<ul><li>…</li></ul>`).
+
+### Accessible name
+- If the toggle is an **icon button associated with a parent link** (case B), it has an accessible name that includes the parent link text.
+  - Example: `aria-label="Categories menu"` (text is customizable but must include the parent link label).
+
+### State & properties
 - If the current page corresponds to a top-level item:
   - If the top-level item is a link, apply aria-current="page" to that link.
   - If the top-level item is a button-only parent (no destination), do not put aria-current on the button. Instead, apply aria-current="page" to the submenu link that represents the current page.
   - If the navigation has no explicit Home link and the site logo links to the homepage, the logo link carries `aria-current="page"` when the user is on the homepage.
   - Ensure there is some visual change that indicates this is the current page link.
-- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around all links and buttons.
-
-### Toggle button semantics (for cases B and C)
-- The toggle control is a native `<button>` (preferred) or `role="button"` only when a native button cannot be used.
-  - If using `role="button"`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating.
 - The toggle reflects open state with `aria-expanded="true|false"`.
 - The toggle references its submenu with `aria-controls="IDREF"` (recommended).
 - The toggle does not carry `aria-haspopup`; a submenu of links is not a menu, listbox, tree, grid, or dialog, so `aria-expanded` alone is the correct state signal.
-- If the toggle is an **icon button associated with a parent link** (case B), it has an accessible name that includes the parent link text.
-  - Example: `aria-label="Categories menu"` (text is customizable but must include the parent link label).
 - Top-level items that open a sub-menu include a visible indicator (e.g., down caret) that communicates "has submenu."
   - The indicator is decorative and does not replace the accessible name of the toggle (e.g., use an aria-label like "Categories menu" on icon-only toggles).
-
-### Sub-menu container
-- The sub-menu container is positioned immediately after its toggle control in the DOM.
 - Sub-menus all default to closed, or hidden, when the page loads.
 - The sub-menu is shown/hidden in the DOM (e.g., via `hidden`) so that when closed, submenu links cannot be reached by keyboard or screen readers.
-- Sub-menu items are links and/or buttons contained in a list structure (`<ul><li>…</li></ul>`).
-- The sub-menu is non-modal and does not trap focus.
 
-### Keyboard and closing behavior (disclosure-style, Tab-based)
-- When a submenu is opened, focus remains on the toggle control.
-  - Keyboard users reach the first submenu item with Tab.
-- Users can Tab through submenu items and continue to the rest of the page (no focus trap).
-- When focus moves outside the toggle + submenu (Tab away or click elsewhere), the submenu closes.
-- Esc closes an open submenu and returns focus to its toggle control.
+### Keyboard
 - Tab boundary behavior:
   - If focus is on the **last focusable element** in an open submenu and the user presses Tab, the submenu closes and focus moves to the next focusable element after the submenu.
   - If focus is on the **first focusable element** in an open submenu and the user presses Shift+Tab, the submenu closes and focus moves to the toggle control.
 
-### Multi-menu coordination
+### Focus
+- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around all links and buttons.
+- The sub-menu is non-modal and does not trap focus.
+- When a submenu is opened, focus remains on the toggle control.
+  - Keyboard users reach the first submenu item with Tab.
+- Users can Tab through submenu items and continue to the rest of the page (no focus trap).
+
+### Dismissal
+- When focus moves outside the toggle + submenu (Tab away or click elsewhere), the submenu closes.
+- Esc closes an open submenu and returns focus to its toggle control.
 - If the navigation contains multiple sub-menus, opening one closes any other open sub-menu.
 
 ## Customizable

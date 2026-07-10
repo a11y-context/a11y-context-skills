@@ -30,18 +30,13 @@ This pattern is a permanently visible selection list. There is no trigger button
 
 ## Must Haves
 
-### Structure
+### Roles & structure
 - The container is an element with `role="listbox"` and an accessible name via `aria-label` or `aria-labelledby`.
 - Each option is an element with `role="option"` and `aria-selected="true|false"`.
-- For multiple selection, the listbox has `aria-multiselectable="true"`.
 - Options contain no interactive child elements (no links, buttons, inputs, or nested controls).
 
-### Focus
-- Manage the active option with either roving tabindex or `aria-activedescendant`, and apply one approach consistently.
-  - Roving tabindex: the focused option has `tabindex="0"` and all other options have `tabindex="-1"`.
-  - `aria-activedescendant`: the `role="listbox"` element has `tabindex="0"` and its `aria-activedescendant` references the active option's ID.
-- Scripting keeps the active option scrolled into view.
-- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the active option.
+### State & properties
+- For multiple selection, the listbox has `aria-multiselectable="true"`.
 
 ### Keyboard
 - Arrow Down and Arrow Up move the active option to the next and previous option.
@@ -53,6 +48,13 @@ This pattern is a permanently visible selection list. There is no trigger button
   - Shift+Arrow Up and Shift+Arrow Down extend the selection to the adjacent option.
   - Ctrl+A (Cmd+A on macOS) selects all options.
   - No modifier-only click is required to select an option.
+
+### Focus
+- Manage the active option with either roving tabindex or `aria-activedescendant`, and apply one approach consistently.
+  - Roving tabindex: the focused option has `tabindex="0"` and all other options have `tabindex="-1"`.
+  - `aria-activedescendant`: the `role="listbox"` element has `tabindex="0"` and its `aria-activedescendant` references the active option's ID.
+- Scripting keeps the active option scrolled into view.
+- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the active option.
 
 ## Customizable
 - Roving tabindex and `aria-activedescendant` are equal alternatives. Choose one and apply it consistently.

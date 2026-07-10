@@ -30,37 +30,41 @@ This pattern is rarely appropriate on the web. Almost every horizontal bar of li
 
 ## Must Haves
 
-### Container
+### Roles & structure
 - The container has `role="menubar"`.
-- The container has an accessible name (e.g., `aria-label="Application"`).
 - Horizontal orientation is implicit for `role="menubar"`; no `aria-orientation` is required.
 - Only menu-related elements appear inside the menubar (top-level items, submenus, and separators). No links, no arbitrary content.
-
-### Top-level items and submenus
 - Each top-level item has `role="menuitem"`.
-- Each top-level item that opens a submenu has `aria-haspopup="menu"` and `aria-expanded="true|false"` reflecting open/closed.
 - Each submenu is a container with `role="menu"` and an accessible name that matches its top-level item (e.g., `aria-label="File"`).
 - Submenu commands have `role="menuitem"`, or `role="menuitemcheckbox"` or `role="menuitemradio"` for stateful commands.
 - Dividers within a submenu use `role="separator"`.
 - The submenu contains only menu parts (`menuitem`, `menuitemcheckbox`, `menuitemradio`, and `separator`), no links or arbitrary content.
 
-### Focus management
-- Focus is managed with roving tabindex across the top-level items.
-  - The first top-level item starts at `tabindex="0"`; all other top-level items start at `tabindex="-1"`.
-  - Moving between top-level items updates tabindex so exactly one top-level item is at `tabindex="0"` at a time.
-- Each submenu is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its commands cannot be reached by keyboard or screen readers.
-- The menubar closes any open submenu when focus moves outside the menubar (e.g., via Tab or an outside pointer click), so no submenu stays visible while its top-level item is at `aria-expanded="false"`.
+### Accessible name
+- The container has an accessible name (e.g., `aria-label="Application"`).
 
-### Keyboard interaction
+### State & properties
+- Each top-level item that opens a submenu has `aria-haspopup="menu"` and `aria-expanded="true|false"` reflecting open/closed.
+- Each submenu is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its commands cannot be reached by keyboard or screen readers.
+
+### Keyboard
 - Arrow Left and Arrow Right move focus between top-level items and wrap at the ends.
 - Arrow Down, Enter, or Space on a top-level item opens its submenu and moves focus to the first submenu item.
 - Within an open submenu, Arrow Up and Arrow Down move focus between commands and wrap at the ends.
 - Within an open submenu, Arrow Right moves to the adjacent top-level menu, and Arrow Left moves to the previous top-level menu (opening that menu).
 - Within an open submenu, Home moves focus to the first command and End moves focus to the last command.
 - Enter or Space activates the focused submenu command.
-- Esc closes the current submenu and returns focus to its top-level item.
 - Type-ahead moves focus to the next item whose label starts with the typed character, both across top-level items and within an open submenu.
+
+### Focus
+- Focus is managed with roving tabindex across the top-level items.
+  - The first top-level item starts at `tabindex="0"`; all other top-level items start at `tabindex="-1"`.
+  - Moving between top-level items updates tabindex so exactly one top-level item is at `tabindex="0"` at a time.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the top-level items and submenu commands.
+
+### Dismissal
+- Esc closes the current submenu and returns focus to its top-level item.
+- The menubar closes any open submenu when focus moves outside the menubar (e.g., via Tab or an outside pointer click), so no submenu stays visible while its top-level item is at `aria-expanded="false"`.
 
 ## Customizable
 - Stateful commands may use `role="menuitemcheckbox"` (with `aria-checked="true|false"`) or `role="menuitemradio"` (with `aria-checked="true|false"` within a grouped set) instead of plain `role="menuitem"`.
