@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.4.6",
+  "catalog_revision": "0.5.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -247,6 +247,53 @@
       }
     },
     {
+      "id": "combobox.autocomplete",
+      "title": "Autocomplete Combobox",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "An editable text input that filters a listbox of options as the user types; uses role=\"combobox\" with aria-autocomplete, aria-expanded, aria-controls, and aria-activedescendant while DOM focus stays on the input.",
+      "aliases": [
+        "typeahead",
+        "type-ahead",
+        "autosuggest",
+        "auto-suggest",
+        "search select",
+        "filterable dropdown",
+        "predictive input",
+        "combo box"
+      ],
+      "tags": [
+        "combobox",
+        "autocomplete",
+        "listbox",
+        "filter",
+        "aria-activedescendant",
+        "form",
+        "search"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the option set is large enough that typing to filter or search is faster than scanning a list (e.g., \"Country\", \"City\", \"Assign to a user\").",
+          "Use when the user narrows the available options by typing (e.g., \"Search shows\", \"Add a tag\").",
+          "Use when free-text entry is allowed alongside suggestions (e.g., a tag field that accepts new values while suggesting existing ones)."
+        ],
+        "do_not_use_when": [
+          "Do not use when no typing is needed and the set is small or preset (use select.native, or for a rich custom-styled picker use select.basic).",
+          "Do not use when the options must be permanently visible with no popup (use listbox.basic).",
+          "Do not use when the control performs actions rather than picking a value (use menu.basic).",
+          "Do not use when the trigger reveals navigation links (use navigation-menu.dropdown)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/combobox.autocomplete.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "dialog.modal",
       "title": "Dialog (Modal)",
       "pattern_type": "component",
@@ -285,6 +332,97 @@
       "default_variant": null,
       "source": {
         "path": "components/dialog.modal.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "dialog.nonmodal",
+      "title": "Dialog (Non-Modal)",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A dialog that does not block the page; uses role=\"dialog\" with an accessible name, moves focus in on open and restores it on close, but does not trap focus or inert the background.",
+      "aliases": [
+        "non-modal dialog",
+        "modeless dialog",
+        "non-blocking dialog",
+        "popover dialog",
+        "editor popover",
+        "composer panel",
+        "floating panel"
+      ],
+      "tags": [
+        "dialog",
+        "non-modal",
+        "overlay",
+        "popover",
+        "focus-restoration",
+        "modeless"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when an overlay presents content or a task without blocking the page (e.g., a non-blocking editor popover, a composer, a rich panel with interactive controls).",
+          "Use when the user can keep interacting with the rest of the page while the overlay is open.",
+          "Use when focus should move into the dialog on open but not be trapped there."
+        ],
+        "do_not_use_when": [
+          "Do not use when the user must complete or dismiss the overlay before returning to the page (use dialog.modal).",
+          "Do not use when a control simply shows and hides inline content (use disclosure.basic).",
+          "Do not use when the overlay is a menu of commands (use menu.basic).",
+          "Do not use when the message is a brief, non-interactive status update (use toast.basic).",
+          "Do not use when the content is a plain-text supplementary hint (use tooltip.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/dialog.nonmodal.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "disclosure.basic",
+      "title": "Disclosure",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A button that shows and hides an associated content region; uses aria-expanded on the trigger and aria-controls to the region, with DOM show/hide.",
+      "aliases": [
+        "disclosure",
+        "show more",
+        "expand collapse",
+        "expandable section",
+        "collapsible panel",
+        "reveal panel",
+        "toggle content",
+        "twisty"
+      ],
+      "tags": [
+        "disclosure",
+        "show-hide",
+        "expand-collapse",
+        "button",
+        "toggle"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a control shows and hides a single section of related content (e.g., \"Show more details\", an FAQ answer, an advanced-options or filters panel).",
+          "Use when the revealed content is arbitrary (text, form fields, media).",
+          "Use when a single independent expandable region is toggled by one trigger."
+        ],
+        "do_not_use_when": [
+          "Do not use when several coordinated expandable sections form an accordion (use accordion.basic).",
+          "Do not use when the revealed items are in-place commands or actions (use menu.basic).",
+          "Do not use when a single trigger reveals a list of navigation links (use navigation-menu.dropdown).",
+          "Do not use when the control chooses a form value (use select.native)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/disclosure.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -368,6 +506,144 @@
       }
     },
     {
+      "id": "listbox.basic",
+      "title": "Listbox",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "An always-visible list of selectable options using role=\"listbox\" and role=\"option\", supporting single or multiple selection with roving tabindex or aria-activedescendant.",
+      "aliases": [
+        "option list",
+        "select list",
+        "single-select list",
+        "multi-select list",
+        "transfer list source",
+        "inline listbox",
+        "choice list",
+        "selectable list"
+      ],
+      "tags": [
+        "listbox",
+        "roving-tabindex",
+        "aria-activedescendant",
+        "multi-select",
+        "selection",
+        "form"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the choices are permanently visible with no popup or expansion (e.g., an inline \"Playback quality\" list, a settings choice shown in place).",
+          "Use when the user selects one option or multiple options from plain-text labels (e.g., \"Select genres to follow\", the source column of a transfer list)."
+        ],
+        "do_not_use_when": [
+          "Do not use when a collapsed popup value picker is expected (use select.native, or select.basic for a custom-styled one).",
+          "Do not use when the user types to filter the options (use combobox.autocomplete).",
+          "Do not use when the options must contain interactive elements such as links or buttons (use grid.basic).",
+          "Do not use when the user chooses among many independent on and off settings (use checkbox.group).",
+          "Do not use when the control performs actions rather than holding a selection (use menu.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/listbox.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "menu.basic",
+      "title": "Menu",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A button that opens a menu of commands using role='menu' and role='menuitem', with roving tabindex focus management and the full menu keyboard contract.",
+      "aliases": [
+        "kebab menu",
+        "overflow menu",
+        "actions menu",
+        "three-dot menu",
+        "more menu",
+        "menu button",
+        "context menu button",
+        "command menu"
+      ],
+      "tags": [
+        "menu",
+        "actions-menu",
+        "roving-tabindex",
+        "overflow-menu",
+        "kebab-menu",
+        "commands"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a button reveals a set of in-place commands or actions (e.g., \"Rename\", \"Duplicate\", \"Delete\", \"Export\").",
+          "Use when a button exposes an overflow (\"...\") or kebab action menu on a toolbar, card, or table row.",
+          "Use when the items perform actions in place, not navigation to a URL.",
+          "Use when you will implement the full menu keyboard contract (roving tabindex, Arrow keys, Home/End, type-ahead, Esc)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the items are links or navigate to a URL (use navigation-menu.dropdown, or for a primary navigation bar use navigation-menu.basic).",
+          "Do not use when the user picks a value to submit in a form (use select.native, or for type-to-filter selection use combobox.autocomplete).",
+          "Do not use when the trigger shows and hides arbitrary content rather than a list of commands (use disclosure.basic).",
+          "Do not use when building a persistent application command bar with horizontal top-level items (use menu.menubar)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/menu.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "menu.menubar",
+      "title": "Menubar",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A persistent horizontal bar of application command menus using role=\"menubar\", role=\"menu\", and role=\"menuitem\", for desktop-application command surfaces only, never site navigation.",
+      "aliases": [
+        "menu bar",
+        "application menu bar",
+        "command bar",
+        "app menu bar",
+        "editor menu bar",
+        "file edit view menu",
+        "desktop menu bar"
+      ],
+      "tags": [
+        "menubar",
+        "menu",
+        "roving-tabindex",
+        "command-bar",
+        "application",
+        "keyboard-navigation"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when building a genuine desktop-application-style command bar that replicates an operating-system menu bar of commands (e.g., a web-based document editor, IDE, or design tool with \"File\", \"Edit\", \"View\").",
+          "Use when the items are application commands, not navigation destinations (e.g., \"New File\", \"Undo\", \"Toggle Sidebar\").",
+          "Use when the surface is a persistent bar of multiple always-visible top-level menus, not a single button that opens one menu (e.g., a File/Edit/View bar fixed at the top of the editor)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the bar is site or app navigation of any kind, including a nav bar styled to look like a menu bar or with fly-out submenus; this is the overwhelmingly common case (use navigation-menu.basic).",
+          "Do not use when a single button opens one action menu (use menu.basic).",
+          "Do not use when the user picks a value from a set (use select.native).",
+          "Do not use when a single trigger shows and hides a region of content (use disclosure.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/menu.menubar.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "navigation-menu.basic",
       "title": "Navigation Menu",
       "pattern_type": "component",
@@ -410,6 +686,52 @@
       }
     },
     {
+      "id": "navigation-menu.dropdown",
+      "title": "Navigation Dropdown",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A single-trigger, non-modal dropdown that reveals a short list of navigation links and optional actions, using a native button with aria-expanded plus DOM show/hide, and never role=\"menu\".",
+      "aliases": [
+        "account dropdown",
+        "user menu",
+        "avatar menu",
+        "profile menu",
+        "nav dropdown",
+        "links dropdown",
+        "account menu",
+        "header dropdown"
+      ],
+      "tags": [
+        "navigation",
+        "dropdown",
+        "disclosure",
+        "account-menu",
+        "avatar-menu",
+        "header"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a single dedicated control reveals a compact set of navigation destinations (e.g., an avatar button or an \"Account\" button opening \"Profile\", \"Settings\", \"Billing\").",
+          "Use when the revealed content is short and stable, typically 3-10 items that are primarily links.",
+          "Use when the revealed list ends in an optional single incidental action alongside the links (e.g., \"Sign out\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when the site navigation is a bar of several top-level items or sibling dropdowns (use navigation-menu.basic).",
+          "Do not use when the revealed items are primarily in-place commands or actions that need arrow-key navigation and role=\"menu\" (use menu.basic).",
+          "Do not use when the control chooses a value to submit in a form (use select.native).",
+          "Do not use when the trigger shows and hides arbitrary non-navigational content (use disclosure.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/navigation-menu.dropdown.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "select.basic",
       "title": "Select",
       "pattern_type": "component",
@@ -446,6 +768,52 @@
       "default_variant": null,
       "source": {
         "path": "components/select.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "select.native",
+      "title": "Native Select",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A native select element styled with CSS, the default single-value form control; retains native keyboard, mobile, dismissal, and assistive-technology behavior.",
+      "aliases": [
+        "native select",
+        "html select",
+        "select element",
+        "dropdown",
+        "form select",
+        "single-select",
+        "option picker",
+        "select box"
+      ],
+      "tags": [
+        "select",
+        "native-select",
+        "form",
+        "form-control",
+        "dropdown",
+        "picker"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a form field selects one value from a preset list of plain-text options (e.g., \"Sort by\", \"Country\", \"Subscription plan\").",
+          "Use when native keyboard support, mobile pickers, dismissal, form submission, and assistive-technology support are wanted without re-implementation.",
+          "Use when single selection is needed and no requirement forces a custom widget (this is the default choice)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the option list needs rich or interactive content the native control cannot render (use select.basic).",
+          "Do not use when the user must type to filter a large list (use combobox.autocomplete).",
+          "Do not use when multiple selection is required (use listbox.basic; a checkbox group is often better).",
+          "Do not use when the control performs actions rather than choosing a value (use menu.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/select.native.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -525,6 +893,51 @@
       "default_variant": null,
       "source": {
         "path": "components/toast.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "tooltip.basic",
+      "title": "Tooltip",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A brief supplementary text label shown on hover and focus of its trigger; uses role=\"tooltip\" referenced by aria-describedby, and is hoverable, dismissible, and persistent.",
+      "aliases": [
+        "tooltip",
+        "hint",
+        "help bubble",
+        "info bubble",
+        "hover text",
+        "popup label",
+        "title text",
+        "describedby"
+      ],
+      "tags": [
+        "tooltip",
+        "aria-describedby",
+        "hover",
+        "focus",
+        "supplementary-label"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a brief plain-text label supplements a control (e.g., clarifying an icon-only button, a short hint on a form field).",
+          "Use when the content is non-essential supplementary text.",
+          "Use when the label should appear on both pointer hover and keyboard focus of the trigger."
+        ],
+        "do_not_use_when": [
+          "Do not use when the content is interactive or rich, containing links or buttons (use dialog.nonmodal).",
+          "Do not use when the content is a status or confirmation message (use toast.basic).",
+          "Do not use when the label would be the control's only accessible name; give the control a real accessible name via a visible label or aria-label instead (use button.basic).",
+          "Do not use when the content is a menu of choices (use menu.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/tooltip.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
