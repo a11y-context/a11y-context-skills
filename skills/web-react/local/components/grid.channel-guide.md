@@ -26,6 +26,8 @@ Interactive channel guide grid with one Tab stop and arrow-key navigation across
 - Do not use when supporting spreadsheet-style editing, multi-cell selection, sorting, or resizing (use `grid.interactive`).
 
 ## Must Haves
+
+### Roles & structure
 - Use `role="grid"` with an accessible name (e.g., `aria-label="Channel guide"`).
 - Use `role="row"` for each row, including the header row.
 - Use `role="columnheader"` for the time header cells (typically static).
@@ -37,19 +39,23 @@ Interactive channel guide grid with one Tab stop and arrow-key navigation across
   - Set `aria-rowcount` to the total number of rows in the grid.
   - Set `aria-colcount` to the total number of columns in the grid (including the channel column).
   - Set `aria-rowindex` on each row and `aria-colindex` on each cell (1-based, counting the header row and the channel column), so position announcements remain correct when rows or columns are rendered lazily.
+
+### Keyboard
 - Keyboard model:
   - The grid must be a single Tab stop.
   - Only one cell is tabbable at a time (roving `tabIndex`: active cell `0`, all others `-1`).
   - Arrow keys move focus within the grid (Left/Right/Up/Down).
   - Tab/Shift+Tab exits the grid to the next/previous focusable element outside.
-- Pointer + keyboard continuity:
-  - Clicking a cell updates the roving "current cell" so Arrow-key navigation continues from that cell.
-- Persist and restore "last focused cell":
-  - When focus leaves and re-enters the grid, focus lands on the last focused cell.
 - Activation model:
   - Channel column (row header) opens "channel details".
   - "Now" column activates tune (no-op if already selected).
   - Future columns open "program details" (demo can use a modal).
+
+### Focus
+- Pointer + keyboard continuity:
+  - Clicking a cell updates the roving "current cell" so Arrow-key navigation continues from that cell.
+- Persist and restore "last focused cell":
+  - When focus leaves and re-enters the grid, focus lands on the last focused cell.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) on each focusable element, such as grid cells and grid headers.
 
 ## Customizable

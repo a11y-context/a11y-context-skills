@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.5.1",
+  "catalog_revision": "0.5.2",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {

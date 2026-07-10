@@ -29,24 +29,34 @@ This is a disclosure of links, not an ARIA menu. The revealed content is primari
 - Do not use when the trigger shows and hides arbitrary non-navigational content (use `disclosure.basic`).
 
 ## Must Haves
+
+### Roles & structure
 - Use a native `<button>` (preferred), or `role="button"` only when a native button cannot be used.
   - If `role="button"` is used instead of a native `<button>`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating the control.
+- The list is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its content cannot be reached by keyboard or screen readers.
+- Items are contained in a list structure (`<ul><li>…</li></ul>`) holding links and an optional trailing action `<button>`.
+  - Any links and buttons comply with the rules for the `link.basic` and `button.basic` patterns.
+
+### Accessible name
 - The button has an accessible name that describes its purpose or action.
   - For an icon-only avatar button, provide an accessible name using `aria-label` or `aria-labelledby`.
 - Icons within the button are decorative (`aria-hidden="true"`).
+
+### State & properties
 - The button reflects open state with `aria-expanded="true|false"`.
 - The button is associated with the list container via `aria-controls="IDREF"`.
 - The button does not carry `aria-haspopup`.
   - A list of links is not a menu, listbox, tree, grid, or dialog, so `aria-haspopup` announces a widget that is not present; `aria-expanded` alone is the correct signal.
-- The list is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its content cannot be reached by keyboard or screen readers.
+
+### Focus
 - When the dropdown opens, focus remains on the invoking button.
   - Keyboard users reach the first item with Tab.
 - The dropdown does not trap focus. Users can Tab through the items and continue to the rest of the page.
+- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the invoking button and every item inside the list.
+
+### Dismissal
 - When focus moves outside the button and list (Tab away, click elsewhere), the dropdown closes.
 - Esc closes the dropdown and returns focus to the invoking button (use `requestAnimationFrame` for the focus restore).
-- Items are contained in a list structure (`<ul><li>…</li></ul>`) holding links and an optional trailing action `<button>`.
-  - Any links and buttons comply with the rules for the `link.basic` and `button.basic` patterns.
-- Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the invoking button and every item inside the list.
 
 ## Customizable
 - Whether the list contains only links or links plus a single trailing action button (e.g., "Sign out").
