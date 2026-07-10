@@ -53,11 +53,9 @@ If a fetch returns a 404 or fails, note it and continue with native HTML semanti
 
 ---
 
-## Step 3 — Apply Global Rules (Conditional)
+## Step 3 — Apply Global Rules (Always retrieve; apply by scope)
 
-Read `${CLAUDE_SKILL_DIR}/global_rules.md` when the task involves page/layout structure, headings, landmarks, navigation, or focus-critical UI (dialogs, menus, carousels).
-
-Each rule in the file has a `scope` field. Apply only the rules whose scope matches the current task:
+Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules are not only page-level — many are component-specific. Each rule has a `scope` field; apply the Must Haves of every rule whose scope matches the current change:
 
 **Scope selection guide:**
 - Building or modifying a full page or route → apply rules scoped to `page`, `layout`, `utility`

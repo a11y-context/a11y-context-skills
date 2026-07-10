@@ -1,0 +1,7 @@
+{
+  "_comment": "Fill in your organization's retrieval endpoint so the skill knows where to query. Edit this once at install; the skill reads it at retrieval time.",
+  "ragEndpoint": "https://your-vector-db.internal/query",
+  "indexName": "a11y-context",
+  "stack": "web/react",
+  "topK": 3
+}
