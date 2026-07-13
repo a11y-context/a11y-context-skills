@@ -9,7 +9,7 @@ aliases: [hero carousel thumbnails, marquee thumbnails, featured gallery thumbna
 summary: Horizontally-advancing carousel (aka hero or marquee carousel) with thumbnail navigation, prev/next buttons, and pause behavior.
 ---
 
-# Carousel with Thumbnail Navigation
+# Carousel (Thumbnails)
 
 Pattern ID: `carousel.thumbnails`
 

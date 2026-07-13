@@ -9,16 +9,16 @@ aliases: [form select, styled select, listbox select, dropdown select]
 summary: A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.
 ---
 
-# Select
+# Select (Custom Style)
 
 Pattern ID: `select.basic`
 
 A custom-styled form select that matches native `<select>` behavior using a button trigger + listbox popup, and a visually hidden native `<select>` for form submission and browser autofill.
 
-Native `<select>` elements are accessible out of the box. This pattern applies only when building a **custom-styled** select input.
+Native `<select>` elements are accessible out of the box. This pattern applies only when building a custom-styled select input.
 
 ## Use When
-- Use when a form input must allow selecting **one option** from a predefined set.
+- Use when a form input must allow selecting one option from a predefined set.
 - Use when the options are short labels and the selection is discrete (not freeform text).
 - Use for primary or secondary forms anywhere on a site or application.
 
@@ -30,7 +30,7 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
 
 ## Must Haves
 - Provide a visible label for the field. Prefer a native `<label>` and ensure the custom UI is programmatically associated with the label (see `aria-labelledby` below).
-- Include a **visually hidden native `<select>`** (required).
+- Include a visually hidden native `<select>` (required).
   - The hidden `<select>` includes the same options and current value as the custom UI.
   - The hidden `<select>` includes form attributes as needed (e.g., `name`, `required`, `disabled`).
   - The hidden `<select>` is not focusable (so users don't tab to both controls).

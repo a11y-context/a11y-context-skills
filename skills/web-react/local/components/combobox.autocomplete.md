@@ -9,7 +9,7 @@ aliases: [typeahead, type-ahead, autosuggest, auto-suggest, search select, filte
 summary: An editable text input that filters a listbox of options as the user types; uses role="combobox" with aria-autocomplete, aria-expanded, aria-controls, and aria-activedescendant while DOM focus stays on the input.
 ---
 
-# Autocomplete Combobox
+# Combobox (Autocomplete)
 
 Pattern ID: `combobox.autocomplete`
 

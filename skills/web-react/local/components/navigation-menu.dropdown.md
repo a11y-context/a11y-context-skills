@@ -9,7 +9,7 @@ aliases: [account dropdown, user menu, avatar menu, profile menu, nav dropdown, 
 summary: A single-trigger, non-modal dropdown that reveals a short list of navigation links and optional actions, using a native button with aria-expanded plus DOM show/hide, and never role="menu".
 ---
 
-# Navigation Dropdown
+# Navigation (Disclosure)
 
 Pattern ID: `navigation-menu.dropdown`
 

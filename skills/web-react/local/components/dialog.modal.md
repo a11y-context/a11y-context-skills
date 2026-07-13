@@ -28,7 +28,7 @@ User-initiated blocking dialog. Uses the native `<dialog>` element with `.showMo
 
 ## Must Haves
 - Use the native `<dialog>` element (preferred). When `<dialog>` cannot be used, `<div role="dialog">` is the documented fallback — see Customizable → Manual fallback.
-- **Open with `.showModal()`, close with `.close()`.** A `<dialog>` present in the DOM without `.showModal()` is non-modal — no focus trap, no background inertness, no `aria-modal`, no top-layer rendering. Unmounting a `<dialog>` while open (rather than calling `.close()`) leaves focus stranded because the browser's focus-restoration to the invoker runs on `.close()` (or on the browser's implicit `.close()` from Esc's `cancel` event and from `<form method="dialog">` submits). Both lifecycle endpoints must be exercised.
+- Open with `.showModal()`, close with `.close()`. A `<dialog>` present in the DOM without `.showModal()` is non-modal — no focus trap, no background inertness, no `aria-modal`, no top-layer rendering. Unmounting a `<dialog>` while open (rather than calling `.close()`) leaves focus stranded because the browser's focus-restoration to the invoker runs on `.close()` (or on the browser's implicit `.close()` from Esc's `cancel` event and from `<form method="dialog">` submits). Both lifecycle endpoints must be exercised.
 - Dialog surface has an accessible name via `aria-labelledby` (preferred) or `aria-label`. If `aria-labelledby` is used, it references a visible title element (e.g., `<h2 id="...">`).
 - If a description is rendered, it is referenced by `aria-describedby`. Do not rely on incidental reading order.
 - Dialog width is fluid so content reflows at 400% zoom (WCAG 1.4.10 Reflow). Prefer `max-width: min(<Npx>, 100%)`; do not set fixed pixel widths that would exceed the 320-CSS-pixel viewport at 400% zoom.
@@ -45,13 +45,13 @@ User-initiated blocking dialog. Uses the native `<dialog>` element with `.showMo
 - Focus indicators on the dialog surface, close button, and any focusable content follow the [Foundations focus rule](/web/react/foundations#rule-focus-states).
 
 ## Customizable
-- **Manual `<div role="dialog">` fallback** when native `<dialog>` cannot be used (portal / stacking-context conflicts, legacy target matrix). Implement all six behaviors by hand: `aria-modal="true"`, focus trap, `inert` on the app content root (never `body` or `documentElement`), body scroll lock (on iOS Safari use `position: fixed; top: -${scrollY}px`), Escape listener, focus restoration, and render via portal to `document.body`.
-- **Backdrop click closes** by default; may be intentionally disabled for destructive confirmations so users must Cancel or Confirm explicitly.
-- **Initial focus target** — three acceptable defaults:
+- Manual `<div role="dialog">` fallback when native `<dialog>` cannot be used (portal / stacking-context conflicts, legacy target matrix). Implement all six behaviors by hand: `aria-modal="true"`, focus trap, `inert` on the app content root (never `body` or `documentElement`), body scroll lock (on iOS Safari use `position: fixed; top: -${scrollY}px`), Escape listener, focus restoration, and render via portal to `document.body`.
+- Backdrop click closes by default; may be intentionally disabled for destructive confirmations so users must Cancel or Confirm explicitly.
+- Initial focus target — three acceptable defaults:
   - the dialog surface (`tabIndex={-1}`) — accessible name announces, then Tab to first control (default under `.showModal()`);
   - a safe-default control (Cancel / Close) for destructive confirmations, to prevent inadvertent Enter-confirm;
   - the first interactive element for form-shaped dialogs.
-- **`<form method="dialog">`** may be used for zero-JS form dismiss — the submit button's `value` becomes `dialog.returnValue` on the `close` event.
+- `<form method="dialog">` may be used for zero-JS form dismiss — the submit button's `value` becomes `dialog.returnValue` on the `close` event.
 
 ## Don'ts
 - Do not render `<dialog>` without calling `.showModal()` and expect modal behavior. A bare `<dialog>` produces a non-modal reveal with none of the modal contract.

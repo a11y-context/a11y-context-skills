@@ -9,7 +9,7 @@ aliases: [toggle button, pressed button]
 summary: Two- or three-state button that toggles between pressed and not pressed using aria-pressed.
 ---
 
-# Toggle Button
+# Button (Toggle)
 
 Pattern ID: `button.toggle`
 
@@ -46,7 +46,7 @@ Two- or three-state button that toggles between pressed and not pressed using `a
 - You may add context to the accessible name when multiple similar toggles exist (e.g., "Mute Trailer", "Unmute Trailer") using `aria-label`, `aria-labelledby`, or offscreen text.
 
 ## Don'ts
--   Do not use `aria-pressed` for non-toolbar toggles **if** you are already changing the accessible name to the next action (avoid conflicting models like "Unmute, pressed").
+-   Do not use `aria-pressed` for non-toolbar toggles if you are already changing the accessible name to the next action (avoid conflicting models like "Unmute, pressed").
 - Do not leave `aria-pressed` incorrect, stale, or always `"true"` / always `"false"` when you choose the toolbar approach.
 - Do not ship icon-only toggles without an accessible name (`aria-label` or `aria-labelledby`).
 - Do not put state only in the icon (screen reader users must get state via the accessible name change or `aria-pressed`, depending on strategy).

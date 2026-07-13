@@ -9,7 +9,7 @@ aliases: [epg, electronic program guide, tv guide, live guide, schedule grid]
 summary: Interactive channel guide grid with one Tab stop and arrow-key navigation across channels and time slots.
 ---
 
-# Channel Guide Grid
+# Grid (Channel Guide)
 
 Pattern ID: `grid.channel-guide`
 

@@ -9,7 +9,7 @@ aliases: [hero carousel, marquee, featured gallery, hero gallery, image gallery,
 summary: Horizontally-advancing carousel (aka hero or marquee carousel) with 'dot' navigation, prev/next buttons, and pause behavior.
 ---
 
-# Carousel with Dot Navigation
+# Carousel (Dots)
 
 Pattern ID: `carousel.dots`
 

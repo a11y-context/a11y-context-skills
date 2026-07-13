@@ -732,47 +732,6 @@
       }
     },
     {
-      "id": "select.basic",
-      "title": "Select",
-      "pattern_type": "component",
-      "status": "beta",
-      "latest_version": "0.2.0",
-      "summary": "A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.",
-      "aliases": [
-        "form select",
-        "styled select",
-        "listbox select",
-        "dropdown select"
-      ],
-      "tags": [
-        "select",
-        "form",
-        "form-select",
-        "listbox",
-        "dropdown"
-      ],
-      "selection_excerpt": {
-        "use_when": [
-          "Use when a form input must allow selecting **one option** from a predefined set.",
-          "Use when the options are short labels and the selection is discrete (not freeform text).",
-          "Use for primary or secondary forms anywhere on a site or application."
-        ],
-        "do_not_use_when": [
-          "Do not use when a native <select> styled with CSS meets the need (use select.native).",
-          "Do not use when the user needs to type to filter a large list (use combobox.autocomplete).",
-          "Do not use when multiple selections are required (use listbox.basic).",
-          "Do not use for navigation menus or account menus (use navigation-menu.basic or navigation-menu.dropdown)."
-        ]
-      },
-      "variants": [],
-      "default_variant": null,
-      "source": {
-        "path": "components/select.basic.md",
-        "format": "markdown",
-        "frontmatter": true
-      }
-    },
-    {
       "id": "select.native",
       "title": "Native Select",
       "pattern_type": "component",
@@ -814,6 +773,47 @@
       "default_variant": null,
       "source": {
         "path": "components/select.native.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "select.basic",
+      "title": "Select",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.2.0",
+      "summary": "A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.",
+      "aliases": [
+        "form select",
+        "styled select",
+        "listbox select",
+        "dropdown select"
+      ],
+      "tags": [
+        "select",
+        "form",
+        "form-select",
+        "listbox",
+        "dropdown"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a form input must allow selecting one option from a predefined set.",
+          "Use when the options are short labels and the selection is discrete (not freeform text).",
+          "Use for primary or secondary forms anywhere on a site or application."
+        ],
+        "do_not_use_when": [
+          "Do not use when a native <select> styled with CSS meets the need (use select.native).",
+          "Do not use when the user needs to type to filter a large list (use combobox.autocomplete).",
+          "Do not use when multiple selections are required (use listbox.basic).",
+          "Do not use for navigation menus or account menus (use navigation-menu.basic or navigation-menu.dropdown)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/select.basic.md",
         "format": "markdown",
         "frontmatter": true
       }

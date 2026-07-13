@@ -9,7 +9,7 @@ aliases: [native select, html select, select element, dropdown, form select, sin
 summary: A native select element styled with CSS, the default single-value form control; retains native keyboard, mobile, dismissal, and assistive-technology behavior.
 ---
 
-# Native Select
+# Select (Basic)
 
 Pattern ID: `select.native`
 

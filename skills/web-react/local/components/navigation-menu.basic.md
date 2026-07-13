@@ -9,7 +9,7 @@ aliases: [nav dropdown, header dropdown, mega menu (simple), disclosure navigati
 summary: A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with aria-expanded/controls and Tab-based navigation (no roving focus / no role=menu).
 ---
 
-# Navigation Menu
+# Navigation (Flat List)
 
 Pattern ID: `navigation-menu.basic`
 
@@ -31,11 +31,11 @@ A non-modal header navigation pattern that supports top-level links and optional
 - Navigation is contained within a `<nav>` landmark, or an element with `role="navigation"`, and an accessible name (`aria-label`) when multiple nav landmarks exist.
 - Top-level navigation items are presented in a list structure (e.g., `<ul><li>…</li></ul>`).
 - Each top-level item is one of the following:
-  - (A) **Simple link**: a single `<a>` to a destination.
-  - (B) **Parent link + menu button** (when the parent has its own destination page):
+  - (A) Simple link: a single `<a>` to a destination.
+  - (B) Parent link + menu button (when the parent has its own destination page):
     - The parent is a normal `<a>` (activates navigation).
-    - A separate adjacent **menu toggle button** opens/closes the sub-menu.
-  - (C) **Parent button** (when the parent does not have its own destination page):
+    - A separate adjacent menu toggle button opens/closes the sub-menu.
+  - (C) Parent button (when the parent does not have its own destination page):
     - A `<button>` acts as the parent control and opens/closes the sub-menu.
 - The toggle control is a native `<button>` (preferred) or `role="button"` only when a native button cannot be used.
   - If using `role="button"`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating.
@@ -43,7 +43,7 @@ A non-modal header navigation pattern that supports top-level links and optional
 - Sub-menu items are links and/or buttons contained in a list structure (`<ul><li>…</li></ul>`).
 
 ### Accessible name
-- If the toggle is an **icon button associated with a parent link** (case B), it has an accessible name that includes the parent link text.
+- If the toggle is an icon button associated with a parent link (case B), it has an accessible name that includes the parent link text.
   - Example: `aria-label="Categories menu"` (text is customizable but must include the parent link label).
 
 ### State & properties
@@ -62,8 +62,8 @@ A non-modal header navigation pattern that supports top-level links and optional
 
 ### Keyboard
 - Tab boundary behavior:
-  - If focus is on the **last focusable element** in an open submenu and the user presses Tab, the submenu closes and focus moves to the next focusable element after the submenu.
-  - If focus is on the **first focusable element** in an open submenu and the user presses Shift+Tab, the submenu closes and focus moves to the toggle control.
+  - If focus is on the last focusable element in an open submenu and the user presses Tab, the submenu closes and focus moves to the next focusable element after the submenu.
+  - If focus is on the first focusable element in an open submenu and the user presses Shift+Tab, the submenu closes and focus moves to the toggle control.
 
 ### Focus
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around all links and buttons.
@@ -87,7 +87,7 @@ A non-modal header navigation pattern that supports top-level links and optional
 - Do not open sub-menus on hover only.
   - If hover-to-open is supported for mouse users, sub-menus must also be operable via click and keyboard, and keyboard users must not be forced to tab through submenu items unless they intentionally open them.
 - Do not make a top-level item both a navigation link and the submenu toggle using the same element.
-  - If the parent has its own destination page and also has a submenu, use **parent link + separate toggle button**.
+  - If the parent has its own destination page and also has a submenu, use parent link + separate toggle button.
 - Do not use `role="menu"` / `role="menuitem"` unless you implement the full ARIA menu widget behavior (managed focus, arrow keys, typeahead).
 - Do not add `aria-haspopup` to the toggle; the submenu is a list of links, not a menu, so it announces a widget that is not present.
 - Do not leave submenu content visible while `aria-expanded="false"` (and vice versa).
