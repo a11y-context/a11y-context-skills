@@ -26,7 +26,7 @@ Native button that triggers an action. Supports text-only, icon+text, and icon-o
 ## Must Haves
 - Use a native `<button>` for built-in semantics and keyboard behavior.
   - A custom implementation with `role="button"` is appropriate only when a native button cannot be used.
-  - If role="button" is used instead of a native <button>, add tabindex="0" and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating the control.
+  - If `role="button"` is used instead of a native `<button>`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating the control.
 - The button has an accessible name that describes its purpose or action.
 - When the button has visible text, the visible text serves as the accessible name.
 - When additional context is needed beyond the visible text, add it via `aria-label`, `aria-labelledby`, or offscreen text. The visible text appears at the start of the accessible name.
@@ -48,7 +48,7 @@ Native button that triggers an action. Supports text-only, icon+text, and icon-o
 
 Structural reference for AI coding assistants — semantics, focus, and keyboard behavior. Styling, copy, and demo data are illustrative.
 
-```jsx
+```jsx title="ButtonBasicDemo.jsx"
 export function ButtonBasicDemo() {
   return (
     <div>

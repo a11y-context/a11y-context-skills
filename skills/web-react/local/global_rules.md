@@ -2,6 +2,7 @@
 
 id: "global_ruleset.baseline"
 title: "Foundations"
+toc_max_heading_level: 2
 slug: "/foundations"
 stack: "web/react"
 rule_set: "baseline"
