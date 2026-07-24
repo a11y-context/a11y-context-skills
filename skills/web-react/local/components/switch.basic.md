@@ -3,7 +3,7 @@ id: switch.basic
 title: Switch
 stack: web/react
 status: beta
-latest_version: 0.3.0
+latest_version: 0.3.1
 tags: [switch, form, settings, on-off, form-control, toggle]
 aliases: [toggle switch, preference toggle]
 summary: Two-state on/off control representing a persistent setting. Uses role="switch" with aria-checked, or native checkbox semantics when applicable.
@@ -28,24 +28,19 @@ Two-state on/off control representing a persistent setting. Uses `role="switch"`
 
 ## Must Haves
 - The switch has `role="switch"`.
-- The switch has an associated visible text label.
-- The switch has an accessible name that describes its action. Often this is worded to be true when the switch is set to "on" (e.g., "Enable notifications").
-- The accessible name is equivalent to the visible text label.
-- When additional context is needed beyond the visible text, add it via `aria-label`, `aria-labelledby`, or offscreen text (i.e., `.sr-only`). The visible text appears at the start of the accessible name.
-- When on, the switch has `aria-checked="true"`. When off, the switch has `aria-checked="false"`.
-  - If the switch is implemented as `input[type="checkbox"]`, use the native `checked` attribute instead of `aria-checked`.
-- The switch must be focusable:
-  - Native input (i.e., `input[type="checkbox"]`) is focusable by default.
-  - Non-native elements must include `tabIndex="0"`.
+- The switch has a visible text label, either programmatically associated with the control (`label[for]`) or matched by an accessible name on the control (`aria-label` or `aria-labelledby`).
+  - The accessible name begins with the visible label text, and may append a short amount of additional context for screen reader users (via `aria-label`, `aria-labelledby`, or offscreen `.sr-only` text).
+- The accessible name describes the setting the switch controls, worded so it is true when the switch is on (e.g., "Enable notifications").
+- The switch's on/off state is exposed via `aria-checked` (`"true"`/`"false"`), or via the native `checked` property when the switch is an `input[type="checkbox"]`.
+  - The exposed state stays in sync with the switch as it toggles.
+- The switch is focusable so Tab and Shift+Tab reach it: a native `input[type="checkbox"]` is focusable by default; a non-native element (`div`/`button` with `role="switch"`) must include `tabIndex="0"`.
 - Keyboard:
-  - Tab/Shift+Tab moves focus to the switch.
   - Space toggles the switch.
   - Enter toggles the switch.
     - Exception: If using native input `input[type="checkbox"]`, then only Space toggles the switch, not Enter.
-- If multiple switches are presented as a labeled set:
-  - Use `fieldset` with `legend`, or
-  - Wrap in `role="group"` with `aria-labelledby`.
-- If additional descriptive static text is relevant to a switch or switch group, associate it using `aria-describedby`.
+- If multiple switches are presented as a labeled set, group them with `fieldset` + `legend` or `role="group"` + `aria-labelledby`.
+  - The group's label describes the purpose of the set (WCAG 2.4.6).
+- Associate any additional descriptive static text with the switch via `aria-describedby` on the switch element itself. Do not place `aria-describedby` on a `fieldset` or group container — a screen reader announces a description when its element receives focus, and the container is never focused, so it is announced unreliably; put group-level context in the `legend`.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the switch control.
 
 ## Customizable
@@ -57,10 +52,9 @@ Two-state on/off control representing a persistent setting. Uses `role="switch"`
 - Whether multiple switches may be grouped.
 
 ## Don'ts
-- Do not use a switch for non-setting actions.
+- Do not use a switch for non-setting actions; use it only for persistent on/off settings.
 - Do not omit `aria-checked` when using `div` or `button` with `role="switch"`.
 - Do not use both `checked` and `aria-checked` on `input[type="checkbox"]`.
-- Do not use a switch to trigger actions; use it only for persistent on/off settings.
 
 ## Golden Pattern
 
