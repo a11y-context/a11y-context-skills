@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.7.0",
+  "catalog_revision": "0.8.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -194,6 +194,97 @@
       "default_variant": null,
       "source": {
         "path": "components/carousel.thumbnails.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "checkbox.basic",
+      "title": "Checkbox",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A single binary checkbox for an independent on/off choice submitted with a form. Uses a native <input type=\"checkbox\"> with an associated <label>, or role=\"checkbox\" with aria-checked when a native input cannot be used.",
+      "aliases": [
+        "checkbox",
+        "check box",
+        "tickbox",
+        "agree to terms",
+        "remember me",
+        "opt-in",
+        "consent checkbox",
+        "boolean input"
+      ],
+      "tags": [
+        "checkbox",
+        "form",
+        "form-control",
+        "boolean",
+        "consent",
+        "selection"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a single control records an independent yes/no choice that is submitted with a form rather than taking effect immediately (e.g., \"I agree to the Terms of Service\", \"Remember me on this device\", \"Email me about new releases\").",
+          "Use when the control's label is self-sufficient, including when several such independent checkboxes appear in the same form.",
+          "Use when both the checked and unchecked values are meaningful and are read when the form is submitted."
+        ],
+        "do_not_use_when": [
+          "Do not use when several checkboxes answer one shared question and their labels are not meaningful without it (use checkbox.group).",
+          "Do not use when toggling the control takes effect immediately as a persistent setting rather than a value submitted with a form (use switch.basic).",
+          "Do not use when the control toggles a feature, tool, or formatting state in the current context rather than recording a value to submit (use button.toggle).",
+          "Do not use when a third \"mixed\" or \"partially checked\" state is required, such as a parent reflecting a mix of checked children (use checkbox.tristate)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/checkbox.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "checkbox.group",
+      "title": "Checkbox Group",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A set of related checkboxes that together answer one question. The group is named with <fieldset> and <legend>, or role=\"group\" with aria-labelledby, and each option is an independent native <input type=\"checkbox\">.",
+      "aliases": [
+        "checkbox group",
+        "checkbox list",
+        "multi-select checkboxes",
+        "fieldset checkboxes",
+        "options list",
+        "select multiple",
+        "preferences checkboxes"
+      ],
+      "tags": [
+        "checkbox",
+        "form",
+        "form-control",
+        "group",
+        "fieldset",
+        "multi-select"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when several checkboxes together answer one question and each option's label is not meaningful without that shared question (e.g., \"Which genres do you watch?\" with \"Action\", \"Comedy\", \"Drama\").",
+          "Use when the user may select zero, one, or many options from the set.",
+          "Use when the set needs a single visible group label, and sometimes group-level validation (e.g., \"Select at least one\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when a single, self-sufficient checkbox captures the choice (use checkbox.basic).",
+          "Do not use when exactly one option may be selected from the set (use radio.group).",
+          "Do not use when each toggle is a persistent setting that takes effect immediately rather than a value submitted with a form (use switch.basic).",
+          "Do not use when the choices are presented inside a popup opened from a trigger (use select.basic, or a dedicated multi-select pattern for many values)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/checkbox.group.md",
         "format": "markdown",
         "frontmatter": true
       }
