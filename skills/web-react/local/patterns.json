@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.6.0",
+  "catalog_revision": "0.7.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -858,6 +858,53 @@
       "default_variant": null,
       "source": {
         "path": "components/switch.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "tabs.basic",
+      "title": "Tabs",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Same-page sections where one panel is visible at a time, using role=\"tablist\", role=\"tab\", and role=\"tabpanel\" with aria-selected, a roving tabindex, and arrow-key traversal.",
+      "aliases": [
+        "tabbed interface",
+        "tab panel",
+        "tab bar",
+        "view switcher",
+        "content switcher",
+        "segmented control",
+        "pill navigation",
+        "browse tabs"
+      ],
+      "tags": [
+        "tabs",
+        "tablist",
+        "roving-tabindex",
+        "view-switching",
+        "disclosure",
+        "segmented-control"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a large amount of same-page content divides into a few clearly labeled sections at the same level, and the user views one section at a time (e.g., \"Episodes\", \"Details\", and \"More Like This\" on a title page).",
+          "Use when one collection is presented through several filtered or status-partitioned views of the same kind of item (e.g., \"Continue Watching\", \"Saved\", and \"Downloads\" in a personal list).",
+          "Use when the sections are consulted regularly by returning users, and the sections that start hidden are supplemental rather than critical.",
+          "Use when switching between sections keeps the user in place, without loading a different URL or reloading the page."
+        ],
+        "do_not_use_when": [
+          "Do not use when each tab is a link that loads a different URL or route (use navigation-menu.basic, or navigation-menu.dropdown when the navigation opens from a trigger).",
+          "Do not use when the sections are steps in a sequence the user works through in order (use stepper.basic).",
+          "Do not use when sections stack vertically and expand or collapse independently, with more than one open at a time (use accordion.basic, or disclosure.basic for a single show/hide section).",
+          "Do not use when the control records a choice such as a filter value, a form field, or a setting rather than displaying a different panel of content (use radio.group, or select.native when one value is picked from a list)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/tabs.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
