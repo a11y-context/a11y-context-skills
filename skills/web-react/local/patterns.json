@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.5.2",
+  "catalog_revision": "0.6.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -294,16 +294,19 @@
       }
     },
     {
-      "id": "dialog.modal",
-      "title": "Dialog (Modal)",
+      "id": "dialog.basic",
+      "title": "Dialog (Basic)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.3.1",
+      "latest_version": "0.1.0",
       "summary": "User-initiated blocking dialog. Uses the native <dialog> element with .showModal() so the browser handles focus trap, background inertness, Escape dismissal, focus restoration, and top-layer rendering.",
       "aliases": [
         "dialog",
         "modal",
-        "pop-up"
+        "modal dialog",
+        "pop-up",
+        "blocking overlay",
+        "show-modal"
       ],
       "tags": [
         "dialog",
@@ -322,8 +325,8 @@
           "Use when the user must explicitly complete or dismiss the dialog before returning to the main interface."
         ],
         "do_not_use_when": [
-          "Do not use when the content is part of the normal page flow and does not block background interaction.",
-          "Do not use when presenting brief, non-blocking status messages that do not require focus movement (use toast or snackbar).",
+          "Do not use when the content is part of the normal page flow and does not block background interaction (use popover.basic).",
+          "Do not use when presenting brief, non-blocking status messages that do not require focus movement (use toast.basic).",
           "Do not use when the message is urgent and requires immediate acknowledgment (use dialog.alert).",
           "Do not use when the interaction involves complex, multi-step workflows spanning multiple screens."
         ]
@@ -331,53 +334,7 @@
       "variants": [],
       "default_variant": null,
       "source": {
-        "path": "components/dialog.modal.md",
-        "format": "markdown",
-        "frontmatter": true
-      }
-    },
-    {
-      "id": "dialog.nonmodal",
-      "title": "Dialog (Non-Modal)",
-      "pattern_type": "component",
-      "status": "beta",
-      "latest_version": "0.1.0",
-      "summary": "A dialog that does not block the page; uses role=\"dialog\" with an accessible name, moves focus in on open and restores it on close, but does not trap focus or inert the background.",
-      "aliases": [
-        "non-modal dialog",
-        "modeless dialog",
-        "non-blocking dialog",
-        "popover dialog",
-        "editor popover",
-        "composer panel",
-        "floating panel"
-      ],
-      "tags": [
-        "dialog",
-        "non-modal",
-        "overlay",
-        "popover",
-        "focus-restoration",
-        "modeless"
-      ],
-      "selection_excerpt": {
-        "use_when": [
-          "Use when an overlay presents content or a task without blocking the page (e.g., a non-blocking editor popover, a composer, a rich panel with interactive controls).",
-          "Use when the user can keep interacting with the rest of the page while the overlay is open.",
-          "Use when focus should move into the dialog on open but not be trapped there."
-        ],
-        "do_not_use_when": [
-          "Do not use when the user must complete or dismiss the overlay before returning to the page (use dialog.modal).",
-          "Do not use when a control simply shows and hides inline content (use disclosure.basic).",
-          "Do not use when the overlay is a menu of commands (use menu.basic).",
-          "Do not use when the message is a brief, non-interactive status update (use toast.basic).",
-          "Do not use when the content is a plain-text supplementary hint (use tooltip.basic)."
-        ]
-      },
-      "variants": [],
-      "default_variant": null,
-      "source": {
-        "path": "components/dialog.nonmodal.md",
+        "path": "components/dialog.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -732,6 +689,53 @@
       }
     },
     {
+      "id": "popover.basic",
+      "title": "Popover",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A non-modal overlay anchored to its trigger; uses role=\"dialog\" with an accessible name, moves focus in on open and restores it on close, but does not trap focus or inert the background.",
+      "aliases": [
+        "popover",
+        "anchored overlay",
+        "floating panel",
+        "editor popover",
+        "composer panel",
+        "non-modal dialog",
+        "modeless dialog",
+        "popup panel"
+      ],
+      "tags": [
+        "popover",
+        "overlay",
+        "non-modal",
+        "anchored",
+        "focus-restoration",
+        "disclosure"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when an overlay anchored to a trigger presents content or a task without blocking the page (e.g., an editor popover, a composer, a rich panel with interactive controls).",
+          "Use when the user can keep interacting with the rest of the page while the overlay is open.",
+          "Use when focus should move into the overlay on open but not be trapped there."
+        ],
+        "do_not_use_when": [
+          "Do not use when the user must complete or dismiss the overlay before returning to the page (use dialog.basic).",
+          "Do not use when a control simply shows and hides inline content (use disclosure.basic).",
+          "Do not use when the overlay is a menu of commands (use menu.basic).",
+          "Do not use when the message is a brief, non-interactive status update (use toast.basic).",
+          "Do not use when the content is a plain-text supplementary hint (use tooltip.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/popover.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "select.native",
       "title": "Native Select",
       "pattern_type": "component",
@@ -884,7 +888,7 @@
           "Use when the message is text-only and contains no required actions, except for (at most) a dismiss button."
         ],
         "do_not_use_when": [
-          "Do not use when the message requires user acknowledgment, moves keyboard focus, or blocks background interaction (use dialog).",
+          "Do not use when the message requires user acknowledgment, moves keyboard focus, or blocks background interaction (use dialog.basic).",
           "Do not use when the message is urgent or must interrupt the user immediately (use dialog.alert).",
           "Do not use when the message includes required actions or interactive controls beyond simple dismissal (use snackbar)."
         ]
@@ -928,7 +932,7 @@
           "Use when the label should appear on both pointer hover and keyboard focus of the trigger."
         ],
         "do_not_use_when": [
-          "Do not use when the content is interactive or rich, containing links or buttons (use dialog.nonmodal).",
+          "Do not use when the content is interactive or rich, containing links or buttons (use popover.basic).",
           "Do not use when the content is a status or confirmation message (use toast.basic).",
           "Do not use when the label would be the control's only accessible name; give the control a real accessible name via a visible label or aria-label instead (use button.basic).",
           "Do not use when the content is a menu of choices (use menu.basic)."

@@ -1,17 +1,17 @@
 ---
-id: dialog.modal
-title: "Dialog (Modal)"
+id: dialog.basic
+title: "Dialog (Basic)"
 stack: web/react
 status: beta
-latest_version: 0.3.1
+latest_version: 0.1.0
 tags: [dialog, modal, pop-up, overlay, focus-trap, blocking, native-dialog, show-modal]
-aliases: [dialog, modal, pop-up]
+aliases: [dialog, modal, modal dialog, pop-up, blocking overlay, show-modal]
 summary: User-initiated blocking dialog. Uses the native <dialog> element with .showModal() so the browser handles focus trap, background inertness, Escape dismissal, focus restoration, and top-layer rendering.
 ---
 
-# Dialog (Modal)
+# Dialog (Basic)
 
-Pattern ID: `dialog.modal`
+Pattern ID: `dialog.basic`
 
 User-initiated blocking dialog. Uses the native `<dialog>` element with `.showModal()` so the browser handles focus trap, background inertness, Escape dismissal, focus restoration, and top-layer rendering. When the native element cannot be used, a manual `<div role="dialog">` fallback is documented under Customizable with the full behavior contract that must be implemented by hand.
 
@@ -21,8 +21,8 @@ User-initiated blocking dialog. Uses the native `<dialog>` element with `.showMo
 - Use when the user must explicitly complete or dismiss the dialog before returning to the main interface.
 
 ## Do Not Use When
-- Do not use when the content is part of the normal page flow and does not block background interaction.
-- Do not use when presenting brief, non-blocking status messages that do not require focus movement (use `toast` or `snackbar`).
+- Do not use when the content is part of the normal page flow and does not block background interaction (use `popover.basic`).
+- Do not use when presenting brief, non-blocking status messages that do not require focus movement (use `toast.basic`).
 - Do not use when the message is urgent and requires immediate acknowledgment (use `dialog.alert`).
 - Do not use when the interaction involves complex, multi-step workflows spanning multiple screens.
 

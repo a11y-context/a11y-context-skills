@@ -23,7 +23,7 @@ A brief supplementary text label shown on hover and focus of its trigger; uses `
 
 ## Do Not Use When
 
-- Do not use when the content is interactive or rich, containing links or buttons (use `dialog.nonmodal`).
+- Do not use when the content is interactive or rich, containing links or buttons (use `popover.basic`).
 - Do not use when the content is a status or confirmation message (use `toast.basic`).
 - Do not use when the label would be the control's only accessible name; give the control a real accessible name via a visible label or `aria-label` instead (use `button.basic`).
 - Do not use when the content is a menu of choices (use `menu.basic`).

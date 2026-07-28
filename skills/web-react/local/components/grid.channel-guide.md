@@ -309,7 +309,7 @@ export function ChannelGuideGrid({
       {/* DOCUMENTATION NOTES (intentionally not implemented in MCP code):
           - A live player preview region should announce currently playing content changes (aria-live="polite").
           - Channel tuning should be a no-op when the selectedRow channel is already playing.
-          - "Details" actions (channel column + future programs) should open a modal/dialog (use your dialog.modal pattern).
+          - "Details" actions (channel column + future programs) should open a modal/dialog (use your dialog.basic pattern).
           - On modal close: restore focus to the invoking grid button (store opener ref).
           - Consider additional keys: PageUp/PageDown (jump time columns), Ctrl+Home/End (grid edges), etc.
           - For SR verbosity: aria-label may be double-announced in some AT/browser combos; prefer aria-labelledby/aria-describedby.
