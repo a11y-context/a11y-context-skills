@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.21.0",
+  "catalog_revision": "0.22.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -34,6 +34,94 @@
       "default_variant": null,
       "source": {
         "path": "components/accordion.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "avatar.basic",
+      "title": "Avatar",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Image, initials, or glyph standing for a person or entity, where the accessible name identifies who is represented and stays the same whichever branch of the fallback chain renders.",
+      "aliases": [
+        "avatar",
+        "user avatar",
+        "profile picture",
+        "profile photo",
+        "profile image",
+        "initials avatar",
+        "monogram",
+        "gravatar"
+      ],
+      "tags": [
+        "avatar",
+        "identity",
+        "image",
+        "alt-text",
+        "initials",
+        "profile"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when an image, initials, or a glyph identifies a specific person (e.g., a comment author, an account holder, a viewer in a list) or a non-person entity (e.g., a channel, a team, or a brand account)."
+        ],
+        "do_not_use_when": [
+          "Do not use when activating the avatar performs an action or navigates elsewhere (use button.basic or link.basic).",
+          "Do not use when a status, presence, or count indicator sits on or beside the avatar (use badge.basic).",
+          "Do not use when avatars are stacked into a group with an overflow affordance such as \"+3\" (use avatar.group).",
+          "Do not use when the image is content the user is meant to look at rather than an identifier for someone, such as a poster, a thumbnail, or artwork (use collection-row.basic when it sits in a browse row)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/avatar.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "badge.basic",
+      "title": "Badge",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Small non-interactive indicator annotating a host element with a count or a status, where the meaning is folded into an accessible name and read on arrival rather than announced on change.",
+      "aliases": [
+        "badge",
+        "status badge",
+        "count badge",
+        "notification badge",
+        "unread count",
+        "status chip",
+        "lozenge",
+        "pill"
+      ],
+      "tags": [
+        "badge",
+        "count",
+        "status",
+        "indicator",
+        "notification-count"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a small indicator on or beside another element reports a count for that element (e.g., unread messages on a mail icon, items in a cart).",
+          "Use when a small indicator reports a status of the element it annotates (e.g., \"Live\" on a channel tile, an online dot on an avatar, \"New\" on a menu entry)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the user must be told about the change immediately, without navigating to the indicator (use toast.basic).",
+          "Do not use when the indicator can be selected, dismissed, or removed by the user (use tag.basic).",
+          "Do not use when the element is supplementary text revealed on hover or focus of another control (use tooltip.basic).",
+          "Do not use when the indicator is the control the user activates, such as a filter that toggles on click (use button.toggle)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/badge.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
