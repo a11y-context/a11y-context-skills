@@ -3,7 +3,7 @@ id: link.basic
 title: Link
 stack: web/react
 status: beta
-latest_version: 0.2.0
+latest_version: 0.2.1
 tags: [link, anchor, navigation, external-link]
 aliases: [anchor, hyperlink, external link]
 summary: Native link for navigation using <a href>. Supports optional context in the accessible name, including "opens in new tab/window/dialog".
@@ -20,8 +20,8 @@ Native link for navigation using `<a href>`. Supports optional context in the ac
 - Use when the primary purpose of the element is destination-based navigation rather than performing an action.
 
 ## Do Not Use When
-- Do not use when activating the element performs an in-place action such as submitting, saving, deleting, toggling, or opening a dialog (use `button`).
-- Do not use when the element changes UI state without navigation (use `button`).
+- Do not use when activating the element performs an in-place action such as submitting, saving, deleting, toggling, or opening a dialog (use `button.basic`).
+- Do not use when the element changes UI state without navigation (use `button.basic`).
 
 ## Must Haves
 - Use a native `<a>` element with an `href` whenever possible.

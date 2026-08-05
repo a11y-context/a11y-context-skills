@@ -3,7 +3,7 @@ id: button.toggle
 title: Toggle Button
 stack: web/react
 status: beta
-latest_version: 0.2.1
+latest_version: 0.2.2
 tags: [button, toggle, pressed, aria-pressed, mute-button]
 aliases: [toggle button, pressed button]
 summary: Two- or three-state button that toggles between pressed and not pressed using aria-pressed.
@@ -19,7 +19,7 @@ Two- or three-state button that toggles between pressed and not pressed using `a
 - Use when a control toggles a feature or action within the current context (e.g., "Mute", "Bold", "Pin", "Enable Closed Captioning").
 
 ## Do Not Use When
-- Do not use when the control navigates to a new URL (use `link`).
+- Do not use when the control navigates to a new URL (use `link.basic`).
 - Do not use when the control represents a persistent on/off system or application setting, such as "Enable notifications", "Dark mode" (use `switch.basic`).
 - Do not use when the control records a value to submit with a form rather than toggling something in the current context (use `checkbox.basic`).
 - Do not use when the control opens a menu (use `menu.basic`).

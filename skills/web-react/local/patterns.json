@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.12.0",
+  "catalog_revision": "0.21.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -43,7 +43,7 @@
       "title": "Basic Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.1",
+      "latest_version": "0.2.2",
       "summary": "Native button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.",
       "aliases": [
         "btn",
@@ -63,7 +63,7 @@
           "Use when the user triggers an immediate action (e.g., \"Save\", \"Continue\", \"Dismiss\")."
         ],
         "do_not_use_when": [
-          "Do not use when the control navigates to a new URL (use link).",
+          "Do not use when the control navigates to a new URL (use link.basic).",
           "Do not use when the control represents an on/off pressed state (use button.toggle).",
           "Do not use when the control opens a menu (use menu.basic)."
         ]
@@ -81,7 +81,7 @@
       "title": "Toggle Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.1",
+      "latest_version": "0.2.2",
       "summary": "Two- or three-state button that toggles between pressed and not pressed using aria-pressed.",
       "aliases": [
         "toggle button",
@@ -99,7 +99,7 @@
           "Use when a control toggles a feature or action within the current context (e.g., \"Mute\", \"Bold\", \"Pin\", \"Enable Closed Captioning\")."
         ],
         "do_not_use_when": [
-          "Do not use when the control navigates to a new URL (use link).",
+          "Do not use when the control navigates to a new URL (use link.basic).",
           "Do not use when the control represents a persistent on/off system or application setting, such as \"Enable notifications\", \"Dark mode\" (use switch.basic).",
           "Do not use when the control records a value to submit with a form rather than toggling something in the current context (use checkbox.basic).",
           "Do not use when the control opens a menu (use menu.basic)."
@@ -522,7 +522,7 @@
       "title": "Link",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.2.1",
       "summary": "Native link for navigation using <a href>. Supports optional context in the accessible name, including \"opens in new tab/window/dialog\".",
       "aliases": [
         "anchor",
@@ -541,8 +541,8 @@
           "Use when the primary purpose of the element is destination-based navigation rather than performing an action."
         ],
         "do_not_use_when": [
-          "Do not use when activating the element performs an in-place action such as submitting, saving, deleting, toggling, or opening a dialog (use button).",
-          "Do not use when the element changes UI state without navigation (use button)."
+          "Do not use when activating the element performs an in-place action such as submitting, saving, deleting, toggling, or opening a dialog (use button.basic).",
+          "Do not use when the element changes UI state without navigation (use button.basic)."
         ]
       },
       "variants": [],
@@ -827,6 +827,54 @@
       }
     },
     {
+      "id": "progress-bar.basic",
+      "title": "Progress Bar",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Non-interactive indicator of a process advancing toward completion, using the native <progress> element or role=\"progressbar\" with aria-valuenow, and announcing completion through a separate live region rather than on every value change.",
+      "aliases": [
+        "progress bar",
+        "progress indicator",
+        "loading bar",
+        "loading indicator",
+        "upload progress",
+        "download progress",
+        "percent complete",
+        "indeterminate progress"
+      ],
+      "tags": [
+        "progress",
+        "progressbar",
+        "loading",
+        "status",
+        "live-region",
+        "reduced-motion"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a process the user started reports how far it has advanced toward a known end point (e.g., \"Uploading 3 of 8 files\", a download at 47%).",
+          "Use when a process the user started is running with no knowable end point, and a bar communicates that work is still underway (e.g., a form submitting, a report generating).",
+          "Use when the value advances on its own and the user cannot set, drag, or type it."
+        ],
+        "do_not_use_when": [
+          "Do not use when the user sets or changes the value by dragging or with arrow keys (use slider.basic).",
+          "Do not use when the value is a static measurement within a known range rather than progress toward completion, such as disk usage, storage quota, or battery level (use meter.basic).",
+          "Do not use when the indicator is a small glyph inside a button or panel that already carries its own label, added only to show that button or panel is working, such as a spinner inside a Save button while it submits (use spinner.basic).",
+          "Do not use when grey shapes stand in for the layout of the content itself, such as bars where lines of text will appear and a block where an image will load (use skeleton.basic).",
+          "Do not use when the bar shows position within playing media and the user can seek to a point in it (use slider.seek).",
+          "Do not use when the display shows which step of a multi-step sequence the user has reached (use stepper.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/progress-bar.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "select.native",
       "title": "Native Select",
       "pattern_type": "component",
@@ -909,6 +957,144 @@
       "default_variant": null,
       "source": {
         "path": "components/select.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "separator.basic",
+      "title": "Separator",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Static line separating sections of content, rendered as an hr and hidden from assistive technology unless the line itself is the only thing marking the boundary.",
+      "aliases": [
+        "divider",
+        "horizontal rule",
+        "hr",
+        "rule",
+        "hairline",
+        "section break",
+        "thematic break",
+        "vertical divider",
+        "list divider",
+        "menu divider"
+      ],
+      "tags": [
+        "separator",
+        "divider",
+        "thematic-break",
+        "structure",
+        "semantics"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a visible line marks a break between sections of content (e.g., between entries in a feed, or between groups of settings on a preferences screen).",
+          "Use when a line separates groups of items or controls inside a container (e.g., separating destructive actions from the rest of a menu)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the divider can be moved by the user to resize the regions on either side of it, which is a focusable widget with a value and a keyboard model rather than a static line (use splitter.basic).",
+          "Do not use when the line is a border belonging to a single element, such as a card edge, an input underline, or a rule between table cells. That is styling on that element rather than a break between two things, and it needs no separator semantics."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/separator.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "spinner.basic",
+      "title": "Spinner",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Indeterminate loading glyph that carries no semantics of its own, where the graphic is decorative and the control or region hosting it reports the wait through aria-busy and a separate live region.",
+      "aliases": [
+        "spinner",
+        "loading spinner",
+        "loading indicator",
+        "busy indicator",
+        "activity indicator",
+        "throbber",
+        "loader",
+        "button loading state"
+      ],
+      "tags": [
+        "spinner",
+        "loading",
+        "busy",
+        "status",
+        "live-region",
+        "reduced-motion"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a control the user activated stays busy long enough that the user would otherwise wonder whether it worked, and the wait has no knowable end point (e.g., a Save button submitting, a Sign in button authenticating).",
+          "Use when a region is fetching or replacing its content with no knowable end point, and the region keeps its place in the layout (e.g., a results panel reloading after a filter change).",
+          "Use when the button or region the indicator sits in already names what is loading, so the indicator itself needs no label."
+        ],
+        "do_not_use_when": [
+          "Do not use when the process reports how far it has advanced toward a known end point (use progress-bar.basic).",
+          "Do not use when the indicator has its own label naming the work and its own place in the layout, whether or not it reports a value, such as a labeled bar beneath \"Uploading episode files\" or a labeled ring for a sync that is running (use progress-bar.basic).",
+          "Do not use when grey shapes stand in for the layout of the content itself, such as bars where lines of text will appear and a block where an image will load (use skeleton.basic).",
+          "Do not use when several regions of one view would each show their own spinner at the same time (use skeleton.basic).",
+          "Do not use when the message reports the outcome of finished work rather than work still in progress (use toast.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/spinner.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "splitter.basic",
+      "title": "Splitter",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Moveable divider between two panes that changes their relative size, using a focusable role=\"separator\" with aria-valuenow, aria-controls, and arrow-key movement.",
+      "aliases": [
+        "split panel",
+        "split pane",
+        "split view",
+        "window splitter",
+        "splitter bar",
+        "resizable panes",
+        "pane divider",
+        "resize handle",
+        "drag handle",
+        "gutter",
+        "sash"
+      ],
+      "tags": [
+        "splitter",
+        "resizable-panes",
+        "window-splitter",
+        "drag-alternative",
+        "keyboard"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a moveable divider lets the user change the relative size of two adjacent panes (e.g., an episode list beside an episode detail view, or a player beside a live chat panel).",
+          "Use when a divider moves between a small set of layout positions rather than any value in a range (e.g., a three-stop divider for left pane only, both panes, and right pane only)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the divider is a static line the user cannot move, which is the common case for anything a design system calls a separator or divider (use separator.basic).",
+          "Do not use when the divider has only two positions, expanded and collapsed, which is a show/hide control rather than a position with a value (use disclosure.basic for the toggle, and separator.basic for the line beside it).",
+          "Do not use when the control sets a value in the content rather than a layout size, such as a volume level, a playback position, or a price filter (use slider.basic).",
+          "Do not use when the two regions are resized by a control that is not positioned between them, such as a button in a toolbar that expands a panel (use disclosure.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/splitter.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
