@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.22.0",
+  "catalog_revision": "0.23.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -863,6 +863,49 @@
       "default_variant": null,
       "source": {
         "path": "components/navigation-menu.dropdown.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "pin-input.basic",
+      "title": "PIN Input",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A fixed-length numeric code entered across segmented boxes, implemented as a single <input> whose expected length is carried in a description rather than by the box count, with the boxes and any group separator rendered as aria-hidden presentation.",
+      "aliases": [
+        "pin entry",
+        "passcode field",
+        "otp input",
+        "one-time code input",
+        "verification code input",
+        "2fa code entry",
+        "segmented code input",
+        "security code boxes"
+      ],
+      "tags": [
+        "pin",
+        "otp",
+        "form",
+        "form-control",
+        "authentication",
+        "numeric"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user enters a short numeric code of a known fixed length across segmented boxes (e.g., \"Parental control PIN\", \"Profile lock\", \"Purchase confirmation\").",
+          "Use when a verification code delivered out of band is entered (e.g., \"Enter the 6-digit code we texted you\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when the value has no fixed length, such as free-form text, an arbitrary number, or an account password (no pattern is needed; use a native <input> with a visible <label> and the Foundations rules).",
+          "Do not use when the requirement is collecting and summarizing errors across several fields rather than validating one code field (use form.error-summary)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/pin-input.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
