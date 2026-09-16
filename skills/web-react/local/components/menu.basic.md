@@ -273,22 +273,3 @@ const DEFAULT_ITEMS = [
   { id: "delete", label: "Delete", onSelect: () => alert("Delete") },
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Enter, Space, or Arrow Down on the trigger opens the menu and focuses the first item.
-- Arrow Up on the trigger opens the menu and focuses the last item.
-- Arrow Up and Arrow Down move focus between items and wrap at the ends.
-- Home focuses the first item and End focuses the last item.
-- Typing a printable character moves focus to the next item whose label starts with that character.
-- Enter or Space activates the focused item, closes the menu, and returns focus to the trigger.
-- Esc closes the menu and returns focus to the trigger.
-- Tab closes the menu and moves focus out of it.
-- A click outside the trigger and menu closes the menu.
-
-Screen Reader
-- The trigger exposes a menu popup and its expanded or collapsed state (from `aria-haspopup="menu"` and `aria-expanded`).
-- The container is announced as a menu with its accessible name.
-- Items are announced as menu items, and stateful items convey their checked state via `aria-checked`.
-- Closed menus are not reachable.

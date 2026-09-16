@@ -258,29 +258,3 @@ const EPISODES = [
   "5. Last Transmission",
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Tab moves focus to the splitter, and the splitter shows a visible focus indicator.
-- Tab reaches the step buttons and the splitter in the order they appear on screen, leading button first.
-- Arrow keys move the splitter along its axis, and the panes resize as it moves.
-- On a splitter with a set number of positions, each arrow press lands on the next position rather than moving by a smaller amount.
-- Arrow keys stop the splitter at its minimum and maximum instead of wrapping to the opposite end.
-- Enter collapses the primary pane, and Enter again restores it to the position it held before collapsing.
-- Focus remains on the splitter after every move and after collapsing or restoring.
-- Driving the splitter to either end from its own step button leaves focus on a visible button, never on the document body.
-- While a pane is collapsed, Tab never lands on anything inside it.
-
-Pointer
-- A button sits on each side of the splitter, visible without hovering over or focusing anything, and pressing one moves the splitter one step in that direction.
-- Every position the splitter can reach is reachable by pressing those buttons, without ever dragging.
-- The splitter's clickable area is at least 24 by 24 CSS pixels even where the visible line is thinner, and each step button meets the same size.
-
-Screen Reader
-- The splitter is announced with a role and a name describing the pane it sizes. The role name varies by platform: VoiceOver maps it to the native splitter and says "vertical splitter" or "splitter" rather than "separator".
-- A splitter carrying `aria-orientation="vertical"` is announced as vertical, confirming the attribute reached the accessibility tree.
-- The announced value changes as the splitter moves.
-- Any glyph drawn inside the splitter is not announced.
-- Content inside a collapsed pane is absent from the reading order.
-- With a screen reader running, the panes can still be resized or collapsed without relying on the screen reader's own splitter interaction. Verify this in VoiceOver, where that interaction is offered and does not work.

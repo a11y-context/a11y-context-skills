@@ -329,21 +329,3 @@ export function NavigationMenuBasic() {
   );
 }
 ```
-
-## Acceptance Checks
-
-Keyboard
--   Top-level links are reachable with Tab and activate normally.
--   If a parent has both a destination and submenu, Tab reaches the parent link, then the adjacent submenu toggle button.
--   Activating a toggle button opens/closes its submenu; focus remains on the toggle.
--   Tab enters submenu items only after the submenu is intentionally opened.
--   Tab from last submenu item closes the submenu and moves to the next element after it.
--   Shift+Tab from first submenu item closes the submenu and moves focus back to the toggle.
--   Esc closes the submenu and moves focus to the toggle.
--   When opening a submenu, any other open submenu closes.
-Screen Reader
--   Toggle announces expanded/collapsed state via `aria-expanded`.
--   Closed submenus are not reachable.
--   Submenu items announce as links/buttons and operate normally.
--   Icon toggle buttons have accessible names that include the associated parent label (e.g., "Categories menu").
-- On initial render, all sub-menus are closed (`aria-expanded="false"` on toggles; all sub-menus hidden/unreachable).

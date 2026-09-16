@@ -172,31 +172,3 @@ export function ModalDialog({
   );
 }
 ```
-
-## Acceptance Checks
-- On open:
-  - Focus moves into the dialog.
-  - Dialog is announced with its accessible name.
-  - Background content is not reachable by keyboard or screen reader.
-  - Body scroll is prevented.
-
-- While open:
-  - Tab and Shift+Tab remain within the dialog.
-  - Escape closes the dialog.
-  - Clicking the backdrop closes the dialog (unless the pattern has intentionally opted out per Customizable → Backdrop click contract).
-  - Clicking inside the dialog content does not close it.
-  - Focus indicators on all interactive elements follow the Foundations focus rule.
-
-- On close:
-  - Focus returns to the invoking element.
-  - Background content becomes interactive again.
-  - Body scroll is restored.
-
-- Semantics:
-  - Dialog has an accessible name.
-  - Close button has an accessible name.
-  - Under native `<dialog>` + `.showModal()`, the modal state is conveyed by the top-layer/modal contract; under the manual fallback, `aria-modal="true"` is set explicitly.
-  - The invoking control declares dialog-trigger semantics (e.g., `aria-haspopup="dialog"`).
-
-- Reflow:
-  - At 400% browser zoom (~320 CSS pixels wide), dialog content reflows within the viewport without horizontal scrolling.

@@ -204,27 +204,3 @@ export function PinInput({
   );
 }
 ```
-
-## Acceptance Checks
-
-Structure
-- The accessibility tree exposes one text field for the whole control, and no entry for any individual box.
-- The group separator is absent from the accessibility tree and absent from the submitted value.
-- Pasting a value that includes the separator or spaces fills the boxes with digits only.
-
-Keyboard
-- Tab moves focus to the field once, and Tab again leaves it; no box is a separate stop.
-- Typing digits fills boxes left to right and the current-position indicator advances.
-- Backspace clears the digit before the caret and the indicator moves back one box.
-- Left and Right move the current-position indicator between boxes, and never onto the separator.
-- Paste fills the whole field rather than the first box only.
-- Text selection and deletion behave as they do in a normal text field.
-
-Screen Reader
-- The field is announced once, with its label and the expected number of digits.
-- No box is announced as a separate unlabeled text field.
-- The separator is not spoken.
-- While the value is masked, typing does not speak the entered digits.
-- After the reveal control is activated, typing speaks the entered digits.
-- The reveal control conveys its pressed state when activated.
-- An incomplete or rejected code is announced from the live region without focus moving.

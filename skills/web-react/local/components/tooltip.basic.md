@@ -123,17 +123,3 @@ export function TooltipDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-
-- Keyboard
-  - A visible focus indicator is present on the trigger when reached by keyboard.
-  - Focusing the trigger shows the tooltip.
-  - Esc dismisses the tooltip while focus stays on the trigger.
-  - A stray pointer movement over and off the trigger does not hide the tooltip while the trigger still has focus.
-- Pointer
-  - Hovering the trigger shows the tooltip.
-  - The pointer can move onto the tooltip without dismissing it.
-  - Pressing Esc while the tooltip is shown by hover dismisses it without moving the pointer.
-- Screen Reader
-  - The tooltip text is announced as the trigger's description via `aria-describedby`.

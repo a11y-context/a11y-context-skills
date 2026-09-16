@@ -177,22 +177,3 @@ export function CheckboxDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-
-- Keyboard
-  - Tab moves focus to each checkbox, and the disabled checkbox is skipped.
-  - Space toggles the focused checkbox.
-  - Enter does not toggle the checkbox.
-  - A visible focus indicator is present on the focused checkbox.
-- Screen Reader
-  - Each checkbox is announced with its accessible name and role ("checkbox").
-  - The checked or unchecked state is announced and updates when toggled.
-  - A description associated with `aria-describedby` is announced (e.g., "You can unsubscribe at any time").
-  - A required checkbox is announced as required.
-  - The custom `role="checkbox"` control announces its role and `aria-checked` state just like the native input, and its visible box matches the announced state.
-- Validation
-  - Leaving the required checkbox unchecked (moving focus away) populates an inline error that is announced once via the `aria-live="polite"` container.
-  - Returning focus to the checkbox re-announces the error via `aria-describedby`.
-  - Focus is not moved when the error appears.
-  - Checking the box clears the error.

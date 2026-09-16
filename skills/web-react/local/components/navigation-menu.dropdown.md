@@ -199,22 +199,3 @@ const ACCOUNT_LINKS = [
   { label: "Settings", href: "/account/settings" },
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Tab reaches the invoking button.
-- Enter or Space opens the dropdown; focus remains on the button.
-- Tab moves from the button into the first item, then through each item, then out to the next focusable element on the page.
-- Tab from the last item closes the dropdown and moves to the next focusable element after it.
-- Shift+Tab from the first item closes the dropdown and moves focus back to the button.
-- Esc closes the dropdown and returns focus to the button.
-- If focus moves outside the button and list (Tab away or click elsewhere), the dropdown closes.
-
-Screen Reader
-- The button announces expanded/collapsed state via `aria-expanded`; the attribute is present and flips between `"true"` and `"false"` on every open and close.
-- The button is not announced as a menu; no `role="menu"` or `aria-haspopup` is present.
-- The button exposes an accessible name (visible text or `aria-label`/`aria-labelledby` on an icon-only avatar button).
-- When closed, the items are not reachable.
-- When open, the list and its items are reachable in reading and focus order.
-- Items announce as links and navigate correctly; the trailing action announces as a button and activates correctly.

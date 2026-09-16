@@ -275,19 +275,3 @@ const COUNTRIES = [
   "United States",
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Typing a character filters the listbox to matching options.
-- Arrow Down and Arrow Up move the active option and wrap at the ends.
-- Alt+Arrow Down opens the listbox without moving the active option.
-- Enter sets the input value to the active option and closes the listbox.
-- Esc closes the listbox when open, and clears the input when the listbox is already closed.
-- Home, End, Left, and Right move the text caret and do not move the active option.
-- Text editing (typing, selecting, and deleting) works normally while the listbox is open.
-
-Screen Reader
-- The input is announced as a combobox with its label and expanded/collapsed state (from `role="combobox"` + `aria-expanded`).
-- The listbox and its options are announced as a listbox and options.
-- The currently active option is conveyed as the user navigates (via `aria-activedescendant`).

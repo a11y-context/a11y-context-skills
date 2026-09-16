@@ -276,21 +276,3 @@ const MENUS = [
   { id: "view", label: "View", items: ["Zoom In", "Zoom Out", "Toggle Sidebar"] },
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Arrow Left and Arrow Right move focus across the top-level items and wrap at the ends.
-- Arrow Down, Enter, or Space on a top-level item opens its submenu and focuses the first command.
-- Within an open submenu, Home focuses the first command and End focuses the last command.
-- Within an open submenu, Arrow Right moves to the adjacent top-level menu and Arrow Left moves to the previous top-level menu, opening that menu.
-- Esc closes the open submenu and returns focus to its top-level item.
-- Enter or Space activates the focused command.
-- Type-ahead moves focus to the next item whose label starts with the typed character.
-- Tab enters and exits the menubar as a single stop, closing any open submenu on exit, and does not visit every top-level item and command.
-
-Screen Reader
-- The container is announced as a menu bar with its accessible name.
-- Each open submenu is announced as a menu, with a name matching its top-level item.
-- Top-level items and commands are announced as menu items.
-- A top-level item that opens a submenu announces that it has a submenu via `aria-haspopup`, and announces its expanded or collapsed state via `aria-expanded`.

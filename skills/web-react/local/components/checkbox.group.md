@@ -155,21 +155,3 @@ export function CheckboxGroupDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-
-- Keyboard
-  - Tab moves focus to each option in turn; each checkbox is its own tab stop.
-  - Space toggles the focused option, and multiple options can be checked at once.
-  - Arrow keys do not move focus between options (this is not a radio group).
-  - A visible focus indicator is present on the focused option.
-- Screen Reader
-  - Entering the group announces the group name (the `<legend>` or the `aria-labelledby` target).
-  - Each option is announced with its own label, role ("checkbox"), and checked or unchecked state.
-  - The group-level hint is announced when a checkbox receives focus.
-  - The `role="group"` set announces equivalently to the `<fieldset>` and `<legend>` set.
-- Validation
-  - Moving focus out of the group with no option selected populates one group-level error, announced once via `aria-live="polite"` (not once per option as focus passes through).
-  - While invalid, the group shows a visible non-color indication, and returning focus to a checkbox re-announces the error via `aria-describedby`.
-  - Focus is not moved when the error appears.
-  - Selecting an option clears the error.

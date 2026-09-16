@@ -81,17 +81,3 @@ export function Disclosure({ label, children }) {
   );
 }
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Tab lands on the trigger button.
-- A visible focus indicator appears on the trigger when it receives keyboard focus.
-- Enter toggles the region between shown and hidden.
-- Space toggles the region between shown and hidden.
-- When the region is hidden, focus cannot reach any content inside it.
-
-Screen Reader
-- The button announces its expanded or collapsed state via `aria-expanded`, which flips between `"true"` and `"false"` on every toggle.
-- The button name describes the content it controls.
-- When collapsed, the region content is not reachable in reading order.

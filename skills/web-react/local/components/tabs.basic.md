@@ -202,19 +202,3 @@ const SECTIONS = [
   { title: "Live TV", titles: ["Sci-Fi Classics 24/7", "Retro Toons", "World News"] },
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Tab moves focus into the tablist and lands on the selected tab, and pressing Tab again moves focus out of the tablist rather than to another tab.
-- When the visible panel begins with non-focusable content, Tab from the tablist moves focus to the panel itself.
-- Right Arrow and Left Arrow move focus between tabs and wrap at both ends.
-- Home moves focus to the first tab and End moves focus to the last tab.
-- Under automatic activation, arrowing to a tab immediately displays its panel; under manual activation, the panel changes only on Enter or Space.
-- The focused tab shows a visible focus indicator that is distinguishable from the selected-tab styling.
-
-Screen Reader
-- The container is announced as a tab list with its accessible name.
-- Each tab is announced as a tab with its name, selected state, and position in the set (e.g., "Shows, tab, two of three").
-- The newly displayed panel is announced with the activating tab's name and the tab panel role when focus moves into it.
-- Inactive panels are absent from the reading order, so reading through the page never encounters hidden panel content.

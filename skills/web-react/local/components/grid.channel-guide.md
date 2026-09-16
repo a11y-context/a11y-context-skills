@@ -430,24 +430,3 @@ const DEMO_CHANNELS = [
   },
 ];
 ```
-
-## Acceptance Checks
-- Entry/exit:
-  - Tab enters the grid to the last-focused cell.
-  - Tab/Shift+Tab exits the grid to the next/previous focusable element outside.
-- Keyboard navigation:
-  - Arrow keys move focus between cells (Left/Right/Up/Down).
-  - Home moves to the channel column for the current row.
-  - End moves to the last time column for the current row.
-  - Only the active cell is tabbable (`tabIndex=0`); all others are not (`tabIndex=-1`).
-- Semantics:
-  - Grid container uses `role="grid"` and has an accessible name.
-  - Time headers use `role="columnheader"` and are not focusable.
-  - Channel cells are row headers and are interactive.
-  - Program cells use `role="gridcell"` and are interactive.
-  - Rows expose `aria-rowindex` and cells expose `aria-colindex`, consistent with `aria-rowcount`/`aria-colcount`.
-- State:
-  - Exactly one channel row is marked as selected (currently playing), distinct from focus.
-  - Selecting/tuning updates the selected row without forcibly moving focus.
-- Pointer + keyboard continuity:
-  - Clicking a cell updates the roving "current cell" so arrow-key navigation continues from that cell.

@@ -92,17 +92,3 @@ const SORT_OPTIONS = [
   { value: "rating", label: "Highest rated" },
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Tab moves focus to the `<select>`, which shows a visible focus indicator.
-- Type-ahead and Arrow Up/Down move through the options natively.
-- Enter, Space, and Esc behave as the native control defines (opening, selecting, and dismissing).
-
-Screen Reader
-- The control is announced with its label and current value as a native select.
-- Options are announced as the user moves through the list.
-
-Form
-- Submitting the form sends the selected value under the field name `sortOrder`.

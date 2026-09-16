@@ -125,17 +125,3 @@ function AvatarExamples() {
   );
 }
 ```
-
-## Acceptance Checks
-- Structure
-  - Tab never lands on the avatar.
-  - A decorative avatar exposes no role and no accessible name.
-- Accessible naming
-  - A meaningful avatar's accessible name is the person's or entity's name.
-  - The name contains no file name and none of the words "avatar", "image", "photo", or "profile picture".
-  - Blocking the image so the fallback renders produces the same name the photograph produced.
-- Screen reader
-  - An avatar beside a visible name announces the person once, not twice.
-  - Initials inside a `role="img"` avatar are not announced as separate text.
-- Visual
-  - A glyph or monogram carrying meaning is distinguishable from its background, per `global.non-text-contrast`.

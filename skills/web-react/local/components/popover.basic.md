@@ -169,17 +169,3 @@ const DEFAULT_NOTES = [
   "Reminder: finish the S2 finale review before it leaves the service on Friday.",
 ];
 ```
-
-## Acceptance Checks
-- On open:
-  - Focus moves into the popover.
-  - The popover is announced with its accessible name.
-  - Background content remains reachable and interactive.
-
-- While open:
-  - Esc closes the popover, including when focus has moved out of the popover into the page.
-  - Tab and Shift+Tab move focus out of the popover into the page, confirming focus is not trapped.
-  - The trigger, the close control, and any focusable content within the popover show a visible focus indicator (e.g., a 2px solid outline) when focused.
-
-- On close:
-  - Focus returns to the invoking element.

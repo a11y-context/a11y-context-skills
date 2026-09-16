@@ -300,19 +300,3 @@ export function CustomSelectBasic() {
   );
 }
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Tab focuses the trigger button; Shift+Tab moves away normally.
-- Enter or Space on the trigger opens the listbox.
-- When open, Arrow Up/Down moves the active option.
-- Enter or Space selects the active option and closes the listbox.
-- Esc closes the listbox and leaves focus on the trigger.
-- Tab does not move through every option (no focus trap / no tabbing each option).
-
-Screen Reader
-- The trigger is announced with "has popup" and expanded/collapsed state (from aria-haspopup="listbox" + aria-expanded).
-- The listbox is announced as a listbox, and options are announced as options.
-- The selected option is conveyed via aria-selected="true".
-- The active option is conveyed while navigating (e.g., via aria-activedescendant).

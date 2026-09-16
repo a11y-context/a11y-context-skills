@@ -185,26 +185,3 @@ export function ReportProgressDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-
-- Structure
-  - The progress bar exposes the `progressbar` role.
-  - Tab never lands on the progress bar.
-  - The progress bar element has no text or interactive descendants; the label, value, and status text sit beside it.
-  - While a region is loading, that region carries `aria-busy="true"`, and the attribute is gone once loading finishes.
-- Accessible naming
-  - The progress bar has an accessible name describing what is progressing.
-  - When a visible label is present, its text is contained in the accessible name.
-- Screen reader
-  - A determinate bar reports its current value on demand, and the reported value matches any visible percentage.
-  - An indeterminate bar reports no value, and is not reported as 0%.
-  - Where a percentage would be misleading, the value is reported using `aria-valuetext` in the unit shown to the user.
-  - Advancing from 0 to complete produces announcements only at the defined status points and at completion, with no announcement per value change.
-  - Completion is announced exactly once, and is not duplicated between a visible message and a hidden one.
-- Visual
-  - The filled portion and the unfilled track meet at least 3:1 contrast against each other.
-  - With Windows High Contrast Mode active (or emulated via a browser dev-tool forced-colors setting), the filled portion remains distinguishable from the track.
-  - Every progress state that color conveys is still distinguishable in grayscale.
-  - With `prefers-reduced-motion: reduce` set, no looping animation runs, and an indeterminate bar remains visible as a static indicator.
-  - With that preference set, a determinate fill still advances as the value changes.

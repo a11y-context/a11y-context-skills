@@ -100,10 +100,3 @@ export function ToggleButtonDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-- Keyboard activation
-  - Tab to each control: a visible focus indicator is present.
-  - Press Space or Enter: the control activates/toggles.
-- Either the button's accessible name adjusts to reflect its state (preferred), or it remains constant and the value of `aria-pressed` reflects its state
-- Icons are not announced (decorative via `aria-hidden="true"`).

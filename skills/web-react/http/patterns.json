@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.24.0",
+  "catalog_revision": "0.25.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -1318,56 +1318,11 @@
       }
     },
     {
-      "id": "toast.action",
-      "title": "Toast with Action",
-      "pattern_type": "component",
-      "status": "beta",
-      "latest_version": "0.1.0",
-      "summary": "Transient status message carrying exactly one action, announced through a text-only live region while the visible message and its controls sit in a separately mounted landmark region, and dismissing itself only when that action is also reachable elsewhere in the interface.",
-      "aliases": [
-        "snackbar",
-        "actionable toast",
-        "toast with action",
-        "undo toast",
-        "action toast",
-        "flag",
-        "actionable notification",
-        "snackbar with undo"
-      ],
-      "tags": [
-        "toast",
-        "snackbar",
-        "notification",
-        "live-region",
-        "landmark",
-        "transient-message"
-      ],
-      "selection_excerpt": {
-        "use_when": [
-          "Use when a completed action needs a brief confirmation that also offers exactly one related action (e.g., \"Nightfall Protocol removed from My List\" with \"Undo\", \"Added to your watchlist\" with \"View\").",
-          "Use when that single action must stay available until the user takes it, without interrupting what they are doing."
-        ],
-        "do_not_use_when": [
-          "Do not use when the message carries no action beyond a dismiss control (use toast.basic).",
-          "Do not use when the message carries more than one action, requires acknowledgment before the user continues, or blocks interaction with the page behind it (use dialog.basic).",
-          "Do not use when the message is urgent and must interrupt the user immediately (use dialog.alert).",
-          "Do not use when the message reports a page-level or persistent condition rather than the outcome of an action the user just took (use banner.basic)."
-        ]
-      },
-      "variants": [],
-      "default_variant": null,
-      "source": {
-        "path": "components/toast.action.md",
-        "format": "markdown",
-        "frontmatter": true
-      }
-    },
-    {
       "id": "toast.basic",
       "title": "Toast",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.3.0",
       "summary": "Temporary, non-blocking status message carrying no action beyond an optional dismiss control, announced through a text-only live region and disappearing on its own.",
       "aliases": [
         "notification",
@@ -1393,7 +1348,7 @@
         "do_not_use_when": [
           "Do not use when the message offers an action the user can take, such as Undo, Retry, or View (use toast.action).",
           "Do not use when the message requires acknowledgment before the user continues, or blocks interaction with the page behind it (use dialog.basic).",
-          "Do not use when the message is urgent and must interrupt the user immediately (use dialog.alert).",
+          "Do not use when the message is critical and the user is expected to respond to it rather than merely be informed of it (use dialog.alert).",
           "Do not use when the message reports a page-level or persistent condition rather than the outcome of an action the user just took (use banner.basic)."
         ]
       },
@@ -1401,6 +1356,52 @@
       "default_variant": null,
       "source": {
         "path": "components/toast.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "toast.action",
+      "title": "Toast with Action",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.2.0",
+      "summary": "Transient status message carrying exactly one action, announced through a text-only live region while the message itself is a named landmark, and used only when that action is also performable elsewhere in the interface.",
+      "aliases": [
+        "snackbar",
+        "actionable toast",
+        "toast with action",
+        "undo toast",
+        "action toast",
+        "flag",
+        "actionable notification",
+        "snackbar with undo"
+      ],
+      "tags": [
+        "toast",
+        "snackbar",
+        "notification",
+        "live-region",
+        "landmark",
+        "transient-message"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a completed action needs a brief confirmation that also offers exactly one related action (e.g., \"Nightfall Protocol removed from My List\" with \"Undo\", \"Added to your watchlist\" with \"View\").",
+          "Use when that action is also performable elsewhere in the interface, so the message can disappear on its own without stranding the user."
+        ],
+        "do_not_use_when": [
+          "Do not use when the message is the only place the user can perform the action (use banner.basic).",
+          "Do not use when the message carries no action beyond a dismiss control (use toast.basic).",
+          "Do not use when the message carries more than one action, requires acknowledgment before the user continues, or blocks interaction with the page behind it (use dialog.basic).",
+          "Do not use when the message is critical and the user is expected to respond to it rather than merely be informed of it (use dialog.alert).",
+          "Do not use when the message reports a page-level or ongoing condition rather than the outcome of an action the user just took (use banner.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/toast.action.md",
         "format": "markdown",
         "frontmatter": true
       }

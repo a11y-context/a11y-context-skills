@@ -142,16 +142,3 @@ export function AccordionDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-
-- Keyboard
-  - Tab/Shift+Tab moves focus through accordion header buttons in order.
-  - Enter and Space toggle the associated panel visibility.
-  - Focus remains on the header button after toggling.
-  - If a panel is collapsed while focus is inside it (implementation choice), focus is moved to a sensible place (typically the controlling header).
-- Screen Reader
-  - Each header is announced as a button within a heading. 
-  - The expanded/collapsed state is announced via `aria-expanded`.
-  - If `role="region"` is used, the panel is announced with a name that matches the controlling header.
-  - Links inside expanded panels are reachable and operate normally.

@@ -92,14 +92,3 @@ export function LinkDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-- Tab to each link: link receives focus and has a visible focus indicator.
-- Press Enter on a focused link: navigation is triggered.
-- Press Space on a focused link: does not activate the link.
-- Inline link in body text is visually identifiable as a link (e.g., underlined).
-- Screen reader announces an understandable name for each link:
-  - Simple link: reads the visible text.
-  - Contextual link: includes the additional context (e.g., "Superflo Water Bottle Read more").
-  - New tab/window link: includes "opens in a new tab/window" in the accessible name, and the external-link icon is not announced.
-  - Icon-only link: announces the `aria-label`.

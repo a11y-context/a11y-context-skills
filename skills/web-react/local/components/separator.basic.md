@@ -80,18 +80,3 @@ export function SeparatorDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-
-Screen Reader
-- Reading through the page does not announce a separator for any line whose boundary is already carried by a heading, a sectioning element, or a list item.
-- Every line that is the only marker of a topic change is announced as a separator at the point the break occurs.
-- No separator is announced with a name, a label, or any inner text.
-
-Keyboard
-- Tabbing through the page never lands on a separator.
-
-Structure
-- No `<hr>` appears as a child of a `<ul>`, `<ol>`, or `<menu>` element.
-- Exposed vertical separators carry `aria-orientation="vertical"`.
-- With forced colors active, every separator that is still meant to be seen remains visible.

@@ -129,19 +129,3 @@ function BadgeExamples({ unread }) {
   );
 }
 ```
-
-## Acceptance Checks
-- Structure
-  - Tab never lands on the badge.
-  - The badge exposes no interactive role and no live-region role.
-- Accessible naming
-  - Reaching the host reports the badge's meaning as part of its accessible name.
-  - The name states what the value represents rather than the number alone.
-  - The text visible in the badge appears in the host control's accessible name, including a capped value such as "9+".
-  - Changing the value changes the host's accessible name, and removing the badge removes its claim.
-- Screen reader
-  - Changing the badge's value announces nothing while focus is elsewhere.
-  - A badge rendered only as a dot still reports what it means.
-- Visual
-  - The badge's meaning is perceivable in grayscale, per `global.use-of-color`.
-  - With forced colors active, the badge remains distinguishable from its host, per `global.forced-colors`.

@@ -245,19 +245,3 @@ const GENRES = [
   { value: "sci-fi", label: "Sci-Fi" },
 ];
 ```
-
-## Acceptance Checks
-
-Keyboard
-- Arrow Down and Arrow Up move the active option, and the active option shows a visible focus indicator.
-- Home moves the active option to the first option; End moves it to the last option.
-- In a multi-select listbox, Space toggles the selected state of the active option without moving focus.
-- In a multi-select listbox, Shift+Arrow Up and Shift+Arrow Down extend the selection to the adjacent option.
-- In a multi-select listbox, Ctrl+A (Cmd+A on macOS) selects all options.
-- Typing a printable character moves the active option to the next option whose label begins with the typed characters.
-- No option requires Ctrl or Cmd plus click to be selected.
-
-Screen Reader
-- The container is announced as a listbox, and as multi-selectable when `aria-multiselectable="true"` is set.
-- Each option is announced as an option together with its selected state (from `aria-selected`).
-- Moving the active option announces the newly active option and its selected state.

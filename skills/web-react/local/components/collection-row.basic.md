@@ -160,20 +160,3 @@ const ITEMS = [
   { id: "8", title: "Item Eight", meta: "$34.00", href: "#" },
 ];
 ```
-
-## Acceptance Checks
-- Structure:
-  - A visible heading is present.
-  - The row uses `ul` / `li` semantics.
-  - Each item is a single link wrapping its content.
-- Accessible naming:
-  - Each link exposes a programmatic name that includes the visible title.
-  - If metadata is present, it contributes to the accessible name.
-  - Each link exposes position context (e.g., "3 of 18") once via `aria-describedby`.
-- Keyboard:
-  - Tab order reaches Previous and Next buttons without forcing navigation through hidden items.
-  - Activating Next moves focus to the first newly visible item.
-  - Activating Previous moves focus to the last newly visible item.
-  - Tabbing from the last visible item moves to the Next button (not to hidden items).
-- Visual focus:
-  - All interactive elements (item links and paging buttons) have a visible focus indicator.

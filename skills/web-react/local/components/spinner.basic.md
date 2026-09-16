@@ -200,24 +200,3 @@ export function PanelLoadingDemo() {
 
 const TITLES = ["Nightfall Protocol", "The Quiet Coast", "Ember and Ash"];
 ```
-
-## Acceptance Checks
-
-- Structure
-  - The spinner graphic exposes no role and no accessible name.
-  - Tab never lands on the spinner.
-  - While a region is loading it carries `aria-busy="true"`, and the attribute is gone once content arrives.
-  - The live region is present in the DOM before the spinner appears, not mounted alongside it.
-- Accessible naming
-  - The host control or region names what is loading.
-  - Adding the spinner does not change the host's accessible name.
-  - A control whose label changes while busy reports the changed label.
-- Screen reader
-  - Starting the wait announces what is being waited on, exactly once.
-  - Ending the wait announces the outcome, on both success and failure.
-  - Nothing is announced by the graphic itself when the live region is removed from the page.
-  - A busy control remains reachable and reports its disabled state without focus moving elsewhere.
-- Visual
-  - With `prefers-reduced-motion: reduce` set, no animation runs and visible text names the work in the graphic's place.
-  - The spinner is distinguishable from its background, per `global.non-text-contrast`.
-  - With Windows High Contrast Mode active, the spinner or its replacement text remains visible.

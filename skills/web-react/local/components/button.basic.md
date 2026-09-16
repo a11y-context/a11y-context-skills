@@ -79,13 +79,3 @@ export function ButtonBasicDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-- Tab to the button: a visible focus indicator is present.
-- Press Space or Enter: the button activates.
-- Text-only button: screen reader announces the visible label.
-- Icon+text button: screen reader announces the text label (icon is not redundantly announced).
-- Icon-only button: screen reader announces the `aria-label` (e.g., "Open settings").
-- Disabled button:
-  - Cannot be activated by click/keyboard.
-  - Is not focusable when `disabled` is set.

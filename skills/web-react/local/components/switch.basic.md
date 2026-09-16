@@ -130,16 +130,3 @@ export function SwitchDemo() {
   );
 }
 ```
-
-## Acceptance Checks
-
-- Keyboard
-  - Tab moves focus to each switch.
-  - Space toggles state.
-  - Enter toggles state.
-  - Focus remains on the switch after toggling.
-- Screen Reader
-  - Switch is announced with its accessible name and role ("switch").
-  - State is announced correctly as on/off.
-  - Group label is announced when using `fieldset/legend` or `role="group"`.
-  - Additional descriptive text is announced when associated via `aria-describedby`.
