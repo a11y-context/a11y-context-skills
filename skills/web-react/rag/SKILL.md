@@ -42,8 +42,10 @@ Retrieve queries for all components before generating any code. If a component r
 From the retrieved chunks for each component, extract and apply:
 - **Must Haves** — non-negotiable WCAG 2.2 AA requirements; implement all of them
 - **Don'ts** — hard constraints; never produce code that violates them
-- **Golden Pattern** — the implementation reference; match its structure and ARIA usage, adapted to the project's conventions
 - **Customizable** — optional aspects that may be adjusted
+- **Golden Pattern** — the implementation reference; match its structure and ARIA usage, adapted to the project's conventions
+
+They appear in the pattern in that order: what you must do, what you must never do, where you have room, then the reference implementation.
 
 If retrieval quality is poor (chunks don't cover a selected pattern's Must Haves), widen `topK` or refine the query before falling back to native semantics. Do not invent pattern guidance.
 
