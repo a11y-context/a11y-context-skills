@@ -51,13 +51,17 @@ If retrieval quality is poor (chunks don't cover a selected pattern's Must Haves
 
 ## Step 3 — Retrieve Foundations (Always)
 
-On every UI task, also query for the Foundations ruleset (index terms: "Foundations", "global rules", "focus states", "landmarks", "headings", "contrast"). Foundations rules are not only page-level; many are component-specific. Each rule carries a `scope` field (`utility`, `page`, `layout`, `component`, `style`). Apply the Must Haves of every rule whose scope matches the current change:
+On every UI task, also query for the Foundations ruleset (index terms: "Foundations", "global rules", "focus states", "landmarks", "headings", "contrast"). Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
 
-- Building or modifying a full page or route → `page`, `layout`, `utility`, `style`
-- Adding or modifying interactive components only → `component`, `utility`, `style`
-- Both → all scopes
+`scope` exists for one job, and it is the opposite of filtering. It tells you **what not to go and repair in code you were not asked to change.** The buckets are a structural scale, identical on every stack:
 
-Do not introduce unrelated changes to satisfy rules outside the task scope.
+- `screen` — the document, route, or screen as a whole
+- `layout` — the structural frame inside a screen: landmarks, heading hierarchy, regions
+- `component` — an individual element and its own presentation
+
+So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing landmark or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
+
+Apply all `Must Haves` from every rule that bears on the code you are writing.
 
 ---
 
@@ -71,7 +75,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 
 ## Retrieval Parameters
 
-- Always scope to the `web/react` stack. It is the only populated stack.
+- Always scope to the `web/react` stack. This skill covers React only. Other stacks exist in the corpus and are not interchangeable with it.
 - If the user explicitly requests a different stack, state that it is not yet available and proceed with `web/react` equivalents, or stop if the task cannot be adapted.
 - If the RAG endpoint is unreachable, report it and stop. Do not silently fall back.
 
@@ -80,7 +84,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 ## Guardrails
 
 ### Retrieval
-- Query only for the components in the current task; retrieve Foundations once per session.
+- Query only for the components in the current task. Retrieve Foundations once per session, and again if a later request brings in a new component type or the results have left your context.
 - Prefer precision over recall — retrieve the pattern that matches, not adjacent similar ones.
 
 ### Design System & Scope

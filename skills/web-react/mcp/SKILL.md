@@ -47,15 +47,21 @@ If a call fails, report the error and stop. Do not invent pattern guidance or fa
 
 ---
 
-## Step 3 — Retrieve Foundations (Always)
+## Step 3 — Retrieve Foundations (Always, in full)
 
-Call `get_foundations()` on every UI task — Foundations rules are not only page-level; many are component-specific. Each rule carries a `scope` field (`utility`, `page`, `layout`, `component`, `style`). Apply the Must Haves of every rule whose scope matches the current change:
+Call `get_foundations()` on every UI task. Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
 
-- Building or modifying a full page or route → `page`, `layout`, `utility`, `style`
-- Adding or modifying interactive components only → `component`, `utility`, `style`
-- Both → all scopes
+`scope` exists for one job, and it is the opposite of filtering. It tells you **what not to go and repair in code you were not asked to change.** The buckets are a structural scale, identical on every stack:
 
-Do not introduce unrelated changes to satisfy rules outside the task scope. Call `get_foundations()` at most once per session.
+- `screen` — the document, route, or screen as a whole
+- `layout` — the structural frame inside a screen: landmarks, heading hierarchy, regions
+- `component` — an individual element and its own presentation
+
+So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing landmark or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
+
+Apply all `Must Haves` from every rule that bears on the code you are writing.
+
+Call it again if a later request in this session brings in a new component type, or if the response is no longer in your context. Otherwise once per session is enough. Do not pass the optional `scope` argument: it narrows what the server returns, and narrowing retrieval is not what `scope` is for.
 
 ---
 
@@ -69,7 +75,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 
 ## Retrieval Parameters
 
-- Always use the `web/react` stack. It is the only populated stack.
+- Always use the `web/react` stack. This skill covers React only. Other stacks exist in the corpus and are not interchangeable with it.
 - If the user explicitly requests a different stack, state that it is not yet available and proceed with `web/react` equivalents, or stop if the task cannot be adapted.
 - If the MCP server is unreachable, report it and stop. Do not attempt alternative retrieval mechanisms.
 
@@ -79,7 +85,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 
 ### Retrieval
 - Select with `list_patterns`; retrieve only the patterns needed for the current task.
-- Call `get_pattern` once per selected id, and `get_foundations` once, per session.
+- Call `get_pattern` once per selected id, and `get_foundations` once, per session. Call either again if a later request returns to that component, brings in a new one, or the response has left your context.
 
 ### Design System & Scope
 - If the project uses a component library or design system, preserve it.

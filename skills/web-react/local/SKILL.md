@@ -54,18 +54,21 @@ If a file is missing, note it and continue with native HTML semantics and any ap
 
 ---
 
-## Step 3 — Apply Global Rules (Always retrieve; apply by scope)
+## Step 3 — Apply Global Rules (Always retrieve them all; scope bounds repairs, not reading)
 
-Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules are not only page-level — many are component-specific. Each rule has a `scope` field; apply the Must Haves of every rule whose scope matches the current change:
+Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
 
-**Scope selection guide:**
-- Building or modifying a full page or route → apply rules scoped to `page`, `layout`, `utility`
-- Adding or modifying interactive components only → apply rules scoped to `component`, `utility`, `style`
-- Both → apply all rules
+`scope` exists for one job, and it is the opposite of filtering. It tells you **what not to go and repair in code you were not asked to change.** The buckets are a structural scale, identical on every stack:
 
-Apply all `Must Haves` from matching rules. Do not introduce unrelated changes to satisfy rules outside the task scope.
+- `screen` — the document, route, or screen as a whole
+- `layout` — the structural frame inside a screen: landmarks, heading hierarchy, regions
+- `component` — an individual element and its own presentation
 
-Read at most **once** per session.
+So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing landmark or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
+
+Apply all `Must Haves` from every rule that bears on the code you are writing.
+
+Re-read it if a later request in this session brings in a new component type, or if its contents are no longer in your context. Otherwise once per session is enough.
 
 ---
 
@@ -82,7 +85,7 @@ Apply all `must_haves` from read patterns and applicable global rules. Treat `go
 ### Retrieval
 - Use the local catalog at `${CLAUDE_SKILL_DIR}/patterns.json` for component selection.
 - Read only the pattern files needed for the current task.
-- Read each pattern file at most once per session. Read `global_rules.md` at most once per session.
+- Read each pattern file once, and re-read it only if a later request returns to that component or its contents have left your context. The same applies to `global_rules.md`.
 
 ### Design System & Scope
 - If the project uses a component library or design system, preserve it.
