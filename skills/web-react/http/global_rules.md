@@ -32,6 +32,7 @@ scope: [utility, component, style]
 
 ### Don'ts
 - Do not hide offscreen text using `display: none` or `visibility: hidden` when it is needed for an accessible name.
+- Do not add `aria-label` or `aria-labelledby` to an element whose accessible name is carried by offscreen text. Both override the element's text content, so the offscreen text is never used.
 - Do not leave focusable content inside a visually hidden container that stays hidden while focused. A keyboard user reaches it with nothing visible on screen, and the focus indicator appears to vanish.
   - A visually hidden control that returns to the visible layout on focus is the acceptable case, such as a skip link. Pair `.sr-only` with the `:focus` restoration below.
 
@@ -65,11 +66,6 @@ For a visually hidden element that must become visible when it receives focus, s
 }
 ```
 
-### Acceptance Checks
-- Where offscreen text is implemented, it is not overridden by `aria-labelledby` or `aria-label`.
-- Tabbing through the page never lands on a control that is invisible at the moment it holds focus.
-- Any visually hidden control intended to be reachable, such as a skip link, becomes visible when it receives keyboard focus.
-
 ---
 
 ## Rule: Page Title
@@ -87,10 +83,6 @@ scope: [page]
 
 ### Don'ts
 - Do not leave the page title as a generic placeholder across routes.
-
-### Acceptance Checks
-- Browser tab title changes appropriately when navigating to the page.
-- The browser tab title includes the page name and then the site name, with a clear separator between.
 
 ---
 
@@ -117,10 +109,6 @@ scope: [page, layout]
 ### Don'ts
 - Do not use multiple `main` landmarks on the same page.
 - Do not wrap the `header`, `footer`, or `aside` inside the `main` landmark, or vice-versa: these should all be siblings.
-
-### Acceptance Checks
-- There is one `main` landmark present on every page.
-- If there is site or app navigation present, this is contained inside a `nav` landmark, which is contained inside a `header` landmark, sibling to the `main`.
 
 ---
 
@@ -149,15 +137,7 @@ scope: [page, layout]
 - Do not use heading elements only to make text look larger or bolder.
 - Do not skip heading levels when moving deeper into the hierarchy, such as going from `<h2>` directly to `<h4>`, unless closing a subsection and returning to a higher-level section.
 - Do not use non-heading elements as visual-only section titles when they function as headings.
-
-### Acceptance Checks
-- Each page has one clear primary heading that identifies the main topic of the page.
-- The heading structure forms a logical outline of the content.
-- When heading depth increases, levels are not skipped.
-- Headings are descriptive of the content they introduce.
-- Footer link-group titles, when present, are marked up as `<h2>` headings.
-- Text that appears visually to be a heading is programmatically marked up as a heading.
-- No empty heading elements are present.
+- Do not render an empty heading element.
 
 ---
 
@@ -178,11 +158,6 @@ scope: [page, layout, component, style]
 ### Don'ts
 - Do not use color combinations for text that fall below 4.5:1 for normal text or 3:1 for large text.
 - Do not rely on a background image alone to establish the contrast behind text.
-
-### Acceptance Checks
-- Normal text meets at least 4.5:1 contrast against its background.
-- Large-scale text meets at least 3:1 contrast against its background.
-- With forced colors active, all text remains legible, including text that sits over a background image.
 
 ---
 
@@ -216,11 +191,6 @@ A boundary painted as a background fill needs a real border under forced colors,
 }
 ```
 
-### Acceptance Checks
-- Visible UI controls and authored state indicators needed for perception meet at least 3:1 contrast against adjacent colors.
-- Meaningful icons and other non-text graphics needed for understanding meet at least 3:1 contrast against adjacent colors.
-- With forced colors active, every boundary and indicator that was carried by a background fill is still perceivable.
-
 ---
 
 ## Rule: Use of Color
@@ -240,10 +210,6 @@ scope: [component, style]
 ### Don'ts
 - Do not signal selection, validity, current-ness, or availability by color alone.
 - Do not satisfy this rule with a second color treatment, such as a darker tint or a colored background swap, which fails under forced colors exactly as the first one does.
-
-### Acceptance Checks
-- Every meaningful state the component renders is perceivable without relying on color (verify in grayscale).
-- With forced colors active, every meaningful state is still distinguishable, and the cue carrying it is not a background tint.
 
 ---
 
@@ -298,13 +264,6 @@ Opting out, for the narrow case where the authored color is the content itself:
 }
 ```
 
-### Acceptance Checks
-- With Windows High Contrast Mode active, or emulated via a browser dev-tool forced-colors setting, every meaningful boundary, state, and indicator remains visible.
-- Elements that were distinguished by background color alone remain distinguishable from their surroundings.
-- No meaningful element becomes invisible once shadows are removed.
-- Colors inside `forced-colors` blocks come from the system keyword palette rather than being hard-coded.
-- `forced-color-adjust: none` appears only where the authored color is itself the information.
-
 ---
 
 ## Rule: Focus Not Obscured
@@ -321,9 +280,6 @@ scope: [component, layout, style]
 ### Don'ts
 - Do not let a sticky or floating region overlap and fully conceal the element that currently has keyboard focus.
 
-### Acceptance Checks
-- Tabbing or arrowing to any focusable element leaves at least part of that element and its focus indicator visible, not fully covered by sticky or overlapping content.
-
 ---
 
 ## Rule: Focus States
@@ -334,7 +290,7 @@ scope: [component, style]
 ```
 
 ### Must Haves
-- Each keyboard-focusable user interface component must have a visible focus indicator when it receives keyboard focus.
+- Each keyboard-focusable user interface component must have a visible focus indicator when it receives keyboard focus, and for as long as it retains focus.
 - The focus indicator must have a contrast ratio of at least 3:1 against adjacent colors.
 
 ### Customizable 
@@ -384,14 +340,6 @@ Required forced-colors override — pair with either primary style above. `Highl
   }
 }
 ```
-
-### Acceptance Checks
-- Every keyboard-focusable component shows a visible focus indicator when reached by keyboard navigation.
-- The visible focus indicator remains present while the component has keyboard focus.
-- The focus indicator has at least 3:1 contrast against adjacent colors.
-- If a custom focus style is used, it is clearly visible and does not make focus harder to perceive than the default browser or platform behavior.
-- Hover alone is not the only visible cue for the currently focused element.
-- With Windows High Contrast Mode active (or emulated via a browser dev-tool forced-colors setting), the focus indicator remains clearly visible using the system `Highlight` color.
 
 ---
 
@@ -451,14 +399,6 @@ Moving focus before removal, deferred so the replacement is focusable by the tim
 requestAnimationFrame(() => returnTarget.current?.focus());
 ```
 
-### Acceptance Checks
-- With `prefers-reduced-motion: reduce` set, no element repeats an animation, travels across the screen, or scales.
-- With that preference set, all content that would have animated in is present and readable, and nothing has been removed.
-- Dismissing or collapsing a component that holds focus leaves focus on a stable, visible element, never on the document body.
-- No focusable control has `aria-hidden="true"` on itself or on any ancestor.
-- Content that has been dismissed is absent from the accessibility tree as soon as it is unavailable, not after its exit animation completes.
-- Every change communicated by movement is also available without perceiving that movement.
-
 ---
 
 ## Rule: Icons
@@ -477,6 +417,7 @@ An icon is meaningful when the user needs it to understand or operate the interf
   - To supply text, place the equivalent text beside the icon, visually hidden when it should not be seen (see `global.sr-only`), and hide the icon.
 - For an icon-only control, put the accessible name on the `<button>` or `<a>` and leave the graphic decorative.
 - Name what the control does or what the icon means, not what it depicts (e.g., "Add to my list", not "Plus sign").
+- Controls that differ only by their icon have different accessible names (e.g., "Edit profile" and "Edit cover photo", not "Edit" on both).
 - A meaningful icon carries the non-text contrast requirement in `global.non-text-contrast`. A decorative one does not.
 
 ### Don'ts
@@ -520,11 +461,3 @@ Meaningful standalone icon, where no text nearby carries the status. Either rout
   <span className="sr-only">Downloaded</span>
 </span>
 ```
-
-### Acceptance Checks
-- Icons the user does not need, and icons whose meaning is already in adjacent text, are absent from the screen reader's output.
-- Every icon the user does need is announced with its meaning.
-- No control is announced with its name repeated.
-- Icon-only controls are announced with a name describing the action, not the shape of the glyph.
-- Controls that differ only by their icon are announced with different names.
-- No announcement contains an icon font glyph, a private use area character, or an emoji name standing in for a meaning.
