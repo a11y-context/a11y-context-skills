@@ -46,8 +46,10 @@ Issue all fetches in parallel before generating any code — do not retrieve one
 From each fetched page, extract and apply:
 - **Must Haves** — non-negotiable WCAG 2.2 AA requirements; implement all of them
 - **Don'ts** — hard constraints; never produce code that violates them
-- **Golden Pattern** — use as the implementation reference; match its structure and ARIA usage, adapted to the project's conventions
 - **Customizable** — optional aspects that may be adjusted
+- **Golden Pattern** — use as the implementation reference; match its structure and ARIA usage, adapted to the project's conventions
+
+They appear in the pattern file in that order: what you must do, what you must never do, where you have room, then the reference implementation.
 
 If a fetch returns a 404 or fails, note it and continue with native HTML semantics and any applicable global rules. Do not invent pattern guidance.
 
