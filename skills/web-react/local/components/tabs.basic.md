@@ -69,6 +69,11 @@ This pattern is same-page view switching: the tabs and their panels live in one 
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the tabs and around the tabpanel when it is focusable.
   - The focus indicator on a focused tab is distinguishable from the selected-tab styling.
 
+## Don'ts
+- Do not leave a tabpanel visible while its tab has `aria-selected="false"` (and vice versa).
+- Do not derive arrow-key movement from the selected tab's index instead of the focused tab's index.
+- Do not move focus off the activated tab. Activation leaves focus on that tab and does not move it into the tabpanel, open a window, submit a form, or navigate (WCAG 3.2.1 On Focus).
+
 ## Customizable
 - Activation model. Automatic activation (as in the golden pattern) is appropriate when the panels are displayed without noticeable latency. Choose manual activation when activating a tab fetches panel data, navigates or refreshes the page, starts media playback, discards in-progress work, or renders slowly enough to be perceptible.
 - Tab count and label length. Keep labels to 1-2 words and the set small enough to fit one unwrapped row; design systems converge on 3 to 5 tabs, with 8 a practical ceiling. When one section matters more than the rest, place it first and select it by default.
@@ -77,11 +82,6 @@ This pattern is same-page view switching: the tabs and their panels live in one 
 - Unavailable tabs. A tab that cannot currently be selected may carry `aria-disabled="true"` and stay in the arrow-key sequence so screen reader users can discover it, or be omitted from the set entirely. Do not use the native `disabled` attribute, which removes the tab from the arrow-key sequence.
 - The tab base element: `<button role="tab">` (as in the golden pattern) or a non-native element with `role="tab"` plus hand-rolled focus and keyboard wiring.
 - Collapsing to `accordion.basic` below a viewport breakpoint is at the engineer's discretion, as long as each layout implements its own pattern completely and focus is preserved across the swap.
-
-## Don'ts
-- Do not leave a tabpanel visible while its tab has `aria-selected="false"` (and vice versa).
-- Do not derive arrow-key movement from the selected tab's index instead of the focused tab's index.
-- Do not move focus off the activated tab. Activation leaves focus on that tab and does not move it into the tabpanel, open a window, submit a form, or navigate (WCAG 3.2.1 On Focus).
 
 ## Golden Pattern
 

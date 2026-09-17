@@ -63,6 +63,17 @@ This is the interactive component that shares the `separator` role with the stat
 - A step button is visible whenever the splitter can move in its direction. Only at the end of the range, where it has nothing left to do, is it removed or disabled.
 - The splitter's pointer target measures at least 24 by 24 CSS pixels, counting the visible line plus the padding around it. The painted line itself may be thinner.
 
+## Don'ts
+- Do not build the splitter as a plain `<div>` with pointer handlers only. Without `tabindex="0"`, `role="separator"`, and the arrow keys it cannot be operated by keyboard at all.
+- Do not omit `aria-valuenow`, and do not let it go stale while the splitter moves. It is the only thing reporting the splitter's position.
+- Do not put the splitter's accessible name in text inside it, which is not announced because the role has presentational children.
+- Do not let a step button disappear while it holds focus without moving focus first. Focus falls to the document body and the user loses their place in the page (see `global.motion`).
+- Do not reveal the step buttons only on hover or focus. Touch input has no hover, which puts them out of reach of the pointer users this requirement exists to serve, and a control that is absent from the DOM until hover is outside the tab order as well.
+- Do not size the panes as a share of the whole container and add the splitter and its controls on top. The total then exceeds the container, and a control pushed past a clipped edge is focusable while invisible, which is the stranded-focusable failure in `global.sr-only`. Size the panes against the space that remains after the gutter.
+- Do not assume a screen reader user can drive the splitter the way their screen reader offers to. VoiceOver maps a focusable separator to the native macOS splitter and offers to move it with VO plus the arrow keys, but WebKit does not deliver those key presses to the page, so the interaction it advertises does nothing. The plain arrow keys work, and are what the user falls back to.
+- Do not try to correct that announcement with `aria-describedby`. A description is announced in addition to the screen reader's own interaction hint, not instead of it, so the user receives the working instruction and the broken one together.
+- Do not detect double-click with a hand-rolled timer. The native `dblclick` event uses the interval the user set in their operating system, while an author-written threshold is a time limit the content imposes and the user cannot adjust.
+
 ## Customizable
 - Continuous or stepped positions. A splitter may move to any value in its range, or to a set number of stops (e.g., left pane only, both panes, right pane only). The keyboard model is the same either way; only the size of a step changes.
 - Whether a step button that cannot act at the current position is removed or is marked `aria-disabled="true"` and left in place. Removing it keeps the controls honest about what is available and requires the focus move above; leaving it in place holds the layout steady and needs no focus handling.
@@ -75,17 +86,6 @@ This is the interactive component that shares the `separator` role with the stat
 - The arrow-key step size is at the engineer's discretion, as long as the full range is reachable in a reasonable number of presses.
 - The value scale. The 0 to 100 percentage scale carries no units and needs no extra attributes. A scale in pixels or another unit is acceptable, in which case set `aria-valuemin` and `aria-valuemax` to match and add `aria-valuetext` so the announced value carries its unit (e.g., "320 pixels").
 - Whether the collapsed state is also reachable from a separate control, such as a panel header button, in addition to Enter on the splitter.
-
-## Don'ts
-- Do not build the splitter as a plain `<div>` with pointer handlers only. Without `tabindex="0"`, `role="separator"`, and the arrow keys it cannot be operated by keyboard at all.
-- Do not omit `aria-valuenow`, and do not let it go stale while the splitter moves. It is the only thing reporting the splitter's position.
-- Do not put the splitter's accessible name in text inside it, which is not announced because the role has presentational children.
-- Do not let a step button disappear while it holds focus without moving focus first. Focus falls to the document body and the user loses their place in the page (see `global.motion`).
-- Do not reveal the step buttons only on hover or focus. Touch input has no hover, which puts them out of reach of the pointer users this requirement exists to serve, and a control that is absent from the DOM until hover is outside the tab order as well.
-- Do not size the panes as a share of the whole container and add the splitter and its controls on top. The total then exceeds the container, and a control pushed past a clipped edge is focusable while invisible, which is the stranded-focusable failure in `global.sr-only`. Size the panes against the space that remains after the gutter.
-- Do not assume a screen reader user can drive the splitter the way their screen reader offers to. VoiceOver maps a focusable separator to the native macOS splitter and offers to move it with VO plus the arrow keys, but WebKit does not deliver those key presses to the page, so the interaction it advertises does nothing. The plain arrow keys work, and are what the user falls back to.
-- Do not try to correct that announcement with `aria-describedby`. A description is announced in addition to the screen reader's own interaction hint, not instead of it, so the user receives the working instruction and the broken one together.
-- Do not detect double-click with a hand-rolled timer. The native `dblclick` event uses the interval the user set in their operating system, while an author-written threshold is a time limit the content imposes and the user cannot adjust.
 
 ## Golden Pattern
 

@@ -43,6 +43,13 @@ The non-modal counterpart to `dialog.basic`. The defining contrast is the absenc
 - The close control has an accessible name that describes its purpose or action (e.g., `aria-label="Close"`).
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the trigger, the close control, and any focusable content within the popover.
 
+## Don'ts
+- Do not set `aria-modal="true"` on a popover; it falsely tells assistive technology the background is inert.
+- Do not trap focus within the popover.
+- Do not apply `inert` to, or otherwise block, the background content.
+- Do not omit focus restoration; closing the popover must return focus to the element that invoked it.
+- Do not bind Esc only to a container-level handler on the popover surface; once focus leaves the untrapped popover, that handler stops firing and Esc no longer closes.
+
 ## Customizable
 - Delivery is at the engineer's discretion as long as the non-modal contract above holds. Acceptable options:
   - A native `<dialog>` element shown non-modally.
@@ -51,13 +58,6 @@ The non-modal counterpart to `dialog.basic`. The defining contrast is the absenc
 - Positioning is at the engineer's discretion. A popover is normally anchored to its trigger (CSS anchor positioning, the `popover` attribute's anchoring, or a positioning library), but a fixed-position panel is acceptable as long as the relationship to the trigger stays clear and focus still moves in on open.
 - Whether an outside click also dismisses the popover is optional. The `popover` attribute provides it automatically; a `role="dialog"` div may add it via an outside-pointer handler, or omit it.
 - Initial focus may land on the popover container (`tabindex="-1"`) so the accessible name is announced before the user Tabs to the first control, or on the first interactive control when the user's next action is to type or select. Either is acceptable.
-
-## Don'ts
-- Do not set `aria-modal="true"` on a popover; it falsely tells assistive technology the background is inert.
-- Do not trap focus within the popover.
-- Do not apply `inert` to, or otherwise block, the background content.
-- Do not omit focus restoration; closing the popover must return focus to the element that invoked it.
-- Do not bind Esc only to a container-level handler on the popover surface; once focus leaves the untrapped popover, that handler stops firing and Esc no longer closes.
 
 ## Golden Pattern
 

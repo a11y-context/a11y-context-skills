@@ -56,16 +56,16 @@ This pattern is a permanently visible selection list. There is no trigger button
 - Scripting keeps the active option scrolled into view.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the active option.
 
-## Customizable
-- Roving tabindex and `aria-activedescendant` are equal alternatives. Choose one and apply it consistently.
-- For single-select, selection may follow focus (each Arrow move updates `aria-selected`) or require an explicit Enter or Space to commit. Selection-follows-focus suits short lists where each change is inexpensive; explicit selection suits lists where moving through options should not trigger side effects.
-- The multi-select keyboard model above (Space to toggle, Shift+Arrow to extend, Ctrl+A to select all) may be extended with Shift+Home, Shift+End, and Ctrl+Space, provided Space toggle and Arrow navigation remain intact.
-
 ## Don'ts
 - Do not place interactive elements (links, buttons, checkboxes, inputs) inside `role="option"` elements.
 - Do not require Ctrl or Cmd plus click as the only way to select multiple options.
 - Do not use `role="menu"` or `role="menuitem"` for a selection list.
 - Do not leave `aria-selected` out of sync with the visible selection state.
+
+## Customizable
+- Roving tabindex and `aria-activedescendant` are equal alternatives. Choose one and apply it consistently.
+- For single-select, selection may follow focus (each Arrow move updates `aria-selected`) or require an explicit Enter or Space to commit. Selection-follows-focus suits short lists where each change is inexpensive; explicit selection suits lists where moving through options should not trigger side effects.
+- The multi-select keyboard model above (Space to toggle, Shift+Arrow to extend, Ctrl+A to select all) may be extended with Shift+Home, Shift+End, and Ctrl+Space, provided Space toggle and Arrow navigation remain intact.
 
 ## Golden Pattern
 

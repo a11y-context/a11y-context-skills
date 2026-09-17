@@ -35,14 +35,14 @@ Native button that triggers an action. Supports text-only, icon+text, and icon-o
 - If the action is unavailable, disable the button using the native `disabled` attribute. (It becomes unfocusable and non-interactive.)
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the button.
 
-## Customizable
-- No accessibility-relevant variations beyond the Must Haves above.
-
 ## Don'ts
 - Do not build a button out of a `<div>` or `<span>` with `role="button"` unless you absolutely must; native `<button>` is the baseline.
 - Do not create icon-only buttons without an accessible name (no unlabeled icons). 
 - Do not use `aria-label` that conflicts with (or is wildly different from) the visible label text. Accessible names should at least begin with the visible label.
 - Do not hide focus outlines without providing a strong custom focus style.
+
+## Customizable
+- No accessibility-relevant variations beyond the Must Haves above.
 
 ## Golden Pattern
 

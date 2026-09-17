@@ -62,19 +62,19 @@ An editable text input that filters a listbox of options as the user types; uses
 ### Dismissal
 - Esc closes the listbox if it is open, or clears the input if the listbox is already closed.
 
-## Customizable
-- `aria-autocomplete` may be `"none"`, `"list"` (the default for this pattern), or `"both"`.
-  - With `"both"`, an inline completion string is inserted and selected after the caret; this can be confusing with some screen readers, so test it with assistive technology before shipping.
-- Selection behavior may be manual (the active option is committed only on Enter) or automatic (the first suggestion is pre-selected as the user types). Choose one and test with keyboard and screen readers.
-- An optional trigger button that opens the listbox may be included; give it `tabindex="-1"` so it does not add a stop in the tab order, and keep the input as the accessible combobox.
-- Whether the list filters to matches or auto-selects the first match is at the engineer's discretion, as long as the announced options reflect what is visible.
-
 ## Don'ts
 - Do not capture the keys used for text editing (typing, caret movement, selection, deletion); the input must behave as a normal text field.
 - Do not move DOM focus into the options; it breaks native text editing. Track the active option with `aria-activedescendant` instead.
 - Do not use `role="menu"` or `role="menuitem"` for the options; use `role="listbox"` and `role="option"`.
 - Do not forget to scroll the active option into view when it changes.
 - Do not leave the listbox visible while `aria-expanded="false"` (and vice versa).
+
+## Customizable
+- `aria-autocomplete` may be `"none"`, `"list"` (the default for this pattern), or `"both"`.
+  - With `"both"`, an inline completion string is inserted and selected after the caret; this can be confusing with some screen readers, so test it with assistive technology before shipping.
+- Selection behavior may be manual (the active option is committed only on Enter) or automatic (the first suggestion is pre-selected as the user types). Choose one and test with keyboard and screen readers.
+- An optional trigger button that opens the listbox may be included; give it `tabindex="-1"` so it does not add a stop in the tab order, and keep the input as the accessible combobox.
+- Whether the list filters to matches or auto-selects the first match is at the engineer's discretion, as long as the announced options reflect what is visible.
 
 ## Golden Pattern
 

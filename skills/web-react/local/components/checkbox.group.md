@@ -44,12 +44,6 @@ Each option in the group is an individual checkbox that follows `checkbox.basic`
   - While invalid, give the group a visible non-color indication (e.g., a red outline plus error text beginning with "Error:").
   - Do not move focus when the error appears; submit-time focus handling is a form-level concern (see `form.error-summary`).
 
-## Customizable
-- The grouping mechanism: `<fieldset>` with `<legend>` (most robust), or `role="group"` with `aria-labelledby` (choose this when `<legend>` styling or layout is the blocker). Both convey the group name; pick one and verify with a screen reader.
-- Per-option visual styling, using the same ladder as `checkbox.basic` (`accent-color`, `appearance: none`, or a visually hidden input with a painted box), as long as each input stays focusable and operable.
-- Whether the options are laid out in a column, grid, or inline, as long as the reading and focus order is sensible.
-- Whether a "Select all" affordance is offered. (A tri-state "Select all" that reflects a mix of checked children is `checkbox.tristate`.)
-
 ## Don'ts
 - Do not rely on a nearby heading or paragraph to label the set without a programmatic association (a `<legend>`, or `aria-labelledby` on a `role="group"` container).
 - Do not use `role="radiogroup"`, `role="radio"`, or arrow-key roving focus for checkboxes; checkboxes allow multiple selections, and each is a tab stop.
@@ -58,6 +52,12 @@ Each option in the group is an individual checkbox that follows `checkbox.basic`
 - Do not rely on `aria-describedby` on the `<fieldset>` or `role="group"` container to convey the hint or error. NVDA does not announce a group-level description when the first control in the group is a checkbox, and descriptions on the container are dropped in browse mode. Put the reference on each `<input>`.
 - Do not wrap a single, self-sufficient checkbox in a `<fieldset>` and `<legend>` (that belongs to `checkbox.basic`).
 - Do not combine unrelated questions in one group; one question per `<fieldset>` or `role="group"`.
+
+## Customizable
+- The grouping mechanism: `<fieldset>` with `<legend>` (most robust), or `role="group"` with `aria-labelledby` (choose this when `<legend>` styling or layout is the blocker). Both convey the group name; pick one and verify with a screen reader.
+- Per-option visual styling, using the same ladder as `checkbox.basic` (`accent-color`, `appearance: none`, or a visually hidden input with a painted box), as long as each input stays focusable and operable.
+- Whether the options are laid out in a column, grid, or inline, as long as the reading and focus order is sensible.
+- Whether a "Select all" affordance is offered. (A tri-state "Select all" that reflects a mix of checked children is `checkbox.tristate`.)
 
 ## Golden Pattern
 

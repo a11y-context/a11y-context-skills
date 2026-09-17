@@ -38,16 +38,16 @@ A button that shows and hides an associated content region; uses `aria-expanded`
 - The button omits `aria-haspopup`.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the trigger.
 
-## Customizable
-- The region may take `role="region"` with an accessible name, recommended when the region contains headings; avoid `role="region"` when it would create landmark proliferation (e.g., more than roughly 6 disclosures on one page).
-- Enter and Space both toggle the region by virtue of the native `<button>`; no extra key handling is required.
-- A disclosure indicator (e.g., a caret) is decorative and marked `aria-hidden="true"`.
-
 ## Don'ts
 - Do not use `role="menu"` on the region.
 - Do not add `aria-haspopup` to the button.
 - Do not put the expanded state on the region instead of the trigger.
 - Do not leave the region visible while `aria-expanded="false"` (and vice versa).
+
+## Customizable
+- The region may take `role="region"` with an accessible name, recommended when the region contains headings; avoid `role="region"` when it would create landmark proliferation (e.g., more than roughly 6 disclosures on one page).
+- Enter and Space both toggle the region by virtue of the native `<button>`; no extra key handling is required.
+- A disclosure indicator (e.g., a caret) is decorative and marked `aria-hidden="true"`.
 
 ## Golden Pattern
 

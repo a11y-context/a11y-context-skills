@@ -32,12 +32,6 @@ Every requirement here follows from one question: **is the boundary already in t
 - A separator that is exposed is a graphical object the reader needs, and carries the contrast requirement in `global.non-text-contrast`. A decorative one does not, because it conveys nothing that needs to be perceived.
 - A separator drawn as a `background-color` fill rather than a `border` is restated under forced colors, where author backgrounds are replaced and the line disappears entirely. See `global.forced-colors`.
 
-## Customizable
-- Drawing the line as a CSS `border` on an element that is already in the markup, instead of adding an `<hr>`. This is equivalent to the decorative case and adds no node at all, which is often the cleaner result when the separator is purely visual.
-- Using `role="separator"` on another element where the host element's content model does not permit `<hr>`. Between list items this is the only correct route, and it takes the form `<li role="separator">`.
-- Thickness, color, length, inset, and surrounding spacing are all at the engineer's discretion, subject to the contrast requirement above when the separator is exposed. `<hr>` is fully styleable; reset its default border and margins first (e.g., `border: none; border-top: 1px solid; margin: 0;`).
-- Whether a section break also carries a visible label (e.g., "Today" above a group of notifications). When it does, that label is a heading and the line beside it is decorative, because the heading already communicates the break.
-
 ## Don'ts
 - Do not use `<hr>` as a child of `<ul>`, `<ol>`, or `<menu>`. Those elements accept only `<li>` and script-supporting elements, so an `<hr>` between list items is invalid markup. Use `<li role="separator">` instead.
 - Do not make a separator focusable. It has no interactive behavior, so a `tabindex` produces a tab stop that does nothing.
@@ -45,6 +39,12 @@ Every requirement here follows from one question: **is the boundary already in t
 - Do not give a decorative separator an accessible name. It produces an announcement carrying no information.
 - Do not repeat separators to create rhythm or spacing. Each exposed one is announced, and spacing is a style concern.
 - Do not rely on a separator alone to convey a grouping. Even when exposed it reports a boundary without saying what the groups are, so a reader who needs to know what changed still needs a heading or a labelled region.
+
+## Customizable
+- Drawing the line as a CSS `border` on an element that is already in the markup, instead of adding an `<hr>`. This is equivalent to the decorative case and adds no node at all, which is often the cleaner result when the separator is purely visual.
+- Using `role="separator"` on another element where the host element's content model does not permit `<hr>`. Between list items this is the only correct route, and it takes the form `<li role="separator">`.
+- Thickness, color, length, inset, and surrounding spacing are all at the engineer's discretion, subject to the contrast requirement above when the separator is exposed. `<hr>` is fully styleable; reset its default border and margins first (e.g., `border: none; border-top: 1px solid; margin: 0;`).
+- Whether a section break also carries a visible label (e.g., "Today" above a group of notifications). When it does, that label is a heading and the line beside it is decorative, because the heading already communicates the break.
 
 ## Golden Pattern
 

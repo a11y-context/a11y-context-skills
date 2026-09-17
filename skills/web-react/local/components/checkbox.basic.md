@@ -42,16 +42,6 @@ Native `<input type="checkbox">` is accessible out of the box and is the preferr
 - If the choice is unavailable, disable the input with the native `disabled` attribute.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the control.
 
-## Customizable
-- The base element: a native `<input type="checkbox">` (preferred), or a custom `role="checkbox"` element only when a native input cannot be used. Native elements reduce the keyboard, focus, and state wiring that must be hand-rolled.
-- Visual styling, in increasing order of control, while keeping a real native input:
-  - Recolor only: set `accent-color` on the input to apply a brand color with no markup change.
-  - Full control: set `appearance: none` on the input and style the element directly (border, background, check indicator), driving the appearance from the `:checked` state, and keep a visible `:focus-visible` indicator.
-  - Older equivalent: visually hide the native input with the `.sr-only` utility (`global.sr-only`) and draw a styled box from the associated `<label>`. The input must remain focusable and operable.
-- Whether the label wraps the input or is associated by `for` / `htmlFor`.
-- Whether the box is rendered before or after the label text, as long as the two remain programmatically associated.
-- Whether a hint or description is shown under the label (associate it with `aria-describedby` when present).
-
 ## Don'ts
 - Do not build a checkbox out of a `<div>` or `<span>` with a click handler unless a native input cannot be used; the native `<input type="checkbox">` is the baseline.
 - Do not convey the checked state by appearance alone (e.g., a filled box) without the native `checked` property or `aria-checked`.
@@ -63,6 +53,16 @@ Native `<input type="checkbox">` is accessible out of the box and is the preferr
 - Do not indicate the required state or an error with color alone; include text (e.g., "Required", "Error:") or an icon carrying an `aria-label`.
 - Do not move focus to the checkbox when its inline error appears; populating the `aria-live` container is what announces it.
 - Do not use a single checkbox for a set of related options that answer one question (that is a grouped pattern).
+
+## Customizable
+- The base element: a native `<input type="checkbox">` (preferred), or a custom `role="checkbox"` element only when a native input cannot be used. Native elements reduce the keyboard, focus, and state wiring that must be hand-rolled.
+- Visual styling, in increasing order of control, while keeping a real native input:
+  - Recolor only: set `accent-color` on the input to apply a brand color with no markup change.
+  - Full control: set `appearance: none` on the input and style the element directly (border, background, check indicator), driving the appearance from the `:checked` state, and keep a visible `:focus-visible` indicator.
+  - Older equivalent: visually hide the native input with the `.sr-only` utility (`global.sr-only`) and draw a styled box from the associated `<label>`. The input must remain focusable and operable.
+- Whether the label wraps the input or is associated by `for` / `htmlFor`.
+- Whether the box is rendered before or after the label text, as long as the two remain programmatically associated.
+- Whether a hint or description is shown under the label (associate it with `aria-describedby` when present).
 
 ## Golden Pattern
 

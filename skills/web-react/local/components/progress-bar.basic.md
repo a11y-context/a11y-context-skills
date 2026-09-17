@@ -65,14 +65,6 @@ The value is reported by the system, never set by the user. Shape does not decid
 - Under `prefers-reduced-motion: reduce`, the progress bar runs no looping animation, such as a barber-pole stripe or a fill that sweeps back and forth, and stays on screen as a static indicator of ongoing work.
   - Movement driven by the value itself is exempt. A fill that advances as progress is made, including in occasional discrete jumps, continues under this preference.
 
-## Customizable
-- The base element. The native `<progress>` element is preferred when feasible: it carries the role, the value, and forced-colors behavior without additional code. Substitute `<div role="progressbar">` when the design requires visual treatment the native element cannot express, since `<progress>` is styled through three vendor-specific pseudo-element systems (`::-webkit-progress-bar`, `::-webkit-progress-value`, and `::-moz-progress-bar`) and offers no control over its indeterminate animation. Either implementation requires the naming, value, contrast, and announcement contract above.
-- How reduced motion is honored. A CSS `@media (prefers-reduced-motion: reduce)` block setting `animation: none` and a JavaScript `matchMedia` check that skips the animated style are equally acceptable. The golden pattern uses `matchMedia` so the decision is visible in the component.
-- Whether the numeric value is also displayed as visible text. When it is, the same value is reflected in `aria-valuenow` or `aria-valuetext`.
-- Whether status messages exist at all. A progress bar with no status messages and no completion state (an indeterminate bar that is simply removed when work finishes) needs no live region.
-- How often `aria-valuenow` updates is at the engineer's discretion, as long as announcements stay limited to discrete points. The attribute is read on demand by assistive technology rather than announced, so updating it frequently is not itself disruptive.
-- Bar thickness, corner treatment, placement relative to the label, and fill animation easing.
-
 ## Don'ts
 - Do not give the progress bar element `aria-live`, and do not nest it inside a live region. Every value change is then announced, interrupting the user's reading and navigation.
   - A visible status message adjacent to the bar may be a live region, as long as it updates at discrete points rather than on every tick.
@@ -83,6 +75,14 @@ The value is reported by the system, never set by the user. Shape does not decid
 - Do not leave `aria-busy="true"` on a region after its content has finished loading.
 - Do not distinguish the fill from the track by background color alone with no `forced-colors` override.
 - Do not announce completion twice by pairing a visible status message with a visually hidden one carrying the same text.
+
+## Customizable
+- The base element. The native `<progress>` element is preferred when feasible: it carries the role, the value, and forced-colors behavior without additional code. Substitute `<div role="progressbar">` when the design requires visual treatment the native element cannot express, since `<progress>` is styled through three vendor-specific pseudo-element systems (`::-webkit-progress-bar`, `::-webkit-progress-value`, and `::-moz-progress-bar`) and offers no control over its indeterminate animation. Either implementation requires the naming, value, contrast, and announcement contract above.
+- How reduced motion is honored. A CSS `@media (prefers-reduced-motion: reduce)` block setting `animation: none` and a JavaScript `matchMedia` check that skips the animated style are equally acceptable. The golden pattern uses `matchMedia` so the decision is visible in the component.
+- Whether the numeric value is also displayed as visible text. When it is, the same value is reflected in `aria-valuenow` or `aria-valuetext`.
+- Whether status messages exist at all. A progress bar with no status messages and no completion state (an indeterminate bar that is simply removed when work finishes) needs no live region.
+- How often `aria-valuenow` updates is at the engineer's discretion, as long as announcements stay limited to discrete points. The attribute is read on demand by assistive technology rather than announced, so updating it frequently is not itself disruptive.
+- Bar thickness, corner treatment, placement relative to the label, and fill animation easing.
 
 ## Golden Pattern
 

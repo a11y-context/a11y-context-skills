@@ -66,17 +66,17 @@ This pattern is rarely appropriate on the web. Almost every horizontal bar of li
 - Esc closes the current submenu and returns focus to its top-level item.
 - The menubar closes any open submenu when focus moves outside the menubar (e.g., via Tab or an outside pointer click), so no submenu stays visible while its top-level item is at `aria-expanded="false"`.
 
-## Customizable
-- Stateful commands may use `role="menuitemcheckbox"` (with `aria-checked="true|false"`) or `role="menuitemradio"` (with `aria-checked="true|false"` within a grouped set) instead of plain `role="menuitem"`.
-- Roving tabindex is the default focus model. `aria-activedescendant` on the menubar is an acceptable alternative, with the caveat that its assistive-technology support is weaker than roving tabindex and it must be tested against target screen readers.
-- Submenu depth is at the engineer's discretion; nested submenus are permitted as long as each nested `role="menu"` carries an accessible name and the same keyboard contract applies at every level.
-
 ## Don'ts
 - Do not use a menubar for site or app navigation; a horizontal bar of links is navigation and must use `navigation-menu.basic`, not menu roles.
 - Do not place links (`<a href>`) inside a menubar or its submenus; menubar children are commands, not destinations.
 - Do not half-implement the keyboard contract; a menubar without arrow-key traversal, submenu open/close, and type-ahead is broken for keyboard and screen reader users.
 - Do not make every top-level item and command tabbable; use roving tabindex so Tab enters and exits the menubar as a single stop.
 - Do not leave a submenu visible while its top-level item has `aria-expanded="false"` (and vice versa).
+
+## Customizable
+- Stateful commands may use `role="menuitemcheckbox"` (with `aria-checked="true|false"`) or `role="menuitemradio"` (with `aria-checked="true|false"` within a grouped set) instead of plain `role="menuitem"`.
+- Roving tabindex is the default focus model. `aria-activedescendant` on the menubar is an acceptable alternative, with the caveat that its assistive-technology support is weaker than roving tabindex and it must be tested against target screen readers.
+- Submenu depth is at the engineer's discretion; nested submenus are permitted as long as each nested `role="menu"` carries an accessible name and the same keyboard contract applies at every level.
 
 ## Golden Pattern
 

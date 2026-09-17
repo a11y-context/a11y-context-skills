@@ -58,17 +58,17 @@ Interactive channel guide grid with one Tab stop and arrow-key navigation across
   - When focus leaves and re-enters the grid, focus lands on the last focused cell.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) on each focusable element, such as grid cells and grid headers.
 
-## Customizable
-- Support a "currently playing" channel:
-  - Exactly one channel row is marked as selected (separate from focus).
-  - Selecting/tuning changes the selected row, but focus stays with the user's navigation.
-
 ## Don'ts
 - Do not make every cell a Tab stop.
 - Do not require Tab to move between cells.
 - Do not mix multiple interactive controls inside a cell in this basic pattern.
 - Do not conflate "selected channel" with "focused cell".
 - Do not use `<button role="gridcell">` or `<button role="columnheader">`.
+
+## Customizable
+- Support a "currently playing" channel:
+  - Exactly one channel row is marked as selected (separate from focus).
+  - Selecting/tuning changes the selected row, but focus stays with the user's navigation.
 
 ## Golden Pattern
 

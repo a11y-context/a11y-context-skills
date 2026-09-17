@@ -32,13 +32,6 @@ Image, initials, or glyph standing for a person or entity, where the accessible 
 - A rendering that is not an `<img>` uses `role="img"` named with `aria-label` or `aria-labelledby`.
   - Descendants of `role="img"` are presentational. Initials or an inline `<svg>` inside it are not exposed, so the name comes from the attribute.
 
-## Customizable
-- Which element renders the artwork. An `<img>`, an inline `<svg>`, a `<span>` of initials, and an element carrying a CSS `background-image` are all acceptable. An `<img>` is named with `alt`; every other rendering carries `role="img"` and an `aria-label`.
-- Where the name lives on a rendering that is not an `<img>`. `role="img"` with `aria-label` is preferred. When the artwork must stay out of the accessibility tree entirely, `aria-hidden="true"` on the artwork with the name supplied as visually hidden text (see `global.sr-only`) is an acceptable substitute.
-- The fallback chain. A photograph, a monogram, a generic glyph, or a color derived from the identifier, in any order, as long as the name is the same at every branch.
-- Which form of the name is used, whether a display name, a full name, or a username, as long as it matches the form used for the same person elsewhere in the view.
-- Shape, size, border treatment, and how the image is cropped.
-
 ## Don'ts
 - Do not make the avatar focusable or place it in the page tab sequence.
 - Do not use a file name, "avatar", "image", "photo", or "profile picture" as the accessible name.
@@ -46,6 +39,13 @@ Image, initials, or glyph standing for a person or entity, where the accessible 
 - Do not pair `alt=""` with an `aria-label`. Supplying a name by any mechanism restores the implicit image role, and the avatar stops being decorative.
 - Do not omit `alt` on an `<img>` avatar. An absent `alt` leaves the image unnamed rather than decorative.
 - Do not name only the branch that usually renders, leaving the fallback anonymous.
+
+## Customizable
+- Which element renders the artwork. An `<img>`, an inline `<svg>`, a `<span>` of initials, and an element carrying a CSS `background-image` are all acceptable. An `<img>` is named with `alt`; every other rendering carries `role="img"` and an `aria-label`.
+- Where the name lives on a rendering that is not an `<img>`. `role="img"` with `aria-label` is preferred. When the artwork must stay out of the accessibility tree entirely, `aria-hidden="true"` on the artwork with the name supplied as visually hidden text (see `global.sr-only`) is an acceptable substitute.
+- The fallback chain. A photograph, a monogram, a generic glyph, or a color derived from the identifier, in any order, as long as the name is the same at every branch.
+- Which form of the name is used, whether a display name, a full name, or a username, as long as it matches the form used for the same person elsewhere in the view.
+- Shape, size, border treatment, and how the image is cropped.
 
 ## Golden Pattern
 

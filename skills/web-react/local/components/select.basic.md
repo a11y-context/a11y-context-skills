@@ -66,13 +66,6 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
   - The user can perceive which option is currently active when navigating (`aria-activedescendant` recommended).
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the button that opens the select, and all option elements inside.
 
-## Customizable
-- Whether Arrow Up/Down changes selection while closed vs opens then moves active option.
-  - Choose one behavior and test with keyboard + screen readers.
-- Whether the listbox closes immediately after selection (usually yes for single-select).
-- Visual styling (caret icon, borders, spacing, animation), as long as it does not replace accessible naming.
-- Optional grouping or separators, as long as listbox/option semantics remain correct and options remain navigable.
-
 ## Don'ts
 - Do not omit the visually hidden native `<select>` when this control participates in form submission or should support autofill.
 - Do not implement the trigger as a non-interactive element (e.g., `<div>`) without button semantics.
@@ -80,6 +73,13 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
 - Do not make each option tabbable (avoid forcing users to Tab through options).
 - Do not leave the listbox visible while `aria-expanded="false"` (and vice versa).
 - Do not allow the custom UI and hidden `<select>` to get out of sync (options/value must match).
+
+## Customizable
+- Whether Arrow Up/Down changes selection while closed vs opens then moves active option.
+  - Choose one behavior and test with keyboard + screen readers.
+- Whether the listbox closes immediately after selection (usually yes for single-select).
+- Visual styling (caret icon, borders, spacing, animation), as long as it does not replace accessible naming.
+- Optional grouping or separators, as long as listbox/option semantics remain correct and options remain navigable.
 
 ## Golden Pattern
 

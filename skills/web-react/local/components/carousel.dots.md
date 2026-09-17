@@ -35,13 +35,13 @@ Horizontally-advancing carousel (aka hero or marquee carousel) with dot navigati
 - Pause when keyboard focus enters the carousel region.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) on each focusable element, including the previous/next buttons, pause button, and dots.
  
-## Customizable
-- The contents of each slide are customizable. However, if they contain a title, then these should usually be `<h2>`.
-
 ## Don'ts
 - Do not auto-advance the slides without a visible Pause/Play control.
 - Do not ignore `prefers-reduced-motion`.
 - Do not keep moving while the user is interacting (focus inside carousel must pause autoplay).
+
+## Customizable
+- The contents of each slide are customizable. However, if they contain a title, then these should usually be `<h2>`.
 
 ## Golden Pattern
 

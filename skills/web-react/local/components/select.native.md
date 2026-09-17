@@ -36,17 +36,17 @@ This is the first-choice control for single selection. Reach for a custom `selec
 - Style the control with CSS only (`appearance` and related properties).
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the `<select>` control.
 
-## Customizable
-- The modern customizable-select CSS (`appearance: base-select` with the picker pseudo-elements and the `:open` state) may be used where browser support allows, with the classic approach of styling only the closed control as the fallback where support is absent.
-- `<optgroup>` may be used to group related options under visible group labels.
-- The arrow indicator styling is at the engineer's discretion as long as the control keeps its 3:1 non-text contrast and native behavior.
-
 ## Don'ts
 - Do not rebuild the select with `<div>` elements and scripting when a native `<select>` suffices.
 - Do not remove the native element in favor of a custom widget for styling reasons alone.
 - Do not replace native behavior with scripting.
 - Do not use the `multiple` attribute (native multi-select tests very poorly).
 - Do not hide the label.
+
+## Customizable
+- The modern customizable-select CSS (`appearance: base-select` with the picker pseudo-elements and the `:open` state) may be used where browser support allows, with the classic approach of styling only the closed control as the fallback where support is absent.
+- `<optgroup>` may be used to group related options under visible group labels.
+- The arrow indicator styling is at the engineer's discretion as long as the control keeps its 3:1 non-text contrast and native behavior.
 
 ## Golden Pattern
 

@@ -39,17 +39,17 @@ Two- or three-state button that toggles between pressed and not pressed using `a
 - If the control is a formatting toggle in a toolbar (e.g., Bold/Italic/Underline), use aria-pressed="true|false" to reflect whether formatting is currently applied.
 - In this toolbar case, keep the accessible name stable (e.g., "Bold") and do not rename it to "Remove bold" or "Unbold".
 
-## Customizable
-- For most toggles (non-toolbar), you may express "next action" via:
-  - Visible text (preferred when space allows), and/or
-  - `aria-label` / `aria-labelledby` (required for icon-only).
-- You may add context to the accessible name when multiple similar toggles exist (e.g., "Mute Trailer", "Unmute Trailer") using `aria-label`, `aria-labelledby`, or offscreen text.
-
 ## Don'ts
 -   Do not use `aria-pressed` for non-toolbar toggles if you are already changing the accessible name to the next action (avoid conflicting models like "Unmute, pressed").
 - Do not leave `aria-pressed` incorrect, stale, or always `"true"` / always `"false"` when you choose the toolbar approach.
 - Do not ship icon-only toggles without an accessible name (`aria-label` or `aria-labelledby`).
 - Do not put state only in the icon (screen reader users must get state via the accessible name change or `aria-pressed`, depending on strategy).
+
+## Customizable
+- For most toggles (non-toolbar), you may express "next action" via:
+  - Visible text (preferred when space allows), and/or
+  - `aria-label` / `aria-labelledby` (required for icon-only).
+- You may add context to the accessible name when multiple similar toggles exist (e.g., "Mute Trailer", "Unmute Trailer") using `aria-label`, `aria-labelledby`, or offscreen text.
 
 ## Golden Pattern
 

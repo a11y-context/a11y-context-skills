@@ -40,9 +40,6 @@ Native link for navigation using `<a href>`. Supports optional context in the ac
   - a visual affordance: append an external-link icon at the end of the visible label.
  - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the link.
 
-## Customizable
-- No accessibility-relevant variations beyond the Must Haves above.
-
 ## Don'ts
 - Do not style a link to look like plain text when it appears inline within a paragraph; inline links must be visually obvious (e.g., underlined).
 - Do not rely on color alone to indicate a link.
@@ -50,6 +47,9 @@ Native link for navigation using `<a href>`. Supports optional context in the ac
 - Do not use `role="link"` on non-link elements unless you cannot use a native `<a href>`. Native links provide browser behaviors ARIA cannot add automatically.
   - Do not use `role="link"` unless you also implement the missing link behaviors (focus, Enter activation, navigation, and expected link affordances).
 - Do not permit Space to activate links.
+
+## Customizable
+- No accessibility-relevant variations beyond the Must Haves above.
 
 ## Golden Pattern
 

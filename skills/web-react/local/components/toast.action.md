@@ -67,14 +67,6 @@ This component is recommended only where no other pattern fits. Its barriers are
 - Activating the action control dismisses the message.
 - Esc dismisses the message when focus is inside it.
 
-## Customizable
-- Whether more than one message can be on screen at once. One message is the default, and it carries `role="region"` itself. When several can stack, move the role to a single container that wraps them all, give that container the accessible name, and drop the per-message role, so the page still exposes one landmark rather than one per message. Each message keeps its own timer and its own single action. Pausing the whole container is the simpler default, since it keeps a stacked message from expiring while the user reads the one above it.
-- The keyboard route to the action. Screen reader users reach a named landmark through landmark navigation with no additional code. Sighted keyboard users have no equivalent, so binding F6 to move focus to the action control and Shift+F6 to move back is recommended, and is the binding React Aria and Adobe Spectrum both ship. F6 supplements the landmark rather than replacing it, and it is not discoverable on its own, which is why the action's availability elsewhere carries the accessibility weight rather than the key binding.
-- The announcing element. `role="status"` is the default. A plain element carrying `aria-live="polite"` and `aria-atomic="true"` is equivalent, since those are the implicit values of `role="status"`.
-- Where the announcing element lives. A visually hidden element separate from the message, and the message's own text when the action control is a sibling of that text rather than a descendant of it, are equally acceptable. Both keep interactive content out of the live region.
-- The dismiss delay. Systems that set one converge between 5 and 10 seconds: Adobe Spectrum enforces a 5 second floor, Microsoft Fluent uses 7 seconds, and Nord and Elastic EUI default to 10. Shopify Polaris sets 10 seconds specifically for a message carrying an action. 10 seconds is a reasonable default for this pattern, and a shorter delay is at the engineer's discretion as long as the message can be read and the action reached.
-- Visual placement (e.g., bottom-center, top-right), and the transition used to show and hide a message, subject to `global.motion`.
-
 ## Don'ts
 - Do not give the message `role="alert"`, `role="status"`, `role="alertdialog"`, or `aria-live`, and do not place the action control inside the announcing element. Interactive content in a live region is announced as flat text, so the button is spoken as part of the message with nothing marking it activatable.
 - Do not expose more than one landmark for messages. When several stack, the container carries the role and the messages do not, or the rotor's landmark list fills with duplicates of one name.
@@ -82,6 +74,14 @@ This component is recommended only where no other pattern fits. Its barriers are
 - Do not mount or unmount the announcing element along with the message. A live region that is not in the DOM before its text changes does not announce reliably.
 - Do not announce the message text alone when an action is present. An action the user is never told about is unreachable in practice.
 - Do not restart a paused timer from its full duration when the pointer leaves. A user who reads a message slowly is then given less time than one who never looked at it.
+
+## Customizable
+- Whether more than one message can be on screen at once. One message is the default, and it carries `role="region"` itself. When several can stack, move the role to a single container that wraps them all, give that container the accessible name, and drop the per-message role, so the page still exposes one landmark rather than one per message. Each message keeps its own timer and its own single action. Pausing the whole container is the simpler default, since it keeps a stacked message from expiring while the user reads the one above it.
+- The keyboard route to the action. Screen reader users reach a named landmark through landmark navigation with no additional code. Sighted keyboard users have no equivalent, so binding F6 to move focus to the action control and Shift+F6 to move back is recommended, and is the binding React Aria and Adobe Spectrum both ship. F6 supplements the landmark rather than replacing it, and it is not discoverable on its own, which is why the action's availability elsewhere carries the accessibility weight rather than the key binding.
+- The announcing element. `role="status"` is the default. A plain element carrying `aria-live="polite"` and `aria-atomic="true"` is equivalent, since those are the implicit values of `role="status"`.
+- Where the announcing element lives. A visually hidden element separate from the message, and the message's own text when the action control is a sibling of that text rather than a descendant of it, are equally acceptable. Both keep interactive content out of the live region.
+- The dismiss delay. Systems that set one converge between 5 and 10 seconds: Adobe Spectrum enforces a 5 second floor, Microsoft Fluent uses 7 seconds, and Nord and Elastic EUI default to 10. Shopify Polaris sets 10 seconds specifically for a message carrying an action. 10 seconds is a reasonable default for this pattern, and a shorter delay is at the engineer's discretion as long as the message can be read and the action reached.
+- Visual placement (e.g., bottom-center, top-right), and the transition used to show and hide a message, subject to `global.motion`.
 
 ## Golden Pattern
 

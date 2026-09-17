@@ -71,11 +71,6 @@ A button that opens a menu of commands using `role="menu"` and `role="menuitem"`
 - Tab moves focus out of the menu and closes it.
 - An outside click or focus loss closes the menu.
 
-## Customizable
-- Roving tabindex is the default focus model. `aria-activedescendant` on the menu container is an acceptable alternative when DOM focus must remain on a single owner element. It has weaker screen-reader support, and the active-item visual style must be painted manually because no element holds DOM focus.
-- Items that toggle a setting in place may use `role="menuitemcheckbox"` or `role="menuitemradio"` with `aria-checked` instead of `role="menuitem"`.
-- Submenus may be supported: Arrow Right on a parent item opens its submenu and Arrow Left closes the submenu and returns focus to the parent item.
-
 ## Don'ts
 - Do not use `role="menu"` for navigation or for items that are links.
 - Do not place links, headings, form inputs, or arbitrary content inside a `role="menu"` container.
@@ -83,6 +78,11 @@ A button that opens a menu of commands using `role="menu"` and `role="menuitem"`
 - Do not forget to return focus to the trigger when the menu closes via activation or Esc.
 - Do not leave the menu visible while `aria-expanded="false"` (and vice versa).
 - Do not reach for `aria-activedescendant` when roving tabindex is simpler for the case at hand.
+
+## Customizable
+- Roving tabindex is the default focus model. `aria-activedescendant` on the menu container is an acceptable alternative when DOM focus must remain on a single owner element. It has weaker screen-reader support, and the active-item visual style must be painted manually because no element holds DOM focus.
+- Items that toggle a setting in place may use `role="menuitemcheckbox"` or `role="menuitemradio"` with `aria-checked` instead of `role="menuitem"`.
+- Submenus may be supported: Arrow Right on a parent item opens its submenu and Arrow Left closes the submenu and returns focus to the parent item.
 
 ## Golden Pattern
 

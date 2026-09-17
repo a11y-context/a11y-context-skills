@@ -47,14 +47,14 @@ Horizontal product shelf with a heading, list semantics, and Prev/Next paging th
   - Activating Previous moves focus to the last newly revealed item (right-most visible link).
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) on each item and button.
  
-## Customizable
-- In the golden pattern, we wrap the component in a container with `role="group"` and `aria-labelledby` pointing to the heading ID. This is optional. Engineers may choose instead to use a `<section>` or `role="region"`, or to eschew the container entirely.
-- Items must at minimum have some "title" text that gives each item a name, but they are not required to also have metadata, like a price, or rating, etc.
-
 ## Don'ts
 - Do not let Tab from the last visible item move into out-of-view items; it must reach the Next button instead.
 - Do not split the item into multiple separate interactive elements (one item = one link).
 - Do not rely solely on poster art or imagery to communicate the name of each item.
+
+## Customizable
+- In the golden pattern, we wrap the component in a container with `role="group"` and `aria-labelledby` pointing to the heading ID. This is optional. Engineers may choose instead to use a `<section>` or `role="region"`, or to eschew the container entirely.
+- Items must at minimum have some "title" text that gives each item a name, but they are not required to also have metadata, like a price, or rating, etc.
 
 ## Golden Pattern
 

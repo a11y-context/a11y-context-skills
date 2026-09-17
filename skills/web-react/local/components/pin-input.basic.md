@@ -60,13 +60,6 @@ The segmented boxes are a visual treatment, not a structure: the field is one in
 - The field occupies one stop in the tab order.
 - Indicate the box at the caret with a visible current-position indicator, distinct from the field's own focus indicator (see `global.focus-states`).
 
-## Customizable
-- A code delivered out of band and a stored PIN are the same control and differ only in `autocomplete`: out-of-band codes carry `autocomplete="one-time-code"`, stored PINs omit it. Every other requirement above applies to both.
-- The expected digit count may live in the accessible name instead of the description (e.g., a label reading "Parental control PIN, 4 digits"). A visible description is the better default, because it gives sighted users the same information the box count already gives them.
-- Masking is at the engineer's discretion as long as the user can reveal the value. An unmasked field needs no reveal control; a masked field requires one.
-- Group sizes and the separator glyph are at the engineer's discretion, as long as the separator stays inside the `aria-hidden` container and out of the value.
-- Layout is horizontal in this pattern, so Left and Right are the caret keys. A vertical arrangement would make Up and Down the expected keys and is outside the scope of this pattern.
-
 ## Don'ts
 - Do not render the field as one `<input>` per box; each box then announces as an unlabeled text field, and the field consumes one tab stop per digit.
 - Do not make an individual box focusable.
@@ -80,6 +73,13 @@ The segmented boxes are a visual treatment, not a structure: the field is one in
 - Do not set `autocomplete="off"` on the field; it suppresses the password manager and platform autofill that a user may rely on to complete it.
 - Do not mask the value by substituting mask glyphs in the presentational boxes while the input stays `type="text"`; the screen reader then speaks the real digits aloud while the screen shows the mask.
 - Do not move focus to the field when its inline error appears; populating the `aria-live` container is what announces it. Submit-time focus is a form-level concern (see `form.error-summary`).
+
+## Customizable
+- A code delivered out of band and a stored PIN are the same control and differ only in `autocomplete`: out-of-band codes carry `autocomplete="one-time-code"`, stored PINs omit it. Every other requirement above applies to both.
+- The expected digit count may live in the accessible name instead of the description (e.g., a label reading "Parental control PIN, 4 digits"). A visible description is the better default, because it gives sighted users the same information the box count already gives them.
+- Masking is at the engineer's discretion as long as the user can reveal the value. An unmasked field needs no reveal control; a masked field requires one.
+- Group sizes and the separator glyph are at the engineer's discretion, as long as the separator stays inside the `aria-hidden` container and out of the value.
+- Layout is horizontal in this pattern, so Left and Right are the caret keys. A vertical arrangement would make Up and Down the expected keys and is outside the scope of this pattern.
 
 ## Golden Pattern
 

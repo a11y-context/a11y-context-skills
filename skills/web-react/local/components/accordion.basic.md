@@ -33,6 +33,13 @@ A set of show/hide sections with heading-wrapped buttons controlling associated 
 - If the accordion does not permit a panel to be collapsed while expanded, the expanded header button uses `aria-disabled="true"` (rare case).
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the header controls.
 
+## Don'ts
+- Do not use non-focusable headers (e.g., `<div>` without proper button semantics) as the interactive control.
+- Do not make the panel visible while leaving `aria-expanded="false"` (and vice versa).
+- Do not remove panel content from the DOM in a way that breaks expected focus behavior (e.g., collapsing a panel while focus remains inside it without moving focus).
+- Do not use `role="heading"` without an `aria-level`.
+- Do not nest accordions within accordion panels.
+
 ## Customizable
 - `aria-controls` on the header button pointing to the panel ID (recommended, but optional).
 - Panel container uses `role="region"` with `aria-labelledby` referencing the header button ID (optional).
@@ -41,13 +48,6 @@ A set of show/hide sections with heading-wrapped buttons controlling associated 
 - Whether multiple panels can be expanded at the same time.
   - If only one panel may be expanded, expanding a new panel collapses the previously open panel.
 - The heading level will usually be `h2`, but this is customizable and depends on the heading hierarchy of the surrounding page.
-
-## Don'ts
-- Do not use non-focusable headers (e.g., `<div>` without proper button semantics) as the interactive control.
-- Do not make the panel visible while leaving `aria-expanded="false"` (and vice versa).
-- Do not remove panel content from the DOM in a way that breaks expected focus behavior (e.g., collapsing a panel while focus remains inside it without moving focus).
-- Do not use `role="heading"` without an `aria-level`.
-- Do not nest accordions within accordion panels.
 
 ## Golden Pattern
 

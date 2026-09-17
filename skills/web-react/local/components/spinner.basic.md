@@ -57,13 +57,6 @@ A spinner decorates something that already has a label, such as a button, a pane
   - The host's own visible label satisfies this when it already changes while busy.
 - The spinner is removed when the wait ends, and a failed wait is replaced by an error message rather than a graphic that spins indefinitely.
 
-## Customizable
-- Delay before the spinner appears. A short delay keeps fast responses from flashing a graphic the user cannot read; 100ms is a common threshold, and some systems show a spinner only when the expected wait exceeds 3 seconds. The threshold is at the engineer's discretion as long as the live region is not populated for waits the user never perceives.
-- Whether the host's visible label changes while busy. Leaving "Save" in place and swapping it for "Saving" are both acceptable; when it changes, the new text becomes the accessible name.
-- Which element hosts the live region. A dedicated visually hidden region and visible loading text that doubles as the live region are equally acceptable. Visible text is preferred when the wait is long enough that sighted users benefit from the same information.
-- Size and placement, including inline within a control, centered within a region, or beside a label.
-- The reduced-motion replacement text may repeat what the live region carries or be shorter, as long as it names the work rather than only saying that something is happening.
-
 ## Don'ts
 - Do not rely on the spinner graphic to announce anything. An SVG with no text is exposed inconsistently across assistive technologies, and a spinner that is the only signal leaves screen reader users with silence.
 - Do not put `role="progressbar"` on a spinner that has no value, which reports a range widget with nothing to report.
@@ -73,6 +66,13 @@ A spinner decorates something that already has a label, such as a button, a pane
 - Do not keep the animation running under `prefers-reduced-motion: reduce`.
 - Do not place several spinners in one view for content arriving in pieces.
 - Do not attach a spinner to every asynchronous call. Add one when the wait is long enough for the user to notice it, or when the design asks for a busy state on a specific control. A wait the user never perceives needs no indicator.
+
+## Customizable
+- Delay before the spinner appears. A short delay keeps fast responses from flashing a graphic the user cannot read; 100ms is a common threshold, and some systems show a spinner only when the expected wait exceeds 3 seconds. The threshold is at the engineer's discretion as long as the live region is not populated for waits the user never perceives.
+- Whether the host's visible label changes while busy. Leaving "Save" in place and swapping it for "Saving" are both acceptable; when it changes, the new text becomes the accessible name.
+- Which element hosts the live region. A dedicated visually hidden region and visible loading text that doubles as the live region are equally acceptable. Visible text is preferred when the wait is long enough that sighted users benefit from the same information.
+- Size and placement, including inline within a control, centered within a region, or beside a label.
+- The reduced-motion replacement text may repeat what the live region carries or be shorter, as long as it names the work rather than only saying that something is happening.
 
 ## Golden Pattern
 

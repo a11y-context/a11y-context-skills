@@ -43,6 +43,11 @@ Two-state on/off control representing a persistent setting. Uses `role="switch"`
 - Associate any additional descriptive static text with the switch via `aria-describedby` on the switch element itself. Do not place `aria-describedby` on a `fieldset` or group container — a screen reader announces a description when its element receives focus, and the container is never focused, so it is announced unreliably; put group-level context in the `legend`.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the switch control.
 
+## Don'ts
+- Do not use a switch for non-setting actions; use it only for persistent on/off settings.
+- Do not omit `aria-checked` when using `div` or `button` with `role="switch"`.
+- Do not use both `checked` and `aria-checked` on `input[type="checkbox"]`.
+
 ## Customizable
 - The base element: `<div role="switch">` (as in the golden pattern), `<button role="switch">`, or `<input type="checkbox" role="switch">`. Native elements reduce the keyboard and focus wiring that must be hand-rolled.
   - A native HTML switch control (`<input type="checkbox" switch>`) is emerging in browsers (WebKit ships an implementation) and may become the preferred base once support is broad.
@@ -50,11 +55,6 @@ Two-state on/off control representing a persistent setting. Uses `role="switch"`
 - Whether the accessible name is contained within the switch or referenced externally.
 - Whether state text ("On"/"Off") is visually displayed.
 - Whether multiple switches may be grouped.
-
-## Don'ts
-- Do not use a switch for non-setting actions; use it only for persistent on/off settings.
-- Do not omit `aria-checked` when using `div` or `button` with `role="switch"`.
-- Do not use both `checked` and `aria-checked` on `input[type="checkbox"]`.
 
 ## Golden Pattern
 

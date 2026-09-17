@@ -44,18 +44,18 @@ Small non-interactive indicator annotating a host element with a count or a stat
 - When no badge is rendered, the host's accessible name makes no claim about one. A control with no badge is named "Notifications", not "Notifications, 0 unread".
 - The badge stays distinguishable without color and keeps a real border rather than a background fill alone, per `global.use-of-color` and `global.forced-colors`.
 
-## Customizable
-- Shape and placement. A dot, a circle, a pill, or a rectangle, on a corner of the host or beside it.
-- Where the text alternative lives. Visually hidden text inside the badge, and the meaning folded into the host's own name, are equally acceptable. The second is preferred when the badge is not a descendant of its host.
-- Whether a count is capped for display, and at what threshold, as long as the accessible name carries the text the badge shows.
-- Whether the badge renders at zero or at an empty status, as long as the host's name agrees with what is rendered.
-
 ## Don'ts
 - Do not make the badge focusable, give it an interactive role, or render it as a `<button>` or a link.
 - Do not announce the badge on change with `aria-live`, `role="status"`, or `role="alert"`. A count that increments while the user is reading elsewhere interrupts work the badge is not urgent enough to interrupt.
 - Do not leave the count or status in `aria-hidden` content with nothing else carrying it. Hidden descendants are excluded from name computation, so the value is dropped while the screen still looks correct.
 - Do not repeat the badge's text in both the host's content and an `aria-label` on the host.
 - Do not hard-code a count into an `aria-label` that does not track the rendered value.
+
+## Customizable
+- Shape and placement. A dot, a circle, a pill, or a rectangle, on a corner of the host or beside it.
+- Where the text alternative lives. Visually hidden text inside the badge, and the meaning folded into the host's own name, are equally acceptable. The second is preferred when the badge is not a descendant of its host.
+- Whether a count is capped for display, and at what threshold, as long as the accessible name carries the text the badge shows.
+- Whether the badge renders at zero or at an empty status, as long as the host's name agrees with what is rendered.
 
 ## Golden Pattern
 

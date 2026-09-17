@@ -58,15 +58,6 @@ This is a disclosure of links, not an ARIA menu. The revealed content is primari
 - When focus moves outside the button and list (Tab away, click elsewhere), the dropdown closes.
 - Esc closes the dropdown and returns focus to the invoking button (use `requestAnimationFrame` for the focus restore).
 
-## Customizable
-- Whether the list contains only links or links plus a single trailing action button (e.g., "Sign out").
-- Whether the dropdown closes when an item is activated (often yes).
-- Positioning of the list (left/right alignment, above/below) as long as DOM order and focus order remain logical.
-- The disclosure indicator (e.g., a down caret) is decorative and may be omitted; when present it is marked `aria-hidden="true"` and does not replace the button's accessible name.
-- Accessible labeling strategy:
-  - The button label may be visible text (e.g., "Account") or, for an icon-only avatar button, an `aria-label` or `aria-labelledby`.
-  - The list may carry an optional `aria-label` (e.g., `aria-label="Account"`).
-
 ## Don'ts
 - Do not use `role="menu"` or `role="menuitem"`; the items are links in a list, not menu commands.
 - Do not add `aria-haspopup` to the button; it announces a menu that is not there.
@@ -75,6 +66,15 @@ This is a disclosure of links, not an ARIA menu. The revealed content is primari
 - Do not leave the list visible while `aria-expanded="false"` (and vice versa).
 - Do not close the dropdown in a way that strands focus (e.g., removing the focused element without moving focus).
 - Do not let a hidden dropdown be the only path to a destination; expose those links elsewhere on the site as well.
+
+## Customizable
+- Whether the list contains only links or links plus a single trailing action button (e.g., "Sign out").
+- Whether the dropdown closes when an item is activated (often yes).
+- Positioning of the list (left/right alignment, above/below) as long as DOM order and focus order remain logical.
+- The disclosure indicator (e.g., a down caret) is decorative and may be omitted; when present it is marked `aria-hidden="true"` and does not replace the button's accessible name.
+- Accessible labeling strategy:
+  - The button label may be visible text (e.g., "Account") or, for an icon-only avatar button, an `aria-label` or `aria-labelledby`.
+  - The list may carry an optional `aria-label` (e.g., `aria-label="Account"`).
 
 ## Golden Pattern
 

@@ -42,12 +42,6 @@ A brief supplementary text label shown on hover and focus of its trigger; uses `
 - The tooltip is not focusable and contains plain text only, with no interactive content.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the trigger.
 
-## Customizable
-
-- `aria-describedby` associates the tooltip as a supplementary description. When the tooltip text is intended to be the control's accessible name (rare), `aria-labelledby` may be used instead of `aria-describedby`.
-- Positioning relative to the trigger and an optional show delay are at the engineer's discretion, as long as the tooltip remains hoverable, dismissible, and persistent.
-- The tooltip may be delivered via scripting or via the native `popover` attribute.
-
 ## Don'ts
 
 - Do not place interactive content (links, buttons, form controls) in a tooltip.
@@ -57,6 +51,12 @@ A brief supplementary text label shown on hover and focus of its trigger; uses `
 - Do not hide the tooltip on `onMouseLeave` while the trigger still has keyboard focus; hover and focus must be tracked independently.
 - Do not use `role="menu"` on the tooltip.
 - Do not leave the tooltip visible after the trigger has lost focus and the pointer has left both the trigger and the tooltip.
+
+## Customizable
+
+- `aria-describedby` associates the tooltip as a supplementary description. When the tooltip text is intended to be the control's accessible name (rare), `aria-labelledby` may be used instead of `aria-describedby`.
+- Positioning relative to the trigger and an optional show delay are at the engineer's discretion, as long as the tooltip remains hoverable, dismissible, and persistent.
+- The tooltip may be delivered via scripting or via the native `popover` attribute.
 
 ## Golden Pattern
 

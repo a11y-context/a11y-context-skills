@@ -52,19 +52,19 @@ The dismiss control is a convenience rather than a route the user depends on, be
 ### Motion & timing
 - The message dismisses itself after a timed delay.
 
-## Customizable
-- Whether a dismiss control is rendered at all. The message removes itself either way, so the control is a convenience rather than the only route out.
-- The dismiss delay. ~5 seconds is the common default for a message carrying nothing to act on, and the exact value is at the engineer's discretion as long as the message can be read.
-- Which element announces. A visually hidden element separate from the visible message, and the visible message text itself, are equally acceptable, as long as the dismiss control is a sibling of the announcing element rather than a descendant of it.
-- Whether a newer message replaces the current one or queues behind it, as long as each message is announced once and the live region is cleared when the last one leaves.
-- Visual placement (e.g., top-right, bottom-center), and the transition used to show and hide a message, subject to `global.motion`.
-
 ## Don'ts
 - Do not move focus to the message, which interrupts a user mid-task to deliver something they were not required to act on.
 - Do not place the dismiss control inside the element carrying `role="status"` or `aria-live`. Interactive content in a live region is announced as flat text, so the control is spoken as part of the message with nothing marking it activatable.
 - Do not mount or unmount the announcing element along with the message. A live region that is not in the DOM before its text changes does not announce reliably.
 - Do not use `role="alert"` or `role="alertdialog"` for a message the user does not have to act on. Both interrupt the user's current task, and `alertdialog` additionally implies a dialog that must be dismissed before continuing.
 - Do not leave announced text in the live region after the message has left the screen. A stale message stays discoverable to a user browsing the page later.
+
+## Customizable
+- Whether a dismiss control is rendered at all. The message removes itself either way, so the control is a convenience rather than the only route out.
+- The dismiss delay. ~5 seconds is the common default for a message carrying nothing to act on, and the exact value is at the engineer's discretion as long as the message can be read.
+- Which element announces. A visually hidden element separate from the visible message, and the visible message text itself, are equally acceptable, as long as the dismiss control is a sibling of the announcing element rather than a descendant of it.
+- Whether a newer message replaces the current one or queues behind it, as long as each message is announced once and the live region is cleared when the last one leaves.
+- Visual placement (e.g., top-right, bottom-center), and the transition used to show and hide a message, subject to `global.motion`.
 
 ## Golden Pattern
 
