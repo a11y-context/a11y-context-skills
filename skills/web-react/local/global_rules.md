@@ -11,7 +11,7 @@ summary: "Baseline accessibility rules applied across most UI work."
 cache_ttl_seconds: 86400
 apply_policy:
   instruction: "Apply all MUST rules that match the current change scope. If the task does not touch a scope, do not introduce unrelated changes."
-  scopes_in_order: ["utility", "page", "layout", "component", "style"]
+  scopes_in_order: ["screen", "layout", "component"]
 
 ---
 
@@ -23,7 +23,7 @@ Foundations are the accessibility rules that aren't tied to a single component â
 
 ```yaml
 id: global.sr-only
-scope: [utility, component, style]
+scope: [component]
 ```
 
 ### Must Haves
@@ -72,7 +72,7 @@ For a visually hidden element that must become visible when it receives focus, s
 
 ```yaml
 id: global.page-title
-scope: [page]
+scope: [screen]
 ```
 
 ### Must Haves
@@ -90,7 +90,7 @@ scope: [page]
 
 ```yaml
 id: global.landmarks
-scope: [page, layout]
+scope: [screen, layout]
 ```
 
 ### Must Haves
@@ -116,7 +116,7 @@ scope: [page, layout]
 
 ```yaml
 id: global.headings
-scope: [page, layout]
+scope: [screen, layout]
 ```
 
 ### Must Haves
@@ -145,7 +145,7 @@ scope: [page, layout]
 
 ```yaml
 id: global.text-contrast
-scope: [page, layout, component, style]
+scope: [component]
 ```
 
 ### Must Haves
@@ -165,7 +165,7 @@ scope: [page, layout, component, style]
 
 ```yaml
 id: global.non-text-contrast
-scope: [page, component, style]
+scope: [component]
 ```
 
 ### Must Haves
@@ -197,7 +197,7 @@ A boundary painted as a background fill needs a real border under forced colors,
 
 ```yaml
 id: global.use-of-color
-scope: [component, style]
+scope: [component]
 ```
 
 ### Must Haves
@@ -217,7 +217,7 @@ scope: [component, style]
 
 ```yaml
 id: global.forced-colors
-scope: [component, style]
+scope: [component]
 ```
 
 Windows High Contrast Mode replaces the author's palette with a small set of user-chosen system colors. It is not a dark theme: `background-color`, `border-color`, and `color` are re-mapped, `box-shadow` is removed, and some background images are dropped. Anything whose meaning rested on those properties alone disappears.
@@ -270,7 +270,7 @@ Opting out, for the narrow case where the authored color is the content itself:
 
 ```yaml
 id: global.focus-not-obscured
-scope: [component, layout, style]
+scope: [layout, component]
 ```
 
 ### Must Haves
@@ -286,7 +286,7 @@ scope: [component, layout, style]
 
 ```yaml
 id: global.focus-states
-scope: [component, style]
+scope: [component]
 ```
 
 ### Must Haves
@@ -347,7 +347,7 @@ Required forced-colors override â€” pair with either primary style above. `Highl
 
 ```yaml
 id: global.motion
-scope: [component, style]
+scope: [component]
 ```
 
 Animation and content removal belong to one rule because they fail together. An element animating out is still in the DOM while it is visually gone, and that window is where keyboard focus is lost and the accessibility tree stops matching the screen.
@@ -405,7 +405,7 @@ requestAnimationFrame(() => returnTarget.current?.focus());
 
 ```yaml
 id: global.icon
-scope: [component, style]
+scope: [component]
 ```
 
 An icon is meaningful when the user needs it to understand or operate the interface and no text beside it carries the same meaning. Everything else is decorative, which is most icons. The two are marked up in opposite ways, so answer this first.
