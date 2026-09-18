@@ -201,7 +201,7 @@ scope: [component]
 ```
 
 ### Must Haves
-- Do not use color as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element (WCAG 1.4.1).
+- Do not use color as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element.
 - When a component renders a meaningful state visually (e.g., selected, active, current, invalid, pressed), that state is distinguishable by something in addition to color, such as an icon, checkmark, shape, underline, or text.
   - This is the visual counterpart to exposing the state programmatically. A component may satisfy `aria-selected` yet still fail 1.4.1 if selection is shown by a background tint alone.
 - The additional cue is an icon, a shape, a border, or text rather than a second color treatment, so that it survives Windows High Contrast Mode. See `global.forced-colors`.
@@ -274,7 +274,7 @@ scope: [layout, component]
 ```
 
 ### Must Haves
-- When a component receives keyboard focus, the focused element is not entirely hidden by author-created content such as sticky headers, sticky footers, or the component's own overlapping chrome (WCAG 2.4.11 Focus Not Obscured, Minimum).
+- When a component receives keyboard focus, the focused element is not entirely hidden by author-created content such as sticky headers, sticky footers, or the component's own overlapping chrome.
 - Components with their own sticky or floating sub-regions (e.g., a frozen header row or column) keep the focused element scrolled or offset into a visible area.
 
 ### Don'ts
@@ -356,7 +356,7 @@ Animation and content removal belong to one rule because they fail together. An 
 - Under `prefers-reduced-motion: reduce`, no animation repeats, travels an element across the screen, or scales it.
   - Changes to color, opacity, or blur that do not alter an element's perceived size, shape, or position are not motion animation and may continue.
   - Movement driven by a value the user is waiting on, such as a progress fill advancing, is not decorative motion and continues.
-- Animation that starts automatically, lasts more than 5 seconds, and runs alongside other content provides a mechanism to pause, stop, or hide it, unless the movement is essential to an activity in progress (WCAG 2.2.2).
+- Animation that starts automatically, lasts more than 5 seconds, and runs alongside other content provides a mechanism to pause, stop, or hide it, unless the movement is essential to an activity in progress.
 - Motion is not the only means of conveying that something changed. A change communicated by movement is also communicated by text, by a change in the accessibility tree, or by a live region.
 - Before an element holding keyboard focus is removed from the DOM or made unfocusable, focus is moved to a stable element that remains present, such as the control that opened it or the container that replaces it.
 - `aria-hidden="true"` is not applied to a focusable element, nor to any ancestor of one.

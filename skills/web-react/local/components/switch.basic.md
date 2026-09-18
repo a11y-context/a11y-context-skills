@@ -39,7 +39,7 @@ Two-state on/off control representing a persistent setting. Uses `role="switch"`
   - Enter toggles the switch.
     - Exception: If using native input `input[type="checkbox"]`, then only Space toggles the switch, not Enter.
 - If multiple switches are presented as a labeled set, group them with `fieldset` + `legend` or `role="group"` + `aria-labelledby`.
-  - The group's label describes the purpose of the set (WCAG 2.4.6).
+  - The group's label describes the purpose of the set.
 - Associate any additional descriptive static text with the switch via `aria-describedby` on the switch element itself. Do not place `aria-describedby` on a `fieldset` or group container — a screen reader announces a description when its element receives focus, and the container is never focused, so it is announced unreliably; put group-level context in the `legend`.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the switch control.
 

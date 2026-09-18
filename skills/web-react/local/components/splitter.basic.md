@@ -178,7 +178,7 @@ export function SplitterDemo() {
         </ul>
       </div>
 
-      {/* Required, not chrome: the no-drag pointer route (WCAG 2.5.7).
+      {/* Required, not chrome: the no-drag pointer route.
           Siblings, in visual order, since DOM order is the tab order. */}
       <div style={{ flex: `0 0 ${gutter}px`, display: "flex", alignItems: "stretch" }}>
         {!atMin && (
@@ -217,7 +217,7 @@ export function SplitterDemo() {
             setDragging(false);
           }}
           style={{
-            // 24px pointer target around a 2px visible line (WCAG 2.5.8).
+            // 24px pointer target around a 2px visible line.
             flex: "0 0 24px",
             display: "flex",
             justifyContent: "center",

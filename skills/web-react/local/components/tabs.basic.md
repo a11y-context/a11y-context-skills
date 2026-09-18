@@ -72,7 +72,7 @@ This pattern is same-page view switching: the tabs and their panels live in one 
 ## Don'ts
 - Do not leave a tabpanel visible while its tab has `aria-selected="false"` (and vice versa).
 - Do not derive arrow-key movement from the selected tab's index instead of the focused tab's index.
-- Do not move focus off the activated tab. Activation leaves focus on that tab and does not move it into the tabpanel, open a window, submit a form, or navigate (WCAG 3.2.1 On Focus).
+- Do not move focus off the activated tab. Activation leaves focus on that tab and does not move it into the tabpanel, open a window, submit a form, or navigate.
 
 ## Customizable
 - Activation model. Automatic activation (as in the golden pattern) is appropriate when the panels are displayed without noticeable latency. Choose manual activation when activating a tab fetches panel data, navigates or refreshes the page, starts media playback, discards in-progress work, or renders slowly enough to be perceptible.

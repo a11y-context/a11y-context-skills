@@ -31,7 +31,7 @@ User-initiated blocking dialog. Uses the native `<dialog>` element with `.showMo
 - Open with `.showModal()`, close with `.close()`. A `<dialog>` present in the DOM without `.showModal()` is non-modal — no focus trap, no background inertness, no `aria-modal`, no top-layer rendering. Unmounting a `<dialog>` while open (rather than calling `.close()`) leaves focus stranded because the browser's focus-restoration to the invoker runs on `.close()` (or on the browser's implicit `.close()` from Esc's `cancel` event and from `<form method="dialog">` submits). Both lifecycle endpoints must be exercised.
 - Dialog surface has an accessible name via `aria-labelledby` (preferred) or `aria-label`. If `aria-labelledby` is used, it references a visible title element (e.g., `<h2 id="...">`).
 - If a description is rendered, it is referenced by `aria-describedby`. Do not rely on incidental reading order.
-- Dialog width is fluid so content reflows at 400% zoom (WCAG 1.4.10 Reflow). Prefer `max-width: min(<Npx>, 100%)`; do not set fixed pixel widths that would exceed the 320-CSS-pixel viewport at 400% zoom.
+- Dialog width is fluid so content reflows at 400% zoom. Prefer `max-width: min(<Npx>, 100%)`; do not set fixed pixel widths that would exceed the 320-CSS-pixel viewport at 400% zoom.
 - Provide a visible close control (`<button type="button">`) with an accessible name (e.g., `aria-label="Close dialog"`).
 - The invoking control declares dialog-trigger semantics — apply `aria-haspopup="dialog"` to the trigger element.
 - The dialog satisfies the following behavior contract (all six required):

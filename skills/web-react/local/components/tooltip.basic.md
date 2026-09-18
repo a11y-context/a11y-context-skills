@@ -74,7 +74,7 @@ export function TooltipDemo() {
   const open = hovered || focused;
   const tooltipId = "tooltip-watchlist";
 
-  // Dismissible (WCAG 1.4.13): Esc closes the tooltip without moving pointer
+  // Dismissible: Esc closes the tooltip without moving pointer
   // hover or keyboard focus. The listener is on the document, not the trigger,
   // because a hover-only tooltip has no focused element to receive the keydown.
   useEffect(() => {

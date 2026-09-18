@@ -35,7 +35,7 @@ Small non-interactive indicator annotating a host element with a count or a stat
 ### Accessible name
 - The badge's meaning is available as text. A badge rendered only as a colored dot, a shape, or a fill has a text alternative (e.g., "Online", "Live", "3 unread").
 - The text states what the value represents, not the value alone. A control named "Notifications" carrying a badge reading "3" is named "Notifications, 3 unread".
-- When the badge is inside a control and displays text, the control's accessible name contains that text (WCAG 2.5.3), including a capped value such as "9+".
+- When the badge is inside a control and displays text, the control's accessible name contains that text, including a capped value such as "9+".
 - The badge's meaning appears once in the host's accessible name.
 - A badge duplicating text already visible inside the same control is `aria-hidden="true"`.
 
