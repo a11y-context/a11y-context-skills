@@ -10,8 +10,13 @@ Installable AI coding assistant skills for the [A11y Context](https://a11y-conte
 |---|---|---|
 | Web / React | `a11y-context-web-react-http` | Fetches corpus from the public docs site at generation time |
 | Web / React | `a11y-context-web-react-local` | Reads a bundled copy of the corpus from disk — fully offline |
+| Android / Compose | `a11y-context-android-compose-http` | Fetches corpus from the public docs site at generation time |
+| Android / Compose | `a11y-context-android-compose-local` | Reads a bundled copy of the corpus from disk — fully offline |
 | iOS / SwiftUI | Coming soon | — |
-| Android / Compose | Coming soon | — |
+
+Each platform also ships `-mcp` and `-rag` variants for those retrieval paths; see the corpus docs for when either is the right choice.
+
+**Stacks are not interchangeable.** A Compose skill retrieves Compose patterns, and nothing in them translates to React — the semantics layer, the component names, and the failure modes are all different. Install the skill for the UI you are actually writing.
 
 ### Picking between HTTP and Local
 
@@ -77,6 +82,13 @@ skills/
       SKILL.md
       patterns.json
       global_rules.md
+    mcp/        ← brain only; retrieval via the MCP server
+      SKILL.md
+    rag/        ← brain + endpoint config; retrieval via your vector index
+      SKILL.md
+      a11y-context.config.json
+  android-compose/
+    local/ http/ mcp/ rag/     ← same four variants, Compose patterns
 ```
 
 The skill's canonical name (declared in `SKILL.md` frontmatter `name:`) is also the destination folder name when consumed.

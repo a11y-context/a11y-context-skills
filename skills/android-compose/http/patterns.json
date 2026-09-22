@@ -1,0 +1,375 @@
+{
+  "stack": "android/compose",
+  "schema_version": "1.0.0",
+  "catalog_revision": "0.2.0",
+  "cache_ttl_seconds": 3600,
+  "patterns": [
+    {
+      "id": "bottom-sheet.modal",
+      "title": "Bottom Sheet (Modal)",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Overlay that rises from the bottom edge and blocks the content behind it. Most of the dismissal contract arrives with the component rather than the caller, and every part of it disappears under some configuration the caller controls.",
+      "aliases": [
+        "modal bottom sheet",
+        "ModalBottomSheet",
+        "bottom drawer",
+        "action sheet",
+        "sheet",
+        "slide-up panel",
+        "tray"
+      ],
+      "tags": [
+        "bottom sheet",
+        "modal",
+        "overlay",
+        "dialog",
+        "sheet"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user needs a set of actions, a list, or a short form that belongs to the current screen and should not replace it (e.g., a share sheet, a filter panel, a sort menu).",
+          "Use when the user will work through several controls before dismissing, and the content blocks interaction with the screen behind it while they do."
+        ],
+        "do_not_use_when": [
+          "Do not use when the background must stay reachable while the sheet is open (use bottom-sheet.standard).",
+          "Do not use when the content is a message the user acknowledges or answers with one of two choices, and nothing else. A sheet holds a set of things; a dialog interrupts with one (use dialog.alert).",
+          "Do not use when the content is a list of commands acting on one trigger (use menu.basic).",
+          "Do not use when the message reports an outcome and needs no response (use snackbar.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/bottom-sheet.modal.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "button.basic",
+      "title": "Button",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Control that triggers an immediate action. Covers text, icon-only, floating, and action-chip presentations, which share one role and differ in where the accessible name comes from.",
+      "aliases": [
+        "btn",
+        "primary button",
+        "icon button",
+        "call to action",
+        "cta",
+        "IconButton",
+        "floating action button",
+        "fab",
+        "ExtendedFloatingActionButton",
+        "assist chip",
+        "suggestion chip",
+        "text button"
+      ],
+      "tags": [
+        "button",
+        "control",
+        "action",
+        "icon-button",
+        "fab",
+        "chip"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user triggers an immediate action and stays on the current screen (e.g., \"Save\", \"Add to Watchlist\", \"Play\").",
+          "Use when the action is presented as a floating action button, an icon-only control, or an assist or suggestion chip. All four carry Role.Button and no state of their own."
+        ],
+        "do_not_use_when": [
+          "Do not use when the control represents an on or off state that persists after the tap (use button.toggle).",
+          "Do not use when the control carries a selected state, such as a filter or a removable token (use chip.filter or chip.input).",
+          "Do not use when the control opens a list of commands (use menu.basic).",
+          "Do not use when the control opens a URL or leaves the app (use link.standalone).",
+          "Do not use when the control is a row in a list that navigates elsewhere (use list-item.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/button.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "checkbox.basic",
+      "title": "Checkbox",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Yes or no choice submitted with a form, independent of any other checkbox beside it. The control and its label form one accessibility node, and the row that owns the toggle owns the role and the touch target.",
+      "aliases": [
+        "check box",
+        "tick box",
+        "form checkbox",
+        "agree checkbox",
+        "opt-in",
+        "Checkbox",
+        "toggleable"
+      ],
+      "tags": [
+        "checkbox",
+        "control",
+        "form-control",
+        "selection",
+        "toggleable"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a single control records an independent yes or no choice submitted with a form rather than taking effect immediately (e.g., \"I agree to the Terms of Service\", \"Remember me on this device\").",
+          "Use when several checkboxes appear together and any number of them may be checked at once, each label standing on its own (e.g., a list of notification types)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the options are mutually exclusive and exactly one must be chosen (use radio.basic).",
+          "Do not use when toggling the control takes effect immediately as a persistent setting (use switch.basic).",
+          "Do not use when the control turns a feature or formatting state on and off in the current context rather than recording a value to submit (use button.toggle).",
+          "Do not use when a third mixed or partially checked state is required, such as a parent reflecting a mix of checked children (use checkbox.tristate).",
+          "Do not use when several checkboxes answer one shared question and their labels are not meaningful without it. Group them and name the group, per global.collection-semantics."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/checkbox.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "content-shelf.basic",
+      "title": "Content Shelf",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Horizontally scrolling strip of tiles under a heading that says what the tiles have in common. A LazyRow reports that the user is in a list and nothing else, so the shelf's name, each tile's name, and every position announcement are the app's to supply.",
+      "aliases": [
+        "collection row",
+        "collection-row",
+        "content row",
+        "content rail",
+        "rail",
+        "strip",
+        "shelf",
+        "tile row",
+        "poster row",
+        "card row",
+        "media row",
+        "LazyRow",
+        "carousel row"
+      ],
+      "tags": [
+        "content-shelf",
+        "shelf",
+        "rail",
+        "horizontal-list",
+        "carousel",
+        "collection",
+        "browse"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when several related items sit in a horizontally scrolling strip under a shared heading (e.g., \"Customers also bought\", \"Continue watching\", \"Recently played\").",
+          "Use when more than one item is visible at a time and the rest are reached by scrolling sideways.",
+          "Use when each item is a compact tile carrying artwork and, usually, a short title."
+        ],
+        "do_not_use_when": [
+          "Do not use when the rows run down the screen rather than across it (use list-item.basic).",
+          "Do not use when one item fills the strip at a time and the others are reached by paging (use carousel.basic).",
+          "Do not use when items wrap across several rows and columns (use grid.basic).",
+          "Do not use when the strip is a set of filters or categories the user selects among rather than content they open (use chip.filter)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/content-shelf.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "list-item.basic",
+      "title": "List Item",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A row in a vertical list. The row is one accessibility node rather than the several elements it looks like, so a second control inside it becomes a custom action rather than a nested target.",
+      "aliases": [
+        "list row",
+        "ListItem",
+        "table row",
+        "cell",
+        "settings row",
+        "channel row",
+        "list tile",
+        "collection-row item"
+      ],
+      "tags": [
+        "list item",
+        "row",
+        "list",
+        "collection",
+        "navigation"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a row in a vertical list presents one item and, on tap, acts on that item or opens it (e.g., a message in an inbox, an order in a purchase history, a row in a settings screen).",
+          "Use when the row carries several pieces of content, such as a thumbnail with a title and supporting text, that describe one thing."
+        ],
+        "do_not_use_when": [
+          "Do not use when the tile sits in a horizontally scrolling row of content (use content-shelf.basic).",
+          "Do not use when the control performs an in-place action and is not a row in a list (use button.basic).",
+          "Do not use when the row is a selectable option in a mutually exclusive set (use radio.basic).",
+          "Do not use when the row carries a setting that toggles in place (use switch.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/list-item.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "radio.basic",
+      "title": "Radio Group",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Exactly one choice from a mutually exclusive set. The group carries selectableGroup, which is what makes each option announce its position in the set, and each row carries the selection rather than the button.",
+      "aliases": [
+        "radio button",
+        "radio group",
+        "single choice",
+        "one of many",
+        "RadioButton",
+        "selectableGroup",
+        "option list"
+      ],
+      "tags": [
+        "radio",
+        "radio button",
+        "single-select",
+        "mutually-exclusive",
+        "selection"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when exactly one option must be chosen from a small set that stays fully visible as a list of rows (e.g., \"Shipping speed\", \"Choose a plan\").",
+          "Use when the always-visible list is preferred over a control that collapses the choices behind a pop-up."
+        ],
+        "do_not_use_when": [
+          "Do not use when any number of options may be chosen, including none (use checkbox.basic).",
+          "Do not use when the control is a single persistent on or off setting (use switch.basic).",
+          "Do not use when two to five options fit inline as one connected control (use segmented-button.single).",
+          "Do not use when one choice comes from a longer set and a compact pop-up is preferred over an expanded list (use select.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/radio.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "switch.basic",
+      "title": "Switch",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Persistent on or off setting that takes effect immediately. The control and its label form one accessibility node, and the row that owns the toggle owns the role and the touch target.",
+      "aliases": [
+        "toggle switch",
+        "preference toggle",
+        "settings toggle",
+        "Switch",
+        "on off toggle",
+        "toggleable"
+      ],
+      "tags": [
+        "switch",
+        "toggle",
+        "settings",
+        "on-off",
+        "form-control"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a control represents a persistent binary setting that stays on or off beyond the current interaction (e.g., \"Enable notifications\", \"Dark mode\").",
+          "Use when the setting takes effect the moment it is toggled, with no form to submit."
+        ],
+        "do_not_use_when": [
+          "Do not use when the value is submitted with a form rather than taking effect immediately (use checkbox.basic).",
+          "Do not use when the control turns a feature or formatting state on and off in the current context rather than recording a setting (use button.toggle).",
+          "Do not use when more than two states are required (use button.toggle).",
+          "Do not use when exactly one option must be chosen from a set (use radio.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/switch.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "text-field.basic",
+      "title": "Text Field",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Single-line text entry whose accessible name has to come from the field's own label slot rather than a Text beside it. Supporting text and error messages are separate nodes the component does not attach, so both have to be associated deliberately.",
+      "aliases": [
+        "textfield",
+        "text input",
+        "input field",
+        "edit text",
+        "EditText",
+        "TextField",
+        "OutlinedTextField",
+        "BasicTextField",
+        "password field",
+        "search field",
+        "secure field"
+      ],
+      "tags": [
+        "text-field",
+        "form",
+        "input",
+        "autofill",
+        "error",
+        "keyboard"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user types a single line of free text, such as a name, an email address, or a search term.",
+          "Use when the value maps to a system autofill category, so the keyboard can offer to fill it (e.g., a password, a one-time code, a postal code).",
+          "Use when the input has a natural software keyboard tied to its type, such as an email address or a phone number."
+        ],
+        "do_not_use_when": [
+          "Do not use when the user types more than one line, such as a message body or a review. The same component takes singleLine = false, and the multi-line case has its own labeling and scrolling requirements.",
+          "Do not use when the value comes from a fixed set rather than being typed (use select.basic).",
+          "Do not use when the value is a date or a time chosen from a picker (use date-picker.basic).",
+          "Do not use when the field is one cell of a segmented code entry (use pin-input.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/text-field.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    }
+  ]
+}
