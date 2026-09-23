@@ -1,0 +1,106 @@
+---
+name: a11y-context-android-compose-local
+description: Apply accessibility patterns to Jetpack Compose user-facing UI. Use whenever generating, building, creating, modifying, or refactoring composables, screens, or any UI a user sees or interacts with — including buttons, forms, text fields, dialogs, bottom sheets, navigation, menus, lists, content shelves, switches, checkboxes, and settings screens. Use when the prompt mentions any UI element by name or describes a screen, home feed, card row, or interactive widget. Do not use for ViewModels, repositories, use cases, data classes, dependency-injection modules, network clients, or test helpers.
+user-invocable: true
+allowed-tools: Read
+---
+
+# A11y Context — Jetpack Compose Skill
+
+## Purpose
+
+Read accessibility best-practice patterns from local documentation files and apply them before generating Compose UI code. Run this skill before any implementation step that produces user-facing UI.
+
+---
+
+## Step 1 — Select Relevant Patterns
+
+Read the component catalog from `${CLAUDE_SKILL_DIR}/patterns.json`. Each entry contains:
+- `id` — the pattern identifier
+- `summary` — a short description of the pattern
+- `aliases` and `tags` — alternate names and keywords
+- `selection_excerpt.use_when` — conditions under which this pattern applies
+- `selection_excerpt.do_not_use_when` — conditions that exclude this pattern
+- `source.path` — relative path to the local pattern file
+
+For each component type involved in the current task:
+1. Match the component against `aliases`, `tags`, and `use_when` criteria.
+2. Apply `do_not_use_when` to exclude false matches.
+3. If a component type has no matching pattern, note `Native + global rules` for it and continue.
+
+Produce a short list of selected pattern IDs before reading any pattern files. If a component matches multiple patterns, prefer the most specific match (e.g., `radio.basic` over `list-item.basic` for a row in a mutually exclusive set). If still ambiguous, read all candidates and apply the most applicable after reviewing their full content.
+
+---
+
+## Step 2 — Read Full Patterns
+
+For each selected pattern, read the local file at:
+
+```
+${CLAUDE_SKILL_DIR}/{source.path}
+```
+
+where `source.path` is the value from the catalog entry (e.g., `components/switch.basic.md`, `components/text-field.basic.md`).
+
+Read all selected pattern files in parallel before generating any code. Only read files for IDs on the selected list.
+
+From each file, extract and apply:
+- **Must Haves** — non-negotiable WCAG 2.2 AA requirements; implement all of them
+- **Don'ts** — hard constraints; never produce code that violates them
+- **Customizable** — optional aspects that may be adjusted
+- **Golden Pattern** — use as the implementation reference; match its structure and its accessibility semantics, adapted to the project's conventions
+
+They appear in the pattern file in that order: what you must do, what you must never do, where you have room, then the reference implementation.
+
+If a file is missing, note it and continue with a component that meets the Foundations contract and any applicable Foundations rules.
+
+---
+
+## Step 3 — Apply Global Rules (Always retrieve them all; scope bounds repairs, not reading)
+
+Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
+
+`scope` exists for one job, and it is the opposite of filtering. It tells you **what not to go and repair in code you were not asked to change.** The buckets are a structural scale, identical on every stack:
+
+- `screen` — the document, route, or screen as a whole
+- `layout` — the structural frame inside a screen: landmarks, heading hierarchy, regions
+- `component` — an individual element and its own presentation
+
+So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing pane title or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
+
+Apply all `Must Haves` from every rule that bears on the code you are writing.
+
+Re-read it if a later request in this session brings in a new component type, or if its contents are no longer in your context. Otherwise once per session is enough.
+
+---
+
+## Step 4 — Apply and Generate
+
+Do not produce final code until pattern files have been read, or you have explicitly noted that no patterns apply to the current task.
+
+Apply all `must_haves` from read patterns and applicable global rules. Treat `golden_pattern` code as the implementation reference — match its structure and its accessibility semantics, adapted to the project's existing component and theming conventions.
+
+---
+
+## Guardrails
+
+### Retrieval
+- Use the local catalog at `${CLAUDE_SKILL_DIR}/patterns.json` for component selection.
+- Read only the pattern files needed for the current task.
+- Read each pattern file once, and re-read it only if a later request returns to that component or its contents have left your context. The same applies to `global_rules.md`.
+
+### Design System & Scope
+- If the project uses a component library or design system, preserve it.
+- Prefer minimal-change compliance: fix usage (props, labels, structure) before replacing components.
+- Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
+
+### Styling
+- Use the project's existing theming system (the Material theme, design-system tokens, etc.).
+- Treat `golden_pattern` styling as optional examples, not requirements.
+- Do not introduce a new theming or component dependency unless explicitly requested.
+
+### Communication
+- Apply this skill implicitly as part of implementation — do not narrate the file-reading workflow to the user.
+- Surface process details only if:
+  - a file read fails, or
+  - the user explicitly asks how patterns were selected or applied.
