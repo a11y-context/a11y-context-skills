@@ -203,7 +203,7 @@ scope: [component]
 ### Must Haves
 - Do not use color as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element.
 - When a component renders a meaningful state visually (e.g., selected, active, current, invalid, pressed), that state is distinguishable by something in addition to color, such as an icon, checkmark, shape, underline, or text.
-  - This is the visual counterpart to exposing the state programmatically. A component may satisfy `aria-selected` yet still fail 1.4.1 if selection is shown by a background tint alone.
+  - This is the visual counterpart to exposing the state programmatically. A component may satisfy `aria-selected` and still leave a sighted user unable to tell which item is selected, when selection is shown by a background tint alone.
 - The additional cue is an icon, a shape, a border, or text rather than a second color treatment, so that it survives Windows High Contrast Mode. See `global.forced-colors`.
   - Forced colors is the reason this rule has teeth beyond grayscale: a state shown by a background tint does not merely lose contrast there, it is repainted with the system color and disappears.
 
