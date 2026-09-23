@@ -1,6 +1,6 @@
 # Contributing
 
-This repo packages installable skill artifacts for [A11y Context](https://a11y-context-project.vercel.app). One repo, multiple platforms (web/react and android/compose today; iOS coming), four retrieval variants per platform (local, http, mcp, rag).
+This repo packages installable skill artifacts for [A11y Context](https://a11y-context-project.vercel.app). One repo, three platforms (web/react, android/compose, ios/swiftui), four retrieval variants per platform (local, http, mcp, rag).
 
 ## License
 

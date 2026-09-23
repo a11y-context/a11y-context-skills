@@ -12,7 +12,8 @@ Installable AI coding assistant skills for the [A11y Context](https://a11y-conte
 | Web / React | `a11y-context-web-react-local` | Reads a bundled copy of the corpus from disk — fully offline |
 | Android / Compose | `a11y-context-android-compose-http` | Fetches corpus from the public docs site at generation time |
 | Android / Compose | `a11y-context-android-compose-local` | Reads a bundled copy of the corpus from disk — fully offline |
-| iOS / SwiftUI | Coming soon | — |
+| iOS / SwiftUI | `a11y-context-ios-swiftui-http` | Fetches corpus from the public docs site at generation time |
+| iOS / SwiftUI | `a11y-context-ios-swiftui-local` | Reads a bundled copy of the corpus from disk — fully offline |
 
 Each platform also ships `-mcp` and `-rag` variants for those retrieval paths; see the corpus docs for when either is the right choice.
 
@@ -89,6 +90,8 @@ skills/
       a11y-context.config.json
   android-compose/
     local/ http/ mcp/ rag/     ← same four variants, Compose patterns
+  ios-swiftui/
+    local/ http/ mcp/ rag/     ← same four variants, SwiftUI patterns
 ```
 
 The skill's canonical name (declared in `SKILL.md` frontmatter `name:`) is also the destination folder name when consumed.
