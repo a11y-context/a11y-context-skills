@@ -3,7 +3,7 @@ id: button.basic
 title: Button
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [button, control, action, icon-button, fab, chip]
 aliases: [btn, primary button, icon button, call to action, cta, IconButton, floating action button, fab, ExtendedFloatingActionButton, assist chip, suggestion chip, text button]
 summary: Control that triggers an immediate action. Covers text, icon-only, floating, and action-chip presentations, which share one role and differ in where the accessible name comes from.
@@ -34,6 +34,7 @@ Control that triggers an immediate action. Covers text, icon-only, floating, and
 - When several buttons on one screen share visible text, such as a repeated "Edit" per row, give each a `contentDescription` that names what it acts on (e.g., "Edit username").
 - When an `ExtendedFloatingActionButton` collapses to icon-only, set a `contentDescription` that survives the collapse. The visible text is the name while expanded and disappears while collapsed, so a control named only by its text becomes unnamed.
 - Set `onClickLabel` when "Double tap to activate" would not tell the user what happens (e.g., `onClickLabel = "add to watchlist"`). This is the only supplementary text Compose exposes, and it completes the sentence TalkBack speaks.
+  - `IconButton` and the other Material composables here take no `onClickLabel` parameter. Set the label through `Modifier.semantics { onClick(label = "...", action = null) }`.
 - If the action is unavailable, pass `enabled = false` rather than removing the handler, so the control stays in the accessibility tree and reports that it is disabled.
 - Give a `FloatingActionButton` a `traversalIndex` or a containing traversal group when it is drawn last but read first, because it sits outside the content flow and composition order will not match what the user sees (`global.traversal-order`).
 - Meets the touch target baseline in `global_rules.md` (`global.touch-target-size`).
@@ -44,6 +45,7 @@ Control that triggers an immediate action. Covers text, icon-only, floating, and
 - Do not include the word "button" in `contentDescription`. TalkBack appends the role itself, so the control announces "Save button, button".
 - Do not set `contentDescription` on the `Icon` inside a labeled button. The button's own name and the icon's name both reach the merged node, and the control announces twice.
 - Do not put the result of the action in `contentDescription` when it belongs in `onClickLabel`. The name says what the control is; the click label says what activating it does.
+- Do not pass a lambda to `onClick`'s `action` parameter to attach a label on a component like `IconButton` that takes no `onClickLabel` directly. The parameter replaces the control's click action in the accessibility tree, so TalkBack triggers the lambda instead of the real handler and the button does nothing, while touch input bypasses semantics and still triggers the real action. Pass `action = null` to attach the label without replacing the handler.
 - Do not disable a button by removing its `onClick` or wrapping it in a non-clickable container. Both leave a control that looks disabled and reports nothing, and the second silently drops the 48dp minimum that the Material composable applies only while it owns the callback.
 
 ## Customizable
@@ -72,7 +74,7 @@ fun ButtonExamples() {
     // Icon-only. The name moves to the control, and onClickLabel says what happens.
     IconButton(
         onClick = { /* open settings */ },
-        modifier = Modifier.semantics { onClick(label = "open settings") { false } }
+        modifier = Modifier.semantics { onClick(label = "open settings", action = null) }
     ) {
         Icon(Icons.Filled.Settings, contentDescription = "Settings")
     }

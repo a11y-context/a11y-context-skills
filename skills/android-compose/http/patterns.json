@@ -1,7 +1,7 @@
 {
   "stack": "android/compose",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.2.0",
+  "catalog_revision": "0.4.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -9,7 +9,7 @@
       "title": "Bottom Sheet (Modal)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "Overlay that rises from the bottom edge and blocks the content behind it. Most of the dismissal contract arrives with the component rather than the caller, and every part of it disappears under some configuration the caller controls.",
       "aliases": [
         "modal bottom sheet",
@@ -52,7 +52,7 @@
       "title": "Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "Control that triggers an immediate action. Covers text, icon-only, floating, and action-chip presentations, which share one role and differ in where the accessible name comes from.",
       "aliases": [
         "btn",
@@ -327,7 +327,7 @@
       "title": "Text Field",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "Single-line text entry whose accessible name has to come from the field's own label slot rather than a Text beside it. Supporting text and error messages are separate nodes the component does not attach, so both have to be associated deliberately.",
       "aliases": [
         "textfield",

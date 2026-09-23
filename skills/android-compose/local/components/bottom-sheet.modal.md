@@ -3,7 +3,7 @@ id: bottom-sheet.modal
 title: Bottom Sheet (Modal)
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [bottom sheet, modal, overlay, dialog, sheet]
 aliases: [modal bottom sheet, ModalBottomSheet, bottom drawer, action sheet, sheet, slide-up panel, tray]
 summary: Overlay that rises from the bottom edge and blocks the content behind it. Most of the dismissal contract arrives with the component rather than the caller, and every part of it disappears under some configuration the caller controls.
@@ -35,6 +35,7 @@ Overlay that rises from the bottom edge and blocks the content behind it. Most o
 - Handle Escape from a hardware keyboard with `Modifier.onKeyEvent`. Compose does not, and back-press dismissal does not cover a keyboard user.
 - Move focus into the sheet when it opens, using a `FocusRequester` requested from a `LaunchedEffect` (`global.focus-management`).
 - Restore focus to the control that opened the sheet when it closes.
+- Meets the focus states baseline in `global_rules.md` (`global.focus-states`). The sheet makes its content container focusable in order to receive focus on open, and a container that can hold focus has to show it.
 - Mark the sheet's title as a heading so a user can find it after entering (`global.headings`).
 - Make the sheet's content scrollable, and set `contentWindowInsets` so it clears the system bars. A sheet whose content is cut off at large font sizes has no route to the controls below the fold (`global.text-scaling`).
 

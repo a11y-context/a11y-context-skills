@@ -3,7 +3,7 @@ id: text-field.basic
 title: Text Field
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [text-field, form, input, autofill, error, keyboard]
 aliases: [textfield, text input, input field, edit text, EditText, TextField, OutlinedTextField, BasicTextField, password field, search field, secure field]
 summary: Single-line text entry whose accessible name has to come from the field's own label slot rather than a Text beside it. Supporting text and error messages are separate nodes the component does not attach, so both have to be associated deliberately.
@@ -40,7 +40,9 @@ The trap is `isError`. Setting it turns the field red and announces a generic er
 - Set `Modifier.semantics { contentType = ContentType.EmailAddress }` or the matching type on any field that maps to an autofill category, so autofill offers the right value.
 - Announce a validation error rather than moving focus to the field when the error appears after submit. Moving focus loses the user's place in a form (`global.announcements`).
 - Label a trailing icon button, such as a password reveal or a clear-text control, and give it a `stateDescription` when it toggles. It is a real control inside the field and needs its own name.
-- Meets the touch target size baseline in `global_rules.md` (`global.touch-target-size`).
+- If the field is unavailable, pass `enabled = false` rather than removing the field or making it non-interactive, so it stays in the accessibility tree and reports that it is disabled.
+- Use `readOnly = true` rather than `enabled = false` for a value the user may read and copy but not change, such as an order number. A disabled field is skipped by some navigation and cannot be selected; a read-only one stays focusable and its text stays reachable.
+- Meets the touch target baseline in `global_rules.md` (`global.touch-target-size`).
 - Meets the focus states baseline in `global_rules.md` (`global.focus-states`).
 
 ## Don'ts
@@ -55,6 +57,7 @@ The trap is `isError`. Setting it turns the field red and announces a generic er
 ## Customizable
 - `TextField` or `OutlinedTextField` is a visual choice. Both carry the same semantics and the same obligations.
 - The supporting text may carry a hint, a character count, an error message, or nothing.
+- A field the user cannot edit may be `readOnly` or disabled. The choice is a semantic one, not a visual one: read-only keeps the value reachable, disabled removes it from the interaction flow.
 - `prefix`, `suffix`, `leadingIcon`, and `trailingIcon` are available. A decorative leading icon takes `contentDescription = null`; an interactive trailing one needs a name.
 - For masked entry, `visualTransformation = PasswordVisualTransformation()` with the password content type. The labeling requirements are unchanged, and the reveal control is a labeled toggle.
 
