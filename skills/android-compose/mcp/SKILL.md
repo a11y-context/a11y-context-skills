@@ -41,7 +41,7 @@ From each returned pattern, extract and apply:
 - **Must Haves** — non-negotiable WCAG 2.2 AA requirements; implement all of them
 - **Don'ts** — hard constraints; never produce code that violates them
 - **Customizable** — optional aspects that may be adjusted
-- **Golden Pattern** — the implementation reference; match its structure and semantics, adapted to the project's conventions
+- **Golden Pattern** — the implementation reference; match its structure and its accessibility semantics, adapted to the project's conventions
 
 They appear in the pattern in that order: what you must do, what you must never do, where you have room, then the reference implementation.
 
@@ -71,7 +71,7 @@ Call it again if a later request in this session brings in a new component type,
 
 Do not produce final code until `get_pattern` has returned for every selected pattern, or you have explicitly noted that no patterns apply.
 
-Apply all Must Haves from retrieved patterns and applicable Foundations rules. Treat the Golden Pattern as the implementation reference — match its structure and its `Modifier.semantics` usage, adapted to the project's existing component and theming conventions.
+Apply all Must Haves from retrieved patterns and applicable Foundations rules. Treat the Golden Pattern as the implementation reference — match its structure and its accessibility semantics, adapted to the project's existing component and theming conventions.
 
 ---
 
