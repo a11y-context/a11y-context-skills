@@ -84,7 +84,7 @@ Apply all Must Haves from retrieved patterns and applicable global rules. Treat 
 ## Retrieval Parameters
 
 - Always use the `android/compose` path. This skill covers Jetpack Compose only. Other stacks exist in the corpus and are not interchangeable with it.
-- If the user explicitly requests a different stack, state that it is not yet available and proceed with `android/compose` equivalents, or stop if the task cannot be adapted.
+- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-web-react-*`, `a11y-context-ios-swiftui-*`). The corpus serves all three, and the patterns are not interchangeable — a stack's Golden Patterns are written in its own language against its own accessibility layer.
 - If a fetch fails, report the error and stop. Do not attempt alternative retrieval mechanisms.
 
 ---

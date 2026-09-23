@@ -1,15 +1,15 @@
 ---
-name: a11y-context-web-react-mcp
-description: Apply accessibility patterns to React user-facing UI. Use whenever generating, building, creating, modifying, or refactoring React components, pages, routes, views, or any UI a user sees or interacts with — including buttons, forms, dialogs, modals, navigation, menus, carousels, dropdowns, toasts, banners, headers, footers, landing pages, product pages, and account flows. Use when the prompt mentions any UI element by name or describes a homepage, hero, card row, or interactive widget. Do not use for custom hooks (use*), context providers, HOCs, API handlers, type definitions, constants, or test helpers.
+name: a11y-context-ios-swiftui-mcp
+description: Apply accessibility patterns to SwiftUI user-facing UI. Use whenever generating, building, creating, modifying, or refactoring SwiftUI views, screens, or any UI a user sees or interacts with — including buttons, forms, text fields, pickers, toggles, steppers, sliders, alerts, sheets, menus, links, and list rows. Use when the prompt mentions any UI element by name or describes a screen, settings pane, detail view, or interactive control. Do not use for view models, Combine publishers, networking, persistence, data models, or test helpers.
 user-invocable: true
 allowed-tools: mcp__a11y-context__list_patterns mcp__a11y-context__get_pattern mcp__a11y-context__get_foundations
 ---
 
-# A11y Context — React Skill (MCP)
+# A11y Context — SwiftUI Skill (MCP)
 
 ## Purpose
 
-Retrieve accessibility best-practice patterns through the A11y Context MCP server and apply them before generating front-end React code. Run this skill before any implementation step that produces user-facing UI.
+Retrieve accessibility best-practice patterns through the A11y Context MCP server and apply them before generating SwiftUI code. Run this skill before any implementation step that produces user-facing UI.
 
 This variant is the **brain**: it decides which patterns are needed and applies them. The [MCP server](https://github.com/a11y-context/accessibility-pattern-mcp) is the **retrieval mechanism** — it must be installed in your client (see the server's README). The three tools below assume the server is configured under the name `a11y-context`; if you named it differently, the tool prefix changes accordingly.
 
@@ -29,7 +29,7 @@ For each component type involved in the current task:
 2. Apply `do_not_use_when` to exclude false matches.
 3. If a component type has no matching pattern, note `Native + Foundations` for it and continue.
 
-Produce a short list of selected pattern IDs before making any `get_pattern` calls. If a component matches multiple patterns, prefer the most specific match (e.g., `button.toggle` over `button.basic` for a toggle action). If still ambiguous, retrieve all candidates and apply the most applicable after reading their full content.
+Produce a short list of selected pattern IDs before making any `get_pattern` calls. If a component matches multiple patterns, prefer the most specific match (e.g., `select.segmented` over `select.menu` for a small fixed set shown inline). If still ambiguous, retrieve all candidates and apply the most applicable after reading their full content.
 
 ---
 
@@ -41,7 +41,7 @@ From each returned pattern, extract and apply:
 - **Must Haves** — non-negotiable WCAG 2.2 AA requirements; implement all of them
 - **Don'ts** — hard constraints; never produce code that violates them
 - **Customizable** — optional aspects that may be adjusted
-- **Golden Pattern** — the implementation reference; match its structure and ARIA usage, adapted to the project's conventions
+- **Golden Pattern** — the implementation reference; match its structure and its accessibility semantics, adapted to the project's conventions
 
 They appear in the pattern in that order: what you must do, what you must never do, where you have room, then the reference implementation.
 
@@ -59,7 +59,7 @@ Call `get_foundations()` on every UI task. Foundations rules are not only screen
 - `layout` — the structural frame inside a screen: landmarks, heading hierarchy, regions
 - `component` — an individual element and its own presentation
 
-So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing landmark or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
+So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing navigation title or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
 
 Apply all `Must Haves` from every rule that bears on the code you are writing.
 
@@ -71,14 +71,14 @@ Call it again if a later request in this session brings in a new component type,
 
 Do not produce final code until `get_pattern` has returned for every selected pattern, or you have explicitly noted that no patterns apply.
 
-Apply all Must Haves from retrieved patterns and applicable Foundations rules. Treat the Golden Pattern as the implementation reference — match its structure and ARIA usage, adapted to the project's existing component and styling conventions.
+Apply all Must Haves from retrieved patterns and applicable Foundations rules. Treat the Golden Pattern as the implementation reference — match its structure and its accessibility semantics, adapted to the project's existing view and styling conventions.
 
 ---
 
 ## Retrieval Parameters
 
-- Always use the `web/react` stack. This skill covers React only. Other stacks exist in the corpus and are not interchangeable with it.
-- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-android-compose-*`, `a11y-context-ios-swiftui-*`). The corpus serves all three, and the patterns are not interchangeable — a stack's Golden Patterns are written in its own language against its own accessibility layer.
+- Always use the `ios/swiftui` stack. This skill covers SwiftUI only. Other stacks exist in the corpus and are not interchangeable with it.
+- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-web-react-*`, `a11y-context-android-compose-*`). The corpus serves all three, and the patterns are not interchangeable — a stack's Golden Patterns are written in its own language against its own accessibility layer.
 - If the MCP server is unreachable, report it and stop. Do not attempt alternative retrieval mechanisms.
 
 ---
@@ -95,9 +95,9 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
 ### Styling
-- Use the project's existing styling system (Tailwind, CSS modules, design tokens, etc.).
+- Use the project's existing styling (view modifiers, a design system, shared style types, etc.).
 - Treat Golden Pattern styling as optional examples, not requirements.
-- Do not introduce a new styling dependency unless explicitly requested.
+- Do not introduce a new styling or component dependency unless explicitly requested.
 
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.

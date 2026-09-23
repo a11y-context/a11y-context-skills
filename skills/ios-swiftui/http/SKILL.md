@@ -1,15 +1,15 @@
 ---
-name: a11y-context-web-react-http
-description: Apply accessibility patterns to React user-facing UI. Use whenever generating, building, creating, modifying, or refactoring React components, pages, routes, views, or any UI a user sees or interacts with — including buttons, forms, dialogs, modals, navigation, menus, carousels, dropdowns, toasts, banners, headers, footers, landing pages, product pages, and account flows. Use when the prompt mentions any UI element by name or describes a homepage, hero, card row, or interactive widget. Do not use for custom hooks (use*), context providers, HOCs, API handlers, type definitions, constants, or test helpers.
+name: a11y-context-ios-swiftui-http
+description: Apply accessibility patterns to SwiftUI user-facing UI. Use whenever generating, building, creating, modifying, or refactoring SwiftUI views, screens, or any UI a user sees or interacts with — including buttons, forms, text fields, pickers, toggles, steppers, sliders, alerts, sheets, menus, links, and list rows. Use when the prompt mentions any UI element by name or describes a screen, settings pane, detail view, or interactive control. Do not use for view models, Combine publishers, networking, persistence, data models, or test helpers.
 user-invocable: true
 allowed-tools: Read WebFetch
 ---
 
-# A11y Context — React Skill
+# A11y Context — SwiftUI Skill
 
 ## Purpose
 
-Retrieve accessibility best-practice patterns from the pattern documentation site and apply them before generating front-end React code. Run this skill before any implementation step that produces user-facing UI.
+Retrieve accessibility best-practice patterns from the pattern documentation site and apply them before generating SwiftUI code. Run this skill before any implementation step that produces user-facing UI.
 
 ---
 
@@ -27,7 +27,7 @@ For each component type involved in the current task:
 2. Apply `do_not_use_when` to exclude false matches.
 3. If a component type has no matching pattern, note `Native + global rules` for it and continue.
 
-Produce a short list of selected pattern IDs before making any fetch calls. If a component matches multiple patterns, prefer the most specific match (e.g., `button.toggle` over `button.basic` for a toggle action). If still ambiguous, retrieve all candidates and apply the most applicable after reading their full content.
+Produce a short list of selected pattern IDs before making any fetch calls. If a component matches multiple patterns, prefer the most specific match (e.g., `select.segmented` over `select.menu` for a small fixed set shown inline). If still ambiguous, retrieve all candidates and apply the most applicable after reading their full content.
 
 ---
 
@@ -36,10 +36,10 @@ Produce a short list of selected pattern IDs before making any fetch calls. If a
 For each selected pattern ID, fetch its documentation page:
 
 ```
-GET https://a11y-context-project.vercel.app/web/react/components/{id}
+GET https://a11y-context-project.vercel.app/ios/swiftui/components/{id}
 ```
 
-Example: for `toast.basic` → `https://a11y-context-project.vercel.app/web/react/components/toast.basic`
+Example: for `switch.basic` → `https://a11y-context-project.vercel.app/ios/swiftui/components/switch.basic`
 
 Issue all fetches in parallel before generating any code — do not retrieve one at a time.
 
@@ -47,11 +47,11 @@ From each fetched page, extract and apply:
 - **Must Haves** — non-negotiable WCAG 2.2 AA requirements; implement all of them
 - **Don'ts** — hard constraints; never produce code that violates them
 - **Customizable** — optional aspects that may be adjusted
-- **Golden Pattern** — use as the implementation reference; match its structure and ARIA usage, adapted to the project's conventions
+- **Golden Pattern** — use as the implementation reference; match its structure and its accessibility semantics, adapted to the project's conventions
 
 They appear in the pattern file in that order: what you must do, what you must never do, where you have room, then the reference implementation.
 
-If a fetch returns a 404 or fails, note it and continue with native HTML semantics and any applicable global rules. Do not invent pattern guidance.
+If a fetch returns a 404 or fails, note it and continue with the native SwiftUI control and any applicable Foundations rules. Do not invent pattern guidance.
 
 ---
 
@@ -65,7 +65,7 @@ Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules a
 - `layout` — the structural frame inside a screen: landmarks, heading hierarchy, regions
 - `component` — an individual element and its own presentation
 
-So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing landmark or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
+So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing navigation title or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
 
 Apply all `Must Haves` from every rule that bears on the code you are writing.
 
@@ -77,14 +77,14 @@ Re-read it if a later request in this session brings in a new component type, or
 
 Do not produce final code until pattern pages have been fetched, or you have explicitly noted that no patterns apply to the current task.
 
-Apply all Must Haves from retrieved patterns and applicable global rules. Treat the Golden Pattern as the implementation reference — match its structure and ARIA usage, adapted to the project's existing component and styling conventions.
+Apply all Must Haves from retrieved patterns and applicable global rules. Treat the Golden Pattern as the implementation reference — match its structure and its accessibility semantics, adapted to the project's existing view and styling conventions.
 
 ---
 
 ## Retrieval Parameters
 
-- Always use the `web/react` path. This skill covers React only. Other stacks exist in the corpus and are not interchangeable with it.
-- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-android-compose-*`, `a11y-context-ios-swiftui-*`). The corpus serves all three, and the patterns are not interchangeable — a stack's Golden Patterns are written in its own language against its own accessibility layer.
+- Always use the `ios/swiftui` path. This skill covers SwiftUI only. Other stacks exist in the corpus and are not interchangeable with it.
+- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-web-react-*`, `a11y-context-android-compose-*`). The corpus serves all three, and the patterns are not interchangeable — a stack's Golden Patterns are written in its own language against its own accessibility layer.
 - If a fetch fails, report the error and stop. Do not attempt alternative retrieval mechanisms.
 
 ---
@@ -102,9 +102,9 @@ Apply all Must Haves from retrieved patterns and applicable global rules. Treat 
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
 ### Styling
-- Use the project's existing styling system (Tailwind, CSS modules, design system tokens, etc.).
+- Use the project's existing styling (view modifiers, a design system, shared style types, etc.).
 - Treat Golden Pattern styling as optional examples, not requirements.
-- Do not introduce a new styling dependency unless explicitly requested.
+- Do not introduce a new styling or component dependency unless explicitly requested.
 
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.

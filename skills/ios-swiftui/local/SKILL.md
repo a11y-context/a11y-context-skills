@@ -1,15 +1,15 @@
 ---
-name: a11y-context-android-compose-local
-description: Apply accessibility patterns to Jetpack Compose user-facing UI. Use whenever generating, building, creating, modifying, or refactoring composables, screens, or any UI a user sees or interacts with — including buttons, forms, text fields, dialogs, bottom sheets, navigation, menus, lists, content shelves, switches, checkboxes, and settings screens. Use when the prompt mentions any UI element by name or describes a screen, home feed, card row, or interactive widget. Do not use for ViewModels, repositories, use cases, data classes, dependency-injection modules, network clients, or test helpers.
+name: a11y-context-ios-swiftui-local
+description: Apply accessibility patterns to SwiftUI user-facing UI. Use whenever generating, building, creating, modifying, or refactoring SwiftUI views, screens, or any UI a user sees or interacts with — including buttons, forms, text fields, pickers, toggles, steppers, sliders, alerts, sheets, menus, links, and list rows. Use when the prompt mentions any UI element by name or describes a screen, settings pane, detail view, or interactive control. Do not use for view models, Combine publishers, networking, persistence, data models, or test helpers.
 user-invocable: true
 allowed-tools: Read
 ---
 
-# A11y Context — Jetpack Compose Skill
+# A11y Context — SwiftUI Skill
 
 ## Purpose
 
-Read accessibility best-practice patterns from local documentation files and apply them before generating Compose UI code. Run this skill before any implementation step that produces user-facing UI.
+Read accessibility best-practice patterns from local documentation files and apply them before generating SwiftUI code. Run this skill before any implementation step that produces user-facing UI.
 
 ---
 
@@ -28,7 +28,7 @@ For each component type involved in the current task:
 2. Apply `do_not_use_when` to exclude false matches.
 3. If a component type has no matching pattern, note `Native + global rules` for it and continue.
 
-Produce a short list of selected pattern IDs before reading any pattern files. If a component matches multiple patterns, prefer the most specific match (e.g., `radio.basic` over `list-item.basic` for a row in a mutually exclusive set). If still ambiguous, read all candidates and apply the most applicable after reviewing their full content.
+Produce a short list of selected pattern IDs before reading any pattern files. If a component matches multiple patterns, prefer the most specific match (e.g., `select.segmented` over `select.menu` for a small fixed set shown inline). If still ambiguous, read all candidates and apply the most applicable after reviewing their full content.
 
 ---
 
@@ -52,7 +52,7 @@ From each file, extract and apply:
 
 They appear in the pattern file in that order: what you must do, what you must never do, where you have room, then the reference implementation.
 
-If a file is missing, note it and continue with a component that meets the Foundations contract and any applicable Foundations rules.
+If a file is missing, note it and continue with the native SwiftUI control and any applicable Foundations rules.
 
 ---
 
@@ -66,7 +66,7 @@ Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules a
 - `layout` — the structural frame inside a screen: landmarks, heading hierarchy, regions
 - `component` — an individual element and its own presentation
 
-So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing pane title or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
+So: adding a button to an existing screen means applying the `component` rules to the button you write, and leaving a missing navigation title or a broken heading order **alone**. Report what you saw; do not fix it. Silently repairing it produces a large diff for a small request; silently ignoring it wastes what you noticed. Say it in one line and move on.
 
 Apply all `Must Haves` from every rule that bears on the code you are writing.
 
@@ -78,14 +78,14 @@ Re-read it if a later request in this session brings in a new component type, or
 
 Do not produce final code until pattern files have been read, or you have explicitly noted that no patterns apply to the current task.
 
-Apply all `must_haves` from read patterns and applicable global rules. Treat `golden_pattern` code as the implementation reference — match its structure and its accessibility semantics, adapted to the project's existing component and theming conventions.
+Apply all `must_haves` from read patterns and applicable global rules. Treat `golden_pattern` code as the implementation reference — match its structure and its accessibility semantics, adapted to the project's existing view and styling conventions.
 
 ---
 
 ## Retrieval Parameters
 
-- The bundled corpus is `android/compose` and this skill covers Jetpack Compose only. Nothing in it translates to another stack: the Golden Patterns are written in that stack's own language against its own accessibility layer.
-- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-web-react-*`, `a11y-context-ios-swiftui-*`). Do not adapt a pattern across stacks.
+- The bundled corpus is `ios/swiftui` and this skill covers SwiftUI only. Nothing in it translates to another stack: the Golden Patterns are written in that stack's own language against its own accessibility layer.
+- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-web-react-*`, `a11y-context-android-compose-*`). Do not adapt a pattern across stacks.
 - If a pattern file named in the catalog is missing from the skill folder, report it and stop. The bundle is incomplete, and guessing at the contents is worse than saying so.
 
 ---
@@ -103,9 +103,9 @@ Apply all `must_haves` from read patterns and applicable global rules. Treat `go
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
 ### Styling
-- Use the project's existing theming system (the Material theme, design-system tokens, etc.).
+- Use the project's existing styling (view modifiers, a design system, shared style types, etc.).
 - Treat `golden_pattern` styling as optional examples, not requirements.
-- Do not introduce a new theming or component dependency unless explicitly requested.
+- Do not introduce a new styling or component dependency unless explicitly requested.
 
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the file-reading workflow to the user.

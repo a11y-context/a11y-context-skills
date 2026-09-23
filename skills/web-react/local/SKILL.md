@@ -82,6 +82,14 @@ Apply all `must_haves` from read patterns and applicable global rules. Treat `go
 
 ---
 
+## Retrieval Parameters
+
+- The bundled corpus is `web/react` and this skill covers React only. Nothing in it translates to another stack: the Golden Patterns are written in that stack's own language against its own accessibility layer.
+- If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-android-compose-*`, `a11y-context-ios-swiftui-*`). Do not adapt a pattern across stacks.
+- If a pattern file named in the catalog is missing from the skill folder, report it and stop. The bundle is incomplete, and guessing at the contents is worse than saying so.
+
+---
+
 ## Guardrails
 
 ### Retrieval
