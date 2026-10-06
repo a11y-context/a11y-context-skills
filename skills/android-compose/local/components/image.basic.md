@@ -3,7 +3,7 @@ id: image.basic
 title: Image
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [image, icon, picture, graphic, decorative, informative, contentDescription]
 aliases: [Image, Icon, AsyncImage, picture, photo, illustration, graphic, logo, status icon, decorative image, alt text]
 summary: Picture or icon whose accessibility comes down to one decision about what it means. A meaningful image is named for what it conveys, a decorative one passes null and leaves the tree, and an empty string is not decorative.
@@ -26,7 +26,7 @@ The empty string is where web habits break. On the web, `alt=""` is how an image
 - Do not use when the icon is the content of a control the user taps (use `button.basic`).
 - Do not use when the image is the thumbnail inside a list row (use `list-item.basic`).
 - Do not use when the image is a tile in a horizontally scrolling strip (use `content-shelf.basic`).
-- Do not use when the graphic shows that work is in progress (use `progress-indicator.indeterminate`).
+- Do not use when the graphic shows that work is in progress (use `progress-indicator.basic`).
 
 ## Must Haves
 - Decide whether the image carries meaning before writing it. `Image` and `Icon` take `contentDescription` as a required parameter with no default, so every call site makes this choice explicitly (`global.icon`).

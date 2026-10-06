@@ -3,7 +3,7 @@ id: button.basic
 title: Button
 stack: android/compose
 status: beta
-latest_version: 0.2.1
+latest_version: 0.2.2
 tags: [button, control, action, icon-button, fab, chip]
 aliases: [btn, primary button, icon button, call to action, cta, IconButton, floating action button, fab, ExtendedFloatingActionButton, assist chip, suggestion chip, text button]
 summary: Control that triggers an immediate action. Covers text, icon-only, floating, and action-chip presentations, which share one role and differ in where the accessible name comes from.
@@ -23,7 +23,7 @@ Control that triggers an immediate action. Covers text, icon-only, floating, and
 - Do not use when the control represents an on or off state that persists after the tap (use `button.toggle`).
 - Do not use when the control carries a `selected` state, such as a filter or a removable token (use `chip.filter` or `chip.input`).
 - Do not use when the control opens a list of commands (use `menu.basic`).
-- Do not use when the control opens a URL or leaves the app (use `link.standalone`).
+- Do not use when the control opens a URL or leaves the app (use `link.basic`).
 - Do not use when the control is a row in a list that navigates elsewhere (use `list-item.basic`).
 
 ## Must Haves

@@ -1,7 +1,7 @@
 {
   "stack": "android/compose",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.6.0",
+  "catalog_revision": "0.7.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -52,7 +52,7 @@
       "title": "Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.1",
+      "latest_version": "0.2.2",
       "summary": "Control that triggers an immediate action. Covers text, icon-only, floating, and action-chip presentations, which share one role and differ in where the accessible name comes from.",
       "aliases": [
         "btn",
@@ -85,7 +85,7 @@
           "Do not use when the control represents an on or off state that persists after the tap (use button.toggle).",
           "Do not use when the control carries a selected state, such as a filter or a removable token (use chip.filter or chip.input).",
           "Do not use when the control opens a list of commands (use menu.basic).",
-          "Do not use when the control opens a URL or leaves the app (use link.standalone).",
+          "Do not use when the control opens a URL or leaves the app (use link.basic).",
           "Do not use when the control is a row in a list that navigates elsewhere (use list-item.basic)."
         ]
       },
@@ -242,7 +242,7 @@
       "title": "Image",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.1.1",
       "summary": "Picture or icon whose accessibility comes down to one decision about what it means. A meaningful image is named for what it conveys, a decorative one passes null and leaves the tree, and an empty string is not decorative.",
       "aliases": [
         "Image",
@@ -276,13 +276,97 @@
           "Do not use when the icon is the content of a control the user taps (use button.basic).",
           "Do not use when the image is the thumbnail inside a list row (use list-item.basic).",
           "Do not use when the image is a tile in a horizontally scrolling strip (use content-shelf.basic).",
-          "Do not use when the graphic shows that work is in progress (use progress-indicator.indeterminate)."
+          "Do not use when the graphic shows that work is in progress (use progress-indicator.basic)."
         ]
       },
       "variants": [],
       "default_variant": null,
       "source": {
         "path": "components/image.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "link.basic",
+      "title": "Link",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Link that stands on its own and opens a web page or another app. Compose has no link role and no Link composable, so a standalone link is a TextButton whose text names the destination; a text link's tap area is only as large as its letters.",
+      "aliases": [
+        "standalone link",
+        "TextButton link",
+        "hyperlink",
+        "learn more link",
+        "external link",
+        "open in browser",
+        "LocalUriHandler"
+      ],
+      "tags": [
+        "link",
+        "url",
+        "external",
+        "navigation",
+        "web page"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a control outside a paragraph opens a web page, a document, or another app (e.g., \"Privacy policy\", \"Terms of service\", \"View on map\").",
+          "Use when the destination is a place the user goes to, not an action performed on the current screen."
+        ],
+        "do_not_use_when": [
+          "Do not use when the link sits inside a sentence of body text (use link.inline).",
+          "Do not use when activating it performs an action on the current screen, such as saving or deleting (use button.basic).",
+          "Do not use when it moves between the app's top-level destinations (use navigation-bar.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/link.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "link.inline",
+      "title": "Inline Link",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Link inside a sentence of body text, built with LinkAnnotation. TalkBack reaches it through its Links menu rather than as a stop of its own, and Material draws nothing when a keyboard focuses it, so the link's text and its focused style are the caller's to get right.",
+      "aliases": [
+        "LinkAnnotation",
+        "LinkAnnotation.Url",
+        "LinkAnnotation.Clickable",
+        "withLink",
+        "buildAnnotatedString",
+        "TextLinkStyles",
+        "hyperlink in text",
+        "link in paragraph"
+      ],
+      "tags": [
+        "link",
+        "inline link",
+        "hyperlink",
+        "text",
+        "annotated string"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a link sits inside a sentence or paragraph of body text (e.g., \"By continuing, you agree to the terms of service and privacy policy.\").",
+          "Use when the linked words are part of the sentence and pulling them out would break it."
+        ],
+        "do_not_use_when": [
+          "Do not use when the link stands on its own outside body text (use link.basic).",
+          "Do not use when activating it performs an action on the current screen rather than opening something (use button.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/link.inline.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -417,6 +501,55 @@
       "default_variant": null,
       "source": {
         "path": "components/navigation-bar.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "progress-indicator.basic",
+      "title": "Progress Indicator",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Bar or ring showing that work is under way, with or without a measure of how much is done. Material reports a value or an indeterminate state but names neither, so on its own the indicator says \"45 percent\" or \"in progress\" without saying of what, and nothing says when the work ends.",
+      "aliases": [
+        "LinearProgressIndicator",
+        "CircularProgressIndicator",
+        "progress bar",
+        "progress ring",
+        "loading spinner",
+        "spinner",
+        "activity indicator",
+        "busy indicator",
+        "determinate progress",
+        "indeterminate progress",
+        "ProgressBarRangeInfo",
+        "progressSemantics"
+      ],
+      "tags": [
+        "progress",
+        "progress bar",
+        "loading",
+        "spinner",
+        "busy",
+        "upload",
+        "download",
+        "percentage"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the app knows how much of a task is done and how much remains, and shows it (e.g., an upload, a download, a multi-step import).",
+          "Use when work is under way and the app cannot say how much remains (e.g., loading a screen's content, contacting a server).",
+          "Use when a control shows that its own action is in progress, such as a button that displays a spinner while it saves."
+        ],
+        "do_not_use_when": [
+          "Do not use when the user sets the value (use slider.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/progress-indicator.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
