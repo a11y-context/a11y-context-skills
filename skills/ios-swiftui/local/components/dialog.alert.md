@@ -3,7 +3,7 @@ id: dialog.alert
 title: Dialog (Alert)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.1.2
 tags: [alert, dialog, modal, confirmation, destructive]
 aliases: [alert, alert dialog, confirmation alert, popup alert, delete confirmation, .alert]
 summary: A native SwiftUI .alert modal that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native alerts do not restore it automatically.
@@ -60,8 +60,6 @@ struct DialogAlertDemo: View {
         }
         .accessibilityFocused($triggerFocused)
         .alert("Remove this download?", isPresented: $showingAlert) {
-            // Each action returns VoiceOver focus to the trigger, since native
-            // alerts do not restore it automatically.
             Button("Cancel", role: .cancel) {
                 triggerFocused = true
             }

@@ -3,7 +3,7 @@ id: link.basic
 title: Link
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [link, url, hyperlink, external, navigation]
 aliases: [hyperlink, url link, external link, Link, web link, open url]
 summary: SwiftUI Link that opens a URL or web view, exposing the link trait (with the redundant button trait removed) so VoiceOver signals that activating it leaves the app.
@@ -55,13 +55,9 @@ import SwiftUI
 struct LinkBasicDemo: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Standalone link: specific text; button trait removed so VoiceOver says only "Link".
-            // The link tint must meet 4.5:1 in light and dark (set via AccentColor or .tint);
-            // the default tint can fall short.
             Link("View Weekly Ad", destination: URL(string: "https://www.example.com/weekly-ad")!)
                 .accessibilityRemoveTraits(.isButton)
 
-            // Adjacent to static text: underline so it is distinct without color alone
             HStack(spacing: 4) {
                 Text("Questions? Read our")
                 Link(destination: URL(string: "https://www.example.com/help")!) {
@@ -71,7 +67,6 @@ struct LinkBasicDemo: View {
                 .accessibilityRemoveTraits(.isButton)
             }
 
-            // Icon + text link still names its destination; the icon stays decorative
             Link(destination: URL(string: "https://www.example.com/privacy")!) {
                 Label("Privacy Policy", systemImage: "lock.shield")
             }

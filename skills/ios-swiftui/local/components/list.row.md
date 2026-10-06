@@ -3,7 +3,7 @@ id: list.row
 title: List Row (Navigable)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [list-row, navigation, navigationlink, drill-in, disclosure]
 aliases: [navigation row, drill-in row, NavigationLink, settings row, disclosure row, list item]
 summary: A NavigationLink rendered as a row in a List, where the whole row is one target that drills into another in-app screen and reads as a button to VoiceOver, with a decorative trailing disclosure chevron.
@@ -56,14 +56,12 @@ struct ListRowDemo: View {
     var body: some View {
         NavigationStack {
             List {
-                // Whole row is one button-trait target; List supplies the decorative chevron.
                 NavigationLink {
                     SettingDetail(title: "Account")
                 } label: {
                     Text("Account")
                 }
 
-                // Rich row: title and subtitle combine into one accessible element automatically.
                 NavigationLink {
                     SettingDetail(title: "Wi-Fi")
                 } label: {
@@ -85,7 +83,7 @@ struct SettingDetail: View {
 
     var body: some View {
         Text("\(title) settings")
-            .navigationTitle(title) // destination has a title so the push is announced by name
+            .navigationTitle(title)
     }
 }
 ```

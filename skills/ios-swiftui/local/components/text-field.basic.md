@@ -3,7 +3,7 @@ id: text-field.basic
 title: Text Field
 stack: ios/swiftui
 status: beta
-latest_version: 0.2.0
+latest_version: 0.2.1
 tags: [text-field, form, input, autofill, secure-field]
 aliases: [textfield, text input, input field, secure field, email field, password field]
 summary: A single-line SwiftUI text field whose visible label is exposed to VoiceOver through the field title, an accessibility label, or LabeledContent, with keyboardType and textContentType set so the correct keyboard and AutoFill appear.
@@ -70,30 +70,25 @@ struct TextFieldDemo: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Name from the field's own title; email keyboard + AutoFill via content type
             TextField("Email", text: $email)
-                .textFieldStyle(.roundedBorder)          // visible boundary, 3:1 non-text contrast
+                .textFieldStyle(.roundedBorder)
                 .keyboardType(.emailAddress)
                 .textContentType(.emailAddress)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
-                // Error appended to the label dynamically; the typed text stays the value
                 .accessibilityLabel(emailError.map { "Email, \($0)" } ?? "Email")
                 .accessibilityFocused($emailFocused)
 
-            // Masked secret entry keeps the same labeling contract
             SecureField("Password", text: $password)
                 .textFieldStyle(.roundedBorder)
                 .textContentType(.password)
 
-            // Name supplied by LabeledContent: do NOT also add .accessibilityLabel
             LabeledContent("Full name") {
                 TextField("", text: $fullName)
                     .textFieldStyle(.roundedBorder)
                     .textContentType(.name)
             }
 
-            // Titleless field: the name comes from .accessibilityLabel
             TextField("", text: $zip)
                 .textFieldStyle(.roundedBorder)
                 .keyboardType(.numberPad)
@@ -102,7 +97,7 @@ struct TextFieldDemo: View {
 
             if let emailError {
                 Text(emailError)
-                    .foregroundStyle(.red)               // color PLUS text, never color alone
+                    .foregroundStyle(.red)
                     .font(.footnote)
             }
 
@@ -111,7 +106,7 @@ struct TextFieldDemo: View {
                     emailError = nil
                 } else {
                     emailError = "Enter a valid email address."
-                    emailFocused = true                  // move VoiceOver to the errored field
+                    emailFocused = true
                 }
             }
         }

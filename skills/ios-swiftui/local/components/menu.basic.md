@@ -3,7 +3,7 @@ id: menu.basic
 title: Menu
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [menu, pull-down, commands, actions, overflow]
 aliases: [Menu, pull-down menu, overflow menu, ellipsis menu, more button, action menu]
 summary: A SwiftUI Menu that presents a pull-down list of command buttons, takes VoiceOver focus when opened, with commands carrying the destructive role where applicable.
@@ -54,15 +54,12 @@ import SwiftUI
 struct MenuBasicDemo: View {
     var body: some View {
         HStack {
-            // Text trigger: the "Actions" label is the accessible name.
             Menu("Actions") {
                 Button("Duplicate") { print("Duplicate") }
                 Button("Rename") { print("Rename") }
-                // Destructive role, not red text alone.
                 Button("Delete", role: .destructive) { print("Delete") }
             }
 
-            // Icon-only trigger needs an explicit accessible name.
             Menu {
                 Button("Show Map") { print("Show Map") }
                 Button("Share") { print("Share") }
@@ -71,9 +68,6 @@ struct MenuBasicDemo: View {
             }
             .accessibilityLabel("Map options")
         }
-        // A native Menu takes VoiceOver focus when opened. On close it does NOT
-        // return focus to the trigger, and @AccessibilityFocusState cannot restore
-        // it, an Apple platform defect, unlike .sheet() or .popover().
     }
 }
 ```

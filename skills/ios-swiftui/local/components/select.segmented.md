@@ -3,7 +3,7 @@ id: select.segmented
 title: Select (Segmented)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [picker, select, segmented, single-choice, mutually-exclusive]
 aliases: [segmented control, segmented picker, Picker, SegmentedPickerStyle, UISegmentedControl, single select]
 summary: A SwiftUI Picker with the segmented style, showing two to five mutually exclusive options inline where selecting one takes effect immediately, and which requires an accessibilityLabel matching its visible label plus accessibilityElement children contain to be named to VoiceOver.
@@ -61,7 +61,6 @@ struct SelectSegmentedDemo: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Visible group label for sighted users.
             Text("Fruit")
             Picker("Fruit", selection: $fruit) {
                 ForEach(Fruit.allCases) { fruit in
@@ -69,8 +68,6 @@ struct SelectSegmentedDemo: View {
                 }
             }
             .pickerStyle(.segmented)
-            // Segmented style needs BOTH of these or the label is not spoken to VoiceOver;
-            // this is the opposite of the menu style, which forbids .accessibilityLabel.
             .accessibilityElement(children: .contain)
             .accessibilityLabel("Fruit")
             .onChange(of: fruit) {

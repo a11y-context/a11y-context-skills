@@ -3,7 +3,7 @@ id: button.toggle
 title: Toggle Button
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [button, toggle, pressed, selected, isSelected, mute-button]
 aliases: [toggle button, pressed button]
 summary: SwiftUI Button with two states (e.g. pressed/active) conveyed via either an accessible-name change or the .isSelected accessibility trait, never both.
@@ -67,7 +67,6 @@ struct ToggleButtonDemo: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            // Toggle state indicated by accessible name change
             Button(muted ? "Unmute" : "Mute") {
                 muted.toggle()
             }
@@ -76,7 +75,6 @@ struct ToggleButtonDemo: View {
                 pinned.toggle()
             }
 
-            // Icon-only: accessible name itself carries the state
             Button {
                 iconOnlyMuted.toggle()
             } label: {
@@ -84,7 +82,6 @@ struct ToggleButtonDemo: View {
             }
             .accessibilityLabel(iconOnlyMuted ? "Unmute" : "Mute")
 
-            // Toggle state indicated by the .isSelected trait (toolbar formatting)
             Button {
                 bold.toggle()
             } label: {

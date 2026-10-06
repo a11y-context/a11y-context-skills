@@ -3,7 +3,7 @@ id: select.wheel
 title: Select (Wheel)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [picker, select, wheel, spinner, single-choice]
 aliases: [picker, wheel picker, spinner, drum picker, WheelPickerStyle, single select]
 summary: A SwiftUI Picker with the wheel style, an always-visible spinning drum of values that requires an accessibilityLabel matching its visible label plus accessibilityElement(children:.contain) for VoiceOver to speak the name.
@@ -61,16 +61,14 @@ struct SelectWheelDemo: View {
     @State private var fruit: Fruit = .apple
 
     var body: some View {
-        // Wheel style names itself ONLY with .accessibilityLabel + .contain.
-        // This is the opposite of the menu style, which is named by its Picker label text.
         Picker("Fruit", selection: $fruit) {
             ForEach(Fruit.allCases) { fruit in
                 Text(fruit.rawValue).tag(fruit)
             }
         }
         .pickerStyle(.wheel)
-        .accessibilityElement(children: .contain) // required, or the label is not spoken
-        .accessibilityLabel("Fruit")               // must match the visible label text
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Fruit")
     }
 }
 ```

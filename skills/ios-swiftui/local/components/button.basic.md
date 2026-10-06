@@ -3,7 +3,7 @@ id: button.basic
 title: Basic Button
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [button, control, action, icon-button]
 aliases: [btn, primary button, icon button, call to action, cta]
 summary: SwiftUI Button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.
@@ -53,19 +53,16 @@ import SwiftUI
 struct ButtonBasicDemo: View {
     var body: some View {
         VStack(spacing: 16) {
-            // Text-only
             Button("Save") {
                 print("Saved")
             }
 
-            // Icon + text
             Button {
                 print("Downloaded")
             } label: {
                 Label("Download", systemImage: "arrow.down.circle")
             }
 
-            // Icon-only (must have accessible name)
             Button {
                 print("Settings")
             } label: {
@@ -73,7 +70,6 @@ struct ButtonBasicDemo: View {
             }
             .accessibilityLabel("Open settings")
 
-            // Disabled
             Button("Disabled") {
                 print("Won't fire")
             }

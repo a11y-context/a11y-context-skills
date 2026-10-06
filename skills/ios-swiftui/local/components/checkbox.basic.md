@@ -3,7 +3,7 @@ id: checkbox.basic
 title: Checkbox
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [checkbox, form, selection, toggle, checkbox-group]
 aliases: [check box, tickbox, form checkbox, Toggle checkbox, agree checkbox, multi-select]
 summary: A checkbox built from a SwiftUI Toggle with a custom square toggle style, using accessibilityValue to announce Checked or Unchecked, since SwiftUI has no native checkbox control or trait.
@@ -60,13 +60,10 @@ struct CheckboxDemo: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Single checkbox: Toggle + square style; value overridden to Checked/Unchecked
             Toggle("Accept Terms", isOn: $acceptedTerms)
                 .toggleStyle(CheckboxToggleStyle())
                 .accessibilityValue(acceptedTerms ? "Checked" : "Unchecked")
 
-            // Checkbox group: the container carries the group label so VoiceOver
-            // announces it when focus first enters the group.
             VStack(alignment: .leading, spacing: 8) {
                 Toggle("Email", isOn: $email)
                     .toggleStyle(CheckboxToggleStyle())
@@ -84,8 +81,6 @@ struct CheckboxDemo: View {
     }
 }
 
-// A real Toggle underneath keeps Switch Control and keyboard operability; the glyph
-// change (not color) distinguishes checked from unchecked, and it scales with Dynamic Type.
 struct CheckboxToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {

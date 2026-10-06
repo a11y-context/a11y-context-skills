@@ -3,7 +3,7 @@ id: date-picker.basic
 title: Date Picker
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [date-picker, time-picker, calendar, date-entry, form-control]
 aliases: [DatePicker, date picker, time picker, calendar picker, compact date picker, graphical date picker, wheel date picker, date and time picker]
 summary: A native SwiftUI DatePicker for choosing a date or time, whose accessible name is supplied per style (an accessibilityLabel for compact and default styles, but the visible DatePicker label text for graphical and wheel styles).
@@ -61,24 +61,19 @@ struct DatePickerBasicDemo: View {
 
     var body: some View {
         Form {
-            // Compact/default style: the visible label is NOT exposed as the
-            // accessible name, so add a matching .accessibilityLabel.
             DatePicker("Start date", selection: $startDate, displayedComponents: .date)
                 .accessibilityLabel("Start date")
 
             DatePicker("Scheduled time", selection: $scheduledTime, displayedComponents: .hourAndMinute)
                 .accessibilityLabel("Scheduled time")
 
-            // Graphical/wheel styles: the DatePicker("Label") string IS spoken as
-            // the accessible name; do NOT also add .accessibilityLabel (double announcement).
             DatePicker("Check in", selection: $checkIn, displayedComponents: .date)
                 .datePickerStyle(.graphical)
 
             Text("Check out")
             DatePicker("Check out", selection: $checkOut, displayedComponents: .hourAndMinute)
                 .datePickerStyle(.wheel)
-                .labelsHidden() // layout label hidden; the visible Text names it for sighted
-                                // users, and the "Check out" string is still spoken to VoiceOver
+                .labelsHidden()
         }
     }
 }

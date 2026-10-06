@@ -3,7 +3,7 @@ id: radio.basic
 title: Radio Button
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [radio, radio-group, selection, single-choice, mutually-exclusive]
 aliases: [radio button, radio group, option button, single-select, mutually exclusive choice, custom radio]
 summary: A mutually exclusive choice group built from custom Button elements, since SwiftUI has no native radio control, using the selected trait plus an accessibilityValue to announce the radio role and its checked or unchecked state.
@@ -61,8 +61,6 @@ struct RadioGroupDemo: View {
     @State private var selected = "Black"
 
     var body: some View {
-        // The container carries the group label so VoiceOver announces it
-        // when focus first enters the group; it matches the visible heading.
         VStack(alignment: .leading, spacing: 8) {
             Text("Choose color")
 
@@ -84,9 +82,6 @@ struct RadioButton: View {
     let action: () -> Void
 
     var body: some View {
-        // A real Button underneath keeps Switch Control and keyboard operability;
-        // the glyph change (not color) distinguishes selected from unselected,
-        // and imageScale lets it grow with Dynamic Type.
         Button(action: action) {
             HStack {
                 Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
@@ -94,7 +89,7 @@ struct RadioButton: View {
                 Text(title)
             }
         }
-        .accessibilityRemoveTraits(.isButton) // no native radio trait exists
+        .accessibilityRemoveTraits(.isButton)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityRemoveTraits(isSelected ? [] : .isSelected)
         .accessibilityValue(isSelected ? "Radio button, checked" : "Radio button, unchecked")

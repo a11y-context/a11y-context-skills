@@ -3,7 +3,7 @@ id: dialog.confirmation
 title: Dialog (Confirmation)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [confirmation, action-sheet, dialog, destructive, actions]
 aliases: [action sheet, confirmation dialog, .confirmationDialog, actionSheet, delete confirmation, bottom sheet actions]
 summary: A native SwiftUI .confirmationDialog action sheet that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native confirmation dialogs do not restore it automatically.
@@ -67,8 +67,6 @@ struct DialogConfirmationDemo: View {
             isPresented: $showingDialog,
             titleVisibility: .visible
         ) {
-            // Each action returns VoiceOver focus to the trigger, since native
-            // confirmation dialogs do not restore it automatically.
             Button("Discard Draft", role: .destructive) {
                 print("Draft discarded")
                 triggerFocused = true

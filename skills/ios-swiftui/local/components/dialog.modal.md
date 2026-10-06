@@ -3,7 +3,7 @@ id: dialog.modal
 title: Dialog (Modal)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [sheet, modal, dialog, bottom sheet, full screen cover]
 aliases: [sheet, bottom sheet, modal sheet, full screen cover, .sheet, .fullScreenCover, presentationDetents]
 summary: A native SwiftUI .sheet or .fullScreenCover modal that takes VoiceOver focus on presentation, carries a heading title and an explicit close control, and returns focus to the trigger via onDismiss because sheets do not restore it automatically.
@@ -63,20 +63,15 @@ struct DialogModalDemo: View {
             showingSheet = true
         }
         .accessibilityFocused($triggerFocused)
-        // onDismiss returns VoiceOver focus to the trigger, since sheets do
-        // not restore it automatically. It fires on every dismissal.
         .sheet(isPresented: $showingSheet, onDismiss: { triggerFocused = true }) {
-            // Content lives in a ScrollView so it scrolls, not truncates, at large text sizes.
             ScrollView {
                 VStack(spacing: 16) {
                     Text("License Agreement")
                         .font(.title)
-                        .accessibilityAddTraits(.isHeader) // title is a VoiceOver heading
+                        .accessibilityAddTraits(.isHeader)
 
                     Text("Full agreement text goes here…")
 
-                    // Explicit close control; never rely on the drag gesture alone.
-                    // A .fullScreenCover has no swipe-dismiss, so this is required there.
                     Button("Done") { showingSheet = false }
                 }
                 .padding()

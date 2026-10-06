@@ -3,7 +3,7 @@ id: select.menu
 title: Select (Menu)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [picker, select, dropdown, menu, single-choice]
 aliases: [picker, menu picker, dropdown, pop-up button, MenuPickerStyle, single select]
 summary: A SwiftUI Picker with the menu style, a pop-up button that shows the current value and opens a list to choose one option, named by the Picker label text rather than an accessibilityLabel.
@@ -62,7 +62,6 @@ struct SelectMenuDemo: View {
     @AccessibilityFocusState private var pickerFocused: Bool
 
     var body: some View {
-        // The Picker label ("Fruit") is the accessible name; do NOT add .accessibilityLabel here.
         Picker("Fruit", selection: $fruit) {
             ForEach(Fruit.allCases) { fruit in
                 Text(fruit.rawValue).tag(fruit)
@@ -71,7 +70,7 @@ struct SelectMenuDemo: View {
         .pickerStyle(.menu)
         .accessibilityFocused($pickerFocused)
         .onChange(of: fruit) {
-            pickerFocused = true // return VoiceOver focus to the picker after the value changes
+            pickerFocused = true
         }
     }
 }

@@ -3,7 +3,7 @@ id: link.inline
 title: Inline Link
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [link, inline-link, hyperlink, attributed-string, markdown, text]
 aliases: [inline link, text link, hyperlink in text, AttributedString link, markdown link, in-paragraph link]
 summary: A hyperlink embedded in a run of Text via an AttributedString .link run (preferred) or Markdown, reachable through the VoiceOver Links rotor but non-operable under Full Keyboard Access and Voice Control because of Apple platform defects.
@@ -51,7 +51,6 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 import SwiftUI
 
 struct InlineLinkDemo: View {
-    // AttributedString inline link: a settable underline distinguishes it without color alone.
     var agreement: AttributedString {
         var text = AttributedString("By continuing you agree to the Terms of Service.")
         if let range = text.range(of: "Terms of Service") {
@@ -65,8 +64,6 @@ struct InlineLinkDemo: View {
         VStack(alignment: .leading, spacing: 16) {
             Text(agreement)
 
-            // Operable alternative to the same destination for Full Keyboard Access and
-            // Voice Control users, who cannot reach the inline link above (Apple platform defect).
             Link("Read the Terms of Service", destination: URL(string: "https://www.example.com/terms")!)
                 .accessibilityRemoveTraits(.isButton)
         }

@@ -3,7 +3,7 @@ id: switch.basic
 title: Switch
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [switch, toggle, settings, on-off, form-control]
 aliases: [toggle switch, preference toggle, settings toggle, Toggle, UISwitch]
 summary: Native SwiftUI Toggle representing a persistent on/off setting. The label and switch state merge into a single accessible element.
@@ -54,10 +54,8 @@ struct SwitchBasicDemo: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Native Toggle: label, switch, and state merge into one accessible element
             Toggle("Enable notifications", isOn: $notifications)
 
-            // Custom value text instead of On/Off; accessibilityValue must match
             Toggle(isOn: $displayMode) {
                 Text("Display Mode")
             }
