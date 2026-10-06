@@ -1,9 +1,53 @@
 {
   "stack": "android/compose",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.8.0",
+  "catalog_revision": "0.9.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
+    {
+      "id": "badge.basic",
+      "title": "Badge",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Small indicator on an icon or control reporting a count or a status. Material's Badge and BadgedBox set no semantics, so a badge's text joins its host's name as a bare number and a dot badge says nothing at all; the badge carries its meaning in words.",
+      "aliases": [
+        "Badge",
+        "BadgedBox",
+        "notification badge",
+        "count badge",
+        "unread count",
+        "dot badge",
+        "status dot",
+        "indicator"
+      ],
+      "tags": [
+        "badge",
+        "count",
+        "notification",
+        "status",
+        "indicator",
+        "dot"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a small indicator on or beside an element reports a count for it (e.g., unread notifications on a bell icon, items in a cart).",
+          "Use when a small indicator reports a status of the element it sits on (e.g., \"New\" on a menu entry, an online dot on an avatar)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the badge sits on a navigation bar item (use navigation-bar.basic, where Material clears the icon slot and the item carries the badge's meaning).",
+          "Do not use when the user must learn of the change right away, without moving to the indicator (use snackbar.basic).",
+          "Do not use when the indicator can be selected or removed (use chip.filter or chip.input)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/badge.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
     {
       "id": "bottom-sheet.modal",
       "title": "Bottom Sheet (Modal)",
@@ -147,6 +191,49 @@
       }
     },
     {
+      "id": "card.basic",
+      "title": "Card",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Surface grouping related content, either static or opening something when tapped. Material's static Card keeps its contents together in traversal order; its clickable overload merges everything into one stop with no role, so the order of that announcement, its click label, and any secondary actions are the caller's.",
+      "aliases": [
+        "Card",
+        "ElevatedCard",
+        "OutlinedCard",
+        "clickable card",
+        "content card",
+        "info card",
+        "surface",
+        "tile"
+      ],
+      "tags": [
+        "card",
+        "container",
+        "surface",
+        "clickable card",
+        "grouped content"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when related content about one thing is grouped on a surface (e.g., a recipe's photo, name, and cooking time).",
+          "Use when tapping anywhere on that surface opens the thing it describes, in the card's clickable form."
+        ],
+        "do_not_use_when": [
+          "Do not use when the item is a row in a vertical list (use list-item.basic).",
+          "Do not use when the item is a tile in a horizontally scrolling strip (use content-shelf.basic).",
+          "Do not use when the surface interrupts the screen to ask for a decision (use dialog.alert or bottom-sheet.modal)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/card.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "checkbox.basic",
       "title": "Checkbox",
       "pattern_type": "component",
@@ -274,6 +361,95 @@
       "default_variant": null,
       "source": {
         "path": "components/checkbox.tristate.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "chip.filter",
+      "title": "Filter Chip",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Chip that turns a filter on or off for the content it sits above. Material's FilterChip reports a checkbox role and a selected state and drops its border when selected; naming the set of chips and announcing the changed results are the caller's.",
+      "aliases": [
+        "FilterChip",
+        "ElevatedFilterChip",
+        "filter chip",
+        "selectable chip",
+        "choice chip",
+        "tag",
+        "selectable tag",
+        "facet",
+        "refinement"
+      ],
+      "tags": [
+        "chip",
+        "filter",
+        "filter chip",
+        "selection",
+        "refine",
+        "tag"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user narrows a set of content by turning one or more filters on and off, and the content updates in place (e.g., \"Vegetarian\", \"Under 30 minutes\", \"Five stars\" above a list of recipes)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the chip performs an action rather than holding a state (use button.basic, which covers assist and suggestion chips).",
+          "Do not use when the chip is a value the user entered and can remove (use chip.input).",
+          "Do not use when only one option can be on at a time, such as a sort order (use segmented-button.basic or radio.basic).",
+          "Do not use when the control is a persistent setting (use switch.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/chip.filter.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "chip.input",
+      "title": "Input Chip",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Chip standing for a value the user entered, such as a recipient or a tag, that can be selected and removed. Material's InputChip is a single click target, and its trailing icon is content rather than a button, so removal is the caller's to build, as a remove button inside the chip plus a Remove action on it.",
+      "aliases": [
+        "InputChip",
+        "input chip",
+        "token",
+        "removable chip",
+        "removable tag",
+        "recipient chip",
+        "entity chip",
+        "tag input",
+        "CustomAccessibilityAction"
+      ],
+      "tags": [
+        "chip",
+        "input chip",
+        "token",
+        "removable",
+        "entered value",
+        "tag"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when values the user entered are shown as tokens they can select and remove (e.g., recipients in a \"To\" field, tags added to a photo)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the chip filters content (use chip.filter).",
+          "Do not use when the chip performs an action (use button.basic, which covers assist and suggestion chips).",
+          "Do not use when tapping the token does something other than select it, such as opening its details (use button.basic with an AssistChip, and add removal the same way)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/chip.input.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -778,6 +954,53 @@
       "default_variant": null,
       "source": {
         "path": "components/segmented-button.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "select.basic",
+      "title": "Select",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Field showing one chosen value that opens a list of the others. Material's ExposedDropdownMenuBox reports the field as a dropdown list and opens it from touch, TalkBack, and the keyboard, but its menu items report no selection, so marking the current option is the caller's. The component is still marked experimental, so the call site opts in.",
+      "aliases": [
+        "ExposedDropdownMenuBox",
+        "ExposedDropdownMenu",
+        "exposed dropdown",
+        "exposed dropdown menu",
+        "dropdown list",
+        "drop-down",
+        "picker",
+        "spinner",
+        "combo box",
+        "menuAnchor"
+      ],
+      "tags": [
+        "select",
+        "dropdown",
+        "picker",
+        "single choice",
+        "form-control",
+        "value chooser"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user chooses one value from a list too long to show inline, in a compact field that shows the current choice (e.g., \"Season\", \"Country\", \"Time zone\").",
+          "Use when the field sits among other form fields, or above content it switches, and the list is only needed while choosing."
+        ],
+        "do_not_use_when": [
+          "Do not use when two to five short options can stay visible (use segmented-button.basic, or radio.basic for a list).",
+          "Do not use when the user types to narrow the options (use combobox.autocomplete).",
+          "Do not use when the list holds commands rather than values (use menu.basic).",
+          "Do not use when any number of options may be chosen (use checkbox.group)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/select.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
