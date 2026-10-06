@@ -3,7 +3,7 @@ id: checkbox.basic
 title: Checkbox
 stack: android/compose
 status: beta
-latest_version: 0.1.1
+latest_version: 0.1.2
 tags: [checkbox, control, form-control, selection, toggleable]
 aliases: [check box, tick box, form checkbox, agree checkbox, opt-in, Checkbox, toggleable]
 summary: Yes or no choice submitted with a form, independent of any other checkbox beside it. The control and its label form one accessibility node, and the row that owns the toggle owns the role and the touch target.
@@ -24,7 +24,7 @@ Yes or no choice submitted with a form, independent of any other checkbox beside
 - Do not use when toggling the control takes effect immediately as a persistent setting (use `switch.basic`).
 - Do not use when the control turns a feature or formatting state on and off in the current context rather than recording a value to submit (use `button.toggle`).
 - Do not use when a third mixed or partially checked state is required, such as a parent reflecting a mix of checked children (use `checkbox.tristate`).
-- Do not use when several checkboxes answer one shared question and their labels are not meaningful without it. Group them and name the group, per `global.collection-semantics`.
+- Do not use when several checkboxes answer one shared question and their labels are not meaningful without it (use `checkbox.group`).
 
 ## Must Haves
 - The control reports `Role.Checkbox`, its checked state, and a click action. Material's `Checkbox` is the reference implementation of that contract; a design system's own checkbox satisfies it by forwarding to `Modifier.toggleable(role = Role.Checkbox)`, and a drawn box with a check glyph satisfies none of it (`global.native-first`).

@@ -1,7 +1,7 @@
 {
   "stack": "android/compose",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.7.0",
+  "catalog_revision": "0.8.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -52,7 +52,7 @@
       "title": "Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.2",
+      "latest_version": "0.3.0",
       "summary": "Control that triggers an immediate action. Covers text, icon-only, floating, and action-chip presentations, which share one role and differ in where the accessible name comes from.",
       "aliases": [
         "btn",
@@ -82,7 +82,7 @@
           "Use when the action is presented as a floating action button, an icon-only control, or an assist or suggestion chip. All four carry Role.Button and no state of their own."
         ],
         "do_not_use_when": [
-          "Do not use when the control represents an on or off state that persists after the tap (use button.toggle).",
+          "Do not use when the control turns a feature on or off and keeps the same name in both states (use button.toggle).",
           "Do not use when the control carries a selected state, such as a filter or a removable token (use chip.filter or chip.input).",
           "Do not use when the control opens a list of commands (use menu.basic).",
           "Do not use when the control opens a URL or leaves the app (use link.basic).",
@@ -98,11 +98,60 @@
       }
     },
     {
+      "id": "button.toggle",
+      "title": "Toggle Button",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Icon button that turns something on or off in place and keeps the same name in both states. Material's icon toggle buttons report a checked state, so the name says what the control turns on and the state says whether it is on; the standard toggle shows that state by color alone.",
+      "aliases": [
+        "toggle button",
+        "IconToggleButton",
+        "FilledIconToggleButton",
+        "FilledTonalIconToggleButton",
+        "OutlinedIconToggleButton",
+        "icon toggle",
+        "pressed button",
+        "favorite button",
+        "bookmark button",
+        "formatting toggle"
+      ],
+      "tags": [
+        "button",
+        "toggle",
+        "icon button",
+        "on-off",
+        "checked",
+        "favorite",
+        "formatting"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a control turns a feature or attribute on and off in the current context and keeps the same name in both states (e.g., \"Favorite\", \"Bookmark\", \"Mute\").",
+          "Use when several such controls sit together in a toolbar, each on or off independently (e.g., \"Bold\", \"Italic\", \"Underline\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when the control's name changes to the action it performs next, such as \"Play\" becoming \"Pause\" (use button.basic).",
+          "Do not use when the control is a persistent setting, such as \"Dark theme\" (use switch.basic).",
+          "Do not use when the control records a value submitted with a form (use checkbox.basic).",
+          "Do not use when two to five related options form one connected control (use segmented-button.basic).",
+          "Do not use when the control filters a set of results (use chip.filter)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/button.toggle.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "checkbox.basic",
       "title": "Checkbox",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "Yes or no choice submitted with a form, independent of any other checkbox beside it. The control and its label form one accessibility node, and the row that owns the toggle owns the role and the touch target.",
       "aliases": [
         "check box",
@@ -130,13 +179,101 @@
           "Do not use when toggling the control takes effect immediately as a persistent setting (use switch.basic).",
           "Do not use when the control turns a feature or formatting state on and off in the current context rather than recording a value to submit (use button.toggle).",
           "Do not use when a third mixed or partially checked state is required, such as a parent reflecting a mix of checked children (use checkbox.tristate).",
-          "Do not use when several checkboxes answer one shared question and their labels are not meaningful without it. Group them and name the group, per global.collection-semantics."
+          "Do not use when several checkboxes answer one shared question and their labels are not meaningful without it (use checkbox.group)."
         ]
       },
       "variants": [],
       "default_variant": null,
       "source": {
         "path": "components/checkbox.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "checkbox.group",
+      "title": "Checkbox Group",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Several checkboxes that together answer one question, any number of them checked. Nothing on Android ties a label to a set of controls, and selectableGroup does nothing for checkboxes, so the set's name, its position information, and its one group-level error are all the caller's.",
+      "aliases": [
+        "checkbox list",
+        "multiple checkboxes",
+        "check all that apply",
+        "multi-select",
+        "CollectionInfo",
+        "CollectionItemInfo",
+        "toggleable group"
+      ],
+      "tags": [
+        "checkbox",
+        "checkbox group",
+        "group",
+        "multiple choice",
+        "selection",
+        "form-control"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when several checkboxes together answer one question and each option's label is not meaningful without it (e.g., \"How should we contact you?\" with \"Email\", \"Text message\", \"Phone call\").",
+          "Use when the user may check none, one, or several of the options, and the set may need one requirement checked as a whole (e.g., \"Select at least one\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when a single checkbox stands on its own (use checkbox.basic).",
+          "Do not use when exactly one option may be chosen (use radio.basic).",
+          "Do not use when a parent checkbox checks or clears the whole set (use checkbox.tristate).",
+          "Do not use when two to five short options sit side by side as one connected control (use segmented-button.basic).",
+          "Do not use when the options filter a set of results (use chip.filter)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/checkbox.group.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "checkbox.tristate",
+      "title": "Tri-State Checkbox",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Parent checkbox that checks or clears a set of child checkboxes and shows partially checked when only some of them are. Compose reports the third state as \"Partially checked\" without being asked; the parent's state has to be derived from its children rather than stored.",
+      "aliases": [
+        "TriStateCheckbox",
+        "triStateToggleable",
+        "ToggleableState",
+        "indeterminate checkbox",
+        "mixed checkbox",
+        "partially checked",
+        "select all",
+        "parent checkbox",
+        "nested checkboxes"
+      ],
+      "tags": [
+        "checkbox",
+        "tristate",
+        "indeterminate",
+        "select all",
+        "parent checkbox",
+        "selection"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when one checkbox checks or clears a set of related checkboxes beneath it and shows whether all, some, or none of them are checked (e.g., \"All toppings\" above \"Cheese\", \"Mushrooms\", \"Olives\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when a checkbox stands on its own (use checkbox.basic), or sits in a set with no parent controlling it (use checkbox.group).",
+          "Do not use when the third state is a value the user picks directly, such as include, exclude, or ignore (use radio.basic or segmented-button.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/checkbox.tristate.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -559,7 +696,7 @@
       "title": "Radio Group",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "Exactly one choice from a mutually exclusive set. The group carries selectableGroup, which is what makes each option announce its position in the set, and each row carries the selection rather than the button.",
       "aliases": [
         "radio button",
@@ -583,9 +720,9 @@
           "Use when the always-visible list is preferred over a control that collapses the choices behind a pop-up."
         ],
         "do_not_use_when": [
-          "Do not use when any number of options may be chosen, including none (use checkbox.basic).",
+          "Do not use when any number of options may be chosen, including none (use checkbox.group).",
           "Do not use when the control is a single persistent on or off setting (use switch.basic).",
-          "Do not use when two to five options fit inline as one connected control (use segmented-button.single).",
+          "Do not use when two to five options fit inline as one connected control (use segmented-button.basic).",
           "Do not use when one choice comes from a longer set and a compact pop-up is preferred over an expanded list (use select.basic)."
         ]
       },
@@ -593,6 +730,54 @@
       "default_variant": null,
       "source": {
         "path": "components/radio.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "segmented-button.basic",
+      "title": "Segmented Button",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Row of two to five connected options, with exactly one selected or any number on at once. Material's single-choice segments report radio semantics and their position in the set; its multiple-choice segments report a checked state with no role and no position, so the caller adds both, and names the row either way.",
+      "aliases": [
+        "SegmentedButton",
+        "SingleChoiceSegmentedButtonRow",
+        "MultiChoiceSegmentedButtonRow",
+        "segmented control",
+        "single-select segmented button",
+        "multi-select segmented button",
+        "toggle group",
+        "button group",
+        "view switcher"
+      ],
+      "tags": [
+        "segmented button",
+        "segmented control",
+        "single choice",
+        "multiple choice",
+        "selection",
+        "view switcher"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user chooses from two to five short options that stay visible together as one connected control.",
+          "Use when exactly one option applies at a time, in a single-choice row (e.g., \"Day\", \"Week\", \"Month\"), or any number may be on, in a multiple-choice row (e.g., \"Walk\", \"Bike\", \"Transit\" as the ways a route may travel).",
+          "Use when the choice takes effect immediately, such as changing how the content below is shown or sorted."
+        ],
+        "do_not_use_when": [
+          "Do not use when there are more than five options or the labels are too long to fit side by side (use radio.basic or checkbox.group, or select.basic for a compact control).",
+          "Do not use when each option opens its own pane of content, such as the sections of a profile (use tabs.basic).",
+          "Do not use when the options filter a set of results (use chip.filter).",
+          "Do not use when each control turns its own feature on and off, such as formatting in a toolbar (use button.toggle).",
+          "Do not use when the control is a single on or off choice (use switch.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/segmented-button.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -732,7 +917,7 @@
       "title": "Tabs",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.1.1",
       "summary": "Row of tabs that switches between views of the same screen. Each tab reports Role.Tab, its selected state, and its position, and only the selected tab's content belongs in the tree. Unlike a navigation bar item, a tab keeps its icon's semantics.",
       "aliases": [
         "Tab",
@@ -759,7 +944,7 @@
         ],
         "do_not_use_when": [
           "Do not use when the options are top-level destinations of the app (use navigation-bar.basic).",
-          "Do not use when the control picks a value or filters a list in place (use segmented-button.single).",
+          "Do not use when the control picks a value or filters a list in place (use segmented-button.basic).",
           "Do not use when the sections are long and meant to be read in sequence (use accordion.basic)."
         ]
       },

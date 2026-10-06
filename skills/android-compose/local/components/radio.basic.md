@@ -3,7 +3,7 @@ id: radio.basic
 title: Radio Group
 stack: android/compose
 status: beta
-latest_version: 0.1.1
+latest_version: 0.1.2
 tags: [radio, radio button, single-select, mutually-exclusive, selection]
 aliases: [radio button, radio group, single choice, one of many, RadioButton, selectableGroup, option list]
 summary: Exactly one choice from a mutually exclusive set. The group carries selectableGroup, which is what makes each option announce its position in the set, and each row carries the selection rather than the button.
@@ -20,9 +20,9 @@ Exactly one choice from a mutually exclusive set. The group carries `selectableG
 - Use when the always-visible list is preferred over a control that collapses the choices behind a pop-up.
 
 ## Do Not Use When
-- Do not use when any number of options may be chosen, including none (use `checkbox.basic`).
+- Do not use when any number of options may be chosen, including none (use `checkbox.group`).
 - Do not use when the control is a single persistent on or off setting (use `switch.basic`).
-- Do not use when two to five options fit inline as one connected control (use `segmented-button.single`).
+- Do not use when two to five options fit inline as one connected control (use `segmented-button.basic`).
 - Do not use when one choice comes from a longer set and a compact pop-up is preferred over an expanded list (use `select.basic`).
 
 ## Must Haves

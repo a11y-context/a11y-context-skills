@@ -106,7 +106,7 @@ scope: [component]
 ### Must Haves
 - Give an `Image` or `Icon` that carries meaning a `contentDescription` naming what it conveys, not what it depicts.
 - Give an `Image` or `Icon` that is decorative, or that sits beside text saying the same thing, `contentDescription = null` so it leaves the accessibility tree.
-- When an icon is the only content of a control, the control carries the name and the icon inside it is decorative. Name the `IconButton`, not both.
+- When an icon is the only content of a control, name the `Icon`. The control merges the icon's description into its own name and keeps its own role. Name the control instead, with `Modifier.semantics { contentDescription = "..." }` and the icon `null`, only when its content changes while it is on screen, such as an `ExtendedFloatingActionButton` that collapses to its icon. Never name both, or the control announces its name twice.
 
 ### Don'ts
 - Do not describe the artwork when the icon stands for an action. A trash glyph on a delete control is named "Delete", not "Trash can".

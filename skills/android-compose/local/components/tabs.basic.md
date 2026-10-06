@@ -3,7 +3,7 @@ id: tabs.basic
 title: Tabs
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [tabs, tab row, segmented views, switch views, selection]
 aliases: [Tab, TabRow, PrimaryTabRow, SecondaryTabRow, ScrollableTabRow, PrimaryScrollableTabRow, tab bar, tab strip, tabbed view]
 summary: Row of tabs that switches between views of the same screen. Each tab reports Role.Tab, its selected state, and its position, and only the selected tab's content belongs in the tree. Unlike a navigation bar item, a tab keeps its icon's semantics.
@@ -23,7 +23,7 @@ Row of tabs that switches between views of the same screen. Each tab reports `Ro
 
 ## Do Not Use When
 - Do not use when the options are top-level destinations of the app (use `navigation-bar.basic`).
-- Do not use when the control picks a value or filters a list in place (use `segmented-button.single`).
+- Do not use when the control picks a value or filters a list in place (use `segmented-button.basic`).
 - Do not use when the sections are long and meant to be read in sequence (use `accordion.basic`).
 
 ## Must Haves
