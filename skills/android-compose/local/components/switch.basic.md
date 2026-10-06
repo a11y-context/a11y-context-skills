@@ -3,7 +3,7 @@ id: switch.basic
 title: Switch
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [switch, toggle, settings, on-off, form-control]
 aliases: [toggle switch, preference toggle, settings toggle, Switch, on off toggle, toggleable]
 summary: Persistent on or off setting that takes effect immediately. The control and its label form one accessibility node, and the row that owns the toggle owns the role and the touch target.
@@ -59,8 +59,6 @@ fun SwitchExamples() {
     var notifications by remember { mutableStateOf(true) }
     var privacy by remember { mutableStateOf(false) }
 
-    // The row owns the toggle, the role, and the 48dp target. The Switch's own
-    // callback is null, which is what hands all three to the row.
     Row(
         modifier = Modifier
             .toggleable(
@@ -76,8 +74,6 @@ fun SwitchExamples() {
         Switch(checked = notifications, onCheckedChange = null)
     }
 
-    // Custom visible wording, so stateDescription matches what is on screen
-    // instead of the default on and off.
     Row(
         modifier = Modifier
             .toggleable(
@@ -95,7 +91,6 @@ fun SwitchExamples() {
         Switch(checked = privacy, onCheckedChange = null)
     }
 
-    // Disabled. enabled = false on both, so the row reports the state.
     Row(
         modifier = Modifier
             .toggleable(

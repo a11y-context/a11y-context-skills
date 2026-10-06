@@ -3,7 +3,7 @@ id: checkbox.basic
 title: Checkbox
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [checkbox, control, form-control, selection, toggleable]
 aliases: [check box, tick box, form checkbox, agree checkbox, opt-in, Checkbox, toggleable]
 summary: Yes or no choice submitted with a form, independent of any other checkbox beside it. The control and its label form one accessibility node, and the row that owns the toggle owns the role and the touch target.
@@ -60,8 +60,6 @@ fun CheckboxExamples() {
     var remember by remember { mutableStateOf(false) }
     var agreed by remember { mutableStateOf(false) }
 
-    // The row owns the toggle, the role, and the 48dp target. The Checkbox's own
-    // callback is null, which is what hands all three to the row.
     Row(
         modifier = Modifier
             .toggleable(
@@ -77,7 +75,6 @@ fun CheckboxExamples() {
         Text("Remember me on this device")
     }
 
-    // Invalid state. error() announces the problem; focus stays where it is.
     Column {
         Row(
             modifier = Modifier
@@ -98,8 +95,6 @@ fun CheckboxExamples() {
         }
     }
 
-    // Disabled. enabled = false on both, so the row reports the state and the
-    // box matches it.
     Row(
         modifier = Modifier
             .toggleable(

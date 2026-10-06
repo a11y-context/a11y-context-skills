@@ -3,7 +3,7 @@ id: list-item.basic
 title: List Item
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [list item, row, list, collection, navigation]
 aliases: [list row, ListItem, table row, cell, settings row, channel row, list tile, collection-row item]
 summary: A row in a vertical list. The row is one accessibility node rather than the several elements it looks like, so a second control inside it becomes a custom action rather than a nested target.
@@ -44,7 +44,7 @@ A row carrying a title, a subtitle, an image, and a trailing control looks like 
 - Do not nest an interactive child inside a clickable row. A child that merges is not absorbed by a parent that merges, so a favorite button inside a clickable row becomes a second competing target rather than part of the row, and the user meets two stops where the layout shows one.
 - Do not make the title clickable instead of the row. The tap target shrinks to the text, and the rest of the row, including the artwork the user is aiming at, does nothing.
 - Do not give every element in the row its own `contentDescription`. They all reach the merged name and the row announces a run-on string.
-- Do not leave a decorative thumbnail unnamed by omitting `contentDescription` entirely. An unset description is not the same as `null`, and the image reports no name rather than leaving the tree.
+- Do not pass `contentDescription = ""` to a decorative thumbnail. An empty string still applies `Role.Image`, so the thumbnail stays in the tree; only `null` removes it (`global.icon`).
 - Do not rely on `LazyColumn` to supply position. It says the user is in a list and stops there.
 
 ## Customizable
@@ -76,17 +76,12 @@ fun ListItemExamples() {
             ListItem(
                 headlineContent = { Text(message.from) },
                 supportingContent = { Text(message.preview) },
-                // The avatar stands for the sender the headline already names,
-                // so naming it makes the row say the sender twice.
                 leadingContent = {
                     Image(
                         painter = painterResource(R.drawable.avatar),
                         contentDescription = null
                     )
                 },
-                // No nested IconButton here. A second clickable inside a
-                // clickable row is not absorbed by the merge, and becomes a
-                // rival target.
                 trailingContent = {
                     if (unread) {
                         Box(Modifier.size(8.dp).background(MaterialTheme.colorScheme.primary, CircleShape))
@@ -99,12 +94,7 @@ fun ListItemExamples() {
                         collectionItemInfo = CollectionItemInfo(
                             rowIndex = index, rowSpan = 1, columnIndex = 0, columnSpan = 1
                         )
-                        // The unread dot is inside the merged node and says
-                        // nothing on its own, so the row carries it.
                         stateDescription = if (unread) "Unread" else "Read"
-                        // The mark-as-read control reaches the user here,
-                        // through the actions menu, instead of as a second stop
-                        // in the list.
                         customActions = listOf(
                             CustomAccessibilityAction(
                                 label = if (unread) "Mark as read" else "Mark as unread"

@@ -110,7 +110,8 @@ scope: [component]
 
 ### Don'ts
 - Do not describe the artwork when the icon stands for an action. A trash glyph on a delete control is named "Delete", not "Trash can".
-- Do not leave `contentDescription` unset on a meaningful graphic. An unset description is not the same as `null`, and the element reports no name at all.
+- Do not pass `contentDescription = ""` to mark a graphic decorative. `Image` and `Icon` treat any non-null value as a name and still apply `Role.Image`; only `null` removes the graphic from the tree.
+- Do not draw a meaningful graphic with `Modifier.paint`, `Canvas`, or `Modifier.background` and stop there. None of them applies semantics, so the graphic does not exist to a screen reader until `Modifier.semantics { contentDescription = "..."; role = Role.Image }` is set on it.
 
 ## Rule: Semantic Color
 

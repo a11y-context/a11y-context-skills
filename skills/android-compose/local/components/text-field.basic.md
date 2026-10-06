@@ -3,7 +3,7 @@ id: text-field.basic
 title: Text Field
 stack: android/compose
 status: beta
-latest_version: 0.2.0
+latest_version: 0.2.1
 tags: [text-field, form, input, autofill, error, keyboard]
 aliases: [textfield, text input, input field, edit text, EditText, TextField, OutlinedTextField, BasicTextField, password field, search field, secure field]
 summary: Single-line text entry whose accessible name has to come from the field's own label slot rather than a Text beside it. Supporting text and error messages are separate nodes the component does not attach, so both have to be associated deliberately.
@@ -13,7 +13,7 @@ summary: Single-line text entry whose accessible name has to come from the field
 
 Pattern ID: `text-field.basic`
 
-Single-line text entry built from the Material text field, whose `label` slot supplies the accessible name. Supporting text and error messages are separate nodes the component does not attach, so both have to be associated deliberately.
+Single-line text entry whose accessible name has to come from the field's own `label` slot rather than a `Text` beside it. Supporting text and error messages are separate nodes the component does not attach, so both have to be associated deliberately.
 
 The trap is `isError`. Setting it turns the field red and announces a generic error string, not the message sitting right underneath it, so the field reads as wrong without ever saying why.
 
@@ -77,14 +77,10 @@ fun TextFieldExamples() {
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            // The label slot is the accessible name. A Text above the field
-            // would look the same and leave the field unnamed.
             label = { Text("Email") },
             singleLine = true,
             isError = invalid,
             supportingText = {
-                // Visible copy. The component does not attach this to the
-                // field, so it is read as its own element after it.
                 Text(if (invalid) errorMessage else "We use this to send receipts.")
             },
             keyboardOptions = KeyboardOptions(
@@ -95,14 +91,10 @@ fun TextFieldExamples() {
                 .fillMaxWidth()
                 .semantics {
                     contentType = ContentType.EmailAddress
-                    // isError on its own announces a generic default string.
-                    // This is what makes TalkBack say what is actually wrong.
                     if (invalid) error(errorMessage)
                 }
         )
 
-        // Password, with a labeled reveal control. The toggle is a real button
-        // inside the field and carries its own name and state.
         var password by remember { mutableStateOf("") }
         var revealed by remember { mutableStateOf(false) }
 

@@ -3,7 +3,7 @@ id: button.basic
 title: Button
 stack: android/compose
 status: beta
-latest_version: 0.2.0
+latest_version: 0.2.1
 tags: [button, control, action, icon-button, fab, chip]
 aliases: [btn, primary button, icon button, call to action, cta, IconButton, floating action button, fab, ExtendedFloatingActionButton, assist chip, suggestion chip, text button]
 summary: Control that triggers an immediate action. Covers text, icon-only, floating, and action-chip presentations, which share one role and differ in where the accessible name comes from.
@@ -60,18 +60,15 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```kotlin
 @Composable
 fun ButtonExamples() {
-    // Text-only. The visible text is the accessible name; set nothing else.
     Button(onClick = { /* save */ }) {
         Text("Save")
     }
 
-    // Icon plus text. The text names the control, so the icon is decorative.
     Button(onClick = { /* download */ }) {
         Icon(Icons.Filled.Download, contentDescription = null)
         Text("Download")
     }
 
-    // Icon-only. The name moves to the control, and onClickLabel says what happens.
     IconButton(
         onClick = { /* open settings */ },
         modifier = Modifier.semantics { onClick(label = "open settings", action = null) }
@@ -79,13 +76,10 @@ fun ButtonExamples() {
         Icon(Icons.Filled.Settings, contentDescription = "Settings")
     }
 
-    // Repeated control. The row's subject goes in the name, or every row reads alike.
     IconButton(onClick = { /* edit */ }) {
         Icon(Icons.Filled.Edit, contentDescription = "Edit username")
     }
 
-    // Extended FAB. The text is the name while expanded and gone while collapsed,
-    // so the contentDescription is what survives.
     ExtendedFloatingActionButton(
         onClick = { /* compose */ },
         expanded = false,
@@ -94,13 +88,11 @@ fun ButtonExamples() {
         modifier = Modifier.semantics { contentDescription = "New list" }
     )
 
-    // Assist chip. Role.Button, no selected state; a chip only in appearance.
     AssistChip(
         onClick = { /* filter by genre */ },
         label = { Text("Comedy") }
     )
 
-    // Disabled. enabled = false keeps it in the tree and reports the state.
     Button(onClick = { /* never fires */ }, enabled = false) {
         Text("Submit")
     }

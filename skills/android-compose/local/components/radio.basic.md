@@ -3,7 +3,7 @@ id: radio.basic
 title: Radio Group
 stack: android/compose
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [radio, radio button, single-select, mutually-exclusive, selection]
 aliases: [radio button, radio group, single choice, one of many, RadioButton, selectableGroup, option list]
 summary: Exactly one choice from a mutually exclusive set. The group carries selectableGroup, which is what makes each option announce its position in the set, and each row carries the selection rather than the button.
@@ -59,8 +59,6 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 @Composable
 fun RadioGroupExamples() {
     val options = listOf("Standard", "Express", "Overnight")
-    // The group opens with a selection. There is no route back to none, so
-    // starting empty creates a state the user cannot return to.
     var selected by remember { mutableStateOf(options.first()) }
 
     Column {
@@ -70,8 +68,6 @@ fun RadioGroupExamples() {
         )
 
         Column(
-            // selectableGroup is what makes each row announce its position in
-            // the set. Without it the rows are unrelated selectable controls.
             modifier = Modifier
                 .selectableGroup()
                 .semantics { contentDescription = "Shipping speed" }
