@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.28.2",
+  "catalog_revision": "0.28.3",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -477,7 +477,7 @@
       "title": "Dialog (Basic)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.1.1",
       "summary": "User-initiated blocking dialog. Uses the native <dialog> element with .showModal() so the browser handles focus trap, background inertness, Escape dismissal, focus restoration, and top-layer rendering.",
       "aliases": [
         "dialog",

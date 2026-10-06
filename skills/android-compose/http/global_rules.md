@@ -21,7 +21,7 @@ The cross-cutting accessibility rules that apply across most Jetpack Compose wor
 
 Verification (audits, contrast measurement, on-device and human review) is a QA concern and lives in the QA layer, not here.
 
-## Rule: Native First
+## Native First
 
 ```yaml
 id: global.native-first
@@ -39,7 +39,7 @@ scope: [component]
 - Do not assume a component satisfies the contract because it is named after the control. Read what it sets: a wrapper that forwards to `Modifier.toggleable(role = Role.Checkbox)` qualifies, and one that forwards to a bare `clickable` does not.
 - Do not hand-assemble a control from `androidx.compose.foundation` primitives when a component that already meets the contract is available to the project, whether that is the Material composable or the design system's own. Assembling one is the fallback, not the starting point.
 
-## Rule: Merged Semantics
+## Merged Semantics
 
 ```yaml
 id: global.merge-semantics
@@ -58,7 +58,7 @@ scope: [component]
 - Do not use `Modifier.clearAndSetSemantics { }` to hide a focusable control. It removes the node from every consumer, including the accessibility tree, leaving a control that is visible and operable by touch but unreachable by assistive technology.
 - Do not rely on modifier order being irrelevant. `Modifier.clearAndSetSemantics` clears every semantics property applied after it in the chain.
 
-## Rule: Touch Target Size
+## Touch Target Size
 
 ```yaml
 id: global.touch-target-size
@@ -79,7 +79,7 @@ scope: [component]
 - Do not set `LocalMinimumInteractiveComponentSize` to `0.dp` to make a dense layout fit. That disables the enforcement for everything beneath it.
 - Do not pad a control from the outside and count the padding as target. `Modifier.padding(12.dp).clickable { }` leaves the padding inert; the tappable area is still only the content.
 
-## Rule: State Description
+## State Description
 
 ```yaml
 id: global.state-description
@@ -96,7 +96,7 @@ scope: [component]
 - Do not concatenate the state into `contentDescription`. The name changes as the state changes, so the control appears to be a different control after every interaction.
 - Do not set `stateDescription` on a control whose Material composable already reports its state correctly, which duplicates the announcement.
 
-## Rule: Icons and Images
+## Icons and Images
 
 ```yaml
 id: global.icon
@@ -113,7 +113,7 @@ scope: [component]
 - Do not pass `contentDescription = ""` to mark a graphic decorative. `Image` and `Icon` treat any non-null value as a name and still apply `Role.Image`; only `null` removes the graphic from the tree.
 - Do not draw a meaningful graphic with `Modifier.paint`, `Canvas`, or `Modifier.background` and stop there. None of them applies semantics, so the graphic does not exist to a screen reader until `Modifier.semantics { contentDescription = "..."; role = Role.Image }` is set on it.
 
-## Rule: Semantic Color
+## Semantic Color
 
 ```yaml
 id: global.semantic-color
@@ -132,7 +132,7 @@ scope: [component]
 - Do not assume the color scheme responds to the system "Increase contrast" setting. It adapts to light and dark on its own; contrast level is a separate integration the app opts into.
 - Do not restyle a Material component in a way that removes its container or state-layer contrast.
 
-## Rule: Use of Color
+## Use of Color
 
 ```yaml
 id: global.use-of-color
@@ -148,7 +148,7 @@ scope: [component]
 - Do not signal an error state with a red border alone. Pair it with `isError`, an error message, and `Modifier.semantics { error("...") }`.
 - Do not distinguish a link from its surrounding text by color alone.
 
-## Rule: Text Scaling
+## Text Scaling
 
 ```yaml
 id: global.text-scaling
@@ -165,7 +165,7 @@ scope: [layout, component]
 - Do not read `Configuration.fontScale` or a density-derived scalar as a single multiplier for text size. Android 14 and later scale large text proportionally less than small text, so no one factor describes the result.
 - Do not apply a fixed `height` to a container holding scalable text, and do not add a truncating `maxLines` to meaningful content.
 
-## Rule: Focus States
+## Focus States
 
 ```yaml
 id: global.focus-states
@@ -183,7 +183,7 @@ scope: [component]
 - Do not remove a Material component's `indication` without supplying a replacement.
 - Do not distinguish the focus indicator from the unfocused state by hue alone, since that fails for users who cannot separate the two colors.
 
-## Rule: Focus Not Obscured
+## Focus Not Obscured
 
 ```yaml
 id: global.focus-not-obscured
@@ -197,7 +197,7 @@ scope: [layout, component]
 ### Don'ts
 - Do not rely on the scroll container's default behavior to reveal a focused item. It scrolls the item into the viewport, which is not the same as clearing fixed chrome drawn on top of that viewport.
 
-## Rule: Motion
+## Motion
 
 ```yaml
 id: global.motion
@@ -214,7 +214,7 @@ scope: [component]
 - Do not drive motion from a `LaunchedEffect` with fixed delays. It bypasses the system animation scale entirely.
 - Do not attach meaning to motion alone, such as signaling an error only by a shake.
 
-## Rule: Custom Control Semantics
+## Custom Control Semantics
 
 ```yaml
 id: global.custom-control-semantics
@@ -234,7 +234,7 @@ scope: [component]
 - Do not ship a custom-drawn control with only a tap gesture and a painted label. It has no role, no state, and no action, so it is inert to assistive technology.
 - Do not assume `Role` covers the control. It has nine members, far fewer than the set of controls an app can draw.
 
-## Rule: Collection Semantics
+## Collection Semantics
 
 ```yaml
 id: global.collection-semantics
@@ -250,7 +250,7 @@ scope: [component]
 ### Don'ts
 - Do not hand-build a position announcement into each item's `contentDescription`. It duplicates what the collection properties report and goes stale when the list changes.
 
-## Rule: Traversal Order
+## Traversal Order
 
 ```yaml
 id: global.traversal-order
@@ -266,7 +266,7 @@ scope: [layout]
 ### Don'ts
 - Do not set `traversalIndex` on every element in a screen to force an order. It is a correction for the cases where composition order is wrong, not a layout mechanism.
 
-## Rule: Headings
+## Headings
 
 ```yaml
 id: global.headings
@@ -281,7 +281,7 @@ scope: [layout]
 - Do not mark every bold or large text as a heading. A heading list that contains every label is as unusable as an empty one.
 - Do not rely on font size or weight to communicate that text is a heading. Visual styling sets no semantics.
 
-## Rule: Announcements
+## Announcements
 
 ```yaml
 id: global.announcements
@@ -299,7 +299,7 @@ scope: [component]
 - Do not place a live region on an item inside a lazy list. The item recomposes as the list scrolls and reannounces each time.
 - Do not use a live region for a change the user caused and can already see the result of, such as text they are typing.
 
-## Rule: Focus Management
+## Focus Management
 
 ```yaml
 id: global.focus-management
@@ -318,7 +318,7 @@ scope: [layout, component]
 - Do not move focus to a status message, a toast-style surface, or a progress update. Taking focus for something the user did not have to act on drops them out of whatever they were reading, and they have to navigate back. Announce it instead, per `global.announcements`.
 - Do not leave focus on a composable that has left the tree. It falls back to an arbitrary position, usually the top of the screen.
 
-## Rule: Screen Announcement
+## Screen Announcement
 
 ```yaml
 id: global.screen-announcement

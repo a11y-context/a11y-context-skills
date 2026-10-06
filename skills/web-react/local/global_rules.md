@@ -19,7 +19,7 @@ apply_policy:
 
 Foundations are the accessibility rules that aren't tied to a single component — utilities used across patterns (like `sr-only`), page-level structure (landmarks, headings, page titles), and visual fundamentals (text contrast, focus indicators). The rules below are the cross-cutting requirements every UI implementation should meet.
 
-## Rule: Offscreen Text Utility (sr-only)
+## Offscreen Text Utility (sr-only)
 
 ```yaml
 id: global.sr-only
@@ -68,7 +68,7 @@ For a visually hidden element that must become visible when it receives focus, s
 
 ---
 
-## Rule: Page Title
+## Page Title
 
 ```yaml
 id: global.page-title
@@ -86,7 +86,7 @@ scope: [screen]
 
 ---
 
-## Rule: Landmarks
+## Landmarks
 
 ```yaml
 id: global.landmarks
@@ -112,7 +112,7 @@ scope: [screen, layout]
 
 ---
 
-## Rule: Heading Structure
+## Heading Structure
 
 ```yaml
 id: global.headings
@@ -141,7 +141,7 @@ scope: [screen, layout]
 
 ---
 
-## Rule: Text Contrast
+## Text Contrast
 
 ```yaml
 id: global.text-contrast
@@ -161,7 +161,7 @@ scope: [component]
 
 ---
 
-## Rule: Non-text Contrast
+## Non-text Contrast
 
 ```yaml
 id: global.non-text-contrast
@@ -193,7 +193,7 @@ A boundary painted as a background fill needs a real border under forced colors,
 
 ---
 
-## Rule: Use of Color
+## Use of Color
 
 ```yaml
 id: global.use-of-color
@@ -213,7 +213,7 @@ scope: [component]
 
 ---
 
-## Rule: Forced Colors (Windows High Contrast Mode)
+## Forced Colors (Windows High Contrast Mode)
 
 ```yaml
 id: global.forced-colors
@@ -266,7 +266,7 @@ Opting out, for the narrow case where the authored color is the content itself:
 
 ---
 
-## Rule: Focus Not Obscured
+## Focus Not Obscured
 
 ```yaml
 id: global.focus-not-obscured
@@ -282,7 +282,7 @@ scope: [layout, component]
 
 ---
 
-## Rule: Focus States
+## Focus States
 
 ```yaml
 id: global.focus-states
@@ -343,7 +343,7 @@ Required forced-colors override — pair with either primary style above. `Highl
 
 ---
 
-## Rule: Motion and Unmounting
+## Motion and Unmounting
 
 ```yaml
 id: global.motion
@@ -401,7 +401,7 @@ requestAnimationFrame(() => returnTarget.current?.focus());
 
 ---
 
-## Rule: Icons
+## Icons
 
 ```yaml
 id: global.icon

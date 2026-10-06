@@ -21,7 +21,7 @@ The cross-cutting accessibility rules that apply across most SwiftUI work, indep
 
 Verification (audits, contrast measurement, on-device and human/LLM review) is a QA concern and lives in the QA layer, not here.
 
-## Rule: Native First
+## Native First
 
 ```yaml
 id: global.native-first
@@ -38,7 +38,7 @@ scope: [control, component]
 - Do not treat a visual match as a semantic match. An `HStack` of a checkmark `Image` and a `Text` renders like a checkbox and exposes none of a checkbox's trait or state.
 - Do not replace a native control to gain a visual treatment a style modifier could have given it. A custom `ToggleStyle` keeps the underlying `Toggle`; a hand-drawn switch does not.
 
-## Rule: Touch Target Size
+## Touch Target Size
 
 ```yaml
 id: global.touch-target-size
@@ -54,7 +54,7 @@ scope: [component]
 ### Don'ts
 - Do not rely on the visible glyph size alone to satisfy the minimum; extend the frame, not the icon.
 
-## Rule: Focus States
+## Focus States
 
 ```yaml
 id: global.focus-states
@@ -67,7 +67,7 @@ scope: [component]
 ### Don'ts
 - Do not apply a custom style modifier (e.g., a `ButtonStyle` or `ToggleStyle` built with `PlainButtonStyle` or a bespoke shape) that suppresses the system focus indicator without restoring an equivalent visible focus treatment.
 
-## Rule: Semantic Color
+## Semantic Color
 
 ```yaml
 id: global.semantic-color
@@ -84,7 +84,7 @@ scope: [component]
 - Do not restyle a native control in a way that strips its default border, track, or state contrast.
 - Do not convey a control's state (on/off, selected) by color alone; keep a shape, fill, or label difference as well.
 
-## Rule: Dynamic Type
+## Dynamic Type
 
 ```yaml
 id: global.dynamic-type
@@ -101,7 +101,7 @@ scope: [layout, component]
 - Do not apply a truncating `.lineLimit()` to meaningful text, or wrap it in a fixed-height frame that clips it when enlarged.
 - Do not clamp the app's Dynamic Type range to protect a layout; fix the layout instead.
 
-## Rule: Custom Control Representation
+## Custom Control Representation
 
 ```yaml
 id: global.custom-control-representation
@@ -117,7 +117,7 @@ scope: [component]
 - Do not ship a custom-drawn control with only a tap gesture and a visual label; it is unreachable and inoperable for VoiceOver, Switch Control, and Full Keyboard Access users.
 - Do not hand-rebuild the contract with loose `.accessibilityLabel`, `.accessibilityValue`, and traits when a native representation supplies the role behaviors (adjustable actions, toggling) that loose traits alone do not.
 
-## Rule: Navigation Focus
+## Navigation Focus
 
 ```yaml
 id: global.navigation-focus
@@ -133,7 +133,7 @@ scope: [screen]
 - Do not push a screen with no title, which leaves the change without a clear spoken announcement.
 - Do not override the system's push-focus placement.
 
-## Rule: Announcements
+## Announcements
 
 ```yaml
 id: global.announcements
@@ -151,7 +151,7 @@ scope: [component]
 - Do not move VoiceOver focus to a passive status message, which interrupts the user's place for information they did not choose to act on. Announce it instead.
 - Do not post the announcement with no delay in the same run loop as the state change; VoiceOver may drop it before it speaks.
 
-## Rule: Focus Management
+## Focus Management
 
 ```yaml
 id: global.focus-management
