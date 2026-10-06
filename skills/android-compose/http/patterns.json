@@ -1,7 +1,7 @@
 {
   "stack": "android/compose",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.5.1",
+  "catalog_revision": "0.6.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -379,6 +379,49 @@
       }
     },
     {
+      "id": "navigation-bar.basic",
+      "title": "Navigation Bar",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Bar of three to five top-level destinations along the bottom of the screen. Each item reports Role.Tab, its selected state, and its position, and Material removes the icon's semantics whenever the label shows, which takes any badge with it.",
+      "aliases": [
+        "NavigationBar",
+        "NavigationBarItem",
+        "bottom navigation",
+        "bottom nav",
+        "bottom bar",
+        "tab bar",
+        "BottomNavigation"
+      ],
+      "tags": [
+        "navigation",
+        "bottom navigation",
+        "tab bar",
+        "destinations",
+        "top-level"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the app has three to five top-level destinations the user moves between from anywhere (e.g., \"Home\", \"Search\", \"Library\", \"Inbox\").",
+          "Use when the destinations are peers and none is a sub-view of another."
+        ],
+        "do_not_use_when": [
+          "Do not use when the options switch between views inside one screen (use tabs.basic).",
+          "Do not use when the layout is wide enough for a side rail (use navigation-rail.basic).",
+          "Do not use when the bar holds actions for the current screen rather than destinations (use bottom-app-bar.basic).",
+          "Do not use when there are more than five destinations (use navigation-drawer.modal)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/navigation-bar.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "radio.basic",
       "title": "Radio Group",
       "pattern_type": "component",
@@ -422,6 +465,94 @@
       }
     },
     {
+      "id": "snackbar.basic",
+      "title": "Snackbar",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Brief message confirming something that already happened, shown at the bottom of the screen without taking focus. SnackbarHost supplies the announcement, the dismiss action, and the time extension a user can ask for; a Snackbar drawn outside it gets none of them.",
+      "aliases": [
+        "Snackbar",
+        "SnackbarHost",
+        "SnackbarHostState",
+        "showSnackbar",
+        "toast",
+        "status message",
+        "confirmation message",
+        "transient message"
+      ],
+      "tags": [
+        "snackbar",
+        "toast",
+        "notification",
+        "status",
+        "message",
+        "live region"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a brief message confirms that something the user did has happened (e.g., \"Draft saved\", \"Link copied\").",
+          "Use when the message needs no response and the user may ignore it."
+        ],
+        "do_not_use_when": [
+          "Do not use when the message offers an action the user may want to take (use snackbar.action).",
+          "Do not use when the user must respond before continuing (use dialog.alert).",
+          "Do not use when the message reports an error in a field the user is filling in. Report it on the field (use text-field.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/snackbar.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "snackbar.action",
+      "title": "Snackbar with Action",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Brief message carrying one action, such as Undo, shown without taking focus. Because focus never moves to it, its action is hard to reach from a keyboard and easy to miss with TalkBack, so the action must also be available somewhere else and the message must stay until dismissed.",
+      "aliases": [
+        "Snackbar",
+        "SnackbarHost",
+        "showSnackbar",
+        "actionLabel",
+        "undo snackbar",
+        "toast with action",
+        "action snackbar",
+        "retry message"
+      ],
+      "tags": [
+        "snackbar",
+        "toast",
+        "undo",
+        "action",
+        "notification",
+        "live region"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a brief message reports something the user did and offers one optional action on it (e.g., \"Message archived\" with \"Undo\", \"Upload failed\" with \"Retry\").",
+          "Use when the user can safely ignore both the message and the action."
+        ],
+        "do_not_use_when": [
+          "Do not use when the message needs no action (use snackbar.basic).",
+          "Do not use when the user must decide before continuing (use dialog.alert).",
+          "Do not use when the action is the only way to do something important, such as the only route to recover deleted work. Put it where the user can find it again."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/snackbar.action.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "switch.basic",
       "title": "Switch",
       "pattern_type": "component",
@@ -459,6 +590,50 @@
       "default_variant": null,
       "source": {
         "path": "components/switch.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "tabs.basic",
+      "title": "Tabs",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Row of tabs that switches between views of the same screen. Each tab reports Role.Tab, its selected state, and its position, and only the selected tab's content belongs in the tree. Unlike a navigation bar item, a tab keeps its icon's semantics.",
+      "aliases": [
+        "Tab",
+        "TabRow",
+        "PrimaryTabRow",
+        "SecondaryTabRow",
+        "ScrollableTabRow",
+        "PrimaryScrollableTabRow",
+        "tab bar",
+        "tab strip",
+        "tabbed view"
+      ],
+      "tags": [
+        "tabs",
+        "tab row",
+        "segmented views",
+        "switch views",
+        "selection"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when one screen offers several views of the same subject and the user switches between them (e.g., \"Overview\", \"Reviews\", \"Specifications\" on a product).",
+          "Use when the views are peers and the user is expected to move between them freely."
+        ],
+        "do_not_use_when": [
+          "Do not use when the options are top-level destinations of the app (use navigation-bar.basic).",
+          "Do not use when the control picks a value or filters a list in place (use segmented-button.single).",
+          "Do not use when the sections are long and meant to be read in sequence (use accordion.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/tabs.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
