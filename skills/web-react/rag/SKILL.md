@@ -13,6 +13,8 @@ Retrieve accessibility best-practice patterns from your organization's retrieval
 
 This variant is the **brain**: it decides which patterns are needed and applies them. Your RAG index is the **retrieval mechanism** — you index the A11y Context corpus into it, and this skill queries it. Because your endpoint is your infrastructure, the skill can't have the address baked in; it reads the address from a config file (below).
 
+This skill's own files, such as `decisions-protocol.md`, are in the folder that contains this `SKILL.md`, and every path to one of them below is relative to that folder. In Claude Code, that folder is `${CLAUDE_SKILL_DIR}`.
+
 ---
 
 ## Scope check — before any other step
@@ -38,7 +40,7 @@ A Cast sender (`cast.framework.CastContext`) is not a TV signal on its own. It b
 
 ## Step 0 — Read the retrieval config and the decisions protocol
 
-Read `${CLAUDE_SKILL_DIR}/a11y-context.config.json`. It provides:
+Read `a11y-context.config.json`. It provides:
 - `ragEndpoint` — the URL the skill queries for pattern content
 - `indexName` — the index/namespace holding the A11y Context corpus
 - `stack` — the platform to scope to (`web/react`)
@@ -46,7 +48,7 @@ Read `${CLAUDE_SKILL_DIR}/a11y-context.config.json`. It provides:
 
 If the config still contains the placeholder `ragEndpoint`, stop and tell the user to fill it in before the skill can retrieve.
 
-Then read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
+Then read `decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 

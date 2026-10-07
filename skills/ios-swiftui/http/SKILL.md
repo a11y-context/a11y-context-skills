@@ -11,6 +11,8 @@ allowed-tools: Read WebFetch
 
 Retrieve accessibility best-practice patterns from the pattern documentation site and apply them before generating SwiftUI code. Run this skill before any implementation step that produces user-facing UI.
 
+This skill's own files, such as `decisions-protocol.md`, are in the folder that contains this `SKILL.md`, and every path to one of them below is relative to that folder. In Claude Code, that folder is `${CLAUDE_SKILL_DIR}`.
+
 ---
 
 ## Scope check — before any other step
@@ -32,13 +34,13 @@ This corpus covers iPhone and iPad. It does not cover Apple TV, where the focus 
 
 ## Step 0 — Follow the decisions protocol
 
-Read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
+Read `decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 
 ## Step 1 — Select Relevant Patterns
 
-Read the component catalog from `${CLAUDE_SKILL_DIR}/patterns.json`. Each entry contains:
+Read the component catalog from `patterns.json`. Each entry contains:
 - `id` — the pattern identifier used to construct the fetch URL
 - `summary` — a short description of the pattern
 - `aliases` and `tags` — alternate names and keywords
@@ -80,7 +82,7 @@ If a fetch returns a 404 or fails, note it and continue with the native SwiftUI 
 
 ## Step 3 — Apply Global Rules (Always retrieve them all; scope bounds repairs, not reading)
 
-Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
+Read `global_rules.md` on every UI task. Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
 
 `scope` exists for one job, and it is the opposite of filtering. It tells you **what not to go and repair in code you were not asked to change.** The buckets are a structural scale, identical on every stack:
 
@@ -115,7 +117,7 @@ Apply all Must Haves from retrieved patterns and applicable global rules. Treat 
 ## Guardrails
 
 ### Retrieval
-- Use the local catalog at `${CLAUDE_SKILL_DIR}/patterns.json` for component selection.
+- Use the local catalog at `patterns.json` for component selection.
 - Fetch only the patterns needed for the current task.
 - Fetch each pattern URL once, and again only if a later request returns to that component or its contents have left your context. The same applies to `global_rules.md`.
 

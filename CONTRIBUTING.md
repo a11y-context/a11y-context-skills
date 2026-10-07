@@ -18,6 +18,10 @@ Contributions to this repo should:
 
 `shared/decisions-protocol.md` is the source of the decisions protocol every variant reads. Each variant ships as its own zip of its own folder, so the file is copied into every variant. Edit only the copy in `shared/`, then run `bash scripts/sync-shared.sh` and commit the result. CI runs `bash scripts/sync-shared.sh --check` on every pull request and fails if any copy differs. The design behind the protocol is in `decisions-layer.md`.
 
+## Paths inside a skill
+
+Refer to a skill's own files by paths relative to its `SKILL.md`: `patterns.json`, `global_rules.md`, `{source.path}`. Claude Code expands `${CLAUDE_SKILL_DIR}`, but Cursor, Codex, and Copilot do not, so a path built on it is a path those tools cannot open. Each `SKILL.md` names the variable once, in the line under Purpose that says where its files are, so Claude Code still gets the absolute folder. Run `bash scripts/check-portable-paths.sh` before opening a pull request; it fails on any other use.
+
 ## Where other contributions belong
 
 - **New accessibility patterns, pattern revisions, foundational rules** → contribute to [a11y-context/accessibility-pattern-api](https://github.com/a11y-context/accessibility-pattern-api). The corpus is the source of truth; skill files in this repo are derived consumption artifacts.

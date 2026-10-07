@@ -11,6 +11,8 @@ allowed-tools: Read
 
 Read accessibility best-practice patterns from local documentation files and apply them before generating SwiftUI code. Run this skill before any implementation step that produces user-facing UI.
 
+This skill's own files, such as `decisions-protocol.md`, are in the folder that contains this `SKILL.md`, and every path to one of them below is relative to that folder. In Claude Code, that folder is `${CLAUDE_SKILL_DIR}`.
+
 ---
 
 ## Scope check — before any other step
@@ -32,13 +34,13 @@ This corpus covers iPhone and iPad. It does not cover Apple TV, where the focus 
 
 ## Step 0 — Follow the decisions protocol
 
-Read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
+Read `decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 
 ## Step 1 — Select Relevant Patterns
 
-Read the component catalog from `${CLAUDE_SKILL_DIR}/patterns.json`. Each entry contains:
+Read the component catalog from `patterns.json`. Each entry contains:
 - `id` — the pattern identifier
 - `summary` — a short description of the pattern
 - `aliases` and `tags` — alternate names and keywords
@@ -57,10 +59,10 @@ Produce a short list of selected pattern IDs before reading any pattern files. I
 
 ## Step 2 — Read Full Patterns
 
-For each selected pattern, read the local file at:
+For each selected pattern, read the local file at this path, relative to the folder that contains this `SKILL.md`:
 
 ```
-${CLAUDE_SKILL_DIR}/{source.path}
+{source.path}
 ```
 
 where `source.path` is the value from the catalog entry (e.g., `components/switch.basic.md`, `components/text-field.basic.md`).
@@ -81,7 +83,7 @@ If a file is missing, note it and continue with the native SwiftUI control and a
 
 ## Step 3 — Apply Global Rules (Always retrieve them all; scope bounds repairs, not reading)
 
-Read `${CLAUDE_SKILL_DIR}/global_rules.md` on every UI task. Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
+Read `global_rules.md` on every UI task. Foundations rules are not only screen-level; most are component-specific. **Apply every Foundations rule to the code you write.** Do not pre-filter which rules to read: a rule that does not apply excludes itself, because there is no page title inside a button.
 
 `scope` exists for one job, and it is the opposite of filtering. It tells you **what not to go and repair in code you were not asked to change.** The buckets are a structural scale, identical on every stack:
 
@@ -116,7 +118,7 @@ Apply all `must_haves` from read patterns and applicable global rules. Treat `go
 ## Guardrails
 
 ### Retrieval
-- Use the local catalog at `${CLAUDE_SKILL_DIR}/patterns.json` for component selection.
+- Use the local catalog at `patterns.json` for component selection.
 - Read only the pattern files needed for the current task.
 - Read each pattern file once, and re-read it only if a later request returns to that component or its contents have left your context. The same applies to `global_rules.md`.
 
