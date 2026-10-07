@@ -205,7 +205,7 @@ Matching uses the key fields and nothing else. Where it is unclear whether an en
 
 **The skill asks first only when the fix would replace, bypass, or remove something that already exists**: a design-system component, a shared helper, a wrapper someone built on purpose. That test is mechanical. The skill applies it to its own planned diff and does not weigh how important the change seems. A skill that asks for permission constantly has misread the cases above as this one.
 
-**A helper that does the job a different way is used, not questioned.** If the codebase's `announce()` sends an announcement event where the pattern uses a live region, using it replaces nothing, so the skill uses it and says once per change: "Used `announce()`. The pattern uses a live region here instead, so say if you want it switched." It never offers that helper as a mapping, because a mapping says the helper does what the pattern names.
+**A helper that does the job a different way is used, not questioned.** If the codebase's `announce()` sends an announcement event where the pattern uses a live region, using it replaces nothing, so the skill uses it and says once per change: "Used `announce()`. The pattern uses a live region here instead, so say if you want it switched." It never offers that helper as a mapping, because a mapping says the helper does what the pattern names. If the engineer answers that the team's way is right, the skill goes to the permanence question below. That is how a `contested` entry for a helper gets recorded.
 
 The worked case. The task is a "Remember me" checkbox. The codebase's `BrandCheckbox` fixes its row at 36dp internally, so nothing the skill adds from outside can meet the 48dp target.
 

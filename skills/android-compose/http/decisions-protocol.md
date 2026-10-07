@@ -32,7 +32,7 @@ Most work ends there. **Ask first only when your fix would replace, bypass, or r
 
 A component is broken, not misused, when nothing you can add from outside it makes it meet the requirement. Read its source to tell. If a modifier, parameter, or wrapper in your own code would fix it, it is misuse: fix it and stay quiet.
 
-A helper that does the job a rule describes, but a different way than the pattern, is neither broken nor misused. Using it replaces nothing, so do not ask. Use it, and say once per change: "Used `<local>`. The pattern uses <the pattern's way> here instead, so say if you want it switched."
+A helper that does the job a rule describes, but a different way than the pattern, is neither broken nor misused. Using it replaces nothing, so do not ask. Use it, and say once per change: "Used `<local>`. The pattern uses <the pattern's way> here instead, so say if you want it switched." If the person answers that their way is right, go to **On no** in section 3 and ask whether to make it permanent.
 
 ## 3. Asking, in order
 
