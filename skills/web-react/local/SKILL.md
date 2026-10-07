@@ -13,6 +13,27 @@ Read accessibility best-practice patterns from local documentation files and app
 
 ---
 
+## Scope check — before any other step
+
+This corpus covers browser apps on desktop, laptop, tablet, and phone. It does not cover apps built for connected TVs, where the remote and the TV platform change what correct looks like. Run this check for each file you will change, since one task can touch both.
+
+**The file targets a connected TV** if any of these is true:
+- The file, its app, or its package is named for a TV platform or TV delivery, such as `tizen`, `webos`, `vizio`, `hisense`, `ctv`, or `smart-tv`.
+- It uses TV platform globals such as `tizen`, `webOS`, or `PalmSystem`, or registers remote-control keys.
+- It uses a spatial-navigation library to move focus with a remote.
+- It is a Cast receiver: it uses `cast.framework.CastReceiverContext` or loads the Cast receiver framework. Treat this as TV unless the surrounding code clearly says otherwise.
+- The request names a TV, a TV platform, a remote, or the 10-foot experience.
+
+A Cast sender (`cast.framework.CastContext`) is not a TV signal on its own. It belongs to whatever app it lives in, which the other signals decide.
+
+**If the file targets a connected TV,** do not retrieve or apply patterns to it. Do the work using the codebase's existing TV accessibility conventions, and say once: "This code targets a connected TV. The A11y Context React corpus covers browser apps only, so I followed the codebase's existing TV accessibility conventions and did not apply browser patterns here."
+
+**If the file is in a shared package that a TV app also uses,** apply patterns as usual and add one line: "This change also ships in a TV app and was not checked against TV behavior."
+
+**Otherwise,** continue with the steps below.
+
+---
+
 ## Step 1 — Select Relevant Patterns
 
 Read the component catalog from `${CLAUDE_SKILL_DIR}/patterns.json`. Each entry contains:

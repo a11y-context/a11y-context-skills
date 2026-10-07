@@ -13,6 +13,24 @@ Retrieve accessibility best-practice patterns from the pattern documentation sit
 
 ---
 
+## Scope check — before any other step
+
+This corpus covers Android phones and tablets. It does not cover Android TV, Google TV, or Fire TV, where the remote and the platform's screen readers change what correct looks like. Run this check for each file you will change, since one task can touch both.
+
+**The file targets TV** if any of these is true:
+- It imports from `androidx.tv.*` or `androidx.leanback.*`.
+- Its module's manifest declares the `android.software.leanback` feature or a `LEANBACK_LAUNCHER` category.
+- It lives in a module or source set that exists for the TV build, such as `compose-tv`, `ui-tv`, `app-tv`, `firetv`, or a `tv` source set. A phone feature named for live TV or a TV guide is not a TV module.
+- The request names Android TV, Google TV, Fire TV, a TV screen, a remote, or the D-pad.
+
+**If the file targets TV,** do not retrieve or apply patterns to it. Do the work using the codebase's existing TV accessibility conventions, and say once: "This code targets Android TV or Fire TV. The A11y Context Compose corpus covers phones and tablets only, so I followed the codebase's existing TV accessibility conventions and did not apply phone patterns here."
+
+**If the file is in a shared module that the TV build also uses,** apply patterns as usual and add one line: "This change also ships in the TV build and was not checked against TV behavior."
+
+**Otherwise,** continue with the steps below.
+
+---
+
 ## Step 1 — Select Relevant Patterns
 
 Read the component catalog from `${CLAUDE_SKILL_DIR}/patterns.json`. Each entry contains:

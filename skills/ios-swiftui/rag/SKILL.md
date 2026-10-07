@@ -15,6 +15,23 @@ This variant is the **brain**: it decides which patterns are needed and applies 
 
 ---
 
+## Scope check — before any other step
+
+This corpus covers iPhone and iPad. It does not cover Apple TV, where the focus engine and the Siri Remote change what correct looks like. Run this check for each file you will change, since one task can touch both.
+
+**The file targets Apple TV** if any of these is true:
+- It is compiled only for tvOS: it belongs only to a target built for the `appletvos` SDK, or its contents are wrapped in `#if os(tvOS)`.
+- It imports `TVUIKit` or `TVServices`.
+- The request names Apple TV, tvOS, or the Siri Remote.
+
+**If the file targets Apple TV,** do not retrieve or apply patterns to it. Do the work using the codebase's existing tvOS accessibility conventions, and say once: "This code targets Apple TV. The A11y Context SwiftUI corpus covers iPhone and iPad only, so I followed the codebase's existing tvOS accessibility conventions and did not apply iPhone patterns here."
+
+**If the file builds for both iOS and tvOS,** apply patterns to the iOS code, leave `#if os(tvOS)` blocks alone, and add one line: "This change also ships in the tvOS build and was not checked against tvOS behavior."
+
+**Otherwise,** continue with the steps below.
+
+---
+
 ## Step 0 — Read the retrieval config
 
 Read `${CLAUDE_SKILL_DIR}/a11y-context.config.json`. It provides:
