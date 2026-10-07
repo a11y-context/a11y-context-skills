@@ -16,7 +16,7 @@ Contributions to this repo should:
 
 ## Shared files
 
-`shared/decisions-protocol.md` is the source of the decisions protocol every variant reads. Each variant ships as its own zip of its own folder, so the file is copied into every variant. Edit only the copy in `shared/`, then run `bash scripts/sync-shared.sh` and commit the result. Before opening a pull request, run `bash scripts/sync-shared.sh --check`, which fails if any copy differs. The design behind the protocol is in `decisions-layer.md`.
+`shared/decisions-protocol.md` is the source of the decisions protocol every variant reads. Each variant ships as its own zip of its own folder, so the file is copied into every variant. Edit only the copy in `shared/`, then run `bash scripts/sync-shared.sh` and commit the result. CI runs `bash scripts/sync-shared.sh --check` on every pull request and fails if any copy differs. The design behind the protocol is in `decisions-layer.md`.
 
 ## Where other contributions belong
 

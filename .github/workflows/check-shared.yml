@@ -1,0 +1,14 @@
+name: Check shared files
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every variant carries the current decisions protocol
+        run: bash scripts/sync-shared.sh --check
