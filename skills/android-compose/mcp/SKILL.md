@@ -15,6 +15,24 @@ This variant is the **brain**: it decides which patterns are needed and applies 
 
 ---
 
+## Scope check — before any other step
+
+This corpus covers Android phones and tablets. It does not cover Android TV, Google TV, or Fire TV, where the remote and the platform's screen readers change what correct looks like. Run this check for each file you will change, since one task can touch both.
+
+**The file targets TV** if any of these is true:
+- It imports from `androidx.tv.*` or `androidx.leanback.*`.
+- Its module's manifest declares the `android.software.leanback` feature or a `LEANBACK_LAUNCHER` category.
+- It lives in a module or source set that exists for the TV build, such as `compose-tv`, `ui-tv`, `app-tv`, `firetv`, or a `tv` source set. A phone feature named for live TV or a TV guide is not a TV module.
+- The request names Android TV, Google TV, Fire TV, a TV screen, a remote, or the D-pad.
+
+**If the file targets TV,** do not retrieve or apply patterns to it. Do the work using the codebase's existing TV accessibility conventions, and say once: "This code targets Android TV or Fire TV. The A11y Context Compose corpus covers phones and tablets only, so I followed the codebase's existing TV accessibility conventions and did not apply phone patterns here."
+
+**If the file is in a shared module that the TV build also uses,** apply patterns as usual and add one line: "This change also ships in the TV build and was not checked against TV behavior."
+
+**Otherwise,** continue with the steps below.
+
+---
+
 ## Step 1 — Select Relevant Patterns
 
 Call `list_patterns` to retrieve the component catalog. Each entry contains:
@@ -102,3 +120,4 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.
 - Surface process details only if a tool call fails, or the user explicitly asks how patterns were selected or applied.
+- The scope check's message is not process narration. Say it as written when the check calls for it.
