@@ -62,7 +62,7 @@ Six `##` sections, one per entry kind, in the order of the table below. Each ent
 
 | Kind | It says | What the person is asked | Effect when it matches |
 |---|---|---|---|
-| `mapping` | "Where the corpus names X, this codebase uses Y." X is a pattern's component, or an API a rule names | Once: is Y your version of X? | The skill uses Y in place of X, and X's requirements still apply to Y |
+| `mapping` | "Where the corpus names X, this codebase uses Y." X is a pattern's component, or an API a rule names | Once, batched at the end of a task: record Y as your version of X? | The skill uses Y in place of X, and X's requirements still apply to Y |
 | `compliance-claim` | "Component Y already meets rule R, through mechanism M in file F" | The gate | The skill re-reads F; if M is there it skips R on Y silently, and if not it says so and checks R as usual |
 | `decided-customizable` | "Where rule R leaves a choice open, this codebase chose C" | The gate | The skill applies C instead of asking or guessing |
 | `approved-substitution` | "Component Y cannot meet rule R; use framework component Z instead, without asking" | The gate | The skill uses Z and does not ask again |
@@ -248,6 +248,16 @@ The fix can be turned off. The sentence cannot.
 > The 2026-10-07 claim says `BrandCheckbox` meets the touch target through `minimumInteractiveComponentSize()` in `BrandCheckbox.kt`, which is no longer there. Checking it as usual.
 
 That catches the common way claims go stale, a refactor. It does not catch a regression with the call still present, and nothing static will.
+
+### Offering the other entries
+
+Three kinds are offered outside the step-two flow, each in one short question:
+
+- **Mappings, once, at the end of a task.** If the skill used a codebase component or helper where a pattern or rule names a different one, and no mapping covers it, it lists them all in one question. Asking per component, mid-task, would be the noise this design exists to avoid.
+- **A compliance claim, only when a person says a component already meets a rule**, and only after the skill finds the mechanism in the component's source. If it cannot find it, it says so and does not offer.
+- **A decided customizable, when a person or a requirement states a general choice** for something a pattern leaves open.
+
+Approved substitutions, contested entries, and accepted barriers come only from the step-two flow above.
 
 ### What it falls back to
 
