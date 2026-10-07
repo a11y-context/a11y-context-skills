@@ -66,12 +66,12 @@ Six `##` sections, one per entry kind, in the order of the table below. Each ent
 | `compliance-claim` | "Component Y already meets rule R, through mechanism M in file F" | The gate | The skill re-reads F; if M is there it skips R on Y silently, and if not it says so and checks R as usual |
 | `decided-customizable` | "Where rule R leaves a choice open, this codebase chose C" | The gate | The skill applies C instead of asking or guessing |
 | `approved-substitution` | "Component Y cannot meet rule R; use framework component Z instead, without asking" | The gate | The skill uses Z and does not ask again |
-| `contested` | "We do R differently on purpose, the pattern may be wrong for us, and this evidence would settle it" | The gate, plus what would settle it | The skill keeps the codebase's way, says so every time, and says when the review date has passed |
-| `accepted-barrier` | "Rule R is unmet here and we are leaving it, because..." | The gate, plus a scope question | The skill does not apply the fix at that scope, and says so every time |
+| `contested` | "We do R differently on purpose, the pattern may be wrong for us, and this would settle it" | Every time? Then why, then what would settle it | The skill keeps the codebase's way, says so every time, and says when the review date has passed |
+| `accepted-barrier` | "Rule R is unmet here and we are leaving it, because..." | Every time? Then why, then the scope | The skill does not apply the fix at that scope, and says so every time |
 
 "The gate" means the skill states, in one sentence, exactly what will stop being checked or asked, and writes the entry only on a yes.
 
-**A contested entry and an accepted barrier differ in who thinks the rule is right.** An accepted barrier agrees the pattern is right and keeps the barrier for a stated reason, usually time. A contested entry records that the team believes the pattern is wrong for this codebase, the evidence it has, and what would settle the question. Recording a team's tested convention as a barrier would misstate what the team believes, and would ask them to call their own work wrong before any evidence says so.
+**A contested entry and an accepted barrier differ in who thinks the rule is right.** An accepted barrier agrees the pattern is right and keeps the barrier for a stated reason, usually time. A contested entry records that the team believes the pattern is wrong for this codebase, whatever evidence it has (which may be none yet), and what would settle the question. Recording a team's tested convention as a barrier would misstate what the team believes, and would ask them to call their own work wrong before any evidence says so. The engineer never has to name either kind: the skill asks why, in plain words, and the answer decides.
 
 ### Fields
 
@@ -85,7 +85,7 @@ Every entry carries `kind`, `date` (ISO), `decided_by`, and `platform` (`all` un
 | `compliance-claim` | `rule`, `local`, `mechanism`, `file`, optional `evidence` |
 | `decided-customizable` | `rule`, `choice` (a plain sentence), optional `evidence` |
 | `approved-substitution` | `rule`, `local`, `substitute` |
-| `contested` | `rule`, `local`, `codebase_does` and `pattern_says` (plain sentences), `evidence`, `settles_on`, `review_by` |
+| `contested` | `rule`, `local`, `codebase_does` and `pattern_says` (plain sentences), `evidence` (or `none yet`), `settles_on`, `review_by` |
 | `accepted-barrier` | `scope` (`instance` or `component`), `rule`, `where` (instance) or `local` (component), `proposed`, `decided` |
 
 **Keys, which decide what a new entry replaces.** A mapping is keyed on `local`. A decided customizable is keyed on `rule` and `platform`. The other four are four different answers to one question, "what does this codebase do about rule R on this thing," so they share one key, `rule` plus `local` (or `where`), and a codebase holds at most one of them per key. Recording a substitution for `BrandChip` replaces an accepted barrier on `BrandChip` under the same rule, and so on.
@@ -221,15 +221,16 @@ Then, unless the person chose to fix the component itself:
 
 "Always" writes an `approved-substitution`.
 
-**On no**, it uses `BrandCheckbox` as it is, then offers the gate:
+**On no**, it uses `BrandCheckbox` as it is, then asks whether to make that permanent:
 
-> That leaves a 36dp touch target on this checkbox. Record it in `.a11y-context/decisions.md`? Reply "barrier" if the pattern is right and you are keeping this for now, or "contested" if you think the pattern is wrong here and have evidence. Either way it stays visible in the repo, and I will mention it each time it applies.
+> Kept `BrandCheckbox`, so the 36dp touch target stays on this checkbox. Should I do this every time it comes up, without asking? That records it in `.a11y-context/decisions.md`, where it stays visible in the repo.
 
-The skill offers both words every time rather than guessing which one fits, since that guess is exactly the kind of judgment the trigger is designed to avoid.
+- **No, or no answer**, records nothing, and the same question comes up next time.
+- **Yes** gets one follow-up, in plain words: "Is that because the pattern is wrong here, or because it can't be fixed yet?"
+  - **The pattern is wrong here:** the skill asks what would settle it and when someone should check, writes a `contested` entry, and suggests opening an issue on the corpus repository, since if the team is right, the pattern is wrong. If nothing has been checked, `evidence` is `none yet`, and the review date is what makes sure the check happens.
+  - **It can't be fixed yet:** the skill asks the scope, "Just this checkbox, or every `BrandCheckbox`?", and writes an `accepted-barrier`.
 
-- **"barrier"**: the skill asks the scope, "Just this checkbox, or every `BrandCheckbox`?", and writes an `accepted-barrier`.
-- **"contested"**: the skill asks what would settle it and when someone should check, writes a `contested` entry, and suggests opening an issue on the corpus repository, since if the team is right, the pattern is wrong.
-- **Anything else** records nothing, and the same question comes up next time.
+**Why permanence comes first.** An earlier draft asked the engineer to reply "barrier" or "contested." That was the file's vocabulary, not the engineer's decision. In a human check, the case where an engineer disputes the pattern without having checked got neither label; it got the question "should it do this every time?" Permanence is the decision being made, so the skill asks it first, asks why only when something is about to be recorded, and keeps the kind names inside the file. The common path, a one-off refusal, still costs one question.
 
 **When an accepted barrier matches later,** the skill does not apply the fix and says, once per change:
 
@@ -321,7 +322,7 @@ Two refinements:
 4. **An evaluation**, before the asking and the gate ship. Without engineered wording, agents in this project's evaluation consulted the corpus only 13 to 53 percent of the time, and there is no reason to expect a gate does better untested. Cases:
    - Asks before replacing a design-system component; stays silent when adding or fixing usage.
    - Classifies "fixable from outside" against "broken inside" correctly. This is the case that decides whether the skill is useful or annoying.
-   - Opens the gate on a refusal, offers both "barrier" and "contested," and asks the scope or the settling check that follows from the answer.
+   - On a refusal, keeps the engineer's way and asks whether to do it every time; asks why only on a yes; never asks the engineer to choose "barrier" or "contested"; then asks the scope or the settling check that follows from the reason.
    - Writes entries in the right shape, under the right key, replacing rather than appending.
    - Suppresses on the next run, and still says the sentence; for a contested entry, adds the review-date line once it has passed.
    - Re-reads a compliance claim's file and catches a missing mechanism.
