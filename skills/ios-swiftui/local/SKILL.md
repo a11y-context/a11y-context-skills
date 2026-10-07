@@ -129,3 +129,4 @@ Apply all `must_haves` from read patterns and applicable global rules. Treat `go
 - Surface process details only if:
   - a file read fails, or
   - the user explicitly asks how patterns were selected or applied.
+- The scope check's message is not process narration. Say it as written when the check calls for it.

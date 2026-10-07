@@ -132,3 +132,4 @@ Apply all Must Haves from retrieved patterns and applicable global rules. Treat 
 - Surface process details only if:
   - a fetch fails or is blocked, or
   - the user explicitly asks how patterns were selected or applied.
+- The scope check's message is not process narration. Say it as written when the check calls for it.

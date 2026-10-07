@@ -119,3 +119,4 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.
 - Surface process details only if retrieval fails, or the user explicitly asks how patterns were selected or applied.
+- The scope check's message is not process narration. Say it as written when the check calls for it.
