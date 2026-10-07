@@ -32,6 +32,8 @@ Most work ends there. **Ask first only when your fix would replace, bypass, or r
 
 A component is broken, not misused, when nothing you can add from outside it makes it meet the requirement. Read its source to tell. If a modifier, parameter, or wrapper in your own code would fix it, it is misuse: fix it and stay quiet.
 
+A helper that does the job a rule describes, but a different way than the pattern, is neither broken nor misused. Using it replaces nothing, so do not ask. Use it, and say once per change: "Used `<local>`. The pattern uses <the pattern's way> here instead, so say if you want it switched."
+
 ## 3. Asking, in order
 
 **Before writing anything,** name the problem and your fix, and ask:
@@ -69,7 +71,7 @@ Then, unless the person chose to fix the component:
 
 Offer each of these in one short question, and write only on a yes.
 
-- **Mappings, once, at the end of a task.** If you used one of this codebase's components or helpers where a pattern or rule names a different one, and no mapping covers it, list them all in one question: "I used `<local>` where `<pattern or rule>` names `<X>`. Record these as mappings in `.a11y-context/decisions.md`, so I reach for them first next time?" A yes writes one `mapping` per item.
+- **Mappings, once, at the end of a task.** If you used one of this codebase's components or helpers where a pattern or rule names a different one, and no mapping covers it, list them all in one question: "I used `<local>` where `<pattern or rule>` names `<X>`. Record these as mappings in `.a11y-context/decisions.md`, so I reach for them first next time?" A yes writes one `mapping` per item. Leave out any helper that does the job a different way than `<X>`: it got its sentence in section 2, and a mapping would say it does what `<X>` does.
 - **A compliance claim, when the person says a component already meets a rule.** Read its source first. If you find the mechanism, offer: "Record that `<local>` meets <rule> through <mechanism> in `<file>`? I will check that file each time instead of asking." If you cannot find the mechanism, say so and do not offer.
 - **A decided customizable, when the person or a requirement states a general choice for something a pattern leaves open.** Offer: "Record '<choice>' as this codebase's choice for <rule>?"
 
