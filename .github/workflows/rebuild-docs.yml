@@ -1,0 +1,26 @@
+name: Rebuild the docs site
+
+# The docs site at a11y-context-project.vercel.app is built from the corpus repo, and that
+# build packages the downloadable skill zips from this repo. A change here does not start a
+# build there, so without this the zips stay stale until the next corpus merge. This calls the
+# corpus project's Vercel deploy hook whenever skill files change on main.
+
+on:
+  push:
+    branches: [main]
+    paths: ['skills/**']
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the corpus site's deploy hook
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::The VERCEL_DEPLOY_HOOK_URL secret is not set on this repository."
+            exit 1
+          fi
+          curl --fail --silent --show-error --request POST "$HOOK"
