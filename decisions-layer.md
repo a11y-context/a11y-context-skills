@@ -1,6 +1,6 @@
 # Decisions layer
 
-*Design note, proposed October 2026. Not built yet. When a part of it ships, the `SKILL.md` text for that part is canonical and this note records why it works the way it does.*
+*Design note, October 2026. The scope check shipped in #7. The decisions protocol is implemented on an unmerged branch, #8, and reaches installs when that merges. Once a part ships, its `SKILL.md` or protocol text is canonical, and this note records why it works the way it does.*
 
 ## What this adds
 
