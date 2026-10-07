@@ -30,6 +30,12 @@ This corpus covers iPhone and iPad. It does not cover Apple TV, where the focus 
 
 ---
 
+## Step 0 — Follow the decisions protocol
+
+Read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
+
+---
+
 ## Step 1 — Select Relevant Patterns
 
 Read the component catalog from `${CLAUDE_SKILL_DIR}/patterns.json`. Each entry contains:
@@ -115,6 +121,7 @@ Apply all Must Haves from retrieved patterns and applicable global rules. Treat 
 
 ### Design System & Scope
 - If the project uses a component library or design system, preserve it.
+- Replace one of its components only by following the decisions protocol, which asks first.
 - Prefer minimal-change compliance: fix usage (props, labels, structure) before replacing components.
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
@@ -128,4 +135,4 @@ Apply all Must Haves from retrieved patterns and applicable global rules. Treat 
 - Surface process details only if:
   - a fetch fails or is blocked, or
   - the user explicitly asks how patterns were selected or applied.
-- The scope check's message is not process narration. Say it as written when the check calls for it.
+- The scope check's message and the decisions protocol's messages are not process narration. Say them as written when they call for them.

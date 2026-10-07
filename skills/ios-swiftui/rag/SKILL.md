@@ -32,7 +32,7 @@ This corpus covers iPhone and iPad. It does not cover Apple TV, where the focus 
 
 ---
 
-## Step 0 — Read the retrieval config
+## Step 0 — Read the retrieval config and the decisions protocol
 
 Read `${CLAUDE_SKILL_DIR}/a11y-context.config.json`. It provides:
 - `ragEndpoint` — the URL the skill queries for pattern content
@@ -41,6 +41,8 @@ Read `${CLAUDE_SKILL_DIR}/a11y-context.config.json`. It provides:
 - `topK` — how many chunks to retrieve per query (default 3)
 
 If the config still contains the placeholder `ragEndpoint`, stop and tell the user to fill it in before the skill can retrieve.
+
+Then read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 
@@ -108,6 +110,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 
 ### Design System & Scope
 - If the project uses a component library or design system, preserve it.
+- Replace one of its components only by following the decisions protocol, which asks first.
 - Prefer minimal-change compliance: fix usage (props, labels, structure) before replacing components.
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
@@ -119,4 +122,4 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.
 - Surface process details only if retrieval fails, or the user explicitly asks how patterns were selected or applied.
-- The scope check's message is not process narration. Say it as written when the check calls for it.
+- The scope check's message and the decisions protocol's messages are not process narration. Say them as written when they call for them.
