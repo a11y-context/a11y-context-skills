@@ -298,15 +298,16 @@ Two refinements:
 **Each variant ships as its own zip of its own folder**, so a file at the repository root reaches no one. The corpus repository's download generator walks `skills/<stack>/<variant>/` and zips each one. That decides two things.
 
 - **The protocol text lives once and is copied into every variant.** Its source is `shared/decisions-protocol.md`. A script copies it into all 12 variant folders, and a check fails if any copy differs. This is how `global_rules.md` already reaches the local and http variants.
-- **Each `SKILL.md` gains one line at the start of its steps**: read `${CLAUDE_SKILL_DIR}/decisions-protocol.md`, then the codebase's `.a11y-context/decisions.md`. The rag variant's existing Step 0 reads its retrieval config; the decisions read becomes the second half of that step.
+- **Each `SKILL.md` gains a Step 0**: read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. The protocol is read whether or not the codebase has a decisions file yet, because its asking rules apply either way. The rag variant's existing Step 0 reads its retrieval config; the protocol read becomes the second half of that step.
+- **Two guardrails change.** The Communication guardrail told the agent to surface process details only on failure, which would have suppressed the protocol's messages and the scope check's, so it now lets them through. The design-system guardrail said "preserve it," which read literally rules out substituting a component even on a yes, so it now says replacing one goes through the protocol.
 
-**No variant's `allowed-tools` changes.** Writing an entry goes through the client's normal file-edit permission, so the engineer sees the exact diff a second time before it lands. A client that cannot edit files shows the entry as a block and asks the engineer to add it by hand. It never skips the gate.
+**No variant gains Edit.** Writing an entry goes through the client's normal file-edit permission, so the engineer sees the exact diff a second time before it lands. A client that cannot edit files shows the entry as a block and asks the engineer to add it by hand. It never skips the gate. The mcp variants gain Read, which they had no need for before and now need to open the protocol and the decisions file.
 
 ## Rollout
 
 1. **This note.** Reviewed and agreed before anything below moves.
 2. **The scope check.** Separate from the rest and needed first.
-3. **The protocol, mappings only.** `decisions-protocol.md`, the copy script and its check, the one-line read in all 12 `SKILL.md` files. Mappings are the lowest-risk kind and prove the read path.
+3. **The protocol, in full, on an unmerged branch.** `decisions-protocol.md` with all six kinds, the copy script and its check, and the Step 0 read in all 12 `SKILL.md` files. The evaluation runs against this branch, so nothing reaches anyone who installs the skill until it passes.
 4. **An evaluation**, before the asking and the gate ship. Without engineered wording, agents in this project's evaluation consulted the corpus only 13 to 53 percent of the time, and there is no reason to expect a gate does better untested. Cases:
    - Asks before replacing a design-system component; stays silent when adding or fixing usage.
    - Classifies "fixable from outside" against "broken inside" correctly. This is the case that decides whether the skill is useful or annoying.
@@ -316,7 +317,7 @@ Two refinements:
    - Re-reads a compliance claim's file and catches a missing mechanism.
    - Applies a mapping and a decided customizable.
    - Stops at the scope check for TV code, applies with one line for shared code.
-5. **Compliance claims, substitutions, contested entries, barriers, and the asking**, once the evaluation passes.
+5. **Merge**, once the evaluation passes. If it shows the asking or the gate are unreliable, a mappings-only cut of the protocol can merge first, since mappings are the lowest-risk kind and prove the read path.
 
 ## Open questions
 
