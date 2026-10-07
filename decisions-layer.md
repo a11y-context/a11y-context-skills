@@ -43,11 +43,11 @@ The file opens with this text, verbatim, so an engineer who finds it without kno
 
 Read by the A11y Context skill (https://a11y-context-project.vercel.app) before it applies
 accessibility patterns to generated code. Each entry records a decision a person made in chat:
-which of this codebase's components stands in for a pattern's, which rules a component already
-meets, which open choices the team settled, which components to replace because they cannot
-meet a rule, and which accessibility barriers the team has knowingly kept. The skill never
-writes here on its own; it asks first. One entry per decision; edits replace in place; git
-holds the history.
+which of this codebase's components and helpers stand in for the ones the patterns name, which
+rules a component already meets, which open choices the team settled, which components to
+replace because they cannot meet a rule, and which accessibility barriers the team has
+knowingly kept. The skill never writes here on its own; it asks first. One entry per decision;
+edits replace in place; git holds the history.
 ```
 
 An optional `owners:` line may follow, naming who answers for the design system (a team handle, or a path into `CODEOWNERS`). When it is present the skill can address a note to them. When it is absent the skill never guesses a recipient.
@@ -60,7 +60,7 @@ Five `##` sections, one per entry kind, in the order of the table below. Each en
 
 | Kind | It says | What the person is asked | Effect when it matches |
 |---|---|---|---|
-| `mapping` | "Pattern X's component is our component Y" | Once: is Y your version of X? | The skill applies X's requirements to Y |
+| `mapping` | "Where the corpus names X, this codebase uses Y." X is a pattern's component, or an API a rule names | Once: is Y your version of X? | The skill uses Y in place of X, and X's requirements still apply to Y |
 | `compliance-claim` | "Component Y already meets rule R, through mechanism M in file F" | The gate | The skill re-reads F; if M is there it skips R on Y silently, and if not it says so and checks R as usual |
 | `decided-customizable` | "Where rule R leaves a choice open, this codebase chose C" | The gate | The skill applies C instead of asking or guessing |
 | `approved-substitution` | "Component Y cannot meet rule R; use framework component Z instead, without asking" | The gate | The skill uses Z and does not ask again |
@@ -74,7 +74,7 @@ Every entry carries `kind`, `date` (ISO), `decided_by`, and `platform` (`all` un
 
 | Kind | Its own fields | Key (one live entry per key) |
 |---|---|---|
-| `mapping` | `stack`, `pattern`, `local` | `local` |
+| `mapping` | `stack`; `pattern` or `rule`; `api` when it maps a rule's API; `local` | `local` |
 | `compliance-claim` | `rule`, `component`, `mechanism`, `file`, optional `evidence` | `rule` + `component` + `platform` |
 | `decided-customizable` | `rule`, `choice` (a plain sentence), optional `evidence` | `rule` + `platform` |
 | `approved-substitution` | `rule`, `component`, `substitute` | `rule` + `component` |
@@ -82,7 +82,9 @@ Every entry carries `kind`, `date` (ISO), `decided_by`, and `platform` (`all` un
 
 `evidence` takes an issue key, a link, or the device and screen reader something was verified on. `proposed` and `decided` are the skill's plain sentences, so someone who was not there can read what the skill wanted to do and what the team decided instead.
 
-### One example of each
+**A mapping never vouches for what it maps to.** It changes which name the skill writes, not what the result must do. If the skill reads `Y` and finds it cannot meet the requirements `X` carries, that is the broken-component case below, and the skill asks.
+
+### Examples
 
 ```yaml
 kind: mapping
@@ -90,6 +92,17 @@ date: 2026-10-07
 stack: android/compose
 pattern: checkbox.basic
 local: com.example.design.BrandCheckbox
+decided_by: jordan.lee
+platform: all
+```
+
+```yaml
+kind: mapping
+date: 2026-10-07
+stack: android/compose
+rule: global.traversal-order
+api: Modifier.semantics { isTraversalGroup = true }
+local: com.example.a11y.traversalGroup()
 decided_by: jordan.lee
 platform: all
 ```
