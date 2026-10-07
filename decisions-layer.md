@@ -33,6 +33,7 @@ On the web the middle layer is thin. The browser ships a dozen correct elements 
 - **Not inside the skill's folder.** Installing a new version of the skill replaces its folder, and anything stored there with it.
 - **Committed.** Every engineer's agent in the repository reads the same decisions, and every entry shows up in a pull request where someone can review it.
 - **Created by the skill on the first entry a person confirms**, with the header below. Nothing creates it ahead of time, and the skill never creates an empty one.
+- **People can also write entries by hand**, for example to seed the file from a helper table the team already maintains. The skill reads them the same way. Rule 1 below governs what the skill writes, not what people write.
 
 ### Header
 
