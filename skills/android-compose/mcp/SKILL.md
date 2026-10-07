@@ -2,7 +2,7 @@
 name: a11y-context-android-compose-mcp
 description: Apply accessibility patterns to Jetpack Compose user-facing UI. Use whenever generating, building, creating, modifying, or refactoring composables, screens, or any UI a user sees or interacts with — including buttons, forms, text fields, dialogs, bottom sheets, navigation, menus, lists, content shelves, switches, checkboxes, and settings screens. Use when the prompt mentions any UI element by name or describes a screen, home feed, card row, or interactive widget. Do not use for ViewModels, repositories, use cases, data classes, dependency-injection modules, network clients, or test helpers.
 user-invocable: true
-allowed-tools: mcp__a11y-context__list_patterns mcp__a11y-context__get_pattern mcp__a11y-context__get_foundations
+allowed-tools: mcp__a11y-context__list_patterns mcp__a11y-context__get_pattern mcp__a11y-context__get_foundations Read
 ---
 
 # A11y Context — Jetpack Compose Skill (MCP)
@@ -30,6 +30,12 @@ This corpus covers Android phones and tablets. It does not cover Android TV, Goo
 **If the file is in a shared module that the TV build also uses,** apply patterns as usual and add one line: "This change also ships in the TV build and was not checked against TV behavior."
 
 **Otherwise,** continue with the steps below.
+
+---
+
+## Step 0 — Follow the decisions protocol
+
+Read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 
@@ -109,6 +115,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 
 ### Design System & Scope
 - If the project uses a component library or design system, preserve it.
+- Replace one of its components only by following the decisions protocol, which asks first.
 - Prefer minimal-change compliance: fix usage (props, labels, structure) before replacing components.
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
@@ -120,4 +127,4 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.
 - Surface process details only if a tool call fails, or the user explicitly asks how patterns were selected or applied.
-- The scope check's message is not process narration. Say it as written when the check calls for it.
+- The scope check's message and the decisions protocol's messages are not process narration. Say them as written when they call for them.

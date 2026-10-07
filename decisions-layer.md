@@ -205,6 +205,8 @@ Matching uses the key fields and nothing else. Where it is unclear whether an en
 
 **The skill asks first only when the fix would replace, bypass, or remove something that already exists**: a design-system component, a shared helper, a wrapper someone built on purpose. That test is mechanical. The skill applies it to its own planned diff and does not weigh how important the change seems. A skill that asks for permission constantly has misread the cases above as this one.
 
+**A helper that does the job a different way is used, not questioned.** If the codebase's `announce()` sends an announcement event where the pattern uses a live region, using it replaces nothing, so the skill uses it and says once per change: "Used `announce()`. The pattern uses a live region here instead, so say if you want it switched." It never offers that helper as a mapping, because a mapping says the helper does what the pattern names. If the engineer answers that the team's way is right, the skill goes to the permanence question below. That is how a `contested` entry for a helper gets recorded.
+
 The worked case. The task is a "Remember me" checkbox. The codebase's `BrandCheckbox` fixes its row at 36dp internally, so nothing the skill adds from outside can meet the 48dp target.
 
 **Before writing anything:**
@@ -230,6 +232,10 @@ Then, unless the person chose to fix the component itself:
   - **The pattern is wrong here:** the skill asks what would settle it and when someone should check, writes a `contested` entry, and suggests opening an issue on the corpus repository, since if the team is right, the pattern is wrong. If nothing has been checked, `evidence` is `none yet`, and the review date is what makes sure the check happens.
   - **It can't be fixed yet:** the skill asks the scope, "Just this checkbox, or every `BrandCheckbox`?", and writes an `accepted-barrier`.
 
+**Only an explicit yes is a yes.** No reply, a reply about something else, or a reply the skill cannot read either way counts as no, and after no answer the skill asks nothing more. The rule leans the safe way on purpose: reading a non-answer as no keeps what the codebase already has, while misreading one as yes would replace a design-system component without consent. A ticket conflict nobody answers follows the pattern, so a barrier ships only when someone chooses it.
+
+**Every fix not made is in the final message.** The task's last message lists each place where the code still misses a pattern's requirement, one line each, after the summary of changes and before any offers: what stays, where, and why. The reason is a no, no answer, an accepted barrier, or a ticket the person chose over the pattern. A decision not to fix accessibility should never live only in a chat message halfway up the scroll. In a background or headless run nobody can answer, so the skill asks nothing, treats every question as unanswered, and the final message carries them all.
+
 **Why permanence comes first.** An earlier draft asked the engineer to reply "barrier" or "contested." That was the file's vocabulary, not the engineer's decision. In a human check, the case where an engineer disputes the pattern without having checked got neither label; it got the question "should it do this every time?" Permanence is the decision being made, so the skill asks it first, asks why only when something is about to be recorded, and keeps the kind names inside the file. The common path, a one-off refusal, still costs one question.
 
 **When an accepted barrier matches later,** the skill does not apply the fix and says, once per change:
@@ -254,7 +260,7 @@ That catches the common way claims go stale, a refactor. It does not catch a reg
 
 Three kinds are offered outside the step-two flow, each in one short question:
 
-- **Mappings, once, at the end of a task.** If the skill used a codebase component or helper where a pattern or rule names a different one, and no mapping covers it, it lists them all in one question. Asking per component, mid-task, would be the noise this design exists to avoid.
+- **Mappings, once, at the end of a task.** If the skill used a codebase component or helper where a pattern or rule names a different one, and no mapping covers it, it lists them all in one question. Asking per component, mid-task, would be the noise this design exists to avoid. It leaves out any helper that does the job a different way, which already got its sentence when it was used.
 - **A compliance claim, only when a person says a component already meets a rule**, and only after the skill finds the mechanism in the component's source. If it cannot find it, it says so and does not offer.
 - **A decided customizable, when a person or a requirement states a general choice** for something a pattern leaves open.
 

@@ -2,7 +2,7 @@
 name: a11y-context-ios-swiftui-mcp
 description: Apply accessibility patterns to SwiftUI user-facing UI. Use whenever generating, building, creating, modifying, or refactoring SwiftUI views, screens, or any UI a user sees or interacts with — including buttons, forms, text fields, pickers, toggles, steppers, sliders, alerts, sheets, menus, links, and list rows. Use when the prompt mentions any UI element by name or describes a screen, settings pane, detail view, or interactive control. Do not use for view models, Combine publishers, networking, persistence, data models, or test helpers.
 user-invocable: true
-allowed-tools: mcp__a11y-context__list_patterns mcp__a11y-context__get_pattern mcp__a11y-context__get_foundations
+allowed-tools: mcp__a11y-context__list_patterns mcp__a11y-context__get_pattern mcp__a11y-context__get_foundations Read
 ---
 
 # A11y Context — SwiftUI Skill (MCP)
@@ -29,6 +29,12 @@ This corpus covers iPhone and iPad. It does not cover Apple TV, where the focus 
 **If the file builds for both iOS and tvOS,** apply patterns to the iOS code, leave `#if os(tvOS)` blocks alone, and add one line: "This change also ships in the tvOS build and was not checked against tvOS behavior."
 
 **Otherwise,** continue with the steps below.
+
+---
+
+## Step 0 — Follow the decisions protocol
+
+Read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 
@@ -108,6 +114,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 
 ### Design System & Scope
 - If the project uses a component library or design system, preserve it.
+- Replace one of its components only by following the decisions protocol, which asks first.
 - Prefer minimal-change compliance: fix usage (props, labels, structure) before replacing components.
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
@@ -119,4 +126,4 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.
 - Surface process details only if a tool call fails, or the user explicitly asks how patterns were selected or applied.
-- The scope check's message is not process narration. Say it as written when the check calls for it.
+- The scope check's message and the decisions protocol's messages are not process narration. Say them as written when they call for them.

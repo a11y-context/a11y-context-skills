@@ -2,7 +2,7 @@
 name: a11y-context-web-react-mcp
 description: Apply accessibility patterns to React user-facing UI. Use whenever generating, building, creating, modifying, or refactoring React components, pages, routes, views, or any UI a user sees or interacts with — including buttons, forms, dialogs, modals, navigation, menus, carousels, dropdowns, toasts, banners, headers, footers, landing pages, product pages, and account flows. Use when the prompt mentions any UI element by name or describes a homepage, hero, card row, or interactive widget. Do not use for custom hooks (use*), context providers, HOCs, API handlers, type definitions, constants, or test helpers.
 user-invocable: true
-allowed-tools: mcp__a11y-context__list_patterns mcp__a11y-context__get_pattern mcp__a11y-context__get_foundations
+allowed-tools: mcp__a11y-context__list_patterns mcp__a11y-context__get_pattern mcp__a11y-context__get_foundations Read
 ---
 
 # A11y Context — React Skill (MCP)
@@ -33,6 +33,12 @@ A Cast sender (`cast.framework.CastContext`) is not a TV signal on its own. It b
 **If the file is in a shared package that a TV app also uses,** apply patterns as usual and add one line: "This change also ships in a TV app and was not checked against TV behavior."
 
 **Otherwise,** continue with the steps below.
+
+---
+
+## Step 0 — Follow the decisions protocol
+
+Read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 
@@ -112,6 +118,7 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 
 ### Design System & Scope
 - If the project uses a component library or design system, preserve it.
+- Replace one of its components only by following the decisions protocol, which asks first.
 - Prefer minimal-change compliance: fix usage (props, labels, structure) before replacing components.
 - Do not refactor unrelated code or introduce architectural changes beyond the requested scope.
 
@@ -123,4 +130,4 @@ Apply all Must Haves from retrieved patterns and applicable Foundations rules. T
 ### Communication
 - Apply this skill implicitly as part of implementation — do not narrate the retrieval workflow to the user.
 - Surface process details only if a tool call fails, or the user explicitly asks how patterns were selected or applied.
-- The scope check's message is not process narration. Say it as written when the check calls for it.
+- The scope check's message and the decisions protocol's messages are not process narration. Say them as written when they call for them.
