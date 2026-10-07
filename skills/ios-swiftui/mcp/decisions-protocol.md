@@ -52,15 +52,18 @@ Then, unless the person chose to fix the component:
 
 "Always" writes an `approved-substitution`.
 
-**On no,** use the component as it is, then offer the gate:
+**On no,** use the component as it is, then ask whether to make that permanent:
 
-> That leaves <the specific barrier> on this <place>. Record it in `.a11y-context/decisions.md`? Reply "barrier" if the pattern is right and you are keeping this for now, or "contested" if you think the pattern is wrong here and have evidence. Either way it stays visible in the repo, and I will mention it each time it applies.
+> Kept `<Component>`, so <the specific barrier> stays on this <place>. Should I do this every time it comes up, without asking? That records it in `.a11y-context/decisions.md`, where it stays visible in the repo.
 
-Offer both words every time. Do not guess which one fits.
+- **No, or no answer:** record nothing. The same question comes up next time.
+- **Yes:** ask why, in these plain words, and never ask the person to choose a kind:
 
-- **"barrier":** ask "Just this <place>, or every `<Component>`?" and write an `accepted-barrier` at that scope. Never offer anything wider than one component.
-- **"contested":** ask what would settle it and when someone should check. Write a `contested` entry. Suggest opening an issue at https://github.com/a11y-context/accessibility-pattern-api, since if the team is right, the pattern is wrong.
-- **Anything else:** record nothing. The same question comes up next time.
+  > Is that because the pattern is wrong here, or because it can't be fixed yet?
+
+  - **The pattern is wrong here:** ask "What would settle it, and when should someone check? If nothing has been checked yet, that's fine to say." Write a `contested` entry, with `evidence` set to `none yet` if nothing has been checked. Suggest opening an issue at https://github.com/a11y-context/accessibility-pattern-api, since if the team is right, the pattern is wrong.
+  - **It can't be fixed yet:** ask "Just this <place>, or every `<Component>`?" and write an `accepted-barrier` at that scope. Never offer anything wider than one component.
+  - **An answer that says neither:** ask once more, offering the two reasons as written.
 
 ## 4. Offering the other entries
 
@@ -105,7 +108,7 @@ decision; edits replace in place; git holds the history.
   - `compliance-claim`: `rule`, `local`, `mechanism`, `file`, optional `evidence`
   - `decided-customizable`: `rule`, `choice`, optional `evidence`
   - `approved-substitution`: `rule`, `local`, `substitute`
-  - `contested`: `rule`, `local`, `codebase_does`, `pattern_says`, `evidence`, `settles_on`, `review_by`
+  - `contested`: `rule`, `local`, `codebase_does`, `pattern_says`, `evidence` (or `none yet`), `settles_on`, `review_by`
   - `accepted-barrier`: `scope` (`instance` or `component`), `rule`, `where` (instance) or `local` (component), `proposed`, `decided`
 - **Replace, do not append.** A mapping is keyed on `local`. A decided customizable is keyed on `rule` and `platform`. The other four share one key, `rule` plus `local` (or `where`): writing one of them removes any of the other three under the same key.
 - To change or remove a decision when asked, edit or delete its block. Never add a second entry that contradicts the first.
@@ -139,4 +142,5 @@ reason: "The design system team is resizing BrandChip in its next release."
 - Never offer an accepted barrier wider than one component.
 - Never sweep the codebase because of an entry. Entries apply to work you were asked to do.
 - Never let an entry silence the sentence for an accepted barrier or a contested entry.
+- Never ask the person to choose between "barrier" and "contested." Those are names for the file. Ask why, in plain words.
 - Never edit shared design-system code, or send a message, unless the person asks.
