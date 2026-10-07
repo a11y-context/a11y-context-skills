@@ -46,16 +46,17 @@ Read by the A11y Context skill (https://a11y-context-project.vercel.app) before 
 accessibility patterns to generated code. Each entry records a decision a person made in chat:
 which of this codebase's components and helpers stand in for the ones the patterns name, which
 rules a component already meets, which open choices the team settled, which components to
-replace because they cannot meet a rule, and which accessibility barriers the team has
-knowingly kept. The skill never writes here on its own; it asks first. One entry per decision;
-edits replace in place; git holds the history.
+replace because they cannot meet a rule, where the team does something differently from the
+patterns on purpose and what evidence would settle it, and which accessibility barriers the
+team has knowingly kept. The skill never writes here on its own; it asks first. One entry per
+decision; edits replace in place; git holds the history.
 ```
 
 An optional `owners:` line may follow, naming who answers for the design system (a team handle, or a path into `CODEOWNERS`). When it is present the skill can address a note to them. When it is absent the skill never guesses a recipient.
 
 ### Format
 
-Five `##` sections, one per entry kind, in the order of the table below. Each entry is one fenced `yaml` block. YAML because the skill matches entries by field; one block per entry so a pull request shows exactly which decision changed.
+Six `##` sections, one per entry kind, in the order of the table below. Each entry is one fenced `yaml` block. YAML because the skill matches entries by field; one block per entry so a pull request shows exactly which decision changed.
 
 ## Entry kinds
 
@@ -65,21 +66,29 @@ Five `##` sections, one per entry kind, in the order of the table below. Each en
 | `compliance-claim` | "Component Y already meets rule R, through mechanism M in file F" | The gate | The skill re-reads F; if M is there it skips R on Y silently, and if not it says so and checks R as usual |
 | `decided-customizable` | "Where rule R leaves a choice open, this codebase chose C" | The gate | The skill applies C instead of asking or guessing |
 | `approved-substitution` | "Component Y cannot meet rule R; use framework component Z instead, without asking" | The gate | The skill uses Z and does not ask again |
+| `contested` | "We do R differently on purpose, the pattern may be wrong for us, and this evidence would settle it" | The gate, plus what would settle it | The skill keeps the codebase's way, says so every time, and says when the review date has passed |
 | `accepted-barrier` | "Rule R is unmet here and we are leaving it, because..." | The gate, plus a scope question | The skill does not apply the fix at that scope, and says so every time |
 
 "The gate" means the skill states, in one sentence, exactly what will stop being checked or asked, and writes the entry only on a yes.
+
+**A contested entry and an accepted barrier differ in who thinks the rule is right.** An accepted barrier agrees the pattern is right and keeps the barrier for a stated reason, usually time. A contested entry records that the team believes the pattern is wrong for this codebase, the evidence it has, and what would settle the question. Recording a team's tested convention as a barrier would misstate what the team believes, and would ask them to call their own work wrong before any evidence says so.
 
 ### Fields
 
 Every entry carries `kind`, `date` (ISO), `decided_by`, and `platform` (`all` unless stated; otherwise a form factor such as `phone`, or a named platform). Every kind except `mapping` also carries `reason`: the person's own words, quoted, because six months later it is the one thing a reviewer cannot reconstruct.
 
-| Kind | Its own fields | Key (one live entry per key) |
-|---|---|---|
-| `mapping` | `stack`; `pattern` or `rule`; `api` when it maps a rule's API; `local` | `local` |
-| `compliance-claim` | `rule`, `component`, `mechanism`, `file`, optional `evidence` | `rule` + `component` + `platform` |
-| `decided-customizable` | `rule`, `choice` (a plain sentence), optional `evidence` | `rule` + `platform` |
-| `approved-substitution` | `rule`, `component`, `substitute` | `rule` + `component` |
-| `accepted-barrier` | `scope` (`instance` or `component`), `rule`, `where` (instance) or `component`, `proposed`, `decided` | `rule` + `where` or `component` |
+`local` always names this codebase's own thing: a component, a helper, or a wrapper.
+
+| Kind | Its own fields |
+|---|---|
+| `mapping` | `stack`; `pattern` or `rule`; `api` when it maps a rule's API; `local` |
+| `compliance-claim` | `rule`, `local`, `mechanism`, `file`, optional `evidence` |
+| `decided-customizable` | `rule`, `choice` (a plain sentence), optional `evidence` |
+| `approved-substitution` | `rule`, `local`, `substitute` |
+| `contested` | `rule`, `local`, `codebase_does` and `pattern_says` (plain sentences), `evidence`, `settles_on`, `review_by` |
+| `accepted-barrier` | `scope` (`instance` or `component`), `rule`, `where` (instance) or `local` (component), `proposed`, `decided` |
+
+**Keys, which decide what a new entry replaces.** A mapping is keyed on `local`. A decided customizable is keyed on `rule` and `platform`. The other four are four different answers to one question, "what does this codebase do about rule R on this thing," so they share one key, `rule` plus `local` (or `where`), and a codebase holds at most one of them per key. Recording a substitution for `BrandChip` replaces an accepted barrier on `BrandChip` under the same rule, and so on.
 
 `evidence` takes an issue key, a link, or the device and screen reader something was verified on. `proposed` and `decided` are the skill's plain sentences, so someone who was not there can read what the skill wanted to do and what the team decided instead.
 
@@ -112,7 +121,7 @@ platform: all
 kind: compliance-claim
 date: 2026-10-07
 rule: global.touch-target-size
-component: com.example.design.BrandCheckbox
+local: com.example.design.BrandCheckbox
 mechanism: Modifier.minimumInteractiveComponentSize() on the row that owns toggleable
 file: design/src/main/java/com/example/design/BrandCheckbox.kt
 evidence: "Checked with TalkBack on a Pixel 8, Android 16"
@@ -136,7 +145,7 @@ reason: "One rule for every screen, so users always know where they start."
 kind: approved-substitution
 date: 2026-10-07
 rule: global.touch-target-size
-component: com.example.design.BrandChip
+local: com.example.design.BrandChip
 substitute: androidx.compose.material3.FilterChip
 decided_by: jordan.lee
 platform: all
@@ -144,11 +153,26 @@ reason: "BrandChip is 40dp tall until the design system's next release."
 ```
 
 ```yaml
+kind: contested
+date: 2026-10-07
+rule: global.announcements
+local: com.example.a11y.announce()
+codebase_does: Announces loading states by dispatching an announcement event.
+pattern_says: Use a polite live region, and do not dispatch announcement events.
+evidence: "On our TV builds, live regions on newly opened screens were dropped or read twice (QA-412)."
+settles_on: A TalkBack check on a phone running Android 16, comparing a live region with the announcement event.
+review_by: 2026-11-15
+decided_by: jordan.lee
+platform: all
+reason: "The helper is what QA verified. We will switch if the phone check favors live regions."
+```
+
+```yaml
 kind: accepted-barrier
 date: 2026-10-07
 scope: component
 rule: global.touch-target-size
-component: com.example.design.BrandChip
+local: com.example.design.BrandChip
 proposed: Replace BrandChip with Material FilterChip, which meets the 48dp target.
 decided: Keep BrandChip at 40dp.
 decided_by: sam.ortiz
@@ -156,7 +180,7 @@ platform: all
 reason: "The design system team is resizing BrandChip in its next release; tracked in DS-88."
 ```
 
-The last two are the two possible answers to the same question about `BrandChip`. A codebase holds one or the other, never both, which the key enforces.
+The substitution and the barrier are two answers to the same question about `BrandChip`, so a codebase holds one or the other, never both. The contested example is the honest record of a common situation: the convention runs on every platform (`platform: all`), the evidence behind it came from one, and `settles_on` names the check that would extend or overturn it.
 
 ## Rules that bound the file
 
@@ -164,8 +188,8 @@ The last two are the two possible answers to the same question about `BrandChip`
 2. **One live entry per key.** A new decision on the same key replaces the old one in place. "Remove the `BrandChip` decision" deletes the entry. The file holds current truth; git holds the history.
 3. **Forward-only.** An entry applies the next time the skill meets that component in work it was asked to do. Recording a decision never triggers a sweep of the codebase. A sweep is a separate request, in plain words.
 4. **An accepted barrier is never rule-wide.** Instance or component, nothing broader. The skill does not offer a wider scope. A team that wants a rule off across a codebase edits the file by hand, in a commit someone reviews.
-5. **Platform truth goes upstream.** If a decision is about how a platform behaves rather than how this codebase is built (a TV screen reader that ignores pane titles, say), it belongs in the corpus, scoped to that platform, so every adopting team inherits it. The file holds a `compliance-claim` pointing at the local workaround until the corpus catches up, and the skill suggests opening an issue on the corpus repository.
-6. **Only an accepted barrier leaves a Must Have unmet**, and it is always spoken. A mapping, a compliance claim, and a substitution change how a Must Have is met. A decided customizable fills only what the corpus leaves open.
+5. **Platform truth goes upstream.** If a decision is about how a platform behaves rather than how this codebase is built (a TV screen reader that ignores pane titles, say), it belongs in the corpus, scoped to that platform, so every adopting team inherits it. Until the corpus catches up, the file holds it as a `contested` entry with its evidence, and the skill suggests opening an issue on the corpus repository. When the question settles, either the corpus changes or the codebase does, and the entry is removed.
+6. **Only an accepted barrier or a contested entry leaves a Must Have unmet or a Don't broken**, and both are always spoken. A mapping, a compliance claim, and a substitution change how a requirement is met. A decided customizable fills only what the corpus leaves open.
 
 ## What the skill does
 
@@ -199,13 +223,23 @@ Then, unless the person chose to fix the component itself:
 
 **On no**, it uses `BrandCheckbox` as it is, then offers the gate:
 
-> That leaves a 36dp touch target on this checkbox. Record it as an accepted barrier in `.a11y-context/decisions.md`? It will be visible in the repo, and I will mention it each time it applies. Just this checkbox, or every `BrandCheckbox`?
+> That leaves a 36dp touch target on this checkbox. Record it in `.a11y-context/decisions.md`? Reply "barrier" if the pattern is right and you are keeping this for now, or "contested" if you think the pattern is wrong here and have evidence. Either way it stays visible in the repo, and I will mention it each time it applies.
 
-A yes writes an `accepted-barrier` at the scope chosen. A no records nothing, and the same question comes up next time.
+The skill offers both words every time rather than guessing which one fits, since that guess is exactly the kind of judgment the trigger is designed to avoid.
+
+- **"barrier"**: the skill asks the scope, "Just this checkbox, or every `BrandCheckbox`?", and writes an `accepted-barrier`.
+- **"contested"**: the skill asks what would settle it and when someone should check, writes a `contested` entry, and suggests opening an issue on the corpus repository, since if the team is right, the pattern is wrong.
+- **Anything else** records nothing, and the same question comes up next time.
 
 **When an accepted barrier matches later,** the skill does not apply the fix and says, once per change:
 
 > Kept `BrandCheckbox` at 36dp, per an accepted barrier in `.a11y-context/decisions.md` from 2026-10-07.
+
+**When a contested entry matches later,** the skill keeps the codebase's way and says, once per change:
+
+> Used `announce()`, per a contested entry in `.a11y-context/decisions.md` from 2026-10-07. The pattern says to use a live region; this settles on a TalkBack check on a phone running Android 16.
+
+Once `review_by` has passed, it adds: "Its review date, 2026-11-15, has passed." It does not start fixing on its own when the date passes. A deadline that silently flipped the skill's behavior would surprise the people who set it.
 
 The fix can be turned off. The sentence cannot.
 
@@ -276,13 +310,13 @@ Two refinements:
 4. **An evaluation**, before the asking and the gate ship. Without engineered wording, agents in this project's evaluation consulted the corpus only 13 to 53 percent of the time, and there is no reason to expect a gate does better untested. Cases:
    - Asks before replacing a design-system component; stays silent when adding or fixing usage.
    - Classifies "fixable from outside" against "broken inside" correctly. This is the case that decides whether the skill is useful or annoying.
-   - Opens the gate on a refusal and asks the scope question.
+   - Opens the gate on a refusal, offers both "barrier" and "contested," and asks the scope or the settling check that follows from the answer.
    - Writes entries in the right shape, under the right key, replacing rather than appending.
-   - Suppresses on the next run, and still says the sentence.
+   - Suppresses on the next run, and still says the sentence; for a contested entry, adds the review-date line once it has passed.
    - Re-reads a compliance claim's file and catches a missing mechanism.
    - Applies a mapping and a decided customizable.
    - Stops at the scope check for TV code, applies with one line for shared code.
-5. **Compliance claims, substitutions, barriers, and the asking**, once the evaluation passes.
+5. **Compliance claims, substitutions, contested entries, barriers, and the asking**, once the evaluation passes.
 
 ## Open questions
 
