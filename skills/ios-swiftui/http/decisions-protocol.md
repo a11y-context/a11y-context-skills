@@ -4,7 +4,7 @@ Follow this on every task, alongside the steps in `SKILL.md`. It covers two thin
 
 ## 1. Read the decisions file
 
-After the scope check and before selecting patterns, read `.a11y-context/decisions.md` at the repository root. If it does not exist, carry on. Do not create it until a person confirms an entry (section 5).
+After the scope check and before selecting patterns, read `.a11y-context/decisions.md` at the repository root. If it does not exist, carry on. Do not create it until a person confirms an entry (section 6).
 
 Each entry is a fenced `yaml` block with a `kind`. If an entry is malformed, ignore it and say once which one. A broken entry never stops a fix. An entry whose `platform` is not `all` applies only to code for that platform.
 
@@ -62,7 +62,17 @@ Offer both words every time. Do not guess which one fits.
 - **"contested":** ask what would settle it and when someone should check. Write a `contested` entry. Suggest opening an issue at https://github.com/a11y-context/accessibility-pattern-api, since if the team is right, the pattern is wrong.
 - **Anything else:** record nothing. The same question comes up next time.
 
-## 4. What you say when an entry applies
+## 4. Offering the other entries
+
+Offer each of these in one short question, and write only on a yes.
+
+- **Mappings, once, at the end of a task.** If you used one of this codebase's components or helpers where a pattern or rule names a different one, and no mapping covers it, list them all in one question: "I used `<local>` where `<pattern or rule>` names `<X>`. Record these as mappings in `.a11y-context/decisions.md`, so I reach for them first next time?" A yes writes one `mapping` per item.
+- **A compliance claim, when the person says a component already meets a rule.** Read its source first. If you find the mechanism, offer: "Record that `<local>` meets <rule> through <mechanism> in `<file>`? I will check that file each time instead of asking." If you cannot find the mechanism, say so and do not offer.
+- **A decided customizable, when the person or a requirement states a general choice for something a pattern leaves open.** Offer: "Record '<choice>' as this codebase's choice for <rule>?"
+
+Approved substitutions, contested entries, and accepted barriers are offered only through the steps in section 3.
+
+## 5. What you say when an entry applies
 
 Say each sentence once per change, as written.
 
@@ -70,7 +80,7 @@ Say each sentence once per change, as written.
 - **Contested:** "Used `<local>`, per a contested entry in `.a11y-context/decisions.md` from <date>. The pattern says <pattern_says, shortened>; this settles on <settles_on>." Once `review_by` has passed, add: "Its review date, <review_by>, has passed." Do not start fixing because the date passed.
 - **Compliance claim whose mechanism is gone:** "The <date> claim says `<local>` meets <rule> through <mechanism> in `<file>`, which is no longer there. Checking it as usual."
 
-## 5. Writing an entry
+## 6. Writing an entry
 
 - Write only after an explicit yes in chat. Never on your own initiative.
 - If `.a11y-context/decisions.md` does not exist, create it starting with this header, verbatim:
@@ -116,14 +126,14 @@ platform: all
 reason: "The design system team is resizing BrandChip in its next release."
 ```
 
-## 6. Requirements
+## 7. Requirements
 
 - If the request names a ticket or requirements document and you can read it, read it before selecting patterns.
 - If the request is to build a new screen or feature and names none, ask once per session: "Is there a ticket or requirements doc for this? Any accessibility requirements in it would shape the work." Do not ask for small changes or bug fixes.
 - Where a requirement settles a choice a pattern leaves open (its Customizable section), follow the requirement. If the requirement states it as a general rule, offer to record it as a `decided-customizable`, with the ticket as `evidence`.
 - Where a requirement contradicts a Must Have or a Don't, ask every time: "The ticket asks for <X>. The pattern requires <Y>, because <Z>. Follow the ticket or the pattern?" Following the ticket goes through the gate in section 3, with the ticket as `evidence`.
 
-## 7. Never
+## 8. Never
 
 - Never write an entry without a yes.
 - Never offer an accepted barrier wider than one component.
