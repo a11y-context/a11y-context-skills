@@ -36,6 +36,8 @@ A helper that does the job a rule describes, but a different way than the patter
 
 ## 3. Asking, in order
 
+Only an explicit yes is a yes: a reply that answers the question you asked and agrees. A no, no reply, a reply about something else, or a reply you cannot read either way is a no. Without a yes, change nothing the codebase already has and add no new barrier.
+
 **Before writing anything,** name the problem and your fix, and ask:
 
 > `<Component>` <what is wrong inside it>, so it can't meet <requirement>, and nothing I add from outside changes that. For this <place> I'd use <fallback> directly. It meets <requirement> but won't match the design system's styling. Go ahead?
@@ -54,7 +56,7 @@ Then, unless the person chose to fix the component:
 
 "Always" writes an `approved-substitution`.
 
-**On no,** use the component as it is, then ask whether to make that permanent:
+**On no,** use the component as it is. If the person did not answer, stop there and ask nothing more. If they said no, ask whether to make that permanent:
 
 > Kept `<Component>`, so <the specific barrier> stays on this <place>. Should I do this every time it comes up, without asking? That records it in `.a11y-context/decisions.md`, where it stays visible in the repo.
 
@@ -134,13 +136,24 @@ reason: "The design system team is resizing BrandChip in its next release."
 ## 7. Requirements
 
 - If the request names a ticket or requirements document and you can read it, read it before selecting patterns.
-- If the request is to build a new screen or feature and names none, ask once per session: "Is there a ticket or requirements doc for this? Any accessibility requirements in it would shape the work." Do not ask for small changes or bug fixes.
+- If the request is to build a new screen or feature and names none, ask once per session: "Is there a ticket or requirements doc for this? Any accessibility requirements in it would shape the work." Do not ask for small changes or bug fixes. If no one answers, carry on without one.
 - Where a requirement settles a choice a pattern leaves open (its Customizable section), follow the requirement. If the requirement states it as a general rule, offer to record it as a `decided-customizable`, with the ticket as `evidence`.
-- Where a requirement contradicts a Must Have or a Don't, ask every time: "The ticket asks for <X>. The pattern requires <Y>, because <Z>. Follow the ticket or the pattern?" Following the ticket goes through the gate in section 3, with the ticket as `evidence`.
+- Where a requirement contradicts a Must Have or a Don't, ask every time: "The ticket asks for <X>. The pattern requires <Y>, because <Z>. Follow the ticket or the pattern?" Following the ticket goes through the gate in section 3, with the ticket as `evidence`. Anything short of an explicit choice of the ticket follows the pattern.
 
-## 8. Never
+## 8. The end of the task
+
+Your final message for the task lists every accessibility fix you did not make, after your summary of the changes and before any offers. Head it "Accessibility not fixed" and give one line per place where code you wrote or changed still misses a pattern's requirement: what stays, where, and why. The reason is one of: the person said no, nobody answered, an accepted barrier applied, or the person chose a ticket over the pattern.
+
+> `BrandCheckbox` on the Remember me row stays at 36dp, under the 48dp touch target. No answer to my question, so I kept it.
+
+An accepted barrier's sentence from section 5 is its line in this list. After the list, give one line for each other question nobody answered. Leave out the list when there is nothing to put in it.
+
+When no one can answer, as in a background or headless run, do not stop to ask. Treat every question as unanswered, and let this message carry them.
+
+## 9. Never
 
 - Never write an entry without a yes.
+- Never treat a reply as a yes unless it answers the question you asked and agrees.
 - Never offer an accepted barrier wider than one component.
 - Never sweep the codebase because of an entry. Entries apply to work you were asked to do.
 - Never let an entry silence the sentence for an accepted barrier or a contested entry.
