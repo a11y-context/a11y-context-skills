@@ -13,6 +13,8 @@ Retrieve accessibility best-practice patterns through the A11y Context MCP serve
 
 This variant is the **brain**: it decides which patterns are needed and applies them. The [MCP server](https://github.com/a11y-context/accessibility-pattern-mcp) is the **retrieval mechanism** — it must be installed in your client (see the server's README). The three tools below assume the server is configured under the name `a11y-context`; if you named it differently, the tool prefix changes accordingly.
 
+This skill's own files, such as `decisions-protocol.md`, are in the folder that contains this `SKILL.md`, and every path to one of them below is relative to that folder. In Claude Code, that folder is `${CLAUDE_SKILL_DIR}`.
+
 ---
 
 ## Scope check — before any other step
@@ -34,7 +36,7 @@ This corpus covers iPhone and iPad. It does not cover Apple TV, where the focus 
 
 ## Step 0 — Follow the decisions protocol
 
-Read `${CLAUDE_SKILL_DIR}/decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
+Read `decisions-protocol.md` and follow it on every task. It covers this codebase's `.a11y-context/decisions.md`, which may not exist yet, and when to ask before replacing something the codebase already has.
 
 ---
 

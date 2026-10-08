@@ -44,6 +44,7 @@ Install locations:
 Example, Claude Code:
 
 ```bash
+mkdir -p .claude/skills
 unzip a11y-context-web-react-http.zip -d .claude/skills/
 ```
 
