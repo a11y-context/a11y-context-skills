@@ -1,7 +1,7 @@
 {
   "stack": "android/compose",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.9.0",
+  "catalog_revision": "0.10.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -44,6 +44,45 @@
       "default_variant": null,
       "source": {
         "path": "components/badge.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "bottom-app-bar.basic",
+      "title": "Bottom App Bar",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Bar along the bottom of a screen holding a few actions and an optional floating action button. Material's BottomAppBar reads the actions in order and the floating button last, as one group, and sets nothing else, so each action's name and keeping the bar off the content above are the caller's.",
+      "aliases": [
+        "BottomAppBar",
+        "bottom toolbar",
+        "bottom action bar",
+        "action bar",
+        "FAB bar"
+      ],
+      "tags": [
+        "app bar",
+        "bottom app bar",
+        "toolbar",
+        "actions",
+        "floating action button"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a screen's main actions sit along the bottom, within reach of the thumb (e.g., \"Archive\", \"Label\", \"Delete\", with a \"Compose\" floating action button)."
+        ],
+        "do_not_use_when": [
+          "Do not use when the bar's items move between the app's top-level destinations and show which one is current (use navigation-bar.basic).",
+          "Do not use when the actions belong beside the screen's title (use top-app-bar.basic).",
+          "Do not use when the screen has a single floating action and nothing else (use button.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/bottom-app-bar.basic.md",
         "format": "markdown",
         "frontmatter": true
       }
@@ -819,6 +858,50 @@
       }
     },
     {
+      "id": "navigation-drawer.modal",
+      "title": "Navigation Drawer (Modal)",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Panel that slides over the screen holding the app's destinations, behind a scrim. Material's ModalNavigationDrawer names the panel and gives it a dismiss action and a scrim that closes it, but leaves the screen behind in the accessibility tree and does nothing with focus or keys, so containing TalkBack and the keyboard, Escape, and moving focus in and back are the caller's.",
+      "aliases": [
+        "ModalNavigationDrawer",
+        "ModalDrawerSheet",
+        "NavigationDrawerItem",
+        "DrawerState",
+        "navigation drawer",
+        "side drawer",
+        "hamburger menu",
+        "nav drawer",
+        "side menu"
+      ],
+      "tags": [
+        "navigation drawer",
+        "drawer",
+        "side menu",
+        "navigation",
+        "overlay",
+        "modal"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the app's destinations are too many for a navigation bar, or are secondary, and open in a panel from a menu button (e.g., \"Inbox\", \"Sent\", \"Drafts\", \"Settings\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when three to five top-level destinations stay visible along the bottom (use navigation-bar.basic).",
+          "Do not use when the panel stays on screen beside the content (use navigation-drawer.persistent).",
+          "Do not use when the panel holds commands rather than destinations (use menu.basic or bottom-sheet.modal)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/navigation-drawer.modal.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "progress-indicator.basic",
       "title": "Progress Indicator",
       "pattern_type": "component",
@@ -1224,6 +1307,52 @@
       "default_variant": null,
       "source": {
         "path": "components/text-field.basic.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
+      "id": "top-app-bar.basic",
+      "title": "Top App Bar",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "Bar across the top of a screen holding its title, a navigation control, and a few actions. Material's top app bars read those in order as one group, but none marks the title as a heading, so the heading, the navigation control's name, and keeping the bar off the content beneath are the caller's.",
+      "aliases": [
+        "TopAppBar",
+        "CenterAlignedTopAppBar",
+        "MediumTopAppBar",
+        "LargeTopAppBar",
+        "toolbar",
+        "action bar",
+        "app bar",
+        "title bar",
+        "screen header",
+        "up button"
+      ],
+      "tags": [
+        "app bar",
+        "top app bar",
+        "toolbar",
+        "title",
+        "navigation icon",
+        "actions",
+        "header"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when a screen shows its title at the top, with a back or menu control before it and a few actions after it (e.g., \"Inbox\" with \"Search\" and \"More options\")."
+        ],
+        "do_not_use_when": [
+          "Do not use when the bar moves between the app's top-level destinations (use navigation-bar.basic or tabs.basic).",
+          "Do not use when the screen's actions sit along the bottom (use bottom-app-bar.basic).",
+          "Do not use when the title belongs to a dialog or a sheet (use dialog.alert or bottom-sheet.modal)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/top-app-bar.basic.md",
         "format": "markdown",
         "frontmatter": true
       }

@@ -275,7 +275,7 @@ scope: [layout]
 
 ### Must Haves
 - Mark each major section header with `Modifier.semantics { heading() }`. This sets the platform heading flag that TalkBack's reading controls use for its Headings granularity, which is the only way a user skips between sections.
-- Mark the title of a screen, a bottom sheet, or a dialog as a heading when it is rendered as content rather than supplied through a component's title slot.
+- Mark the title of a screen or a bottom sheet as a heading, including a title passed to a `TopAppBar`'s title slot, which none of Material's top app bars marks. Leave an `AlertDialog`'s title unmarked: TalkBack lands on it when the dialog opens, so a heading adds nothing the user needs (`dialog.alert`).
 
 ### Don'ts
 - Do not mark every bold or large text as a heading. A heading list that contains every label is as unusable as an empty one.
