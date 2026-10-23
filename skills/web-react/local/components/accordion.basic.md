@@ -3,7 +3,7 @@ id: accordion.basic
 title: Accordion
 stack: web/react
 status: beta
-latest_version: 0.1.1
+latest_version: 0.2.0
 tags: [accordion, disclosure, show-hide]
 aliases: [accordion, disclosure group, expand collapse, collapsible panels]
 summary: A set of show/hide sections with heading-wrapped buttons controlling associated panels via aria-expanded (and optionally aria-controls / region).
@@ -26,7 +26,7 @@ A set of show/hide sections with heading-wrapped buttons controlling associated 
 - Each accordion header control is a native `<button>` (or `role="button"` only when a native button cannot be used).
   - If role="button" is used instead of a native `<button>`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating the control.
 - Each header button is contained within a heading element (`<h2>`–`<h6>`) or an element with `role="heading"` and the appropriate `aria-level`.
-- The header button uses `aria-expanded="true"` when its panel is visible and `"false"` when hidden.
+- The header button uses `aria-expanded="true"` when its panel is visible and `"false"` when hidden. This state toggle is the core signal of the pattern; the implementation fails without it.
 - The panel is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that hidden content cannot be accessed by screen readers.
 - Users move focus between accordion headers using Tab / Shift+Tab.
 - Since the header control is a button, it is activated with Enter or Space.
@@ -35,6 +35,7 @@ A set of show/hide sections with heading-wrapped buttons controlling associated 
 
 ## Don'ts
 - Do not use non-focusable headers (e.g., `<div>` without proper button semantics) as the interactive control.
+- Do not render a header button without `aria-expanded`, including while its panel is collapsed (e.g., `aria-expanded={open || undefined}`); a screen reader announces a plain button with no expanded or collapsed state.
 - Do not make the panel visible while leaving `aria-expanded="false"` (and vice versa).
 - Do not remove panel content from the DOM in a way that breaks expected focus behavior (e.g., collapsing a panel while focus remains inside it without moving focus).
 - Do not use `role="heading"` without an `aria-level`.

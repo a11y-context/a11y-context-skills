@@ -3,7 +3,7 @@ id: select.basic
 title: Select
 stack: web/react
 status: beta
-latest_version: 0.2.0
+latest_version: 0.3.0
 tags: [select, form, form-select, listbox, dropdown]
 aliases: [form select, styled select, listbox select, dropdown select]
 summary: A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.
@@ -40,6 +40,7 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
   - `aria-haspopup="listbox"`
   - `aria-expanded="true|false"` reflecting open/closed
   - `aria-controls="IDREF"` pointing to the listbox element
+- `aria-expanded` on the button is the core signal of the pattern; the implementation fails without it.
 - The button must have an accessible name that includes the field label and current value.
   - Recommended: `aria-labelledby="{labelId} {valueId}"` where:
     - `labelId` references the label element
@@ -71,6 +72,7 @@ Native `<select>` elements are accessible out of the box. This pattern applies o
 - Do not implement the trigger as a non-interactive element (e.g., `<div>`) without button semantics.
 - Do not use `role="menu"` / `role="menuitem"` for select options.
 - Do not make each option tabbable (avoid forcing users to Tab through options).
+- Do not render the trigger without `aria-expanded`; `aria-haspopup="listbox"` alone does not convey open/closed state.
 - Do not leave the listbox visible while `aria-expanded="false"` (and vice versa).
 - Do not allow the custom UI and hidden `<select>` to get out of sync (options/value must match).
 

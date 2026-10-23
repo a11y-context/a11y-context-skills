@@ -1,7 +1,7 @@
 {
   "stack": "web/react",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.28.3",
+  "catalog_revision": "0.29.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -9,7 +9,7 @@
       "title": "Accordion",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "A set of show/hide sections with heading-wrapped buttons controlling associated panels via aria-expanded (and optionally aria-controls / region).",
       "aliases": [
         "accordion",
@@ -430,7 +430,7 @@
       "title": "Autocomplete Combobox",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "An editable text input that filters a listbox of options as the user types; uses role=\"combobox\" with aria-autocomplete, aria-expanded, aria-controls, and aria-activedescendant while DOM focus stays on the input.",
       "aliases": [
         "typeahead",
@@ -477,7 +477,7 @@
       "title": "Dialog (Basic)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "User-initiated blocking dialog. Uses the native <dialog> element with .showModal() so the browser handles focus trap, background inertness, Escape dismissal, focus restoration, and top-layer rendering.",
       "aliases": [
         "dialog",
@@ -523,7 +523,7 @@
       "title": "Disclosure",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "A button that shows and hides an associated content region; uses aria-expanded on the trigger and aria-controls to the region, with DOM show/hide.",
       "aliases": [
         "disclosure",
@@ -692,7 +692,7 @@
       "title": "Menu",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "A button that opens a menu of commands using role='menu' and role='menuitem', with roving tabindex focus management and the full menu keyboard contract.",
       "aliases": [
         "kebab menu",
@@ -739,7 +739,7 @@
       "title": "Menubar",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "A persistent horizontal bar of application command menus using role=\"menubar\", role=\"menu\", and role=\"menuitem\", for desktop-application command surfaces only, never site navigation.",
       "aliases": [
         "menu bar",
@@ -784,7 +784,7 @@
       "title": "Navigation Menu",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.3.0",
+      "latest_version": "0.4.0",
       "summary": "A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with aria-expanded/controls and Tab-based navigation (no roving focus / no role=menu).",
       "aliases": [
         "nav dropdown",
@@ -826,7 +826,7 @@
       "title": "Navigation Dropdown",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.1.1",
       "summary": "A single-trigger, non-modal dropdown that reveals a short list of navigation links and optional actions, using a native button with aria-expanded plus DOM show/hide, and never role=\"menu\".",
       "aliases": [
         "account dropdown",
@@ -915,7 +915,7 @@
       "title": "Popover",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.0",
+      "latest_version": "0.2.0",
       "summary": "A non-modal overlay anchored to its trigger; uses role=\"dialog\" with an accessible name, moves focus in on open and restores it on close, but does not trap focus or inert the background.",
       "aliases": [
         "popover",
@@ -1006,6 +1006,51 @@
       }
     },
     {
+      "id": "radio.group",
+      "title": "Radio Group",
+      "pattern_type": "component",
+      "status": "beta",
+      "latest_version": "0.1.0",
+      "summary": "A set of mutually exclusive options from which the user picks exactly one. Native <input type=\"radio\"> elements share one name inside a <fieldset> with a <legend>, so the browser provides single selection, a single tab stop, and arrow-key movement.",
+      "aliases": [
+        "radio group",
+        "radio buttons",
+        "option buttons",
+        "single choice",
+        "choose one",
+        "mutually exclusive options",
+        "radio list",
+        "segmented control"
+      ],
+      "tags": [
+        "radio",
+        "form",
+        "form-control",
+        "group",
+        "fieldset",
+        "single-select"
+      ],
+      "selection_excerpt": {
+        "use_when": [
+          "Use when the user picks exactly one option from a small set of mutually exclusive choices, all visible at once (e.g., \"Video quality\" with \"Auto\", \"High\", \"Data saver\").",
+          "Use when the options benefit from being compared side by side rather than hidden in a popup, typically 2–6 options."
+        ],
+        "do_not_use_when": [
+          "Do not use when the user may select more than one option (use checkbox.group).",
+          "Do not use when the options are many or space is tight, so a collapsed single-value picker fits better (use select.native).",
+          "Do not use when the choice is a persistent on/off setting that takes effect immediately (use switch.basic), or a single yes/no choice submitted with a form (use checkbox.basic).",
+          "Do not use when choosing an option displays a different panel of content rather than recording a value (use tabs.basic)."
+        ]
+      },
+      "variants": [],
+      "default_variant": null,
+      "source": {
+        "path": "components/radio.group.md",
+        "format": "markdown",
+        "frontmatter": true
+      }
+    },
+    {
       "id": "select.native",
       "title": "Native Select",
       "pattern_type": "component",
@@ -1056,7 +1101,7 @@
       "title": "Select",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.3.0",
       "summary": "A custom-styled form select that matches native <select> behavior using a button trigger + listbox popup, and a visually hidden native <select> for form submission and browser autofill.",
       "aliases": [
         "form select",
@@ -1365,7 +1410,7 @@
       "title": "Toast with Action",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.3.0",
       "summary": "Transient status message carrying exactly one action, announced through a text-only live region while the message itself is a named landmark, and used only when that action is also performable elsewhere in the interface.",
       "aliases": [
         "snackbar",

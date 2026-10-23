@@ -3,7 +3,7 @@ id: toast.action
 title: Toast with Action
 stack: web/react
 status: beta
-latest_version: 0.2.0
+latest_version: 0.3.0
 tags: [toast, snackbar, notification, live-region, landmark, transient-message]
 aliases: [snackbar, actionable toast, toast with action, undo toast, action toast, flag, actionable notification, snackbar with undo]
 summary: Transient status message carrying exactly one action, announced through a text-only live region while the message itself is a named landmark, and used only when that action is also performable elsewhere in the interface.
@@ -49,6 +49,7 @@ This component is recommended only where no other pattern fits. Its barriers are
 - The announcing element uses `role="status"`.
 - The announced text states the message, the action's label in the same words as the control, and the landmark's name as the route to it (e.g., "Nightfall Protocol removed from My List. Undo available in Notifications.").
 - The announced text is cleared once the message has left the screen.
+- When a dialog action triggers the message (e.g., "Remove" in a "Remove from My Channels?" confirmation), write the message and its announcement only after the dialog has closed and focus has been restored, at least one animation frame after the focus move.
 - The surface the message is drawn on is distinguishable from the content behind it by a contrast ratio of at least 3:1, per `global.non-text-contrast`.
 
 ### Keyboard
@@ -56,6 +57,8 @@ This component is recommended only where no other pattern fits. Its barriers are
 
 ### Focus
 - Focus stays on the control that triggered the message when the message appears.
+  - When that control no longer exists (it was inside a dialog that has closed, or on an item the action removed), focus moves to a stable element before the message appears, per `global.motion`.
+- When the action removed an item from a collection, focus moves to the next item, to the previous item when the removed item was last, or to the collection's heading (with `tabindex="-1"`) when the collection is now empty.
 - Activating the action control or the dismiss control returns focus to the element that held focus when the message appeared.
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the action control and the dismiss control, per `global.focus-states`.
 
@@ -71,6 +74,7 @@ This component is recommended only where no other pattern fits. Its barriers are
 - Do not give the message `role="alert"`, `role="status"`, `role="alertdialog"`, or `aria-live`, and do not place the action control inside the announcing element. Interactive content in a live region is announced as flat text, so the button is spoken as part of the message with nothing marking it activatable.
 - Do not expose more than one landmark for messages. When several stack, the container carries the role and the messages do not, or the rotor's landmark list fills with duplicates of one name.
 - Do not rely on Tab order alone as the route to the action. The message is commonly mounted at the end of the document, which places the action after every other control on the page.
+- Do not write the message while a modal dialog is open, or in the same update that closes it. Whether it is announced then depends on the screen reader and on how the dialog hides the rest of the page, and the focus move that follows can cut it off.
 - Do not mount or unmount the announcing element along with the message. A live region that is not in the DOM before its text changes does not announce reliably.
 - Do not announce the message text alone when an action is present. An action the user is never told about is unreachable in practice.
 - Do not restart a paused timer from its full duration when the pointer leaves. A user who reads a message slowly is then given less time than one who never looked at it.
@@ -190,6 +194,74 @@ export function ActionToast({
         </div>
       ) : null}
     </>
+  );
+}
+
+function ActionToastExamples() {
+  const [channels, setChannels] = useState(["Classic TV", "Crime 24/7", "Anime All Day"]);
+  const [removing, setRemoving] = useState(null);
+  const [removed, setRemoved] = useState(null);
+  const dialogRef = useRef(null);
+  const listRef = useRef(null);
+  const headingRef = useRef(null);
+
+  function confirmRemove() {
+    const { name, index } = removing;
+    dialogRef.current.close();
+    setChannels((list) => list.filter((channel) => channel !== name));
+    requestAnimationFrame(() => {
+      const buttons = listRef.current?.querySelectorAll("button") ?? [];
+      (buttons[index] ?? buttons[index - 1] ?? headingRef.current).focus();
+      // A second frame: the message is written after the focus move has landed.
+      requestAnimationFrame(() => setRemoved({ name, index }));
+    });
+  }
+
+  function undo() {
+    const { name, index } = removed;
+    setChannels((list) => [...list.slice(0, index), name, ...list.slice(index)]);
+  }
+
+  return (
+    <div>
+      <h2 ref={headingRef} tabIndex={-1}>
+        My Channels
+      </h2>
+      <ul ref={listRef}>
+        {channels.map((name, index) => (
+          <li key={name}>
+            {name}
+            <button
+              type="button"
+              aria-haspopup="dialog"
+              onClick={() => {
+                setRemoving({ name, index });
+                dialogRef.current.showModal();
+              }}
+            >
+              Remove {name}
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      <dialog ref={dialogRef} aria-labelledby="remove-channel-title">
+        <h2 id="remove-channel-title">Remove {removing?.name} from My Channels?</h2>
+        <button type="button" onClick={confirmRemove}>
+          Remove
+        </button>
+        <button type="button" onClick={() => dialogRef.current.close()}>
+          Cancel
+        </button>
+      </dialog>
+
+      <ActionToast
+        message={removed ? `${removed.name} removed from My Channels.` : null}
+        actionLabel="Undo"
+        onAction={undo}
+        onClose={() => setRemoved(null)}
+      />
+    </div>
   );
 }
 ```

@@ -3,7 +3,7 @@ id: disclosure.basic
 title: Disclosure
 stack: web/react
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [disclosure, show-hide, expand-collapse, button, toggle]
 aliases: [disclosure, show more, expand collapse, expandable section, collapsible panel, reveal panel, toggle content, twisty]
 summary: A button that shows and hides an associated content region; uses aria-expanded on the trigger and aria-controls to the region, with DOM show/hide.
@@ -29,7 +29,7 @@ A button that shows and hides an associated content region; uses `aria-expanded`
 ## Must Haves
 - Use a native `<button>` (preferred), or `role="button"` only when a native button cannot be used.
   - If `role="button"` is used instead of a native `<button>`, add `tabindex="0"` and keyboard support for Enter and Space, ensuring Space prevents page scrolling while activating the control.
-- The button reflects open state with `aria-expanded="true|false"`.
+- The button reflects open state with `aria-expanded="true|false"`. This state toggle is the core signal of the pattern; the implementation fails without it.
 - The button references the region with `aria-controls="IDREF"`.
 - The region is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its content cannot be reached by keyboard or screen readers.
 - The button has an accessible name that describes the content it controls.
@@ -42,6 +42,7 @@ A button that shows and hides an associated content region; uses `aria-expanded`
 - Do not use `role="menu"` on the region.
 - Do not add `aria-haspopup` to the button.
 - Do not put the expanded state on the region instead of the trigger.
+- Do not render the button without `aria-expanded`, including while collapsed (e.g., `aria-expanded={open || undefined}`); a screen reader announces a plain button with no open or closed state.
 - Do not leave the region visible while `aria-expanded="false"` (and vice versa).
 
 ## Customizable

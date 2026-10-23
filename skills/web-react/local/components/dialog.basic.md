@@ -3,7 +3,7 @@ id: dialog.basic
 title: "Dialog (Basic)"
 stack: web/react
 status: beta
-latest_version: 0.1.1
+latest_version: 0.2.0
 tags: [dialog, modal, pop-up, overlay, focus-trap, blocking, native-dialog, show-modal]
 aliases: [dialog, modal, modal dialog, pop-up, blocking overlay, show-modal]
 summary: User-initiated blocking dialog. Uses the native <dialog> element with .showModal() so the browser handles focus trap, background inertness, Escape dismissal, focus restoration, and top-layer rendering.
@@ -41,6 +41,8 @@ User-initiated blocking dialog. Uses the native `<dialog>` element with `.showMo
   - Focus returns to the invoking element on close.
   - Background content is not focusable or reachable by keyboard or screen readers while open.
   - Body scroll is prevented while open.
+- When the dialog's action removes its invoking element (e.g., "Remove" on the item that opened it), focus moves on close to the nearest stable element instead: the next item, the previous item when the removed one was last, or the collection's heading (with `tabindex="-1"`) when the collection is now empty. Defer the focus call with `requestAnimationFrame` so it lands after the removal renders.
+- When a dialog action produces a status message (e.g., a toast offering Undo), write the message only after the dialog has closed and focus has been restored, never while the dialog is open. See `toast.action`.
 - Under native `<dialog>` + `.showModal()` (the Golden Pattern), these six behaviors are provided automatically by the browser. Under the manual `<div role="dialog">` fallback (Customizable → Manual fallback), each is the implementation's responsibility.
 - Focus indicators on the dialog surface, close button, and any focusable content follow the Foundations focus rule (`global.focus-states`).
 

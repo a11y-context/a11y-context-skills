@@ -3,7 +3,7 @@ id: popover.basic
 title: Popover
 stack: web/react
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [popover, overlay, non-modal, anchored, focus-restoration, disclosure]
 aliases: [popover, anchored overlay, floating panel, editor popover, composer panel, non-modal dialog, modeless dialog, popup panel]
 summary: A non-modal overlay anchored to its trigger; uses role="dialog" with an accessible name, moves focus in on open and restores it on close, but does not trap focus or inert the background.
@@ -32,6 +32,10 @@ The non-modal counterpart to `dialog.basic`. The defining contrast is the absenc
 ## Must Haves
 - The popover surface uses `role="dialog"`, or a native `<dialog>` element shown non-modally (rendered in the DOM or opened with `.show()`, never `.showModal()`).
 - The popover has an accessible name via `aria-labelledby` (preferred), referencing a visible title element (e.g., `<h2 id="...">`), or `aria-label`.
+- The trigger reflects open state with `aria-expanded="true|false"`. This state toggle is the core signal of the pattern; the implementation fails without it.
+  - A native `<button popovertarget="...">` is exposed as expanded or collapsed by the browser, with no `aria-expanded` from the author. The state appears in the accessibility tree, not as an attribute in the DOM.
+- The trigger references the popover with `aria-controls` whenever the popover element is in the DOM. While the popover is unmounted, omit `aria-controls`, since it would point at an `id` that does not exist.
+- Activating the trigger while the popover is open closes it.
 - Focus moves into the popover on open, landing on the popover container or its first interactive control.
 - Esc closes the popover, regardless of where focus currently sits, since focus is not trapped and may have moved into the page.
 - Focus is restored to the invoking element on close.
@@ -44,6 +48,8 @@ The non-modal counterpart to `dialog.basic`. The defining contrast is the absenc
 - Ensure a visible focus state (e.g., a 2px solid outline offset by 1-2px) around the trigger, the close control, and any focusable content within the popover.
 
 ## Don'ts
+- Do not render the trigger without `aria-expanded`. Focus moving into the popover announces it once; a user who Tabs back to the trigger has no other way to learn the popover is still open.
+- Do not set `aria-expanded` by hand on a `popovertarget` button. Light dismiss closes the popover without updating component state, and the hand-set value goes stale.
 - Do not set `aria-modal="true"` on a popover; it falsely tells assistive technology the background is inert.
 - Do not trap focus within the popover.
 - Do not apply `inert` to, or otherwise block, the background content.
@@ -53,7 +59,7 @@ The non-modal counterpart to `dialog.basic`. The defining contrast is the absenc
 ## Customizable
 - Delivery is at the engineer's discretion as long as the non-modal contract above holds. Acceptable options:
   - A native `<dialog>` element shown non-modally.
-  - The `popover` attribute, which adds light dismiss on outside click and Esc for free.
+  - The `popover` attribute with a `popovertarget` trigger, which adds light dismiss on outside click and Esc, and the trigger's expanded state, for free.
   - A `<div role="dialog">` with explicit positioning.
 - Positioning is at the engineer's discretion. A popover is normally anchored to its trigger (CSS anchor positioning, the `popover` attribute's anchoring, or a positioning library), but a fixed-position panel is acceptable as long as the relationship to the trigger stays clear and focus still moves in on open.
 - Whether an outside click also dismisses the popover is optional. The `popover` attribute provides it automatically; a `role="dialog"` div may add it via an outside-pointer handler, or omit it.
@@ -71,6 +77,7 @@ export function Popover() {
   const openerRef = useRef(null);
   const popoverRef = useRef(null);
   const titleId = useId();
+  const popoverId = useId();
 
   const openPopover = () => {
     // Capture the opener at the moment we open, so focus can be restored on close.
@@ -105,7 +112,12 @@ export function Popover() {
 
   return (
     <div>
-      <button type="button" onClick={openPopover}>
+      <button
+        type="button"
+        aria-expanded={open ? "true" : "false"}
+        aria-controls={open ? popoverId : undefined}
+        onClick={open ? closePopover : openPopover}
+      >
         Edit note
       </button>
 
@@ -121,6 +133,7 @@ export function Popover() {
         ? createPortal(
             <div
               ref={popoverRef}
+              id={popoverId}
               role="dialog"
               aria-labelledby={titleId}
               tabIndex={-1}

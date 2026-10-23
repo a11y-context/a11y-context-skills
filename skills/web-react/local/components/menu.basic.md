@@ -3,7 +3,7 @@ id: menu.basic
 title: Menu
 stack: web/react
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [menu, actions-menu, roving-tabindex, overflow-menu, kebab-menu, commands]
 aliases: [kebab menu, overflow menu, actions menu, three-dot menu, more menu, menu button, context menu button, command menu]
 summary: A button that opens a menu of commands using role='menu' and role='menuitem', with roving tabindex focus management and the full menu keyboard contract.
@@ -48,7 +48,7 @@ A button that opens a menu of commands using `role="menu"` and `role="menuitem"`
 
 ### State & properties
 - The trigger has `aria-haspopup="menu"`.
-- The trigger has `aria-expanded="true|false"` reflecting the open or closed state of the menu.
+- The trigger has `aria-expanded="true|false"` reflecting the open or closed state of the menu. This state toggle is the core signal of the pattern; the implementation fails without it.
 - The trigger has `aria-controls="IDREF"` pointing to the menu container.
 - The menu is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its items cannot be reached by keyboard or screen readers.
 
@@ -76,6 +76,8 @@ A button that opens a menu of commands using `role="menu"` and `role="menuitem"`
 - Do not place links, headings, form inputs, or arbitrary content inside a `role="menu"` container.
 - Do not declare `role="menu"` without implementing the full keyboard contract (roving tabindex, Arrow keys, Home/End, type-ahead, Esc).
 - Do not forget to return focus to the trigger when the menu closes via activation or Esc.
+- Do not render the trigger without `aria-expanded`; `aria-haspopup="menu"` alone does not convey open/closed state.
+- Do not remove `aria-haspopup="menu"` from the trigger to make VoiceOver announce its state. In Safari, VoiceOver does not voice expanded or collapsed on this trigger, either when focus returns from the menu or when the cursor moves back to it while the menu is open, even with `aria-expanded` set correctly. Confirm the state in the DOM instead.
 - Do not leave the menu visible while `aria-expanded="false"` (and vice versa).
 - Do not reach for `aria-activedescendant` when roving tabindex is simpler for the case at hand.
 

@@ -3,7 +3,7 @@ id: combobox.autocomplete
 title: Autocomplete Combobox
 stack: web/react
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [combobox, autocomplete, listbox, filter, aria-activedescendant, form, search]
 aliases: [typeahead, type-ahead, autosuggest, auto-suggest, search select, filterable dropdown, predictive input, combo box]
 summary: An editable text input that filters a listbox of options as the user types; uses role="combobox" with aria-autocomplete, aria-expanded, aria-controls, and aria-activedescendant while DOM focus stays on the input.
@@ -38,7 +38,7 @@ An editable text input that filters a listbox of options as the user types; uses
 - Provide a visible native `<label>` associated with the input via `for`/`id`.
 
 ### State & properties
-- Set `aria-expanded="true|false"` on the input reflecting whether the listbox is displayed.
+- Set `aria-expanded="true|false"` on the input reflecting whether the listbox is displayed. This state toggle is the core signal of the pattern; the implementation fails without it.
 - Set `aria-controls="IDREF"` on the input pointing to the listbox element.
 - The listbox is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its options cannot be reached by keyboard or screen readers.
 
@@ -67,6 +67,7 @@ An editable text input that filters a listbox of options as the user types; uses
 - Do not move DOM focus into the options; it breaks native text editing. Track the active option with `aria-activedescendant` instead.
 - Do not use `role="menu"` or `role="menuitem"` for the options; use `role="listbox"` and `role="option"`.
 - Do not forget to scroll the active option into view when it changes.
+- Do not render the input without `aria-expanded`; `role="combobox"` and `aria-haspopup` do not convey whether the listbox is displayed.
 - Do not leave the listbox visible while `aria-expanded="false"` (and vice versa).
 
 ## Customizable

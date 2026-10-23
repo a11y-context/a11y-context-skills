@@ -3,7 +3,7 @@ id: navigation-menu.basic
 title: Navigation Menu
 stack: web/react
 status: beta
-latest_version: 0.3.0
+latest_version: 0.4.0
 tags: [navigation, menu, disclosure, header, sitemap, flyout]
 aliases: [nav dropdown, header dropdown, mega menu (simple), disclosure navigation, flyout menu]
 summary: A non-modal header navigation pattern that supports top-level links and optional sub-menus. Uses disclosure-style toggles (buttons) with aria-expanded/controls and Tab-based navigation (no roving focus / no role=menu).
@@ -52,7 +52,7 @@ A non-modal header navigation pattern that supports top-level links and optional
   - If the top-level item is a button-only parent (no destination), do not put aria-current on the button. Instead, apply aria-current="page" to the submenu link that represents the current page.
   - If the navigation has no explicit Home link and the site logo links to the homepage, the logo link carries `aria-current="page"` when the user is on the homepage.
   - Ensure there is some visual change that indicates this is the current page link.
-- The toggle reflects open state with `aria-expanded="true|false"`.
+- The toggle reflects open state with `aria-expanded="true|false"`. This state toggle is the core signal of the pattern; the implementation fails without it.
 - The toggle references its submenu with `aria-controls="IDREF"` (recommended).
 - The toggle does not carry `aria-haspopup`; a submenu of links is not a menu, listbox, tree, grid, or dialog, so `aria-expanded` alone is the correct state signal.
 - Top-level items that open a sub-menu include a visible indicator (e.g., down caret) that communicates "has submenu."
@@ -84,6 +84,7 @@ A non-modal header navigation pattern that supports top-level links and optional
   - If the parent has its own destination page and also has a submenu, use parent link + separate toggle button.
 - Do not use `role="menu"` / `role="menuitem"` unless you implement the full ARIA menu widget behavior (managed focus, arrow keys, typeahead).
 - Do not add `aria-haspopup` to the toggle; the submenu is a list of links, not a menu, so it announces a widget that is not present.
+- Do not render the toggle without `aria-expanded`, including while collapsed (e.g., `aria-expanded={open || undefined}`); a screen reader announces a plain button with no open or closed state.
 - Do not leave submenu content visible while `aria-expanded="false"` (and vice versa).
 - Do not strand focus by removing the currently focused submenu item without closing and allowing focus to move naturally.
 - Do not render sub-menus expanded/visible by default. They open only after the user activates the corresponding toggle.

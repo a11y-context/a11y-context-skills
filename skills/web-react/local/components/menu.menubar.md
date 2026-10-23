@@ -3,7 +3,7 @@ id: menu.menubar
 title: Menubar
 stack: web/react
 status: beta
-latest_version: 0.1.0
+latest_version: 0.2.0
 tags: [menubar, menu, roving-tabindex, command-bar, application, keyboard-navigation]
 aliases: [menu bar, application menu bar, command bar, app menu bar, editor menu bar, file edit view menu, desktop menu bar]
 summary: A persistent horizontal bar of application command menus using role="menubar", role="menu", and role="menuitem", for desktop-application command surfaces only, never site navigation.
@@ -44,7 +44,7 @@ This pattern is rarely appropriate on the web. Almost every horizontal bar of li
 - The container has an accessible name (e.g., `aria-label="Application"`).
 
 ### State & properties
-- Each top-level item that opens a submenu has `aria-haspopup="menu"` and `aria-expanded="true|false"` reflecting open/closed.
+- Each top-level item that opens a submenu has `aria-haspopup="menu"` and `aria-expanded="true|false"` reflecting open/closed. This state toggle is the core signal of the pattern; the implementation fails without it.
 - Each submenu is shown/hidden in the DOM (e.g., via the `hidden` attribute), so that when closed, its commands cannot be reached by keyboard or screen readers.
 
 ### Keyboard
@@ -71,6 +71,7 @@ This pattern is rarely appropriate on the web. Almost every horizontal bar of li
 - Do not place links (`<a href>`) inside a menubar or its submenus; menubar children are commands, not destinations.
 - Do not half-implement the keyboard contract; a menubar without arrow-key traversal, submenu open/close, and type-ahead is broken for keyboard and screen reader users.
 - Do not make every top-level item and command tabbable; use roving tabindex so Tab enters and exits the menubar as a single stop.
+- Do not render a top-level item that opens a submenu without `aria-expanded`; `aria-haspopup="menu"` alone does not convey open/closed state.
 - Do not leave a submenu visible while its top-level item has `aria-expanded="false"` (and vice versa).
 
 ## Customizable

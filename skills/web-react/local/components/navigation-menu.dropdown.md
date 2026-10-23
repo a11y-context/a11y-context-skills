@@ -3,7 +3,7 @@ id: navigation-menu.dropdown
 title: Navigation Dropdown
 stack: web/react
 status: beta
-latest_version: 0.1.0
+latest_version: 0.1.1
 tags: [navigation, dropdown, disclosure, account-menu, avatar-menu, header]
 aliases: [account dropdown, user menu, avatar menu, profile menu, nav dropdown, links dropdown, account menu, header dropdown]
 summary: A single-trigger, non-modal dropdown that reveals a short list of navigation links and optional actions, using a native button with aria-expanded plus DOM show/hide, and never role="menu".
@@ -43,7 +43,7 @@ This is a disclosure of links, not an ARIA menu. The revealed content is primari
 - Icons within the button are decorative (`aria-hidden="true"`).
 
 ### State & properties
-- The button reflects open state with `aria-expanded="true|false"`.
+- The button reflects open state with `aria-expanded="true|false"`. This state toggle is the core signal of the pattern; the implementation fails without it.
 - The button is associated with the list container via `aria-controls="IDREF"`.
 - The button does not carry `aria-haspopup`.
   - A list of links is not a menu, listbox, tree, grid, or dialog, so `aria-haspopup` announces a widget that is not present; `aria-expanded` alone is the correct signal.

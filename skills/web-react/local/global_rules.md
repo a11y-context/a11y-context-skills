@@ -86,6 +86,28 @@ scope: [screen]
 
 ---
 
+## Page Language
+
+```yaml
+id: global.page-language
+scope: [screen, component]
+```
+
+### Must Haves
+- Every document sets `lang` on the `<html>` element to the primary language of its content, as a language tag (e.g., `lang="en"`, `lang="es-MX"`).
+  - Set it where the `<html>` element is rendered: `index.html` in a client-rendered app, or the root layout in a framework that renders `<html>` (e.g., Next.js `app/layout.js`).
+- When the app switches its display language at runtime, update `document.documentElement.lang` to match.
+- A passage in a language other than the page's carries `lang` on the element that contains it (e.g., `<blockquote lang="fr">`, a show title in its original language as `<span lang="ja">`).
+  - Proper names, technical terms, and words that have passed into the surrounding language take no `lang`.
+- Each option in a language switcher that names a language in that language carries the matching `lang` (e.g., `<a lang="es" href="...">Español</a>`).
+
+### Don'ts
+- Do not leave `<html>` without `lang`, or with an empty `lang=""`.
+- Do not ship a template default that does not match the content (e.g., `lang="en"` on a page served in Spanish). Screen readers pronounce the whole page with the wrong voice.
+- Do not put a language name in `lang` (e.g., `lang="english"`). It is not a valid language tag, so screen readers cannot switch to the right voice.
+
+---
+
 ## Landmarks
 
 ```yaml
@@ -102,6 +124,7 @@ scope: [screen, layout]
   - The `main` landmark contains the dominant content of the page, which directly relates to or expands upon the central topic of the page, or the central functionality of an application.
   - If site or app navigation is present at the top of the page or view (i.e., `header`), and/or a footer (`footer`) is present at the bottom of the page, the `main` landmark should wrap all content between `header` and `footer` content
   - The `main` landmark must be a sibling of the `header` and/or `footer` containers.
+  - The `main` landmark is the skip link's target, so it carries a stable `id` and `tabindex="-1"` on every route. See `global.skip-link`.
 - If the page contains complementary content - i.e., content that is only indirectly related to the page's main content - this is contained inside an `<aside>` (or `role="complementary"`) landmark
   - The `aside` landmark is infrequently used and does not need to be present.
   - If present, the `aside` landmark should be a sibling to the `main` landmark, and to the `header` and/or `footer`, if present.
@@ -109,6 +132,80 @@ scope: [screen, layout]
 ### Don'ts
 - Do not use multiple `main` landmarks on the same page.
 - Do not wrap the `header`, `footer`, or `aside` inside the `main` landmark, or vice-versa: these should all be siblings.
+
+---
+
+## Bypass Blocks (Skip Link)
+
+```yaml
+id: global.skip-link
+scope: [screen, layout]
+```
+
+A skip link lets a keyboard user move past the repeated header and navigation to the main content in one keystroke. It belongs to the app shell, not to a page: it is built once, in the layout every route renders, and a task that touches a single page fixes it there rather than adding a target to that page.
+
+### Must Haves
+- Render one skip link, in the app shell or root layout component that every route renders (e.g., `App.jsx`, a Next.js `app/layout.js`), so every route gets it with no per-page code.
+- The skip link is the first focusable element in the document, before the logo, the header, and the navigation.
+- The skip link is a native `<a>` whose `href` points at the main content (e.g., `href="#main"`).
+- The link text names the destination (e.g., "Skip to main content").
+- The skip link is visually hidden until it receives focus and visible for as long as it has focus. Use `.sr-only` paired with `.sr-only-focusable` (see `global.sr-only`).
+  - While visible, it carries the focus indicator in `global.focus-states`, and no sticky header covers it (see `global.focus-not-obscured`).
+- The target is the `<main>` landmark (see `global.landmarks`), with a stable `id` (e.g., `id="main"`) rendered on every route.
+  - Put the `id` on the `<main>` in the shared layout, not on a page component's wrapper, so no route can omit it.
+- The `<main>` target has `tabindex="-1"`, so activating the link moves keyboard focus into it and a screen reader continues reading from there. Without it, only the sequential-focus starting point moves.
+  - `tabindex="-1"` makes `<main>` focusable by script and by fragment navigation without adding it to the Tab order.
+- In a single-page app, handle activation in script: the click handler calls `event.preventDefault()` and then focuses the target (see the snippet below). Enter on a focused link fires `click`, so the one handler covers keyboard and pointer.
+  - The plain `href="#main"` with no handler is sufficient when nothing but the browser handles the URL fragment: a server-rendered or multi-page site, or a history-based router with no hash-change or scroll-restoration listener. Use the handler whenever a hash router is in use, or anything in the app reacts to `hashchange`.
+
+### Don'ts
+- Do not render more than one skip link, or render a skip link from a page component. Per-page links end up duplicated on some routes and missing on others.
+- Do not point the skip link at an `id` that some routes do not render, such as one page's content wrapper. On every other route, activating it does nothing.
+- Do not target an element that is not focusable (a `<main>` or `<div>` without `tabindex="-1"`). The page may scroll, but focus does not move, so a screen reader announces nothing and keeps its reading position at the top of the page.
+- Do not give `<main>` `tabindex="0"`. It adds a non-interactive stop to every keyboard user's Tab order.
+- Do not let a hash router handle the skip link's `href`. `#main` is read as the route `/main`, and activating the link navigates away from the page.
+- Do not hide the skip link with `display: none` or `visibility: hidden`, or with `.sr-only` and no focus restoration. A skip link that stays hidden while focused leaves keyboard users focused on nothing visible.
+
+### Customizable
+- The focused `<main>` may suppress its focus outline. It is a programmatic focus target, not an interactive component, and `global.focus-states` governs the controls a user reaches by Tab. Showing an outline on `<main>` is also acceptable. See the second snippet below.
+
+### Snippets
+
+The skip link and its target, both rendered by the root layout. The handler keeps the fragment out of the router and moves focus explicitly; `focus()` also scrolls the target into view:
+
+```jsx
+"use client";
+
+export function AppShell({ children }) {
+  function skipToMain(event) {
+    event.preventDefault();
+    document.getElementById("main")?.focus();
+  }
+
+  return (
+    <>
+      <a href="#main" className="sr-only sr-only-focusable" onClick={skipToMain}>
+        Skip to main content
+      </a>
+      <header>{/* logo, primary navigation */}</header>
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
+      <footer>{/* footer links */}</footer>
+    </>
+  );
+}
+```
+
+Suppressing the outline on the focused `<main>`, when that option is taken. The selector outranks the global `:focus-visible` ring and its forced-colors override, and it applies only to the non-interactive target:
+
+```css
+main[tabindex="-1"]:focus,
+main[tabindex="-1"]:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+```
 
 ---
 
@@ -460,4 +557,49 @@ Meaningful standalone icon, where no text nearby carries the status. Either rout
   </svg>
   <span className="sr-only">Downloaded</span>
 </span>
+```
+
+---
+
+## Expanded State
+
+```yaml
+id: global.expanded-state
+scope: [component]
+```
+
+A control that shows and hides another element tells assistive technology which of the two states it is in. `aria-expanded` is that signal, and it is the one most often left out: a screen reader user hears a button, presses it, and hears nothing about what happened.
+
+### Must Haves
+- Any control that shows and hides another element exposes `aria-expanded="true"` while that element is visible and `aria-expanded="false"` while it is hidden.
+  - This covers disclosure buttons, accordion headers, menu buttons, navigation dropdown and submenu toggles, custom select triggers, combobox inputs, and popover triggers.
+- `aria-expanded` sits on the control the user operates (the `<button>`, or the combobox `<input>`), not on the element being shown or hidden.
+- `aria-expanded` changes in the same update that shows or hides the element, so the attribute and the visibility never disagree.
+- `aria-expanded` is present in both states. In React, `aria-expanded={open}` renders `"true"` or `"false"`.
+- The rule does not apply to controls whose state is carried by something else:
+  - A button that opens a modal dialog and moves focus into it (see `dialog.basic`).
+  - A toggle button whose state is on or off, which uses `aria-pressed` (see `button.toggle`).
+  - A tooltip trigger, which links its tooltip with `aria-describedby` (see `tooltip.basic`).
+  - A tab or a carousel picker, which selects one panel of a set with `aria-selected` or `aria-current` (see `tabs.basic`, `carousel.dots`).
+
+### Don'ts
+- Do not rely on `aria-haspopup` to convey open or closed. It says the control opens something, not whether it is open.
+- Do not drop the attribute while collapsed (e.g., `aria-expanded={open || undefined}`, or rendering it only when open). A screen reader then announces the collapsed control with no state at all.
+- Do not leave the controlled element visible while `aria-expanded="false"` (and vice versa).
+- Do not put `aria-expanded` and `aria-pressed` on the same control. It is announced as both a toggle and an expander, and neither state reads clearly.
+
+### Snippets
+
+```jsx
+<button
+  type="button"
+  aria-expanded={open}
+  aria-controls="filters-panel"
+  onClick={() => setOpen((value) => !value)}
+>
+  Filters
+</button>
+<div id="filters-panel" hidden={!open}>
+  {/* filter controls */}
+</div>
 ```
