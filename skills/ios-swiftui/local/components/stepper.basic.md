@@ -3,7 +3,7 @@ id: stepper.basic
 title: Stepper
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.2
+latest_version: 0.1.3
 tags: [stepper, increment, decrement, value, quantity]
 aliases: [plus minus, quantity stepper, increment control, Stepper, counter]
 summary: A native SwiftUI Stepper whose visible label text becomes its accessible name and which VoiceOver increments or decrements automatically, with no .adjustable trait to add.
@@ -16,14 +16,14 @@ Pattern ID: `stepper.basic`
 A native SwiftUI `Stepper` whose visible label text becomes its accessible name and which VoiceOver increments or decrements automatically, with no `.adjustable` trait to add.
 
 ## Use When
-- Use when the user increases or decreases a value in discrete single increments with plus and minus controls (e.g., "Tickets", "Copies", "Quantity"). Uses a native SwiftUI `Stepper`, whose increment and decrement behavior is exposed to VoiceOver automatically.
+- Use when the user increases or decreases a value in discrete single increments with plus and minus controls (e.g., "Tickets", "Copies", "Quantity").
 
 ## Do Not Use When
 - Do not use when the value spans a wide continuous range better suited to a thumb slider (use `slider.basic`).
 - Do not use when the choice is among labeled options rather than a number (use `select.menu`).
 
 ## Must Haves
-- Use a native `Stepper` so its increment and decrement behavior is exposed to VoiceOver and operable by Switch Control automatically. SwiftUI has no `.adjustable` trait to add; a custom increment control gets its behavior from `accessibilityAdjustableAction` (per `global.custom-control-representation`).
+- Use a native `Stepper` so its increment and decrement behavior is exposed to VoiceOver and operable by Switch Control automatically. SwiftUI has no `.adjustable` trait to add; a custom increment control gets its behavior from `accessibilityAdjustableAction` (per `global.custom-control-representation`) (`global.native-first`).
 - Give the stepper an accessible name from its visible label using the label closure (`Stepper(value: $tickets) { Text("Tickets: \(tickets)") }`), whose text becomes the accessible name. A manual `.accessibilityLabel` is unnecessary in this case.
   - When the stepper's visible label is empty (e.g., the count is shown in a separate `Text` or `TextField`), add an `.accessibilityLabel` so the stepper is still named.
 - When the current value is not part of the label text, set `.accessibilityValue` so VoiceOver announces the value along with the name.
@@ -34,9 +34,6 @@ A native SwiftUI `Stepper` whose visible label text becomes its accessible name 
 
 ## Don'ts
 - Do not add a `.adjustable` trait; SwiftUI has none (it is a UIKit trait). A native `Stepper` provides the behavior, and a custom control uses `.accessibilityAdjustableAction`.
-- Do not ship a `Stepper` with an empty label and no `.accessibilityLabel`; VoiceOver then announces no name.
-- Do not force a large value to be reached only by repeated taps; pair a `TextField` for direct entry on wide ranges.
-- Do not leave the value undiscoverable to VoiceOver; put it in the label text or `.accessibilityValue`.
 
 ## Customizable
 - The value may be carried in the label text (`Text("Tickets: \(tickets)")`) or announced through `.accessibilityValue` while the label stays static; either keeps the value discoverable.
@@ -50,7 +47,7 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct StepperBasicDemo: View {
+struct StepperExamples: View {
     @State private var tickets = 1
     @State private var copies = 1
 

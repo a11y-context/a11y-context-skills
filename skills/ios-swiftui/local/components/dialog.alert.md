@@ -3,7 +3,7 @@ id: dialog.alert
 title: Dialog (Alert)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.3
+latest_version: 0.1.4
 tags: [alert, dialog, modal, confirmation, destructive]
 aliases: [alert, alert dialog, confirmation alert, popup alert, delete confirmation, .alert]
 summary: A native SwiftUI .alert modal that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native alerts do not restore it automatically.
@@ -16,7 +16,7 @@ Pattern ID: `dialog.alert`
 A native SwiftUI `.alert` modal that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native alerts do not restore it automatically.
 
 ## Use When
-- Use when a brief, blocking message needs the user to acknowledge it or make a small choice before continuing (e.g., confirming a destructive action, acknowledging a required error). Uses the native SwiftUI `.alert()` modifier.
+- Use when a brief, blocking message needs the user to acknowledge it or make a small choice before continuing (e.g., confirming a destructive action, acknowledging a required error).
 - Use when the choice is a short set of clearly labeled actions (typically one to three).
 
 ## Do Not Use When
@@ -25,7 +25,7 @@ A native SwiftUI `.alert` modal that takes VoiceOver focus on presentation, with
 - Do not use when the message is a transient status that does not require acknowledgement (use `global.announcements`).
 
 ## Must Haves
-- Use the native `.alert(_:isPresented:actions:message:)` modifier so the alert is a real modal that takes VoiceOver focus on presentation and blocks interaction with the rest of the screen until it is dismissed.
+- Use the native `.alert(_:isPresented:actions:message:)` modifier so the alert is a real modal that takes VoiceOver focus on presentation and blocks interaction with the rest of the screen until it is dismissed (`global.native-first`).
 - Provide the primary question or statement as the alert title, and any supporting detail in the `message:` closure.
 - Return VoiceOver focus to the trigger on dismissal: bind the trigger with `@AccessibilityFocusState` and set it true inside every alert action's closure, because native alerts do not restore focus automatically.
 - Give each action a specific label and the correct role: `.cancel` for the dismissive action and `.destructive` for a destructive one, so VoiceOver and the system present them correctly.
@@ -35,9 +35,7 @@ A native SwiftUI `.alert` modal that takes VoiceOver focus on presentation, with
 
 ## Don'ts
 - Do not build a custom view as a faux alert (a conditional `VStack` overlay); it does not receive VoiceOver focus on display, does not block the background, and does not restore focus on close. Use the native `.alert()`, or `dialog.modal` for a richer custom modal.
-- Do not omit focus return; without `@AccessibilityFocusState` set in each action, VoiceOver focus is lost when the alert closes, which is a gap in the native control.
 - Do not rely on color alone to signal a destructive action; use the `.destructive` role and a clear label, not only red text.
-- Do not put lengthy content, forms, or many controls in an alert; use `dialog.modal` for that.
 
 ## Customizable
 - The alert may have a single acknowledgement button or two or more actions (e.g., Cancel plus a confirming or destructive action), as long as every action returns focus to the trigger.
@@ -50,7 +48,7 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct DialogAlertDemo: View {
+struct DialogAlertExamples: View {
     @State private var showingAlert = false
     @AccessibilityFocusState private var triggerFocused: Bool
 

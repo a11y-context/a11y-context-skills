@@ -3,9 +3,9 @@ id: checkbox.basic
 title: Checkbox
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.2.0
 tags: [checkbox, form, selection, toggle, checkbox-group]
-aliases: [check box, tickbox, form checkbox, Toggle checkbox, agree checkbox, multi-select]
+aliases: [check box, tickbox, form checkbox, Toggle checkbox, agree checkbox, multi-select, ToggleStyle checkbox]
 summary: A checkbox built from a SwiftUI Toggle with a custom square toggle style, using accessibilityValue to announce Checked or Unchecked, since SwiftUI has no native checkbox control or trait.
 ---
 
@@ -16,7 +16,7 @@ Pattern ID: `checkbox.basic`
 A checkbox built from a SwiftUI `Toggle` with a custom square toggle style, using `.accessibilityValue` to announce Checked or Unchecked, since SwiftUI has no native checkbox control or trait.
 
 ## Use When
-- Use when the user selects an independent binary option that is submitted with a form rather than taking effect immediately (e.g., "Accept Terms", "Remember me"). Uses a SwiftUI `Toggle` with a custom square `.toggleStyle`, since SwiftUI has no native checkbox control.
+- Use when the user selects an independent binary option that is submitted with a form rather than taking effect immediately (e.g., "Accept Terms", "Remember me").
 - Use when several such options form a group where any number may be selected (e.g., "Preferred contact method(s)": Email, Phone, Text).
 
 ## Do Not Use When
@@ -25,7 +25,7 @@ A checkbox built from a SwiftUI `Toggle` with a custom square toggle style, usin
 - Do not use when exactly one option must be chosen from a mutually exclusive set (use `radio.basic`).
 
 ## Must Haves
-- Build the checkbox from a native `Toggle` with a custom `.toggleStyle` that draws the square box and checkmark (e.g., `square` when unchecked, `checkmark.square` when checked), rather than a `Button` or a bare tap gesture, so it keeps the underlying control semantics and stays operable by Switch Control and Full Keyboard Access.
+- Build the checkbox from a native `Toggle` with a custom `.toggleStyle` that draws the square box and checkmark (e.g., `square` when unchecked, `checkmark.square` when checked), rather than a `Button` or a bare tap gesture, so it keeps the underlying control semantics and stays operable by Switch Control and Full Keyboard Access (`global.native-first`).
 - The checkbox has an accessible name matching its visible label; pass the label into the `Toggle` (e.g., `Toggle("Accept Terms", isOn: $accepted)` or the label closure).
 - Override the announced value with `.accessibilityValue(isChecked ? "Checked" : "Unchecked")` so VoiceOver speaks Checked or Unchecked instead of the default On or Off.
 - For a checkbox group, label the container: apply `.accessibilityElement(children: .contain)` and an `.accessibilityLabel` matching the visible group heading, so VoiceOver announces the group name when focus first enters it.
@@ -36,10 +36,6 @@ A checkbox built from a SwiftUI `Toggle` with a custom square toggle style, usin
 
 ## Don'ts
 - Do not build a checkbox from a `Button` that swaps a checkmark image; VoiceOver then announces "Button" with no Checked or Unchecked value, and the state is invisible to screen reader users.
-- Do not leave the checkbox announcing the default On or Off; set `.accessibilityValue` to Checked or Unchecked.
-- Do not omit the group label on a set of related checkboxes; without `.accessibilityElement(children: .contain)` plus `.accessibilityLabel`, VoiceOver users do not hear what the group is for.
-- Do not convey the checked state by color alone; change the box glyph.
-- Do not fix the glyph to a static point size that fails to scale with Dynamic Type.
 
 ## Customizable
 - The custom `.toggleStyle` may draw any recognizable checkbox appearance (square outline, filled check, rounded box) as long as it wraps a real `Toggle`, keeps the state distinguishable without color, and preserves the label and value.
@@ -52,7 +48,19 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct CheckboxDemo: View {
+struct CheckboxToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            Image(systemName: configuration.isOn ? "checkmark.square" : "square")
+                .imageScale(.large)
+            configuration.label
+        }
+        .contentShape(Rectangle())
+        .onTapGesture { configuration.isOn.toggle() }
+    }
+}
+
+struct CheckboxExamples: View {
     @State private var acceptedTerms = false
     @State private var email = false
     @State private var phone = false
@@ -78,18 +86,6 @@ struct CheckboxDemo: View {
             .accessibilityElement(children: .contain)
             .accessibilityLabel("Preferred contact method(s)")
         }
-    }
-}
-
-struct CheckboxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            Image(systemName: configuration.isOn ? "checkmark.square" : "square")
-                .imageScale(.large)
-            configuration.label
-        }
-        .contentShape(Rectangle())
-        .onTapGesture { configuration.isOn.toggle() }
     }
 }
 ```

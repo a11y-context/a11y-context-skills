@@ -3,9 +3,9 @@ id: button.basic
 title: Basic Button
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.2.0
 tags: [button, control, action, icon-button]
-aliases: [btn, primary button, icon button, call to action, cta]
+aliases: [btn, primary button, icon button, call to action, cta, Button]
 summary: SwiftUI Button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.
 ---
 
@@ -24,7 +24,7 @@ SwiftUI `Button` that triggers an action. Supports text-only, icon+text, and ico
 - Do not use when the control opens a URL or leaves the app (use `link.basic`).
 
 ## Must Haves
-- Use a native `Button` for built-in VoiceOver semantics, the `.isButton` trait, and Switch Control / external-keyboard activation.
+- Use a native `Button` for built-in VoiceOver semantics, the `.isButton` trait, and Switch Control / external-keyboard activation (`global.native-first`).
 - The button has an accessible name that describes its purpose or action.
 - When the button has visible text, the visible text serves as the accessible name.
 - When additional context is needed beyond the visible text, add it via `.accessibilityLabel`, with the visible text appearing at the start of the label.
@@ -37,8 +37,6 @@ SwiftUI `Button` that triggers an action. Supports text-only, icon+text, and ico
 
 ## Don'ts
 - Do not include the word "Button" in `.accessibilityLabel`. VoiceOver already appends the "Button" trait, so this makes it announce "Button, Button".
-- Do not create icon-only buttons without an `.accessibilityLabel` (no unlabeled icons).
-- Do not use an `.accessibilityLabel` that conflicts with (or is wildly different from) the visible label text. Accessible names should at least begin with the visible label.
 
 ## Customizable
 - An `.accessibilityHint` may be added when the result of the action is not obvious from the visible label (e.g., a song title that plays on tap might use "Plays the song."). Most buttons with a clear action label ("Save", "Delete") do not need one. Hints describe the result in third-person singular, never the gesture or control type ("button", "tap").
@@ -50,7 +48,7 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct ButtonBasicDemo: View {
+struct ButtonExamples: View {
     var body: some View {
         VStack(spacing: 16) {
             Button("Save") {

@@ -3,7 +3,7 @@ id: dialog.confirmation
 title: Dialog (Confirmation)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.1.2
 tags: [confirmation, action-sheet, dialog, destructive, actions]
 aliases: [action sheet, confirmation dialog, .confirmationDialog, actionSheet, delete confirmation, bottom sheet actions]
 summary: A native SwiftUI .confirmationDialog action sheet that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native confirmation dialogs do not restore it automatically.
@@ -16,7 +16,7 @@ Pattern ID: `dialog.confirmation`
 A native SwiftUI `.confirmationDialog` action sheet that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native confirmation dialogs do not restore it automatically.
 
 ## Use When
-- Use when a control offers a short set of actions to confirm or choose from, presented as an action sheet anchored to that control (e.g., confirming a destructive delete, picking one of a few actions on an item). Uses the native SwiftUI `.confirmationDialog(_:isPresented:titleVisibility:actions:message:)` modifier.
+- Use when a control offers a short set of actions to confirm or choose from, presented as an action sheet anchored to that control (e.g., confirming a destructive delete, picking one of a few actions on an item).
 - Use when the choice is a small set of clearly labeled actions (typically two to four) plus a cancel.
 
 ## Do Not Use When
@@ -26,7 +26,7 @@ A native SwiftUI `.confirmationDialog` action sheet that takes VoiceOver focus o
 - Do not use when the user is choosing a single persistent value rather than committing an action (use `select.menu`).
 
 ## Must Haves
-- Use the native `.confirmationDialog(_:isPresented:titleVisibility:actions:message:)` modifier so the action sheet is a real overlay that takes VoiceOver focus on presentation and blocks interaction with the rest of the screen until it is dismissed.
+- Use the native `.confirmationDialog(_:isPresented:titleVisibility:actions:message:)` modifier so the action sheet is a real overlay that takes VoiceOver focus on presentation and blocks interaction with the rest of the screen until it is dismissed (`global.native-first`).
 - Provide the primary question or statement as the dialog title, and put any supporting detail in the `message:` closure.
 - Set `titleVisibility: .visible` so the title is shown and spoken, unless the triggering context already makes the choice clear (see Customizable).
 - Return VoiceOver focus to the trigger on dismissal: bind the trigger with `@AccessibilityFocusState` and set it true inside every action's closure, because native confirmation dialogs do not restore focus automatically, which is an Apple platform defect. See `global.focus-management`.
@@ -37,9 +37,7 @@ A native SwiftUI `.confirmationDialog` action sheet that takes VoiceOver focus o
 
 ## Don'ts
 - Do not build a custom view as a faux action sheet (a conditional `VStack` overlay); it does not receive VoiceOver focus on display, does not block the background, and does not restore focus on close. Use the native `.confirmationDialog()`, or `dialog.modal` for a richer custom modal.
-- Do not omit focus return; without `@AccessibilityFocusState` set in each action, VoiceOver focus is lost when the dialog closes, which is a gap in the native control.
 - Do not rely on color alone to signal a destructive action; use the `.destructive` role and a clear label, not only red text.
-- Do not put forms, many controls, or lengthy content in a confirmation dialog; use `dialog.modal` for that.
 
 ## Customizable
 - The dialog may present a single confirming action plus cancel, or several actions plus cancel, as long as every action returns focus to the trigger.
@@ -53,7 +51,7 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct DialogConfirmationDemo: View {
+struct DialogConfirmationExamples: View {
     @State private var showingDialog = false
     @AccessibilityFocusState private var triggerFocused: Bool
 

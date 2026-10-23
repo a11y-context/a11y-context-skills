@@ -3,9 +3,9 @@ id: button.toggle
 title: Toggle Button
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.2.0
 tags: [button, toggle, pressed, selected, isSelected, mute-button]
-aliases: [toggle button, pressed button]
+aliases: [toggle button, pressed button, mute button, bold button, formatting toggle, Button isSelected]
 summary: SwiftUI Button with two states (e.g. pressed/active) conveyed via either an accessible-name change or the .isSelected accessibility trait, never both.
 ---
 
@@ -16,14 +16,14 @@ Pattern ID: `button.toggle`
 SwiftUI `Button` with two states (e.g. pressed/active) conveyed via either an accessible-name change or the `.isSelected` accessibility trait, never both.
 
 ## Use When
-- Use when a control toggles a feature or action within the current context (e.g., "Mute", "Bold", "Pin", "Enable Closed Captioning"). Uses a SwiftUI `Button` with two states conveyed via either an accessible-name change or the `.isSelected` accessibility trait, never both.
+- Use when a control toggles a feature or action within the current context (e.g., "Mute", "Bold", "Pin", "Enable Closed Captioning").
 
 ## Do Not Use When
 - Do not use when the control represents a persistent on/off system or application setting, such as "Enable notifications" or "Dark mode" (use `switch.basic`).
 - Do not use when the control drills into a new in-app screen (use `list.row`).
 
 ## Must Haves
-- Use a native `Button` for built-in VoiceOver semantics and Switch Control / external-keyboard activation.
+- Use a native `Button` for built-in VoiceOver semantics and Switch Control / external-keyboard activation (`global.native-first`).
 - The button has an accessible name that describes its purpose or action.
 - Default strategy: represent state by changing the accessible name to the next action (e.g., "Mute" to "Unmute", "Pin" to "Remove Pin") via `.accessibilityLabel`.
 - When the button has visible text and no override is needed, the visible text serves as the accessible name.
@@ -44,7 +44,6 @@ SwiftUI `Button` with two states (e.g. pressed/active) conveyed via either an ac
 ## Don'ts
 - Do not add the `.isSelected` trait to a toggle button that is also changing its accessible name to the next action. Pick one state model, not both; combining them produces conflicting, confusing announcements like "Unmute, Selected".
 - Do not leave `.isSelected` stale, always applied, or never applied when using the toolbar trait strategy; it must track the live state.
-- Do not ship icon-only toggle buttons without an accessible name.
 - Do not put state only in the icon's visual appearance. Screen reader users must get the state via the accessible-name change or the `.isSelected` trait, depending on which strategy is in use.
 
 ## Customizable
@@ -59,7 +58,7 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct ToggleButtonDemo: View {
+struct ToggleButtonExamples: View {
     @State private var muted = false
     @State private var pinned = false
     @State private var iconOnlyMuted = false

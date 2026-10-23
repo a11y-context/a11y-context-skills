@@ -3,7 +3,7 @@ id: radio.basic
 title: Radio Button
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.1.2
 tags: [radio, radio-group, selection, single-choice, mutually-exclusive]
 aliases: [radio button, radio group, option button, single-select, mutually exclusive choice, custom radio]
 summary: A mutually exclusive choice group built from custom Button elements, since SwiftUI has no native radio control, using the selected trait plus an accessibilityValue to announce the radio role and its checked or unchecked state.
@@ -16,7 +16,7 @@ Pattern ID: `radio.basic`
 A mutually exclusive choice group built from custom `Button` elements, since SwiftUI has no native radio control, using the selected trait plus an `.accessibilityValue` to announce the radio role and its checked or unchecked state.
 
 ## Use When
-- Use when exactly one option must be chosen from a small, mutually exclusive set that stays fully visible as a list of selectable rows (e.g., "Choose color", "Choose a size"). Built from custom `Button` elements, since SwiftUI has no native radio control.
+- Use when exactly one option must be chosen from a small, mutually exclusive set that stays fully visible as a list of selectable rows (e.g., "Choose color", "Choose a size").
 - Use when the always-visible radio layout is preferred over a control that collapses the choices behind a pop-up.
 
 ## Do Not Use When
@@ -39,10 +39,6 @@ A mutually exclusive choice group built from custom `Button` elements, since Swi
 
 ## Don'ts
 - Do not leave the options as plain `Button` elements with no trait or value changes; VoiceOver then announces each as a generic button with no indication that they form a single-select group or which one is selected.
-- Do not build the option from a bare tap gesture on a shape; it becomes unreachable and inoperable for VoiceOver, Switch Control, and Full Keyboard Access.
-- Do not omit the group label; without `.accessibilityElement(children: .contain)` plus `.accessibilityLabel`, VoiceOver users do not hear what the group is for.
-- Do not convey the selected state by color alone; change the radio glyph.
-- Do not fix the glyph to a static point size that fails to scale with Dynamic Type.
 
 ## Customizable
 - Each option may render as a classic labeled circle or as a selectable card in a grid, as long as it wraps a real `Button`, keeps the selected state distinguishable without color, and carries the selected trait and value.
@@ -55,26 +51,6 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 
 ```swift
 import SwiftUI
-
-struct RadioGroupDemo: View {
-    private let options = ["Black", "Gray", "White", "Red"]
-    @State private var selected = "Black"
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Choose color")
-
-            ForEach(options, id: \.self) { option in
-                RadioButton(title: option, isSelected: selected == option) {
-                    selected = option
-                    print("selected \(option)")
-                }
-            }
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Choose color")
-    }
-}
 
 struct RadioButton: View {
     let title: String
@@ -93,6 +69,26 @@ struct RadioButton: View {
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityRemoveTraits(isSelected ? [] : .isSelected)
         .accessibilityValue(isSelected ? "Radio button, checked" : "Radio button, unchecked")
+    }
+}
+
+struct RadioGroupExamples: View {
+    private let options = ["Black", "Gray", "White", "Red"]
+    @State private var selected = "Black"
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Choose color")
+
+            ForEach(options, id: \.self) { option in
+                RadioButton(title: option, isSelected: selected == option) {
+                    selected = option
+                    print("selected \(option)")
+                }
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("Choose color")
     }
 }
 ```

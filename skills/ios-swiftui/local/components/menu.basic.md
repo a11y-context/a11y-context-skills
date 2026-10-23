@@ -3,7 +3,7 @@ id: menu.basic
 title: Menu
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.2
+latest_version: 0.1.3
 tags: [menu, pull-down, commands, actions, overflow]
 aliases: [Menu, pull-down menu, overflow menu, ellipsis menu, more button, action menu]
 summary: A SwiftUI Menu that presents a pull-down list of command buttons, takes VoiceOver focus when opened, with commands carrying the destructive role where applicable.
@@ -16,7 +16,7 @@ Pattern ID: `menu.basic`
 A SwiftUI `Menu` that presents a pull-down list of command buttons, takes VoiceOver focus when opened, with commands carrying the destructive role where applicable.
 
 ## Use When
-- Use when a trigger reveals a pull-down list of two or more commands the user runs (e.g., "Duplicate", "Rename", "Delete"), or an overflow "more" control that groups in-place actions. Uses a SwiftUI `Menu` with `Button` actions.
+- Use when a trigger reveals a pull-down list of two or more commands the user runs (e.g., "Duplicate", "Rename", "Delete"), or an overflow "more" control that groups in-place actions.
 - Use when collecting several in-place actions behind one compact control (an icon-only ellipsis or "more" button) keeps the primary UI uncluttered.
 
 ## Do Not Use When
@@ -25,7 +25,7 @@ A SwiftUI `Menu` that presents a pull-down list of command buttons, takes VoiceO
 - Do not use when there is a single, always-visible action (use `button.basic`).
 
 ## Must Haves
-- Use a native `Menu` so the trigger exposes the pop-up button role and the menu receives VoiceOver focus when it opens.
+- Use a native `Menu` so the trigger exposes the pop-up button role and the menu receives VoiceOver focus when it opens (`global.native-first`).
 - Give the trigger an accessible name. A text trigger (`Menu("Actions")`) is named by its label text; an icon-only trigger (an ellipsis or "more" glyph) needs an `.accessibilityLabel` (e.g., "Map options").
 - Populate the menu with `Button` actions, each with a clear, specific label that reads well out of context.
 - Give a destructive command `role: .destructive` so the system presents it as destructive, rather than signaling it with red text alone (see `global.semantic-color`).
@@ -34,7 +34,6 @@ A SwiftUI `Menu` that presents a pull-down list of command buttons, takes VoiceO
 
 ## Don'ts
 - Do not build a faux menu from a custom `VStack` or conditional overlay of buttons; it does not receive VoiceOver focus when shown and is not announced as a pop-up button. Use the native `Menu`.
-- Do not leave an icon-only trigger without an `.accessibilityLabel`; VoiceOver then has no accessible name for it.
 - Do not attempt to restore VoiceOver focus to the trigger after the menu closes with `@AccessibilityFocusState`. A native `Menu` does not return focus to its trigger and, unlike a `.sheet()` restored from `onDismiss:`, cannot be forced to (an Apple platform defect). Do not paper over it with a workaround that lands focus somewhere misleading.
 - Do not convey a command's selected state with a trailing checkmark `Image` only; it disappears at the largest Dynamic Type sizes. Use a `Picker` inside the `Menu` for a checked choice, whose checkmark stays visible.
 - Do not rely on `Section` header text to be exposed as a heading; native menu section headers lack the heading trait and have insufficient contrast (an Apple platform defect).
@@ -51,7 +50,7 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct MenuBasicDemo: View {
+struct MenuExamples: View {
     var body: some View {
         HStack {
             Menu("Actions") {

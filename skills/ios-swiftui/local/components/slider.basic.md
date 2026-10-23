@@ -3,7 +3,7 @@ id: slider.basic
 title: Slider
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.2
+latest_version: 0.1.3
 tags: [slider, range, adjustable, value, continuous]
 aliases: [range slider, volume slider, brightness slider, Slider, value slider]
 summary: A native SwiftUI Slider that VoiceOver adjusts by swiping up or down, paired with single-tap controls so the value is adjustable without a drag gesture.
@@ -16,7 +16,7 @@ Pattern ID: `slider.basic`
 A native SwiftUI `Slider` that VoiceOver adjusts by swiping up or down, paired with single-tap controls so the value is adjustable without a drag gesture.
 
 ## Use When
-- Use when the user adjusts a value across a continuous or stepped numeric range by moving a thumb between a minimum and maximum (e.g., "Brightness", "Volume", "Speed"). Uses a native SwiftUI `Slider`, which VoiceOver adjusts by swiping up or down.
+- Use when the user adjusts a value across a continuous or stepped numeric range by moving a thumb between a minimum and maximum (e.g., "Brightness", "Volume", "Speed").
 
 ## Do Not Use When
 - Do not use when the value changes in discrete single increments and a compact plus/minus control fits better (use `stepper.basic`).
@@ -24,7 +24,7 @@ A native SwiftUI `Slider` that VoiceOver adjusts by swiping up or down, paired w
 - Do not use when the control is a simple on/off setting (use `switch.basic`).
 
 ## Must Haves
-- Use a native `Slider` so VoiceOver exposes the adjustable behavior automatically (swipe up or down to change the value) and Switch Control can adjust it. SwiftUI has no `.adjustable` trait to add; the native control provides adjustability, and a custom-drawn slider gets it from `accessibilityAdjustableAction` (per `global.custom-control-representation`).
+- Use a native `Slider` so VoiceOver exposes the adjustable behavior automatically (swipe up or down to change the value) and Switch Control can adjust it. SwiftUI has no `.adjustable` trait to add; the native control provides adjustability, and a custom-drawn slider gets it from `accessibilityAdjustableAction` (per `global.custom-control-representation`) (`global.native-first`).
 - The slider has a specific accessible name. Supply it with the `Slider` label closure (`Slider(value:in:) { Text("Brightness") }`), whose text becomes the accessible name, or pair a visible `Text` label with `.accessibilityLabel`. A bare `Slider` has no inherent label.
 - Set `.accessibilityValue` to a meaningful value with units when the default percentage is not self-explanatory (e.g., "$50", "Medium", "72 degrees").
 - Provide a single-tap alternative to the drag gesture so the value can be changed without a path-based gesture: decrement and increment buttons, or a paired `Stepper` and `TextField` for fine and direct control.
@@ -35,10 +35,6 @@ A native SwiftUI `Slider` that VoiceOver adjusts by swiping up or down, paired w
 
 ## Don'ts
 - Do not add a `.adjustable` trait; SwiftUI has no such trait (it exists only in UIKit). For a custom slider, confer adjustability with `.accessibilityAdjustableAction`, not a trait.
-- Do not ship a slider adjustable only by dragging; provide a single-tap alternative.
-- Do not leave the slider without a visible label and an accessible name.
-- Do not leave `.accessibilityValue` at the default percentage when the value carries meaningful units the user needs (e.g., currency, temperature).
-- Do not create icon-only increment or decrement buttons without accessible names.
 
 ## Customizable
 - The single-tap alternative is the engineer's choice: increment and decrement buttons, a paired `Stepper`, a `TextField` for direct numeric entry, or a combination, as long as at least one single-tap path adjusts the value.
@@ -52,7 +48,7 @@ Structural reference for AI coding assistants — semantics, focus, and keyboard
 ```swift
 import SwiftUI
 
-struct SliderBasicDemo: View {
+struct SliderExamples: View {
     @State private var brightness = 50.0
 
     var body: some View {

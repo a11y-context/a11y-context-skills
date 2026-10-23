@@ -1,7 +1,7 @@
 {
   "stack": "ios/swiftui",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.6.0",
+  "catalog_revision": "0.7.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -9,14 +9,15 @@
       "title": "Basic Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "SwiftUI Button that triggers an action. Supports text-only, icon+text, and icon-only labeling patterns.",
       "aliases": [
         "btn",
         "primary button",
         "icon button",
         "call to action",
-        "cta"
+        "cta",
+        "Button"
       ],
       "tags": [
         "button",
@@ -47,11 +48,15 @@
       "title": "Toggle Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "SwiftUI Button with two states (e.g. pressed/active) conveyed via either an accessible-name change or the .isSelected accessibility trait, never both.",
       "aliases": [
         "toggle button",
-        "pressed button"
+        "pressed button",
+        "mute button",
+        "bold button",
+        "formatting toggle",
+        "Button isSelected"
       ],
       "tags": [
         "button",
@@ -63,7 +68,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a control toggles a feature or action within the current context (e.g., \"Mute\", \"Bold\", \"Pin\", \"Enable Closed Captioning\"). Uses a SwiftUI Button with two states conveyed via either an accessible-name change or the .isSelected accessibility trait, never both."
+          "Use when a control toggles a feature or action within the current context (e.g., \"Mute\", \"Bold\", \"Pin\", \"Enable Closed Captioning\")."
         ],
         "do_not_use_when": [
           "Do not use when the control represents a persistent on/off system or application setting, such as \"Enable notifications\" or \"Dark mode\" (use switch.basic).",
@@ -83,7 +88,7 @@
       "title": "Checkbox",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "A checkbox built from a SwiftUI Toggle with a custom square toggle style, using accessibilityValue to announce Checked or Unchecked, since SwiftUI has no native checkbox control or trait.",
       "aliases": [
         "check box",
@@ -91,7 +96,8 @@
         "form checkbox",
         "Toggle checkbox",
         "agree checkbox",
-        "multi-select"
+        "multi-select",
+        "ToggleStyle checkbox"
       ],
       "tags": [
         "checkbox",
@@ -102,7 +108,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user selects an independent binary option that is submitted with a form rather than taking effect immediately (e.g., \"Accept Terms\", \"Remember me\"). Uses a SwiftUI Toggle with a custom square .toggleStyle, since SwiftUI has no native checkbox control.",
+          "Use when the user selects an independent binary option that is submitted with a form rather than taking effect immediately (e.g., \"Accept Terms\", \"Remember me\").",
           "Use when several such options form a group where any number may be selected (e.g., \"Preferred contact method(s)\": Email, Phone, Text)."
         ],
         "do_not_use_when": [
@@ -124,7 +130,7 @@
       "title": "Date Picker",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A native SwiftUI DatePicker for choosing a date or time, whose accessible name is supplied per style (an accessibilityLabel for compact and default styles, but the visible DatePicker label text for graphical and wheel styles).",
       "aliases": [
         "DatePicker",
@@ -145,7 +151,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user selects a calendar date, a time, or a combined date and time from a native control (e.g., \"Start date\", \"Scheduled time\", \"Reservation\"). Uses a SwiftUI DatePicker with displayedComponents set to .date, .hourAndMinute, or both.",
+          "Use when the user selects a calendar date, a time, or a combined date and time from a native control (e.g., \"Start date\", \"Scheduled time\", \"Reservation\").",
           "Use when the value must stay a valid date or time, optionally bounded to a range with the in: parameter."
         ],
         "do_not_use_when": [
@@ -167,7 +173,7 @@
       "title": "Dialog (Alert)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.3",
+      "latest_version": "0.1.4",
       "summary": "A native SwiftUI .alert modal that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native alerts do not restore it automatically.",
       "aliases": [
         "alert",
@@ -186,7 +192,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a brief, blocking message needs the user to acknowledge it or make a small choice before continuing (e.g., confirming a destructive action, acknowledging a required error). Uses the native SwiftUI .alert() modifier.",
+          "Use when a brief, blocking message needs the user to acknowledge it or make a small choice before continuing (e.g., confirming a destructive action, acknowledging a required error).",
           "Use when the choice is a short set of clearly labeled actions (typically one to three)."
         ],
         "do_not_use_when": [
@@ -208,7 +214,7 @@
       "title": "Dialog (Confirmation)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A native SwiftUI .confirmationDialog action sheet that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native confirmation dialogs do not restore it automatically.",
       "aliases": [
         "action sheet",
@@ -227,7 +233,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a control offers a short set of actions to confirm or choose from, presented as an action sheet anchored to that control (e.g., confirming a destructive delete, picking one of a few actions on an item). Uses the native SwiftUI .confirmationDialog(_:isPresented:titleVisibility:actions:message:) modifier.",
+          "Use when a control offers a short set of actions to confirm or choose from, presented as an action sheet anchored to that control (e.g., confirming a destructive delete, picking one of a few actions on an item).",
           "Use when the choice is a small set of clearly labeled actions (typically two to four) plus a cancel."
         ],
         "do_not_use_when": [
@@ -250,7 +256,7 @@
       "title": "Dialog (Modal)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A native SwiftUI .sheet or .fullScreenCover modal that takes VoiceOver focus on presentation, carries a heading title and an explicit close control, and returns focus to the trigger via onDismiss because sheets do not restore it automatically.",
       "aliases": [
         "sheet",
@@ -270,8 +276,8 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a self-contained task, form, or longer piece of content is presented in a modal that temporarily covers the current screen (e.g., compose, sign-up, a settings detail, a license agreement). Uses the native SwiftUI .sheet(isPresented:onDismiss:content:) modifier.",
-          "Use when the modal task is immersive enough to occupy the whole screen rather than a partial sheet (use .fullScreenCover(isPresented:onDismiss:content:))."
+          "Use when a self-contained task, form, or longer piece of content is presented in a modal that temporarily covers the current screen (e.g., compose, sign-up, a settings detail, a license agreement).",
+          "Use when the modal task is immersive enough to occupy the whole screen rather than a partial sheet."
         ],
         "do_not_use_when": [
           "Do not use when the content is a short blocking message that needs acknowledgement or a small choice (use dialog.alert).",
@@ -293,7 +299,7 @@
       "title": "Link",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "SwiftUI Link that opens a URL or web view, exposing the link trait (with the redundant button trait removed) so VoiceOver signals that activating it leaves the app.",
       "aliases": [
         "hyperlink",
@@ -312,7 +318,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a standalone control opens a URL in the browser or an in-app web view, or otherwise leaves the current app context (e.g., \"View Weekly Ad\", \"Open Help Center\", \"Privacy Policy\"). Uses a native SwiftUI Link(destination:), whose link trait tells VoiceOver the control exits the app.",
+          "Use when a standalone control opens a URL in the browser or an in-app web view, or otherwise leaves the current app context (e.g., \"View Weekly Ad\", \"Open Help Center\", \"Privacy Policy\").",
           "Use when the destination is a web address rather than an in-app screen."
         ],
         "do_not_use_when": [
@@ -334,7 +340,7 @@
       "title": "Inline Link",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A hyperlink embedded in a run of Text via an AttributedString .link run (preferred) or Markdown, reachable through the VoiceOver Links rotor but non-operable under Full Keyboard Access and Voice Control because of Apple platform defects.",
       "aliases": [
         "inline link",
@@ -354,7 +360,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a hyperlink must appear inside a running sentence or paragraph, surrounded by static text (e.g., \"By continuing you agree to the Terms of Service.\"). Uses an AttributedString .link run (preferred) or Markdown inside a Text."
+          "Use when a hyperlink must appear inside a running sentence or paragraph, surrounded by static text (e.g., \"By continuing you agree to the Terms of Service.\")."
         ],
         "do_not_use_when": [
           "Do not use when the link can stand as its own control or on its own line (use link.basic, which is fully operable with Full Keyboard Access and Voice Control).",
@@ -375,7 +381,7 @@
       "title": "List Row (Navigable)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A NavigationLink rendered as a row in a List, where the whole row is one target that drills into another in-app screen and reads as a button to VoiceOver, with a decorative trailing disclosure chevron.",
       "aliases": [
         "navigation row",
@@ -394,7 +400,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when tapping a row pushes another in-app screen and the whole row is the target (e.g., a \"Settings\" row that opens the Settings detail, a message that opens a thread). Uses a NavigationLink inside a List, so the row exposes the button trait and the system supplies the disclosure chevron.",
+          "Use when tapping a row pushes another in-app screen and the whole row is the target (e.g., a \"Settings\" row that opens the Settings detail, a message that opens a thread).",
           "Use when a scrolling set of such rows forms a navigable list (a settings list, an inbox, a menu of sections)."
         ],
         "do_not_use_when": [
@@ -416,7 +422,7 @@
       "title": "Menu",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.2",
+      "latest_version": "0.1.3",
       "summary": "A SwiftUI Menu that presents a pull-down list of command buttons, takes VoiceOver focus when opened, with commands carrying the destructive role where applicable.",
       "aliases": [
         "Menu",
@@ -435,7 +441,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a trigger reveals a pull-down list of two or more commands the user runs (e.g., \"Duplicate\", \"Rename\", \"Delete\"), or an overflow \"more\" control that groups in-place actions. Uses a SwiftUI Menu with Button actions.",
+          "Use when a trigger reveals a pull-down list of two or more commands the user runs (e.g., \"Duplicate\", \"Rename\", \"Delete\"), or an overflow \"more\" control that groups in-place actions.",
           "Use when collecting several in-place actions behind one compact control (an icon-only ellipsis or \"more\" button) keeps the primary UI uncluttered."
         ],
         "do_not_use_when": [
@@ -457,7 +463,7 @@
       "title": "Radio Button",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A mutually exclusive choice group built from custom Button elements, since SwiftUI has no native radio control, using the selected trait plus an accessibilityValue to announce the radio role and its checked or unchecked state.",
       "aliases": [
         "radio button",
@@ -476,7 +482,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when exactly one option must be chosen from a small, mutually exclusive set that stays fully visible as a list of selectable rows (e.g., \"Choose color\", \"Choose a size\"). Built from custom Button elements, since SwiftUI has no native radio control.",
+          "Use when exactly one option must be chosen from a small, mutually exclusive set that stays fully visible as a list of selectable rows (e.g., \"Choose color\", \"Choose a size\").",
           "Use when the always-visible radio layout is preferred over a control that collapses the choices behind a pop-up."
         ],
         "do_not_use_when": [
@@ -499,7 +505,7 @@
       "title": "Select (Menu)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.2",
+      "latest_version": "0.1.3",
       "summary": "A SwiftUI Picker with the menu style, a pop-up button that shows the current value and opens a list to choose one option, named by the Picker label text rather than an accessibilityLabel.",
       "aliases": [
         "picker",
@@ -518,7 +524,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user chooses one value from a fixed set and the current choice is shown on a compact pop-up button (e.g., \"Sort by\", \"Fruit\", \"Country\"). Uses a SwiftUI Picker with .pickerStyle(.menu).",
+          "Use when the user chooses one value from a fixed set and the current choice is shown on a compact pop-up button (e.g., \"Sort by\", \"Fruit\", \"Country\").",
           "Use when the option set is longer than fits a segmented control but does not need a full-screen wheel."
         ],
         "do_not_use_when": [
@@ -541,7 +547,7 @@
       "title": "Select (Segmented)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "A SwiftUI Picker with the segmented style, showing two to five mutually exclusive options inline where selecting one takes effect immediately, and which requires an accessibilityLabel matching its visible label plus accessibilityElement children contain to be named to VoiceOver.",
       "aliases": [
         "segmented control",
@@ -560,7 +566,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user picks one value from a small fixed set of two to five options that all stay visible at once (e.g., \"Day / Week / Month\", \"Red / Green / Blue\"). Uses a SwiftUI Picker with .pickerStyle(.segmented).",
+          "Use when the user picks one value from a small fixed set of two to five options that all stay visible at once (e.g., \"Day / Week / Month\", \"Red / Green / Blue\").",
           "Use when the choice takes effect immediately and no confirmation step is needed.",
           "Use when each option label is short enough that all segments fit inline without truncation."
         ],
@@ -584,7 +590,7 @@
       "title": "Select (Wheel)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "A SwiftUI Picker with the wheel style, an always-visible spinning drum of values that requires an accessibilityLabel matching its visible label plus accessibilityElement(children:.contain) for VoiceOver to speak the name.",
       "aliases": [
         "picker",
@@ -603,7 +609,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user chooses one value from a fixed set shown as an always-visible spinning drum the user scrolls in place (e.g., a quantity, a unit, a short list of options). Uses a SwiftUI Picker with .pickerStyle(.wheel).",
+          "Use when the user chooses one value from a fixed set shown as an always-visible spinning drum the user scrolls in place (e.g., a quantity, a unit, a short list of options).",
           "Use when the option set is best browsed by scrolling and the wheel is meant to stay on screen rather than pop up."
         ],
         "do_not_use_when": [
@@ -626,7 +632,7 @@
       "title": "Slider",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.2",
+      "latest_version": "0.1.3",
       "summary": "A native SwiftUI Slider that VoiceOver adjusts by swiping up or down, paired with single-tap controls so the value is adjustable without a drag gesture.",
       "aliases": [
         "range slider",
@@ -644,7 +650,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user adjusts a value across a continuous or stepped numeric range by moving a thumb between a minimum and maximum (e.g., \"Brightness\", \"Volume\", \"Speed\"). Uses a native SwiftUI Slider, which VoiceOver adjusts by swiping up or down."
+          "Use when the user adjusts a value across a continuous or stepped numeric range by moving a thumb between a minimum and maximum (e.g., \"Brightness\", \"Volume\", \"Speed\")."
         ],
         "do_not_use_when": [
           "Do not use when the value changes in discrete single increments and a compact plus/minus control fits better (use stepper.basic).",
@@ -665,7 +671,7 @@
       "title": "Stepper",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.2",
+      "latest_version": "0.1.3",
       "summary": "A native SwiftUI Stepper whose visible label text becomes its accessible name and which VoiceOver increments or decrements automatically, with no .adjustable trait to add.",
       "aliases": [
         "plus minus",
@@ -683,7 +689,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user increases or decreases a value in discrete single increments with plus and minus controls (e.g., \"Tickets\", \"Copies\", \"Quantity\"). Uses a native SwiftUI Stepper, whose increment and decrement behavior is exposed to VoiceOver automatically."
+          "Use when the user increases or decreases a value in discrete single increments with plus and minus controls (e.g., \"Tickets\", \"Copies\", \"Quantity\")."
         ],
         "do_not_use_when": [
           "Do not use when the value spans a wide continuous range better suited to a thumb slider (use slider.basic).",
@@ -703,7 +709,7 @@
       "title": "Switch",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.0",
+      "latest_version": "0.3.0",
       "summary": "Native SwiftUI Toggle representing a persistent on/off setting. The label and switch state merge into a single accessible element.",
       "aliases": [
         "toggle switch",
@@ -721,7 +727,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when a control represents a persistent binary setting that remains on or off beyond the current interaction (e.g., \"Enable notifications\", \"Dark mode\"). Uses a native SwiftUI Toggle, whose label and switch state merge into a single accessible element.",
+          "Use when a control represents a persistent binary setting that remains on or off beyond the current interaction (e.g., \"Enable notifications\", \"Dark mode\").",
           "Use when the setting takes effect immediately when toggled, without requiring form submission.",
           "Use when the control reflects the current state of a system or application preference."
         ],
@@ -744,9 +750,10 @@
       "title": "Text Field",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.2.1",
-      "summary": "A single-line SwiftUI text field whose visible label is exposed to VoiceOver through the field title, an accessibility label, or LabeledContent, with keyboardType and textContentType set so the correct keyboard and AutoFill appear.",
+      "latest_version": "0.3.0",
+      "summary": "A single-line SwiftUI text field with a persistent visible label, since the field title renders only as placeholder text on iOS, with keyboardType and textContentType set so the correct keyboard and AutoFill appear.",
       "aliases": [
+        "TextField",
         "textfield",
         "text input",
         "input field",
@@ -763,7 +770,7 @@
       ],
       "selection_excerpt": {
         "use_when": [
-          "Use when the user enters a single line of free-form text such as a name, email address, or search query (e.g., \"Email\", \"Search\"). Uses a native SwiftUI TextField so the field exposes editable-text semantics, its label, and its typed value to VoiceOver.",
+          "Use when the user enters a single line of free-form text such as a name, email address, or search query (e.g., \"Email\", \"Search\").",
           "Use when the entered value maps to a system AutoFill category such as credentials or contact details, so the keyboard can offer to fill it (e.g., \"Password\", \"One-Time Code\", \"Street Address\").",
           "Use when the input has a natural on-screen keyboard tied to its data type, such as an email address or a numeric postal code."
         ],
