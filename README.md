@@ -29,7 +29,7 @@ Each platform also ships `-mcp` and `-rag` variants for those retrieval paths; s
 
 ### Quickest path: download a ZIP
 
-Each skill is built as a ready-to-unzip artifact on the [A11y Context downloads page](https://a11y-context-project.vercel.app/getting-started/ai-coding-agents/downloads). Pick the skill you want, download the ZIP, and unzip it into your AI tool's skills directory.
+Each skill is built as a ready-to-unzip artifact on the [A11y Context downloads page](https://a11y-context-project.vercel.app/getting-started/ai-coding-agents/install/downloads). Pick the skill you want, download the ZIP, and unzip it into your AI tool's skills directory.
 
 Install locations:
 
