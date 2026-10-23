@@ -3,7 +3,7 @@ id: stepper.basic
 title: Stepper
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.1.2
 tags: [stepper, increment, decrement, value, quantity]
 aliases: [plus minus, quantity stepper, increment control, Stepper, counter]
 summary: A native SwiftUI Stepper whose visible label text becomes its accessible name and which VoiceOver increments or decrements automatically, with no .adjustable trait to add.
@@ -40,7 +40,7 @@ A native SwiftUI `Stepper` whose visible label text becomes its accessible name 
 
 ## Customizable
 - The value may be carried in the label text (`Text("Tickets: \(tickets)")`) or announced through `.accessibilityValue` while the label stays static; either keeps the value discoverable.
-- A `TextField` for direct entry is recommended for wide ranges and optional for small ones.
+- A paired `TextField` for direct entry is optional on a small range.
 - The increment size (`step:`) and bounds (`in:`) are the engineer's choice for the value being adjusted.
 
 ## Golden Pattern

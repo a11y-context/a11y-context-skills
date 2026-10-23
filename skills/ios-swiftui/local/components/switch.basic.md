@@ -3,7 +3,7 @@ id: switch.basic
 title: Switch
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.2.0
 tags: [switch, toggle, settings, on-off, form-control]
 aliases: [toggle switch, preference toggle, settings toggle, Toggle, UISwitch]
 summary: Native SwiftUI Toggle representing a persistent on/off setting. The label and switch state merge into a single accessible element.
@@ -22,6 +22,7 @@ Native SwiftUI `Toggle` representing a persistent on/off setting. The label and 
 
 ## Do Not Use When
 - Do not use when the control triggers an in-place action or transient feature toggle within the current context (use `button.toggle`).
+- Do not use when the value is submitted with a form rather than taking effect immediately (use `checkbox.basic`).
 - Do not use when more than two states are required, or the state cycles through several values (use `button.toggle`).
 
 ## Must Haves

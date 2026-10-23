@@ -25,7 +25,7 @@ Verification (audits, contrast measurement, on-device and human/LLM review) is a
 
 ```yaml
 id: global.native-first
-scope: [control, component]
+scope: [component]
 ```
 
 ### Must Haves

@@ -3,7 +3,7 @@ id: select.menu
 title: Select (Menu)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.1
+latest_version: 0.1.2
 tags: [picker, select, dropdown, menu, single-choice]
 aliases: [picker, menu picker, dropdown, pop-up button, MenuPickerStyle, single select]
 summary: A SwiftUI Picker with the menu style, a pop-up button that shows the current value and opens a list to choose one option, named by the Picker label text rather than an accessibilityLabel.
@@ -28,7 +28,6 @@ A SwiftUI `Picker` with the menu style: a pop-up button that shows the current v
 ## Must Haves
 - Use a native `Picker` with `.pickerStyle(.menu)` so it exposes the pop-up button role, the current value, and the option list to VoiceOver and Switch Control.
 - Name the picker with the `Picker` label text (`Picker("Fruit", selection: $fruit)`), which becomes the accessible name for the menu and default styles.
-- Do not add an `.accessibilityLabel` to a menu-style or default-style `Picker`; it suppresses VoiceOver speaking the selected value when the picker is closed. The wheel and segmented styles are the opposite case, covered by `select.wheel` and `select.segmented`.
 - Each option has clear, distinct text so the choices are distinguishable in the pop-up list.
 - After the value changes, return VoiceOver focus to the picker with `@AccessibilityFocusState` and `.accessibilityFocused`, because `Picker` has no dismissal callback to restore focus.
 - Provide a visible indication of what is being chosen when the on-button value alone does not convey it; the `Picker` label text can serve this, or a separate `Text` can precede the picker.

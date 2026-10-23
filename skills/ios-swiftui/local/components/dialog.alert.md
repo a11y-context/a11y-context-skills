@@ -3,7 +3,7 @@ id: dialog.alert
 title: Dialog (Alert)
 stack: ios/swiftui
 status: beta
-latest_version: 0.1.2
+latest_version: 0.1.3
 tags: [alert, dialog, modal, confirmation, destructive]
 aliases: [alert, alert dialog, confirmation alert, popup alert, delete confirmation, .alert]
 summary: A native SwiftUI .alert modal that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native alerts do not restore it automatically.
@@ -20,7 +20,7 @@ A native SwiftUI `.alert` modal that takes VoiceOver focus on presentation, with
 - Use when the choice is a short set of clearly labeled actions (typically one to three).
 
 ## Do Not Use When
-- Do not use when the content is a non-blocking sheet of choices tied to a specific control (use `dialog.confirmation`).
+- Do not use when the choice is a set of actions presented as an action sheet anchored to the control that offered them (use `dialog.confirmation`).
 - Do not use when the content is a larger form or multi-step flow (use `dialog.modal`).
 - Do not use when the message is a transient status that does not require acknowledgement (use `global.announcements`).
 

@@ -1,7 +1,7 @@
 {
   "stack": "ios/swiftui",
   "schema_version": "1.0.0",
-  "catalog_revision": "0.5.2",
+  "catalog_revision": "0.6.0",
   "cache_ttl_seconds": 3600,
   "patterns": [
     {
@@ -167,7 +167,7 @@
       "title": "Dialog (Alert)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.2",
+      "latest_version": "0.1.3",
       "summary": "A native SwiftUI .alert modal that takes VoiceOver focus on presentation, with each action returning focus to the trigger because native alerts do not restore it automatically.",
       "aliases": [
         "alert",
@@ -190,7 +190,7 @@
           "Use when the choice is a short set of clearly labeled actions (typically one to three)."
         ],
         "do_not_use_when": [
-          "Do not use when the content is a non-blocking sheet of choices tied to a specific control (use dialog.confirmation).",
+          "Do not use when the choice is a set of actions presented as an action sheet anchored to the control that offered them (use dialog.confirmation).",
           "Do not use when the content is a larger form or multi-step flow (use dialog.modal).",
           "Do not use when the message is a transient status that does not require acknowledgement (use global.announcements)."
         ]
@@ -416,7 +416,7 @@
       "title": "Menu",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A SwiftUI Menu that presents a pull-down list of command buttons, takes VoiceOver focus when opened, with commands carrying the destructive role where applicable.",
       "aliases": [
         "Menu",
@@ -499,7 +499,7 @@
       "title": "Select (Menu)",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A SwiftUI Picker with the menu style, a pop-up button that shows the current value and opens a list to choose one option, named by the Picker label text rather than an accessibilityLabel.",
       "aliases": [
         "picker",
@@ -665,7 +665,7 @@
       "title": "Stepper",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.1.2",
       "summary": "A native SwiftUI Stepper whose visible label text becomes its accessible name and which VoiceOver increments or decrements automatically, with no .adjustable trait to add.",
       "aliases": [
         "plus minus",
@@ -703,7 +703,7 @@
       "title": "Switch",
       "pattern_type": "component",
       "status": "beta",
-      "latest_version": "0.1.1",
+      "latest_version": "0.2.0",
       "summary": "Native SwiftUI Toggle representing a persistent on/off setting. The label and switch state merge into a single accessible element.",
       "aliases": [
         "toggle switch",
@@ -727,6 +727,7 @@
         ],
         "do_not_use_when": [
           "Do not use when the control triggers an in-place action or transient feature toggle within the current context (use button.toggle).",
+          "Do not use when the value is submitted with a form rather than taking effect immediately (use checkbox.basic).",
           "Do not use when more than two states are required, or the state cycles through several values (use button.toggle)."
         ]
       },
