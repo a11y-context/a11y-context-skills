@@ -7,7 +7,7 @@ slug: "/foundations"
 stack: "android/compose"
 rule_set: "baseline"
 status: "beta"
-summary: "Baseline accessibility rules applied across most Jetpack Compose UI work."
+summary: "Baseline accessibility rules applied across most Jetpack Compose UI work on Android phones and tablets, not Android TV, Google TV, or Fire TV."
 cache_ttl_seconds: 86400
 apply_policy:
   instruction: "Apply all MUST rules that match the current change scope. If the task does not touch a scope, do not introduce unrelated changes."
@@ -18,6 +18,8 @@ apply_policy:
 # Foundations
 
 The cross-cutting accessibility rules that apply across most Jetpack Compose work, independent of any single component. Each rule is a best practice an AI applies while authoring Compose code. Component patterns reference these rules rather than restating them.
+
+These rules cover Android phones and tablets. Android TV, Google TV, and Fire TV are out of scope: navigation there is by remote, the platforms' screen readers behave differently, and none of these rules has been checked on a TV. Do not apply them to code that runs only on a TV. Code in a module that the TV build also uses follows them as written, with that caveat.
 
 Verification (audits, contrast measurement, on-device and human review) is a QA concern and lives in the QA layer, not here.
 
