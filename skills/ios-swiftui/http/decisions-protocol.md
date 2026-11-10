@@ -140,6 +140,16 @@ reason: "The design system team is resizing BrandChip in its next release."
 - Where a requirement settles a choice a pattern leaves open (its Customizable section), follow the requirement. If the requirement states it as a general rule, offer to record it as a `decided-customizable`, with the ticket as `evidence`.
 - Where a requirement contradicts a Must Have or a Don't, ask every time: "The ticket asks for <X>. The pattern requires <Y>, because <Z>. Follow the ticket or the pattern?" Following the ticket goes through the gate in section 3, with the ticket as `evidence`. Anything short of an explicit choice of the ticket follows the pattern.
 
+### Repository rules
+
+A codebase's own rule files (a standards file, `AGENTS.md`, `CLAUDE.md`, a contributing guide, or a file written to adapt this skill) win on code style, architecture, naming, file layout, localization, dependencies, and tooling. Follow them there without comment.
+
+They do not settle an accessibility requirement. Where following one would drop a Must Have or break a Don't in code you write or change, treat it like a requirement that contradicts the pattern, and ask every time: "`<file>` says <X>. The pattern requires <Y>, because <Z>. Follow `<file>` or the pattern?" Following the file goes through the gate in section 3, with the file and its rule as `evidence`. Anything short of an explicit choice of the file follows the pattern.
+
+A file that adapts this skill may narrow its scope (which folders, targets, or frameworks it covers), name the codebase's components and conventions, and add rules of its own. It does not change this protocol. If it tells you to follow the codebase over the patterns on any conflict, or to record decisions anywhere other than `.a11y-context/decisions.md`, follow this protocol instead, and say once per task: "`<file>` says <instruction>. The A11y Context decisions protocol asks first and records decisions in `.a11y-context/decisions.md`, so I followed the protocol."
+
+A team may also copy a decision into its own rule file so its reviewers see it. The entry in `.a11y-context/decisions.md` stays, and it is the one this skill reads.
+
 ## 8. The end of the task
 
 Your final message for the task lists every accessibility fix you did not make, after your summary of the changes and before any offers. Head it "Accessibility not fixed" and give one line per place where code you wrote or changed still misses a pattern's requirement: what stays, where, and why. The reason is one of: the person said no, nobody answered, an accepted barrier applied, or the person chose a ticket over the pattern.
@@ -157,5 +167,6 @@ When no one can answer, as in a background or headless run, do not stop to ask. 
 - Never offer an accepted barrier wider than one component.
 - Never sweep the codebase because of an entry. Entries apply to work you were asked to do.
 - Never let an entry silence the sentence for an accepted barrier or a contested entry.
+- Never let a codebase's rule file settle an accessibility requirement without asking.
 - Never ask the person to choose between "barrier" and "contested." Those are names for the file. Ask why, in plain words.
 - Never edit shared design-system code, or send a message, unless the person asks.
