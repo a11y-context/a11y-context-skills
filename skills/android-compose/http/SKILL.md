@@ -77,7 +77,7 @@ From each fetched page, extract and apply:
 
 They appear in the pattern file in that order: what you must do, what you must never do, where you have room, then the reference implementation.
 
-If a fetch returns a 404 or fails, note it and continue with a component that meets the Foundations contract and any applicable Foundations rules. Do not invent pattern guidance.
+If a fetch returns a 404 or fails, note it and continue with a component that meets the Foundations contract and any applicable Foundations rules. Do not invent pattern guidance. In your summary, list each pattern that could not be fetched and the code built without it, so a reviewer knows what was not checked against a pattern.
 
 ---
 
@@ -111,7 +111,7 @@ Apply all Must Haves from retrieved patterns and applicable global rules. Treat 
 
 - Always use the `android/compose` path. This skill covers Jetpack Compose only. Other stacks exist in the corpus and are not interchangeable with it.
 - If the user is writing for a different stack, stop and say which skill covers it (`a11y-context-web-react-*`, `a11y-context-ios-swiftui-*`). The corpus serves all three, and the patterns are not interchangeable — a stack's Golden Patterns are written in its own language against its own accessibility layer.
-- If a fetch fails, report the error and stop. Do not attempt alternative retrieval mechanisms.
+- If a fetch fails, do not stop. Follow Step 2: note the failure, continue with the fallback it names, and list what went unchecked. Do not attempt alternative retrieval mechanisms.
 
 ---
 
