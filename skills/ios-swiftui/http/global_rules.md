@@ -128,6 +128,7 @@ scope: [screen]
 - Set a `navigationTitle` on every pushed screen so its screen change is announced by name.
 - Let the system manage VoiceOver focus on a `NavigationStack` push; do not force focus to the back button or an arbitrary element.
 - On pop, restore focus to the row that triggered the navigation by binding it with `@AccessibilityFocusState` and setting that focus when the pushed screen is dismissed, where the system does not restore it.
+- On an app whose iOS deployment target is iOS 18 or lower, also follow `global.focus-binding-visibility` for every focus binding this rule calls for.
 
 ### Don'ts
 - Do not push a screen with no title, which leaves the change without a clear spoken announcement.
@@ -163,8 +164,30 @@ scope: [layout, component]
 - When an overlay closes, restore VoiceOver focus to the control that opened it. Bind that trigger with `@AccessibilityFocusState` and set it true as the overlay dismisses. Native `.alert()`, `.confirmationDialog()`, `.sheet()`, `.fullScreenCover()`, and `.popover()` do not restore focus automatically, an Apple platform defect, so restore it explicitly: from each action's closure for alerts and confirmation dialogs, or from the `onDismiss:` handler for sheets and full-screen covers.
 - For a `TextField`, `@AccessibilityFocusState` does not return focus automatically after the keyboard is dismissed; restore it from the keyboard toolbar's Done button.
 - This rule covers overlays, dynamic content reveals, and text-field focus restoration. For an in-app push/pop `NavigationStack` transition, follow `global.navigation-focus` instead.
+- On an app whose iOS deployment target is iOS 18 or lower, also follow `global.focus-binding-visibility` for every focus binding this rule calls for.
 
 ### Don'ts
 - Do not leave VoiceOver focus stranded behind a dismissed overlay; without an explicit restore, focus can jump to the top of the screen or an arbitrary element.
 - Do not depend on `@AccessibilityFocusState` to return focus from a `Menu` or a `DatePicker`; it does not work with either, an Apple platform defect, so do not build a focus-restore contract around those controls.
 - Do not move focus to passive content that does not require action; announce it instead (see `global.announcements`).
+
+## Focus Binding Visibility
+
+```yaml
+id: global.focus-binding-visibility
+scope: [component]
+```
+
+**Applies when** the app's iOS deployment target is iOS 18 or lower, because the app can then run on iOS 18. Check the deployment target before applying this rule. When it is higher than iOS 18, skip this rule and bind focus as `global.focus-management` and `global.navigation-focus` describe.
+
+### Must Haves
+- Bind `.accessibilityFocused` only while the element is exposed to accessibility. On iOS 18, a focus binding on a view that stays in the hierarchy while hidden from accessibility, through `.opacity(0)`, `.accessibilityHidden(true)`, or both, re-renders the hosting view in an endless layout loop: VoiceOver focus jumps to the status bar and the app stops responding. This applies to every focus binding that `global.focus-management` and `global.navigation-focus` call for.
+- Remove the binding in the same state update that hides the view. Drive the binding and the hide from the same state, including when a parent fades the whole container.
+- When a control fades or slides out but stays mounted, such as an auto-hiding toolbar or media playback controls, keep the drawn control as one stable view hidden with `.accessibilityHidden(true)`, and overlay a `Color.clear` element made with `.accessibilityElement()` that carries the label, the `.isButton` trait, and an `.accessibilityAction`. Bind focus on that overlay only while the control is shown, and swap it for an unbound, hidden overlay when the control hides. The drawn control keeps its identity, so its transition still animates.
+- The clear overlay declares its label, trait, and action by hand on purpose, as an exception to `global.custom-control-representation`. It stands in for a plain button, so loose traits lose no role behavior.
+- Test focus moves and restores on iOS 18 with VoiceOver on.
+
+### Don'ts
+- Do not remove the binding from an `onChange` after the view hides. The loop starts in the same update that hides the view, so a later change is too late.
+- Do not gate the binding with a conditional on the visible control (`if`/`else`, or a custom `.if` modifier). Each branch is a different view, so the control pops in and out instead of animating, even with VoiceOver off.
+- Do not leave a focus binding on a view that only looks hidden. A view at `.opacity(0)` is still mounted, and the binding still loops.
