@@ -54,6 +54,8 @@ scope: [component]
 - When a row needs one primary action plus a secondary one, expose the secondary action as a `CustomAccessibilityAction` on the merged node rather than as a nested interactive child. TalkBack surfaces custom actions through its actions menu, which keeps the row a single stop.
 - When a decorative child would pollute the merged name, remove it from the tree with `Modifier.clearAndSetSemantics { }` or, for an `Image` or `Icon`, with `contentDescription = null`.
 - Apply `Modifier.semantics(mergeDescendants = true) { }` explicitly when a group of text and images forms one unit but carries no interaction, so it reads as one item instead of several.
+- To replace what a merged parent's children say, apply `Modifier.clearAndSetSemantics { contentDescription = "..." }` to the parent, after its `clickable` or `toggleable`. Setting `contentDescription` on a merged parent adds a name without removing its descendants' text, so TalkBack reads both.
+- Make a tile that must announce its role childless with `Modifier.clearAndSetSemantics { role = Role.Button; contentDescription = "..." }`, after its clickable modifier. A merged node reports its `Role` as its class name (e.g., `android.widget.Button`) only when it has no merged children.
 
 ### Don'ts
 - Do not nest an interactive child inside an interactive parent. A child that merges cannot be absorbed by a parent that merges, so the result is two competing targets rather than the single row the layout suggests.
@@ -108,6 +110,7 @@ scope: [component]
 ### Must Haves
 - Give an `Image` or `Icon` that carries meaning a `contentDescription` naming what it conveys, not what it depicts.
 - Give an `Image` or `Icon` that is decorative, or that sits beside text saying the same thing, `contentDescription = null` so it leaves the accessibility tree.
+- When an image stands in for text, such as a title logo, name it with `Modifier.semantics { contentDescription = "..." }` and pass `contentDescription = null` to the `Image`, so it reads as the text it shows rather than as an image.
 - When an icon is the only content of a control, name the `Icon`. The control merges the icon's description into its own name and keeps its own role. Name the control instead, with `Modifier.semantics { contentDescription = "..." }` and the icon `null`, only when its content changes while it is on screen, such as an `ExtendedFloatingActionButton` that collapses to its icon. Never name both, or the control announces its name twice.
 
 ### Don'ts
@@ -251,6 +254,7 @@ scope: [component]
 
 ### Don'ts
 - Do not hand-build a position announcement into each item's `contentDescription`. It duplicates what the collection properties report and goes stale when the list changes.
+- Do not replace a lazy list's `LazyListState` while the list is on screen. Hold it in `rememberLazyListState()` for the list's lifetime. The accessibility delegate stays bound to the old state and stops reporting scrolls, so TalkBack's heading navigation reports "No next heading." The binding is a Compose defect, so no app-side workaround restores it.
 
 ## Traversal Order
 
@@ -262,8 +266,9 @@ scope: [layout]
 ### Must Haves
 - Let composition order carry the reading order wherever it already matches the visual order, which is the usual case.
 - Mark a container with `Modifier.semantics { isTraversalGroup = true }` when its children should be read together before traversal moves on, such as a card whose content is visually grouped.
+- Reorder explicitly when a composable is positioned by `Modifier.offset`, drawn in a different order than it appears, or overlaid, since composition order then disagrees with what the user sees. Fix the composition order first, then try `isTraversalGroup`, and set `traversalIndex` only when neither works.
 - Set `traversalIndex` only on a node that is focusable or inside a container marked as a traversal group. It has no effect otherwise, and lower values are read first.
-- Reorder explicitly when a composable is positioned by `Modifier.offset`, drawn in a different order than it appears, or overlaid, since composition order then disagrees with what the user sees.
+- When `traversalIndex` is set, make keyboard focus follow the same order. It reorders accessibility traversal only; keyboard, D-pad, and switch access focus still follow composition order or `Modifier.focusProperties`.
 
 ### Don'ts
 - Do not set `traversalIndex` on every element in a screen to force an order. It is a correction for the cases where composition order is wrong, not a layout mechanism.
@@ -293,13 +298,14 @@ scope: [component]
 ### Must Haves
 - Announce a content change that the user did not navigate to by marking the changed element with `Modifier.semantics { liveRegion = LiveRegionMode.Polite }`, which speaks the new content without moving the user's place.
 - Reserve `LiveRegionMode.Assertive` for content that must interrupt, such as a blocking error, because it cuts off whatever is being spoken.
-- Announce a surface appearing, such as a bottom sheet or a pane replacing another, with `Modifier.semantics { paneTitle = "..." }` rather than a live region.
+- Announce a surface appearing, such as a bottom sheet or a pane replacing another, with `Modifier.semantics { paneTitle = "..." }` rather than a live region. When the surface's content loads asynchronously, put the context in the label of the first element to take focus instead, because `paneTitle` can race the first focus announcement and be cut off or read twice.
 - Report a validation failure with `Modifier.semantics { error("...") }` on the field, alongside the component's own `isError` state.
 
 ### Don'ts
 - Do not call `View.announceForAccessibility` or dispatch a `TYPE_ANNOUNCEMENT` event. Both are deprecated as of Android 16, API level 36.
 - Do not place a live region on an item inside a lazy list. The item recomposes as the list scrolls and reannounces each time.
 - Do not use a live region for a change the user caused and can already see the result of, such as text they are typing.
+- Do not keep a hidden live-region node on screen to carry announcements. Once it holds text, it becomes a permanent extra TalkBack stop.
 
 ## Focus Management
 
@@ -331,6 +337,7 @@ scope: [screen]
 - Give every screen a visible title, rendered through a `TopAppBar` title slot or as a heading in the content.
 - Set `Modifier.semantics { paneTitle = "..." }` on a surface that replaces or covers the screen without a navigation event, so its arrival is announced by name.
 - Decide focus placement on navigation explicitly. Naming a screen and moving focus into it are unrelated on Android, and no navigation library guarantees the second.
+- After a window change, such as a cold start, a deep link, or a new activity, request focus after the window's first accessibility-focus event, not on first composition. TalkBack can drop an earlier request and put its cursor on the first focusable node, usually Back.
 
 ### Don'ts
 - Do not navigate to a screen that announces nothing. Without a title or a pane title, the change is silent.
