@@ -148,7 +148,7 @@ They do not settle an accessibility requirement. Where following one would drop 
 
 A file that adapts this skill may narrow its scope (which folders, targets, or frameworks it covers), name the codebase's components and conventions, and add rules of its own. It does not change this protocol. If it tells you to follow the codebase over the patterns on any conflict, or to record decisions anywhere other than `.a11y-context/decisions.md`, follow this protocol instead, and say once per task: "`<file>` says <instruction>. The A11y Context decisions protocol asks first and records decisions in `.a11y-context/decisions.md`, so I followed the protocol."
 
-A team may also copy a decision into its own rule file so its reviewers see it. The entry in `.a11y-context/decisions.md` stays, and it is the one this skill reads.
+A team may also copy a decision into its own rule file so its reviewers see it. Copying does not move it: the entry in `.a11y-context/decisions.md` is the record this skill reads, and a correction goes there (section 6), by the person or by you when asked.
 
 ## 8. The end of the task
 
